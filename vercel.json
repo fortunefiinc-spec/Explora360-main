@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/portaal", "destination": "/portaal.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

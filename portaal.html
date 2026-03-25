@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Explora360 — Tourportaal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--ink4:#2e3f58;
+  --steel:#374d6a;--slate:#4e5e7e;--mist:#94aac8;--white:#fafbfd;
+  --blue:#4a90f7;--blue-lo:#2d6fd4;--blue-hi:#82b4fa;
+  --amber:#e8a030;--amber-hi:#f0bc60;
+  --fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);--pad:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;line-height:1.75;min-height:100vh}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
+
+/* grain overlay — matches main site */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)'/%3E%3C/svg%3E");}
+
+.eye{font-family:var(--fb);font-size:.57rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--blue)}
+.rule{display:block;width:26px;height:1px;background:var(--blue);margin:14px 0}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--fb);font-size:.58rem;font-weight:400;letter-spacing:.19em;text-transform:uppercase;padding:13px 28px;border:1px solid;cursor:pointer;transition:all .35s var(--ease);position:relative;overflow:hidden;white-space:nowrap;background:none}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.06);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.btn:hover::after{transform:scaleX(1)}
+.btn-blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}
+.btn-blue:hover{background:var(--blue-hi);border-color:var(--blue-hi)}
+.btn-wire{color:var(--white);border-color:rgba(255,255,255,.18)}
+.btn-wire:hover{border-color:var(--blue);color:var(--blue)}
+.btn-wb{color:var(--blue-hi);border-color:rgba(74,144,247,.3)}
+.btn-wb:hover{background:rgba(74,144,247,.1)}
+
+/* ═══ LOGIN ═══ */
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;position:relative;overflow:hidden;
+}
+#login-screen::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--ink) 0%,var(--ink2) 60%,var(--ink3) 100%);
+}
+/* grid bg */
+#login-screen::after{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(74,144,247,.04) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(74,144,247,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+.login-wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;max-width:900px;width:100%;gap:1px;background:rgba(255,255,255,.05)}
+.login-left{
+  background:var(--ink2);padding:clamp(40px,6vw,64px);
+  display:flex;flex-direction:column;justify-content:space-between;
+  border:1px solid rgba(255,255,255,.06);
+}
+.login-brand{margin-bottom:48px}
+.login-logo{font-family:var(--fs);font-size:2rem;font-weight:400;letter-spacing:.06em;margin-bottom:6px}
+.login-logo em{font-style:normal;color:var(--blue)}
+.login-tagline{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.login-pitch h2{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;line-height:1.15;color:var(--white);margin-bottom:14px}
+.login-pitch p{font-size:.78rem;color:rgba(255,255,255,.38);line-height:1.75;max-width:320px}
+.login-features{margin-top:32px;display:flex;flex-direction:column;gap:0}
+.lf{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.lf:last-child{border-bottom:none}
+.lf-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;box-shadow:0 0 8px rgba(74,144,247,.5)}
+.lf span{font-size:.72rem;color:rgba(255,255,255,.45)}
+
+.login-right{
+  background:var(--ink3);padding:clamp(40px,6vw,64px);
+  border:1px solid rgba(255,255,255,.06);
+}
+.login-right-title{font-family:var(--fs);font-size:1.4rem;font-weight:300;margin-bottom:4px}
+.login-right-sub{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:36px}
+.login-label{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);display:block;margin-bottom:8px}
+.login-input{
+  width:100%;padding:14px 16px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-bottom:none;color:var(--white);font-family:var(--fb);font-size:.82rem;
+  outline:none;transition:border-color .22s;display:block;
+}
+.login-input:last-of-type{border-bottom:1px solid rgba(255,255,255,.1)}
+.login-input:focus{border-color:rgba(74,144,247,.5)}
+.login-input::placeholder{color:rgba(255,255,255,.18)}
+.login-submit{
+  width:100%;padding:15px;background:var(--blue);color:var(--ink);
+  border:none;font-family:var(--fb);font-size:.62rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;cursor:pointer;
+  transition:background .22s;margin-top:10px;
+}
+.login-submit:hover{background:var(--blue-hi)}
+.login-err{
+  font-size:.7rem;color:#e05555;margin-top:12px;
+  display:none;padding:10px 14px;
+  background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18);
+}
+.login-demo{
+  margin-top:24px;padding:14px 16px;
+  background:rgba(74,144,247,.06);border:1px solid rgba(74,144,247,.12);
+}
+.login-demo-title{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-hi);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.login-demo-title::before{content:'';display:block;width:14px;height:1px;background:var(--blue)}
+.login-demo-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.login-demo-row:last-child{border-bottom:none}
+.login-demo-row span{font-size:.66rem;color:rgba(255,255,255,.4)}
+.login-demo-row code{font-size:.66rem;color:var(--blue-hi);cursor:pointer;padding:2px 6px;background:rgba(74,144,247,.1);transition:background .2s}
+.login-demo-row code:hover{background:rgba(74,144,247,.2)}
+.login-back{margin-top:20px;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);display:flex;align-items:center;gap:8px;transition:color .22s;cursor:pointer;background:none;border:none;padding:0}
+.login-back:hover{color:rgba(255,255,255,.6)}
+
+/* ═══ PORTAL ═══ */
+#portal{display:none;min-height:100vh;flex-direction:column}
+
+/* Demo banner */
+.demo-banner{
+  background:rgba(232,160,48,.08);border-bottom:1px solid rgba(232,160,48,.15);
+  padding:9px var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.demo-banner-text{font-size:.62rem;letter-spacing:.06em;color:rgba(232,160,48,.8);display:flex;align-items:center;gap:8px}
+.demo-banner-text::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0}
+
+/* Nav bar */
+#pnav{
+  position:sticky;top:0;z-index:800;
+  padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05);
+  background:rgba(26,35,51,.96);backdrop-filter:blur(22px);
+  transition:padding .3s var(--ease);
+}
+.pnav-inner{max-width:1280px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.pnav-logo{font-family:var(--fs);font-size:1.35rem;font-weight:400;letter-spacing:.06em}
+.pnav-logo em{font-style:normal;color:var(--blue)}
+.pnav-logo sup{font-family:var(--fb);font-size:.5rem;font-weight:400;letter-spacing:.15em;color:rgba(255,255,255,.25);vertical-align:super;margin-left:2px}
+.pnav-right{display:flex;align-items:center;gap:16px}
+.pnav-user{display:flex;align-items:center;gap:10px}
+.pnav-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue-lo),var(--blue));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:500;color:#fff;flex-shrink:0;
+  border:1px solid rgba(74,144,247,.3);
+}
+.pnav-name{font-size:.68rem;color:rgba(255,255,255,.55);letter-spacing:.04em}
+.pnav-logout{
+  font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);cursor:pointer;padding:7px 14px;
+  border:1px solid rgba(255,255,255,.1);transition:all .22s;background:none;
+}
+.pnav-logout:hover{color:var(--white);border-color:rgba(255,255,255,.28)}
+
+/* Content wrapper */
+.portal-wrap{flex:1;max-width:1280px;margin:0 auto;padding:clamp(36px,5vw,64px) var(--pad);width:100%}
+
+/* Welcome */
+.portal-welcome{margin-bottom:clamp(32px,4.5vw,52px)}
+.portal-welcome h1{font-family:var(--fs);font-size:clamp(2rem,4.5vw,3.4rem);font-weight:300;line-height:1.08;margin-top:10px}
+.portal-welcome h1 em{font-style:italic;color:var(--mist)}
+.portal-welcome p{color:rgba(255,255,255,.38);font-size:.84rem;margin-top:12px;max-width:480px}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:clamp(32px,4.5vw,52px)}
+.stat-card{background:var(--ink2);padding:26px 28px;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
+.stat-val{font-family:var(--fs);font-size:2.2rem;font-weight:300;color:var(--white);line-height:1;display:block}
+.stat-val em{font-style:normal;color:var(--blue)}
+.stat-key{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:6px;display:block}
+
+/* Tours section */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.section-head-l{}
+.section-head-l .eye{display:block;margin-bottom:6px}
+.section-head-l h2{font-family:var(--fs);font-size:1.6rem;font-weight:300;color:var(--white)}
+
+/* Tour grid */
+.tours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:rgba(255,255,255,.04)}
+.tour-card{background:var(--ink2);transition:all .28s var(--ease);position:relative;overflow:hidden;border-top:2px solid transparent}
+.tour-card:hover{border-top-color:var(--blue);background:rgba(74,144,247,.05);transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.3);z-index:2}
+.tour-card.status-processing{border-top-color:var(--amber);opacity:.8}
+
+/* Thumbnail */
+.tour-thumb{
+  height:190px;background:var(--ink3);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.tour-thumb-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(74,144,247,.045) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(74,144,247,.045) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.tour-thumb-glow{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(74,144,247,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+.tour-thumb-icon{position:relative;z-index:2;color:var(--blue-hi);opacity:.4;transition:opacity .28s}
+.tour-card:hover .tour-thumb-icon{opacity:.75}
+.tour-thumb-icon svg{width:52px;height:52px;stroke-width:1}
+.tour-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(74,144,247,.06);opacity:0;transition:opacity .28s;z-index:3;
+}
+.tour-card:hover .tour-overlay{opacity:1}
+.tour-overlay span{
+  font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--blue-hi);border:1px solid rgba(130,180,250,.35);
+  padding:10px 20px;
+}
+.tour-badge{
+  position:absolute;top:12px;right:12px;z-index:4;
+  font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;
+}
+.badge-live{background:rgba(46,196,112,.12);color:#4dda8a;border:1px solid rgba(46,196,112,.22)}
+.badge-processing{background:rgba(232,160,48,.12);color:var(--amber-hi);border:1px solid rgba(232,160,48,.22)}
+
+/* Tour info */
+.tour-info{padding:22px 24px}
+.tour-meta{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:7px;display:flex;align-items:center;gap:10px}
+.tour-meta span{display:flex;align-items:center;gap:5px}
+.tour-name{font-family:var(--fs);font-size:1.25rem;font-weight:300;color:var(--white);margin-bottom:3px;line-height:1.2}
+.tour-address{font-size:.7rem;color:rgba(255,255,255,.35);margin-bottom:16px;display:flex;align-items:center;gap:6px}
+.tour-address svg{opacity:.4;flex-shrink:0}
+
+.tour-actions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.tact{
+  font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:8px 14px;border:1px solid;cursor:pointer;
+  transition:all .22s;font-family:var(--fb);background:none;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.tact svg{width:11px;height:11px;flex-shrink:0}
+.tact-view{color:var(--blue-hi);border-color:rgba(74,144,247,.3)}
+.tact-view:hover{background:rgba(74,144,247,.1)}
+.tact-copy{color:rgba(255,255,255,.38);border-color:rgba(255,255,255,.1)}
+.tact-copy:hover{color:var(--white);border-color:rgba(255,255,255,.28)}
+
+.tour-url{
+  padding:9px 12px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;gap:8px;
+}
+.tour-url-text{font-family:monospace;font-size:.62rem;color:rgba(255,255,255,.28);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tour-url-btn{
+  font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue-hi);cursor:pointer;padding:4px 8px;
+  border:1px solid rgba(74,144,247,.18);background:none;flex-shrink:0;
+  transition:all .2s;
+}
+.tour-url-btn:hover{background:rgba(74,144,247,.1)}
+
+/* Empty state */
+.tours-empty{
+  padding:64px 32px;text-align:center;
+  background:var(--ink2);border:1px solid rgba(255,255,255,.04);
+}
+.tours-empty svg{opacity:.15;margin-bottom:16px}
+.tours-empty h3{font-family:var(--fs);font-size:1.4rem;font-weight:300;color:rgba(255,255,255,.5);margin-bottom:8px}
+.tours-empty p{font-size:.74rem;color:rgba(255,255,255,.25)}
+
+/* ═══ MODAL ═══ */
+#tour-modal{display:none;position:fixed;inset:0;z-index:900;flex-direction:column;background:#0d1420}
+#tour-modal.open{display:flex}
+.modal-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px clamp(16px,3vw,36px);
+  background:rgba(26,35,51,.98);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0;
+}
+.modal-bar-left{display:flex;align-items:center;gap:16px}
+.modal-logo{font-family:var(--fs);font-size:1.1rem;color:rgba(255,255,255,.3)}
+.modal-logo em{font-style:normal;color:var(--blue)}
+.modal-sep{width:1px;height:18px;background:rgba(255,255,255,.1)}
+.modal-title{font-family:var(--fs);font-size:1.1rem;font-weight:300;color:var(--white)}
+.modal-bar-right{display:flex;align-items:center;gap:10px}
+.modal-url-chip{
+  font-family:monospace;font-size:.6rem;color:rgba(255,255,255,.3);
+  padding:5px 10px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);display:none;
+}
+.modal-close{
+  background:none;border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.4);font-size:.56rem;letter-spacing:.14em;
+  text-transform:uppercase;padding:8px 16px;cursor:pointer;
+  transition:all .22s;font-family:var(--fb);
+}
+.modal-close:hover{color:var(--white);border-color:rgba(255,255,255,.35)}
+.modal-body{flex:1;position:relative}
+.modal-body iframe{width:100%;height:100%;border:none;display:block}
+.modal-placeholder{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;
+}
+.modal-placeholder-icon{opacity:.12}
+.modal-placeholder h3{font-family:var(--fs);font-size:1.6rem;font-weight:300;color:rgba(255,255,255,.4)}
+.modal-placeholder p{font-size:.76rem;color:rgba(255,255,255,.25);text-align:center;max-width:300px;line-height:1.7}
+
+/* Toast */
+#toast{
+  position:fixed;bottom:32px;left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--ink3);border:1px solid rgba(74,144,247,.22);
+  color:var(--blue-hi);font-size:.65rem;letter-spacing:.1em;
+  padding:11px 22px;z-index:999;opacity:0;
+  transition:all .3s var(--ease);pointer-events:none;
+  display:flex;align-items:center;gap:8px;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+/* Reveal */
+.r{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.r.go{opacity:1;transform:none}
+.r.d1{transition-delay:.08s}.r.d2{transition-delay:.16s}.r.d3{transition-delay:.24s}
+
+/* Responsive */
+@media(max-width:800px){
+  .login-wrap{grid-template-columns:1fr}
+  .login-left{display:none}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .modal-url-chip{display:none!important}
+}
+@media(max-width:500px){
+  .stats-row{grid-template-columns:1fr}
+  .pnav-name{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="login-screen">
+  <div class="login-wrap">
+
+    <!-- Left — brand pitch -->
+    <div class="login-left">
+      <div class="login-brand">
+        <div class="login-logo">Explora<em>360</em></div>
+        <div class="login-tagline">Tourportaal</div>
+      </div>
+      <div>
+        <div class="login-pitch">
+          <h2>Al uw virtuele tours op één plek.</h2>
+          <p>Bekijk, deel en beheer al uw 360°-tours direct vanuit uw persoonlijk portaal.</p>
+        </div>
+        <div class="login-features">
+          <div class="lf"><div class="lf-dot"></div><span>Alle tours direct beschikbaar</span></div>
+          <div class="lf"><div class="lf-dot"></div><span>Eigen deelbare links per tour</span></div>
+          <div class="lf"><div class="lf-dot"></div><span>Status live-updates</span></div>
+          <div class="lf"><div class="lf-dot"></div><span>Matterport viewer ingebouwd</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — login form -->
+    <div class="login-right">
+      <div class="login-right-title">Inloggen</div>
+      <div class="login-right-sub">Klantportaal</div>
+
+      <label class="login-label">E-mailadres</label>
+      <input class="login-input" type="email" id="l-email" placeholder="uw@emailadres.nl" autocomplete="email"/>
+      <label class="login-label" style="margin-top:14px">Wachtwoord</label>
+      <input class="login-input" type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password"/>
+      <button class="login-submit" id="login-btn">Inloggen &#8594;</button>
+      <div class="login-err" id="l-err">Onbekend e-mailadres of onjuist wachtwoord.</div>
+
+      <div class="login-demo">
+        <div class="login-demo-title">Demo toegang</div>
+        <div class="login-demo-row">
+          <span>Makelaar ERA</span>
+          <code onclick="fillDemo('makelaar@era.nl')"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7518141e1019141407351007145b1b19">[email&#160;protected]</a></code>
+        </div>
+        <div class="login-demo-row">
+          <span>Hotel De Klok</span>
+          <code onclick="fillDemo('hotel@deklok.nl')"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6aea9b2a3aa86a2a3adaaa9ade8a8aa">[email&#160;protected]</a></code>
+        </div>
+        <div class="login-demo-row">
+          <span>AirBnB Superhost</span>
+          <code onclick="fillDemo('superhost@giethoorn.nl')"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2c1c7c2d7c0daddc1c6f2d5dbd7c6daddddc0dc9cdcde">[email&#160;protected]</a></code>
+        </div>
+        <div style="margin-top:8px;font-size:.6rem;color:rgba(255,255,255,.22)">Wachtwoord voor alle demo-accounts: demo123</div>
+      </div>
+
+      <button class="login-back" onclick="window.location.href='index.html'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Terug naar Explora360
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ PORTAL ═══ -->
+<div id="portal">
+
+  <div class="demo-banner">
+    <div class="demo-banner-text">Demo-omgeving — login is gesimuleerd, geen echte authenticatie</div>
+    <a href="index.html" style="font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.1);padding:5px 12px;transition:all .22s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.28)'">&#8592; Naar website</a>
+  </div>
+
+  <nav id="pnav">
+    <div class="pnav-inner">
+      <span class="pnav-logo">Explora<em>360</em><sup>Portaal</sup></span>
+      <div class="pnav-right">
+        <div class="pnav-user">
+          <div class="pnav-avatar" id="p-avatar">--</div>
+          <span class="pnav-name" id="p-name"></span>
+        </div>
+        <button class="pnav-logout" id="logout-btn">Uitloggen</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="portal-wrap">
+
+    <div class="portal-welcome r">
+      <span class="eye">Welkom terug</span>
+      <h1 id="p-welcome">Goedemiddag, <em>naam</em></h1>
+      <p id="p-subtitle"></p>
+    </div>
+
+    <div class="stats-row r d1">
+      <div class="stat-card">
+        <span class="stat-val" id="s-tours">—</span>
+        <span class="stat-key">Actieve tours</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val" id="s-views">—</span>
+        <span class="stat-key">Totaal bekeken</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val" id="s-date">—</span>
+        <span class="stat-key">Laatste opname</span>
+      </div>
+    </div>
+
+    <div class="section-head r d2">
+      <div class="section-head-l">
+        <span class="eye">Uw tours</span>
+        <h2 id="p-tours-title">Tours</h2>
+      </div>
+    </div>
+
+    <div class="tours-grid r d3" id="tours-grid"></div>
+
+  </div>
+</div>
+
+<!-- ═══ MODAL ═══ -->
+<div id="tour-modal">
+  <div class="modal-bar">
+    <div class="modal-bar-left">
+      <span class="modal-logo">Explora<em>360</em></span>
+      <div class="modal-sep"></div>
+      <span class="modal-title" id="modal-title">Tour</span>
+    </div>
+    <div class="modal-bar-right">
+      <span class="modal-url-chip" id="modal-url-chip"></span>
+      <button class="modal-close" id="modal-close-btn">&#10005; Sluiten</button>
+    </div>
+  </div>
+  <div class="modal-body" id="modal-body">
+    <div class="modal-placeholder">
+      <div class="modal-placeholder-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+      </div>
+      <h3>Tour laden...</h3>
+    </div>
+  </div>
+</div>
+
+<div id="toast">Link gekopieerd</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var USERS = {
+  'makelaar@era.nl': {
+    pass:'demo123', name:'Marloes V.', initials:'MV',
+    subtitle:'ERA Amsterdam · Makelaar',
+    stats:{ tours:3, views:847, date:'24 mrt' },
+    tours:[
+      { id:'h1', name:'Herenhuis Jordaan', address:'Prinsengracht 142, Amsterdam',
+        date:'24 mrt 2025', type:'Woning', status:'live',
+        url:'explora360.nl/era-amsterdam/herenhuis-jordaan',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' },
+      { id:'h2', name:'Appartement Oud-West', address:'Overtoom 88, Amsterdam',
+        date:'18 mrt 2025', type:'Woning', status:'live',
+        url:'explora360.nl/era-amsterdam/appartement-oud-west',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' },
+      { id:'h3', name:'Bovenwoning De Pijp', address:'Ceintuurbaan 211, Amsterdam',
+        date:'12 mrt 2025', type:'Woning', status:'live',
+        url:'explora360.nl/era-amsterdam/bovenwoning-de-pijp',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' }
+    ]
+  },
+  'hotel@deklok.nl': {
+    pass:'demo123', name:'Thomas H.', initials:'TH',
+    subtitle:'Hotel De Klok · Utrecht',
+    stats:{ tours:5, views:1284, date:'20 mrt' },
+    tours:[
+      { id:'hk1', name:'Lobby & Receptie', address:'Oudegracht 44, Utrecht',
+        date:'20 mrt 2025', type:'Hotel', status:'live',
+        url:'explora360.nl/hotel-de-klok/lobby',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' },
+      { id:'hk2', name:'Standaard Kamer 101', address:'Oudegracht 44, Utrecht',
+        date:'20 mrt 2025', type:'Hotel', status:'live',
+        url:'explora360.nl/hotel-de-klok/kamer-101',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' },
+      { id:'hk3', name:'Deluxe Kamer 205', address:'Oudegracht 44, Utrecht',
+        date:'20 mrt 2025', type:'Hotel', status:'live',
+        url:'explora360.nl/hotel-de-klok/kamer-205',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' },
+      { id:'hk4', name:'Restaurant De Klok', address:'Oudegracht 44, Utrecht',
+        date:'20 mrt 2025', type:'Horeca', status:'live',
+        url:'explora360.nl/hotel-de-klok/restaurant',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' },
+      { id:'hk5', name:'Vergaderzaal Noord', address:'Oudegracht 44, Utrecht',
+        date:'19 mrt 2025', type:'Zakelijk', status:'processing',
+        url:'explora360.nl/hotel-de-klok/vergaderzaal',
+        mp:'' }
+    ]
+  },
+  'superhost@giethoorn.nl': {
+    pass:'demo123', name:'Sofie B.', initials:'SB',
+    subtitle:'AirBnB Superhost · Giethoorn',
+    stats:{ tours:1, views:312, date:'15 mrt' },
+    tours:[
+      { id:'g1', name:"Vakantiewoning 't Riet", address:'Binnenpad 22, Giethoorn',
+        date:'15 mrt 2025', type:'AirBnB', status:'live',
+        url:'explora360.nl/sofie-b/vakantiewoning-t-riet',
+        mp:'https://my.matterport.com/show/?m=SFR2uaRjXSR' }
+    ]
+  }
+};
+
+var currentUser = null;
+var tourMap = {};
+
+function fillDemo(email) {
+  document.getElementById('l-email').value = email;
+  document.getElementById('l-pass').value = 'demo123';
+}
+
+function doLogin() {
+  var email = document.getElementById('l-email').value.trim().toLowerCase();
+  var pass  = document.getElementById('l-pass').value;
+  var err   = document.getElementById('l-err');
+  var user  = USERS[email];
+  if (!user || user.pass !== pass) { err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  currentUser = user;
+  buildPortal(user);
+}
+
+function buildPortal(user) {
+  document.getElementById('login-screen').style.display = 'none';
+  var portal = document.getElementById('portal');
+  portal.style.display = 'flex';
+
+  document.getElementById('p-avatar').textContent = user.initials;
+  document.getElementById('p-name').textContent   = user.name;
+  document.getElementById('p-welcome').innerHTML  =
+    'Goedemiddag, <em>' + user.name.split(' ')[0] + '</em>';
+  document.getElementById('p-subtitle').textContent = user.subtitle;
+  document.getElementById('s-tours').textContent  = user.stats.tours;
+  document.getElementById('s-views').textContent  = user.stats.views.toLocaleString('nl');
+  document.getElementById('s-date').textContent   = user.stats.date;
+  document.getElementById('p-tours-title').textContent =
+    user.tours.length === 1 ? '1 tour' : user.tours.length + ' tours';
+
+  tourMap = {};
+  user.tours.forEach(function(t) { tourMap[t.id] = t; });
+
+  var grid = document.getElementById('tours-grid');
+  grid.innerHTML = '';
+
+  if (user.tours.length === 0) {
+    grid.innerHTML =
+      '<div class="tours-empty" style="grid-column:1/-1">' +
+        '<svg class="modal-placeholder-icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".9"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>' +
+        '<h3>Nog geen tours</h3>' +
+        '<p>Uw eerste tour verschijnt hier zodra deze is opgeleverd.</p>' +
+      '</div>';
+    return;
+  }
+
+  user.tours.forEach(function(t) {
+    var isLive = t.status === 'live';
+    var card = document.createElement('div');
+    card.className = 'tour-card' + (isLive ? '' : ' status-processing');
+
+    card.innerHTML =
+      '<div class="tour-thumb" data-id="' + t.id + '">' +
+        '<div class="tour-thumb-grid"></div>' +
+        '<div class="tour-thumb-glow"></div>' +
+        '<div class="tour-thumb-icon">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>' +
+            '<path d="M9 21V12h6v9"/>' +
+          '</svg>' +
+        '</div>' +
+        '<span class="tour-badge ' + (isLive ? 'badge-live' : 'badge-processing') + '">' +
+          (isLive ? 'Live' : 'In verwerking') +
+        '</span>' +
+        (isLive ? '<div class="tour-overlay"><span>Bekijken &#8594;</span></div>' : '') +
+      '</div>' +
+      '<div class="tour-info">' +
+        '<div class="tour-meta">' +
+          '<span>' + t.date + '</span>' +
+          '<span style="opacity:.3">·</span>' +
+          '<span>' + t.type + '</span>' +
+        '</div>' +
+        '<div class="tour-name">' + t.name + '</div>' +
+        '<div class="tour-address">' +
+          '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' +
+          t.address +
+        '</div>' +
+        '<div class="tour-actions">' +
+          (isLive
+            ? '<button class="tact tact-view" data-id="' + t.id + '">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>' +
+                'Bekijken' +
+              '</button>'
+            : '<button class="tact" disabled style="opacity:.35;cursor:default;color:rgba(255,255,255,.3);border-color:rgba(255,255,255,.1)">' +
+                'Wordt verwerkt...' +
+              '</button>') +
+          '<button class="tact tact-copy" data-copy="' + t.url + '">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+            'Link' +
+          '</button>' +
+        '</div>' +
+        '<div class="tour-url">' +
+          '<span class="tour-url-text">' + t.url + '</span>' +
+          '<button class="tour-url-btn" data-copy="' + t.url + '">Kopieer</button>' +
+        '</div>' +
+      '</div>';
+
+    grid.appendChild(card);
+  });
+
+  // Reveal animations
+  setTimeout(function() {
+    document.querySelectorAll('#portal .r').forEach(function(el) {
+      el.classList.add('go');
+    });
+  }, 50);
+}
+
+// Event delegation on grid
+document.getElementById('tours-grid').addEventListener('click', function(e) {
+  var copy = e.target.closest('[data-copy]');
+  var view = e.target.closest('[data-id]');
+  if (copy) { copyLink(copy.getAttribute('data-copy')); return; }
+  if (view) {
+    var id = view.getAttribute('data-id');
+    if (tourMap[id] && tourMap[id].status === 'live') openTour(id);
+  }
+});
+
+function openTour(id) {
+  var t = tourMap[id];
+  if (!t) return;
+  document.getElementById('modal-title').textContent = t.name;
+  var chip = document.getElementById('modal-url-chip');
+  chip.textContent = t.url;
+  chip.style.display = 'block';
+  var body = document.getElementById('modal-body');
+  if (t.mp) {
+    body.innerHTML = '<iframe src="' + t.mp + '" allowfullscreen allow="xr-spatial-tracking"></iframe>';
+  } else {
+    body.innerHTML =
+      '<div class="modal-placeholder">' +
+        '<div class="modal-placeholder-icon"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>' +
+        '<h3>In verwerking</h3>' +
+        '<p>Deze tour wordt nog verwerkt. U ontvangt een e-mail zodra hij beschikbaar is.</p>' +
+      '</div>';
+  }
+  document.getElementById('tour-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('tour-modal').classList.remove('open');
+  document.getElementById('modal-url-chip').style.display = 'none';
+  document.getElementById('modal-body').innerHTML =
+    '<div class="modal-placeholder">' +
+      '<div class="modal-placeholder-icon"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>' +
+      '<h3>Tour laden...</h3>' +
+    '</div>';
+  document.body.style.overflow = '';
+}
+
+function copyLink(url) {
+  var full = 'https://' + url;
+  if (navigator.clipboard) { navigator.clipboard.writeText(full).catch(function(){}); }
+  var t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2800);
+}
+
+function doLogout() {
+  currentUser = null;
+  tourMap = {};
+  document.getElementById('portal').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('l-email').value = '';
+  document.getElementById('l-pass').value = '';
+  document.getElementById('l-err').style.display = 'none';
