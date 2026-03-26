@@ -2,242 +2,380 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 <title>Explora360 — Tourportaal</title>
+<meta name="robots" content="noindex"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
-  --ink:#1a2333;--ink2:#212d40;--ink3:#28364d;
+  --ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--ink4:#2e3f58;
   --mist:#94aac8;--white:#fafbfd;
   --blue:#4a90f7;--blue-lo:#2d6fd4;--blue-hi:#82b4fa;
   --amber:#e8a030;--amber-hi:#f0bc60;
+  --green:#2ec470;--green-lo:#1a9e55;
   --fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;
-  --ease:cubic-bezier(.4,0,.2,1);--pad:clamp(20px,5vw,72px);
+  --ease:cubic-bezier(.4,0,.2,1);
+  --r:clamp(16px,4vw,40px);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-font-smoothing:antialiased}
-body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;line-height:1.75;min-height:100vh}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-font-smoothing:antialiased;height:100%}
+body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;min-height:100vh;overscroll-behavior:none}
 a{color:inherit;text-decoration:none}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
-.eye{font-family:var(--fb);font-size:.57rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--blue)}
-#loading-screen{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;transition:opacity .4s}
-#loading-screen.hide{opacity:0;pointer-events:none}
-.loading-logo{font-family:var(--fs);font-size:1.8rem;color:var(--white)}
-.loading-logo em{font-style:normal;color:var(--blue)}
-.loading-bar{width:120px;height:1px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}
-.loading-bar::after{content:'';position:absolute;left:-40%;width:40%;height:100%;background:var(--blue);animation:lb .8s ease infinite}
+button{font-family:var(--fb);cursor:pointer}
+input{font-family:var(--fb)}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
+
+/* ── LOADING ── */
+#loading{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;transition:opacity .4s}
+#loading.hide{opacity:0;pointer-events:none}
+.ld-logo{font-family:var(--fs);font-size:1.8rem}.ld-logo em{font-style:normal;color:var(--blue)}
+.ld-bar{width:100px;height:1px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}
+.ld-bar::after{content:'';position:absolute;left:-40%;width:40%;height:100%;background:var(--blue);animation:lb .8s ease infinite}
 @keyframes lb{from{left:-40%}to{left:100%}}
+
+/* ── LOGIN ── */
 #login-screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
-#login-screen::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--ink) 0%,var(--ink2) 60%,var(--ink3) 100%)}
-#login-screen::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(74,144,247,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(74,144,247,.04) 1px,transparent 1px);background-size:52px 52px}
-.login-wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;max-width:900px;width:100%;gap:1px;background:rgba(255,255,255,.05)}
-.login-left{background:var(--ink2);padding:clamp(40px,6vw,64px);display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(255,255,255,.06)}
-.login-logo{font-family:var(--fs);font-size:2rem;font-weight:400;letter-spacing:.06em;margin-bottom:6px}
-.login-logo em{font-style:normal;color:var(--blue)}
-.login-tagline{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:48px}
-.login-pitch h2{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;line-height:1.15;margin-bottom:14px}
-.login-pitch p{font-size:.78rem;color:rgba(255,255,255,.38);line-height:1.75;max-width:320px}
-.login-features{margin-top:32px}
-.lf{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.lf:last-child{border-bottom:none}
-.lf-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;box-shadow:0 0 8px rgba(74,144,247,.5)}
-.lf span{font-size:.72rem;color:rgba(255,255,255,.45)}
-.login-right{background:var(--ink3);padding:clamp(40px,6vw,64px);border:1px solid rgba(255,255,255,.06)}
-.login-right-title{font-family:var(--fs);font-size:1.4rem;font-weight:300;margin-bottom:4px}
-.login-right-sub{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:36px}
-.login-label{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);display:block;margin-bottom:8px}
-.login-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-bottom:none;color:var(--white);font-family:var(--fb);font-size:.82rem;outline:none;transition:border-color .22s;display:block}
-.login-input:last-of-type{border-bottom:1px solid rgba(255,255,255,.1)}
-.login-input:focus{border-color:rgba(74,144,247,.5)}
-.login-input::placeholder{color:rgba(255,255,255,.18)}
-.login-submit{width:100%;padding:15px;background:var(--blue);color:var(--ink);border:none;font-family:var(--fb);font-size:.62rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .22s;margin-top:10px}
-.login-submit:hover{background:var(--blue-hi)}
-.login-submit:disabled{opacity:.6;cursor:default}
-.login-err{font-size:.7rem;color:#e05555;margin-top:12px;display:none;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)}
-.login-back{margin-top:20px;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:none;padding:0;transition:color .22s}
-.login-back:hover{color:rgba(255,255,255,.6)}
-#portal{display:none;min-height:100vh;flex-direction:column}
-#pnav{position:sticky;top:0;z-index:800;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(26,35,51,.96);backdrop-filter:blur(22px)}
-.pnav-inner{max-width:1280px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.pnav-logo{font-family:var(--fs);font-size:1.35rem;font-weight:400;letter-spacing:.06em}
-.pnav-logo em{font-style:normal;color:var(--blue)}
-.pnav-logo sup{font-family:var(--fb);font-size:.5rem;font-weight:400;letter-spacing:.15em;color:rgba(255,255,255,.25);vertical-align:super;margin-left:2px}
-.pnav-right{display:flex;align-items:center;gap:16px}
-.pnav-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:500;color:#fff;flex-shrink:0;border:1px solid rgba(74,144,247,.3)}
-.pnav-name{font-size:.68rem;color:rgba(255,255,255,.55)}
-.pnav-logout{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);cursor:pointer;padding:7px 14px;border:1px solid rgba(255,255,255,.1);transition:all .22s;background:none}
-.pnav-logout:hover{color:var(--white);border-color:rgba(255,255,255,.28)}
-.portal-wrap{flex:1;max-width:1280px;margin:0 auto;padding:clamp(36px,5vw,64px) var(--pad);width:100%}
-.portal-welcome{margin-bottom:clamp(32px,4.5vw,52px)}
-.portal-welcome h1{font-family:var(--fs);font-size:clamp(2rem,4.5vw,3.4rem);font-weight:300;line-height:1.08;margin-top:10px}
-.portal-welcome h1 em{font-style:italic;color:var(--mist)}
-.portal-welcome p{color:rgba(255,255,255,.38);font-size:.84rem;margin-top:12px}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:clamp(32px,4.5vw,52px)}
-.stat-card{background:var(--ink2);padding:26px 28px;position:relative;overflow:hidden}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.stat-val{font-family:var(--fs);font-size:2.2rem;font-weight:300;color:var(--white);line-height:1;display:block}
-.stat-key{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:6px;display:block}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.section-head h2{font-family:var(--fs);font-size:1.6rem;font-weight:300}
-.tours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:rgba(255,255,255,.04)}
-.tour-card{background:var(--ink2);transition:all .28s var(--ease);position:relative;overflow:hidden;border-top:2px solid transparent}
-.tour-card:hover{border-top-color:var(--blue);background:rgba(74,144,247,.05);transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.3);z-index:2}
-.tour-card.processing{border-top-color:var(--amber);opacity:.8}
-.tour-thumb{height:190px;background:var(--ink3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.tour-thumb-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(74,144,247,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(74,144,247,.045) 1px,transparent 1px);background-size:24px 24px}
-.tour-thumb-glow{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(74,144,247,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
-.tour-thumb-icon{position:relative;z-index:2;color:var(--blue-hi);opacity:.4;transition:opacity .28s}
-.tour-card:hover .tour-thumb-icon{opacity:.75}
-.tour-thumb-icon svg{width:52px;height:52px;stroke-width:1}
-.tour-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(74,144,247,.06);opacity:0;transition:opacity .28s;z-index:3}
-.tour-card:hover .tour-overlay{opacity:1}
-.tour-overlay span{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-hi);border:1px solid rgba(130,180,250,.35);padding:10px 20px}
-.tour-badge{position:absolute;top:12px;right:12px;z-index:4;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px}
-.badge-live{background:rgba(46,196,112,.12);color:#4dda8a;border:1px solid rgba(46,196,112,.22)}
-.badge-proc{background:rgba(232,160,48,.12);color:var(--amber-hi);border:1px solid rgba(232,160,48,.22)}
-.tour-info{padding:22px 24px}
-.tour-meta{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:7px;display:flex;align-items:center;gap:8px}
-.tour-name{font-family:var(--fs);font-size:1.25rem;font-weight:300;margin-bottom:3px;line-height:1.2}
-.tour-address{font-size:.7rem;color:rgba(255,255,255,.35);margin-bottom:16px;display:flex;align-items:center;gap:6px}
-.tour-actions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
-.tact{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border:1px solid;cursor:pointer;transition:all .22s;font-family:var(--fb);background:none;display:inline-flex;align-items:center;gap:6px}
-.tact svg{width:11px;height:11px}
-.tact-view{color:var(--blue-hi);border-color:rgba(74,144,247,.3)}
-.tact-view:hover{background:rgba(74,144,247,.1)}
-.tact-copy{color:rgba(255,255,255,.38);border-color:rgba(255,255,255,.1)}
-.tact-copy:hover{color:var(--white);border-color:rgba(255,255,255,.28)}
-.tour-url{padding:9px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:8px}
-.tour-url-text{font-family:monospace;font-size:.62rem;color:rgba(255,255,255,.28);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tour-url-btn{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-hi);cursor:pointer;padding:4px 8px;border:1px solid rgba(74,144,247,.18);background:none;transition:all .2s}
-.tour-url-btn:hover{background:rgba(74,144,247,.1)}
-.tours-empty{padding:64px 32px;text-align:center;background:var(--ink2);border:1px dashed rgba(255,255,255,.08);grid-column:1/-1}
-.tours-empty svg{opacity:.15;margin:0 auto 16px;display:block}
-.tours-empty h3{font-family:var(--fs);font-size:1.4rem;font-weight:300;color:rgba(255,255,255,.4);margin-bottom:8px}
-.tours-empty p{font-size:.74rem;color:rgba(255,255,255,.22)}
-#tour-modal{display:none;position:fixed;inset:0;z-index:900;flex-direction:column;background:#0d1420}
-#tour-modal.open{display:flex}
-.modal-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,3vw,36px);background:rgba(26,35,51,.98);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
-.modal-bar-left{display:flex;align-items:center;gap:16px}
-.modal-logo{font-family:var(--fs);font-size:1.1rem;color:rgba(255,255,255,.3)}
-.modal-logo em{font-style:normal;color:var(--blue)}
-.modal-sep{width:1px;height:18px;background:rgba(255,255,255,.1)}
-.modal-title{font-family:var(--fs);font-size:1.1rem;font-weight:300}
-.modal-url-chip{font-family:monospace;font-size:.6rem;color:rgba(255,255,255,.3);padding:5px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);display:none}
-.modal-close{background:none;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;cursor:pointer;transition:all .22s;font-family:var(--fb)}
-.modal-close:hover{color:var(--white);border-color:rgba(255,255,255,.35)}
-.modal-body{flex:1;position:relative}
-.modal-body iframe{width:100%;height:100%;border:none;display:block}
-.modal-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
-.modal-ph svg{opacity:.12}
-.modal-ph h3{font-family:var(--fs);font-size:1.6rem;font-weight:300;color:rgba(255,255,255,.4)}
-.modal-ph p{font-size:.76rem;color:rgba(255,255,255,.25);text-align:center;max-width:300px;line-height:1.7}
-#toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--ink3);border:1px solid rgba(74,144,247,.22);color:var(--blue-hi);font-size:.65rem;letter-spacing:.1em;padding:11px 22px;z-index:999;opacity:0;transition:all .3s var(--ease);pointer-events:none;display:flex;align-items:center;gap:8px}
+#login-screen::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--ink),var(--ink2) 60%,var(--ink3))}
+#login-screen::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(74,144,247,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(74,144,247,.04) 1px,transparent 1px);background-size:48px 48px}
+.login-box{position:relative;z-index:1;width:100%;max-width:420px;background:var(--ink2);border:1px solid rgba(255,255,255,.07);padding:clamp(32px,6vw,52px)}
+.login-logo{font-family:var(--fs);font-size:1.9rem;margin-bottom:4px}.login-logo em{font-style:normal;color:var(--blue)}
+.login-sub{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:36px}
+.lbl{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:7px;margin-top:14px}
+.linput{width:100%;padding:13px 15px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:.84rem;outline:none;transition:border-color .22s;-webkit-appearance:none;border-radius:0}
+.linput:focus{border-color:rgba(74,144,247,.5)}
+.linput::placeholder{color:rgba(255,255,255,.18)}
+.lbtn{width:100%;padding:14px;background:var(--blue);color:var(--ink);border:none;font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;transition:background .22s;margin-top:14px;-webkit-appearance:none;border-radius:0}
+.lbtn:hover{background:var(--blue-hi)}
+.lbtn:disabled{opacity:.5}
+.lerr{font-size:.7rem;color:#e05555;margin-top:10px;display:none;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)}
+.lback{margin-top:18px;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.22);display:flex;align-items:center;gap:7px;background:none;border:none;padding:0;transition:color .22s}
+.lback:hover{color:rgba(255,255,255,.6)}
+
+/* ── WELCOME OVERLAY ── */
+#welcome-overlay{position:fixed;inset:0;z-index:8000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(10,15,24,.92);backdrop-filter:blur(12px)}
+.wc-box{background:var(--ink2);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--blue);padding:clamp(32px,5vw,52px);max-width:480px;width:100%;text-align:center}
+.wc-icon{width:56px;height:56px;border-radius:50%;background:rgba(74,144,247,.12);border:1px solid rgba(74,144,247,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--blue-hi)}
+.wc-icon svg{width:24px;height:24px}
+.wc-title{font-family:var(--fs);font-size:clamp(1.6rem,4vw,2.2rem);font-weight:300;margin-bottom:10px}
+.wc-sub{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.75;margin-bottom:28px}
+.wc-steps{display:flex;flex-direction:column;gap:1px;margin-bottom:28px;text-align:left}
+.wc-step{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--ink3)}
+.wc-step-num{width:24px;height:24px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:500;color:var(--blue-hi);flex-shrink:0}
+.wc-step span{font-size:.76rem;color:rgba(255,255,255,.55);line-height:1.5}
+.wc-btn{width:100%;padding:14px;background:var(--blue);color:var(--ink);border:none;font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;transition:background .22s}
+.wc-btn:hover{background:var(--blue-hi)}
+
+/* ── APP SHELL ── */
+#app{display:none;min-height:100vh;flex-direction:column;padding-bottom:80px}
+
+/* ── TOP NAV ── */
+.top-nav{position:sticky;top:0;z-index:700;background:rgba(26,35,51,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)}
+.top-nav-inner{max-width:700px;margin:0 auto;padding:14px var(--r);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tn-logo{font-family:var(--fs);font-size:1.2rem}.tn-logo em{font-style:normal;color:var(--blue)}
+.tn-logo sup{font-family:var(--fb);font-size:.46rem;color:rgba(255,255,255,.22);letter-spacing:.14em;vertical-align:super;margin-left:2px}
+.tn-right{display:flex;align-items:center;gap:10px}
+.tn-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:500;border:1px solid rgba(74,144,247,.3);cursor:pointer;flex-shrink:0}
+.tn-logout{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);padding:7px 12px;border:1px solid rgba(255,255,255,.08);background:none;color:rgba(255,255,255,.28);transition:all .22s}
+.tn-logout:hover{color:var(--white);border-color:rgba(255,255,255,.28)}
+
+/* ── BOTTOM TAB BAR ── */
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:700;background:rgba(15,22,35,.97);border-top:1px solid rgba(255,255,255,.06);backdrop-filter:blur(20px);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;border:none;background:none;transition:color .22s}
+.tab-item svg{width:20px;height:20px;stroke-width:1.5}
+.tab-item.active{color:var(--blue-hi)}
+.tab-item.active svg{stroke:var(--blue-hi)}
+
+/* ── CONTENT PANELS ── */
+.panel{display:none;max-width:700px;margin:0 auto;padding:24px var(--r)}
+.panel.active{display:block}
+
+/* ── SECTION HEADER ── */
+.sec-eye{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:6px}
+.sec-title{font-family:var(--fs);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;line-height:1.1;margin-bottom:20px}
+.sec-title em{font-style:italic;color:var(--mist)}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px}
+.stat-box{background:var(--ink2);padding:18px 16px;position:relative;overflow:hidden}
+.stat-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
+.stat-val{font-family:var(--fs);font-size:1.7rem;font-weight:300;display:block;line-height:1}
+.stat-lbl{font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-top:5px;display:block}
+
+/* ── TOUR CARDS ── */
+.tours-list{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04)}
+.tour-card{background:var(--ink2);border-left:2px solid transparent;transition:all .22s}
+.tour-card.live{border-left-color:var(--green)}
+.tour-card.processing{border-left-color:var(--amber);opacity:.85}
+.tc-inner{padding:18px 16px}
+.tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.tc-meta{font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.tc-name{font-family:var(--fs);font-size:1.1rem;font-weight:300;color:var(--white);line-height:1.2}
+.tc-address{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:3px;display:flex;align-items:center;gap:5px}
+.tc-address svg{width:10px;height:10px;opacity:.4;flex-shrink:0}
+.tc-badge{font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;flex-shrink:0}
+.tc-badge.live{background:rgba(46,196,112,.12);color:#4dda8a;border:1px solid rgba(46,196,112,.22)}
+.tc-badge.proc{background:rgba(232,160,48,.12);color:var(--amber-hi);border:1px solid rgba(232,160,48,.22)}
+.tc-views{display:flex;align-items:center;gap:5px;font-size:.58rem;color:rgba(255,255,255,.3);margin-top:8px}
+.tc-views svg{width:12px;height:12px;opacity:.5}
+.tc-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tc-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border:1px solid;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;transition:all .22s;background:none;flex:1;justify-content:center;min-height:40px}
+.tc-btn svg{width:12px;height:12px;flex-shrink:0}
+.tc-btn-view{color:var(--blue-hi);border-color:rgba(74,144,247,.3)}
+.tc-btn-view:hover{background:rgba(74,144,247,.1)}
+.tc-btn-share{color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.12)}
+.tc-btn-share:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
+.tc-btn-proc{color:rgba(255,255,255,.22);border-color:rgba(255,255,255,.06);cursor:default;flex:2}
+.empty-state{padding:48px 24px;text-align:center;background:var(--ink2);border:1px dashed rgba(255,255,255,.07)}
+.empty-state svg{opacity:.12;margin:0 auto 16px;display:block}
+.empty-state h3{font-family:var(--fs);font-size:1.3rem;font-weight:300;color:rgba(255,255,255,.35);margin-bottom:8px}
+.empty-state p{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.7}
+
+/* ── TOUR VIEWER ── */
+#viewer{position:fixed;inset:0;z-index:900;background:#0a0f18;display:none;flex-direction:column}
+#viewer.open{display:flex}
+.viewer-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px var(--r);background:rgba(20,28,42,.98);border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
+.viewer-bar-left{display:flex;align-items:center;gap:12px;min-width:0}
+.viewer-logo{font-family:var(--fs);font-size:1rem;flex-shrink:0}.viewer-logo em{font-style:normal;color:var(--blue)}
+.viewer-sep{width:1px;height:16px;background:rgba(255,255,255,.1);flex-shrink:0}
+.viewer-title{font-family:var(--fs);font-size:.95rem;font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-close{padding:8px 14px;background:none;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;transition:all .22s;flex-shrink:0}
+.viewer-close:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
+.viewer-body{flex:1;position:relative}
+.viewer-body iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.viewer-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:32px}
+.viewer-ph svg{opacity:.12}
+.viewer-ph h3{font-family:var(--fs);font-size:1.4rem;font-weight:300;color:rgba(255,255,255,.4)}
+.viewer-ph p{font-size:.74rem;color:rgba(255,255,255,.22);line-height:1.7;max-width:280px}
+
+/* ── SHARE CARD ── */
+#share-modal{position:fixed;inset:0;z-index:950;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+#share-modal.open{display:flex}
+.share-sheet{background:var(--ink2);border-top:1px solid rgba(255,255,255,.08);border-top:2px solid var(--blue);width:100%;max-width:500px;padding:24px var(--r) calc(24px + env(safe-area-inset-bottom));animation:slideup .3s var(--ease)}
+@keyframes slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.share-handle{width:36px;height:3px;background:rgba(255,255,255,.12);border-radius:2px;margin:0 auto 20px}
+.share-title{font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:4px}
+.share-sub{font-size:.66rem;color:rgba(255,255,255,.32);margin-bottom:20px}
+.share-url{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--ink3);border:1px solid rgba(255,255,255,.07);margin-bottom:16px}
+.share-url-text{font-family:monospace;font-size:.64rem;color:rgba(255,255,255,.45);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.share-copy-btn{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-hi);padding:6px 10px;border:1px solid rgba(74,144,247,.25);background:none;flex-shrink:0;transition:all .2s}
+.share-copy-btn:hover{background:rgba(74,144,247,.1)}
+.share-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.share-opt{display:flex;align-items:center;gap:10px;padding:14px;background:var(--ink3);border:1px solid rgba(255,255,255,.06);font-size:.62rem;color:rgba(255,255,255,.5);transition:all .22s}
+.share-opt:hover{background:rgba(255,255,255,.04);color:var(--white)}
+.share-opt svg{width:16px;height:16px;flex-shrink:0}
+.share-opt.wa{border-color:rgba(37,211,102,.2);color:#4dda8a}
+.share-opt.wa:hover{background:rgba(37,211,102,.06)}
+.share-close{width:100%;padding:12px;background:none;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.35);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;transition:all .22s}
+.share-close:hover{border-color:rgba(255,255,255,.28);color:var(--white)}
+
+/* ── PROFIEL PANEL ── */
+.profile-card{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:24px;margin-bottom:16px}
+.profile-avatar-lg{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:400;font-family:var(--fs);border:2px solid rgba(74,144,247,.3);margin-bottom:16px}
+.profile-name{font-family:var(--fs);font-size:1.4rem;font-weight:300}
+.profile-company{font-size:.64rem;color:rgba(255,255,255,.32);letter-spacing:.08em;margin-top:4px}
+.profile-email{font-size:.7rem;color:rgba(255,255,255,.28);margin-top:8px}
+.form-section{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:24px;margin-bottom:12px}
+.form-section-title{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.field-lbl{font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);display:block;margin-bottom:7px;margin-top:14px}
+.field-lbl:first-child{margin-top:0}
+.field-input{width:100%;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--white);font-size:.82rem;outline:none;transition:border-color .22s;-webkit-appearance:none;border-radius:0}
+.field-input:focus{border-color:rgba(74,144,247,.45)}
+.field-input::placeholder{color:rgba(255,255,255,.18)}
+.save-btn{width:100%;padding:13px;background:var(--blue);color:var(--ink);border:none;font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;transition:background .22s;margin-top:16px}
+.save-btn:hover{background:var(--blue-hi)}
+.save-btn:disabled{opacity:.5}
+.field-note{font-size:.62rem;color:rgba(255,255,255,.22);margin-top:6px;line-height:1.6}
+.success-msg{font-size:.7rem;color:var(--green);padding:10px 14px;background:rgba(46,196,112,.08);border:1px solid rgba(46,196,112,.2);margin-top:10px;display:none}
+.danger-btn{width:100%;padding:13px;background:none;color:rgba(224,85,85,.6);border:1px solid rgba(224,85,85,.2);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;transition:all .22s;margin-top:8px}
+.danger-btn:hover{color:#e05555;border-color:rgba(224,85,85,.45);background:rgba(224,85,85,.06)}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:calc(80px + 12px);left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink3);border:1px solid rgba(74,144,247,.25);color:var(--blue-hi);font-size:.62rem;letter-spacing:.08em;padding:10px 18px;z-index:9000;opacity:0;transition:all .3s var(--ease);pointer-events:none;display:flex;align-items:center;gap:7px;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-#toast::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
-.r{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.r.go{opacity:1;transform:none}
-.r.d1{transition-delay:.08s}.r.d2{transition-delay:.16s}.r.d3{transition-delay:.24s}
-@media(max-width:800px){.login-wrap{grid-template-columns:1fr}.login-left{display:none}.stats-row{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.stats-row{grid-template-columns:1fr}.pnav-name{display:none}}
+#toast.success{border-color:rgba(46,196,112,.3);color:#4dda8a}
+#toast::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:480px){
+  .stats-row{grid-template-columns:repeat(3,1fr)}
+  .tc-btn{font-size:.48rem;padding:9px 10px}
+  .share-options{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<div id="loading-screen">
-  <div class="loading-logo">Explora<em>360</em></div>
-  <div class="loading-bar"></div>
+<!-- LOADING -->
+<div id="loading">
+  <div class="ld-logo">Explora<em>360</em></div>
+  <div class="ld-bar"></div>
 </div>
 
+<!-- LOGIN -->
 <div id="login-screen">
-  <div class="login-wrap">
-    <div class="login-left">
-      <div>
-        <div class="login-logo">Explora<em>360</em></div>
-        <div class="login-tagline">Tourportaal</div>
-      </div>
-      <div>
-        <div class="login-pitch">
-          <h2>Al uw virtuele tours op één plek.</h2>
-          <p>Bekijk, deel en beheer al uw 360&#176;-tours vanuit uw persoonlijk portaal.</p>
-        </div>
-        <div class="login-features">
-          <div class="lf"><div class="lf-dot"></div><span>Alle tours direct beschikbaar</span></div>
-          <div class="lf"><div class="lf-dot"></div><span>Eigen deelbare links per tour</span></div>
-          <div class="lf"><div class="lf-dot"></div><span>Live status-updates</span></div>
-          <div class="lf"><div class="lf-dot"></div><span>Matterport viewer ingebouwd</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="login-right">
-      <div class="login-right-title">Inloggen</div>
-      <div class="login-right-sub">Klantportaal</div>
-      <label class="login-label">E-mailadres</label>
-      <input class="login-input" type="email" id="l-email" placeholder="uw@emailadres.nl" autocomplete="email"/>
-      <label class="login-label" style="margin-top:14px">Wachtwoord</label>
-      <input class="login-input" type="password" id="l-pass" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password"/>
-      <button class="login-submit" id="login-btn">Inloggen &#8594;</button>
-      <div class="login-err" id="l-err">Onbekend e-mailadres of onjuist wachtwoord.</div>
-      <button class="login-back" onclick="window.location.href='index.html'">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Terug naar Explora360
-      </button>
-    </div>
+  <div class="login-box">
+    <div class="login-logo">Explora<em>360</em></div>
+    <div class="login-sub">Tourportaal</div>
+    <label class="lbl">E-mailadres</label>
+    <input class="linput" type="email" id="l-email" placeholder="uw@emailadres.nl" autocomplete="email"/>
+    <label class="lbl">Wachtwoord</label>
+    <input class="linput" type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password"/>
+    <button class="lbtn" id="login-btn">Inloggen →</button>
+    <div class="lerr" id="l-err">Onbekend e-mailadres of onjuist wachtwoord.</div>
+    <button class="lback" onclick="window.location.href='index.html'">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Terug naar Explora360
+    </button>
   </div>
 </div>
 
-<div id="portal">
-  <nav id="pnav">
-    <div class="pnav-inner">
-      <span class="pnav-logo">Explora<em>360</em><sup>Portaal</sup></span>
-      <div class="pnav-right">
-        <div class="pnav-avatar" id="p-avatar">--</div>
-        <span class="pnav-name" id="p-name"></span>
-        <button class="pnav-logout" id="logout-btn">Uitloggen</button>
+<!-- WELCOME OVERLAY -->
+<div id="welcome-overlay">
+  <div class="wc-box">
+    <div class="wc-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2L2 19h20L12 2z"/><path d="M12 9v4M12 17h.01"/></svg>
+    </div>
+    <h2 class="wc-title">Welkom bij uw<br/>Explora360 portaal</h2>
+    <p class="wc-sub">Hier vindt u al uw virtuele tours, deelbare links en uw accountinformatie. Zo werkt het:</p>
+    <div class="wc-steps">
+      <div class="wc-step"><div class="wc-step-num">1</div><span>Bekijk uw tours via het <strong style="color:var(--white)">Tours tabblad</strong></span></div>
+      <div class="wc-step"><div class="wc-step-num">2</div><span>Deel een tour via de <strong style="color:var(--white)">Deel-knop</strong> — voor WhatsApp, e-mail of socials</span></div>
+      <div class="wc-step"><div class="wc-step-num">3</div><span>Beheer uw account via het <strong style="color:var(--white)">Profiel tabblad</strong></span></div>
+    </div>
+    <button class="wc-btn" onclick="closeWelcome()">Aan de slag →</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <span class="tn-logo">Explora<em>360</em><sup>Portaal</sup></span>
+      <div class="tn-right">
+        <div class="tn-avatar" id="tn-avatar" onclick="showPanel('profiel')">--</div>
+        <button class="tn-logout" id="logout-btn">Uit</button>
       </div>
     </div>
   </nav>
-  <div class="portal-wrap">
-    <div class="portal-welcome r">
-      <span class="eye">Welkom terug</span>
-      <h1 id="p-welcome">Welkom</h1>
-      <p id="p-subtitle"></p>
+
+  <!-- TOURS PANEL -->
+  <div class="panel active" id="panel-tours">
+    <span class="sec-eye">Mijn tours</span>
+    <h1 class="sec-title" id="p-welcome">Welkom</h1>
+    <div class="stats-row">
+      <div class="stat-box"><span class="stat-val" id="s-live">0</span><span class="stat-lbl">Live</span></div>
+      <div class="stat-box"><span class="stat-val" id="s-total">0</span><span class="stat-lbl">Totaal</span></div>
+      <div class="stat-box"><span class="stat-val" id="s-views">0</span><span class="stat-lbl">Views</span></div>
     </div>
-    <div class="stats-row r d1">
-      <div class="stat-card"><span class="stat-val" id="s-tours">0</span><span class="stat-key">Actieve tours</span></div>
-      <div class="stat-card"><span class="stat-val" id="s-total">0</span><span class="stat-key">Totaal tours</span></div>
-      <div class="stat-card"><span class="stat-val" id="s-date">&#8212;</span><span class="stat-key">Laatste opname</span></div>
-    </div>
-    <div class="section-head r d2">
-      <div><span class="eye" style="display:block;margin-bottom:6px">Uw tours</span><h2 id="p-tours-title">Tours</h2></div>
-    </div>
-    <div class="tours-grid r d3" id="tours-grid"></div>
+    <div class="tours-list" id="tours-list"></div>
   </div>
+
+  <!-- PROFIEL PANEL -->
+  <div class="panel" id="panel-profiel">
+    <span class="sec-eye">Mijn account</span>
+    <h1 class="sec-title">Profiel &amp;<br/><em>Instellingen</em></h1>
+
+    <div class="profile-card">
+      <div class="profile-avatar-lg" id="prof-avatar">--</div>
+      <div class="profile-name" id="prof-name">—</div>
+      <div class="profile-company" id="prof-company"></div>
+      <div class="profile-email" id="prof-email"></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Gegevens aanpassen</div>
+      <label class="field-lbl">Naam</label>
+      <input class="field-input" type="text" id="edit-naam" placeholder="Uw naam"/>
+      <label class="field-lbl">Bedrijf</label>
+      <input class="field-input" type="text" id="edit-bedrijf" placeholder="Bedrijfsnaam (optioneel)"/>
+      <button class="save-btn" id="save-profile-btn" onclick="saveProfile()">Opslaan →</button>
+      <div class="success-msg" id="profile-success">✓ Gegevens opgeslagen</div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Wachtwoord wijzigen</div>
+      <label class="field-lbl">Nieuw wachtwoord</label>
+      <input class="field-input" type="password" id="new-pass" placeholder="Minimaal 8 tekens"/>
+      <label class="field-lbl">Bevestig wachtwoord</label>
+      <input class="field-input" type="password" id="new-pass2" placeholder="Herhaal wachtwoord"/>
+      <p class="field-note">Kies een sterk wachtwoord van minimaal 8 tekens.</p>
+      <button class="save-btn" id="save-pass-btn" onclick="savePassword()">Wachtwoord wijzigen →</button>
+      <div class="success-msg" id="pass-success">✓ Wachtwoord gewijzigd</div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Sessie</div>
+      <button class="danger-btn" onclick="doLogout()">Uitloggen op dit apparaat</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM TAB BAR -->
+  <nav class="tab-bar">
+    <button class="tab-item active" id="tab-tours" onclick="showPanel('tours')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+      Tours
+    </button>
+    <button class="tab-item" id="tab-profiel" onclick="showPanel('profiel')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Profiel
+    </button>
+  </nav>
 </div>
 
-<div id="tour-modal">
-  <div class="modal-bar">
-    <div class="modal-bar-left">
-      <span class="modal-logo">Explora<em>360</em></span>
-      <div class="modal-sep"></div>
-      <span class="modal-title" id="modal-title">Tour</span>
+<!-- TOUR VIEWER -->
+<div id="viewer">
+  <div class="viewer-bar">
+    <div class="viewer-bar-left">
+      <span class="viewer-logo">Explora<em>360</em></span>
+      <div class="viewer-sep"></div>
+      <span class="viewer-title" id="viewer-title">Tour</span>
     </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <span class="modal-url-chip" id="modal-url-chip"></span>
-      <button class="modal-close" id="modal-close-btn">&#10005; Sluiten</button>
-    </div>
+    <button class="viewer-close" onclick="closeViewer()">✕ Sluiten</button>
   </div>
-  <div class="modal-body" id="modal-body">
-    <div class="modal-ph">
-      <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+  <div class="viewer-body" id="viewer-body">
+    <div class="viewer-ph">
+      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
       <h3>Tour laden...</h3>
     </div>
   </div>
 </div>
 
-<div id="toast">Link gekopieerd</div>
+<!-- SHARE MODAL -->
+<div id="share-modal" onclick="closeShare(event)">
+  <div class="share-sheet" id="share-sheet">
+    <div class="share-handle"></div>
+    <div class="share-title" id="share-tour-name">Tour delen</div>
+    <div class="share-sub">Kopieer de link of deel direct via een app</div>
+    <div class="share-url">
+      <span class="share-url-text" id="share-url-text"></span>
+      <button class="share-copy-btn" onclick="copyShareUrl()">Kopieer</button>
+    </div>
+    <div class="share-options">
+      <button class="share-opt wa" onclick="shareWhatsApp()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163A11.867 11.867 0 01.157 11.892C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.821 11.821 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.307 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        WhatsApp
+      </button>
+      <button class="share-opt" onclick="shareEmail()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 7l10 7 10-7"/></svg>
+        E-mail
+      </button>
+      <button class="share-opt" onclick="shareNative()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Meer opties
+      </button>
+      <button class="share-opt" onclick="copyShareUrl()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Link kopiëren
+      </button>
+    </div>
+    <button class="share-close" onclick="closeShare()">Annuleren</button>
+  </div>
+</div>
+
+<div id="toast">Gekopieerd</div>
 
 <script>
 var sb = supabase.createClient(
@@ -245,24 +383,31 @@ var sb = supabase.createClient(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloenBzZnBwdGlvamtrYXFyemdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0ODM2MDAsImV4cCI6MjA5MDA1OTYwMH0.ujW0R1D_Ow4A6GLWNGCTwdOHaYItLlGdeaYXVAcIQUw'
 );
 
-var tourMap = {};
+var currentUser = null;
+var currentKlant = null;
+var currentTours = [];
+var currentShareUrl = '';
+var currentShareName = '';
 
-function hideLoading() {
-  var el = document.getElementById('loading-screen');
-  el.classList.add('hide');
-  setTimeout(function() { el.style.display = 'none'; }, 400);
-}
-
+// ── INIT ──────────────────────────────────────────────────────────────────
 async function init() {
   var res = await sb.auth.getSession();
   if (res.data && res.data.session) {
-    await loadPortal(res.data.session.user);
+    currentUser = res.data.session.user;
+    await loadPortal();
   } else {
     document.getElementById('login-screen').style.display = 'flex';
   }
   hideLoading();
 }
 
+function hideLoading() {
+  var el = document.getElementById('loading');
+  el.classList.add('hide');
+  setTimeout(function(){ el.style.display='none'; }, 400);
+}
+
+// ── LOGIN ─────────────────────────────────────────────────────────────────
 async function doLogin() {
   var email = document.getElementById('l-email').value.trim().toLowerCase();
   var pass  = document.getElementById('l-pass').value;
@@ -274,126 +419,264 @@ async function doLogin() {
   var res = await sb.auth.signInWithPassword({ email: email, password: pass });
   if (res.error) {
     err.style.display = 'block';
-    btn.textContent = 'Inloggen \u2192';
+    btn.textContent = 'Inloggen →';
     btn.disabled = false;
     return;
   }
+  currentUser = res.data.user;
   document.getElementById('login-screen').style.display = 'none';
-  await loadPortal(res.data.user);
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('loading').classList.remove('hide');
+  await loadPortal();
+  hideLoading();
 }
 
-async function loadPortal(user) {
-  var kr = await sb.from('klanten').select('*').eq('id', user.id).single();
-  var klant = kr.data || { naam: user.email.split('@')[0], bedrijf: '' };
-  var tr = await sb.from('tours').select('*').eq('klant_id', user.id).order('created_at', { ascending: false });
-  var tours = tr.data || [];
-  renderPortal(klant, tours);
-}
+// ── LOAD PORTAL ───────────────────────────────────────────────────────────
+async function loadPortal() {
+  var kr = await sb.from('klanten').select('*').eq('id', currentUser.id).single();
+  currentKlant = kr.data || { naam: currentUser.email.split('@')[0], bedrijf: '', eerste_login: true };
 
-function renderPortal(klant, tours) {
-  document.getElementById('portal').style.display = 'flex';
-  var naam = klant.naam || 'Klant';
-  var ini  = naam.split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase();
-  document.getElementById('p-avatar').textContent  = ini;
-  document.getElementById('p-name').textContent    = naam;
-  document.getElementById('p-welcome').innerHTML   = 'Welkom, <em>' + naam.split(' ')[0] + '</em>';
-  document.getElementById('p-subtitle').textContent = klant.bedrijf || '';
-  var live = tours.filter(function(t){ return t.status === 'live'; });
-  document.getElementById('s-tours').textContent   = live.length;
-  document.getElementById('s-total').textContent   = tours.length;
-  var d = tours.length > 0 ? new Date(tours[0].datum || tours[0].created_at).toLocaleDateString('nl-NL',{day:'numeric',month:'short'}) : '\u2014';
-  document.getElementById('s-date').textContent    = d;
-  document.getElementById('p-tours-title').textContent = tours.length === 1 ? '1 tour' : tours.length + ' tours';
+  var tr = await sb.from('tours').select('*').eq('klant_id', currentUser.id).order('created_at', { ascending: false });
+  currentTours = tr.data || [];
 
-  tourMap = {};
-  tours.forEach(function(t){ tourMap[t.id] = t; });
+  renderPortal();
 
-  var grid = document.getElementById('tours-grid');
-  grid.innerHTML = '';
-
-  if (tours.length === 0) {
-    grid.innerHTML = '<div class="tours-empty"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".9"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg><h3>Nog geen tours</h3><p>Uw eerste tour verschijnt hier zodra deze is opgeleverd.</p></div>';
-  } else {
-    tours.forEach(function(t) {
-      var live = t.status === 'live';
-      var dat  = t.datum ? new Date(t.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '';
-      var c    = document.createElement('div');
-      c.className = 'tour-card' + (live ? '' : ' processing');
-      c.innerHTML =
-        '<div class="tour-thumb" data-id="' + t.id + '">' +
-          '<div class="tour-thumb-grid"></div><div class="tour-thumb-glow"></div>' +
-          '<div class="tour-thumb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>' +
-          '<span class="tour-badge ' + (live ? 'badge-live' : 'badge-proc') + '">' + (live ? 'Live' : 'In verwerking') + '</span>' +
-          (live ? '<div class="tour-overlay"><span>Bekijken &#8594;</span></div>' : '') +
-        '</div>' +
-        '<div class="tour-info">' +
-          '<div class="tour-meta"><span>' + dat + '</span>' + (t.type ? '<span style="opacity:.3">&#183;</span><span>' + t.type + '</span>' : '') + '</div>' +
-          '<div class="tour-name">' + t.naam + '</div>' +
-          (t.adres ? '<div class="tour-address"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' + t.adres + '</div>' : '') +
-          '<div class="tour-actions">' +
-            (live ? '<button class="tact tact-view" data-id="' + t.id + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>Bekijken</button>' :
-                    '<button class="tact" disabled style="opacity:.35;cursor:default;color:rgba(255,255,255,.3);border-color:rgba(255,255,255,.1)">Wordt verwerkt...</button>') +
-            (t.matterport_url ? '<button class="tact tact-copy" data-copy="' + t.matterport_url + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Link</button>' : '') +
-          '</div>' +
-          (t.matterport_url ? '<div class="tour-url"><span class="tour-url-text">' + t.matterport_url + '</span><button class="tour-url-btn" data-copy="' + t.matterport_url + '">Kopieer</button></div>' : '') +
-        '</div>';
-      grid.appendChild(c);
-    });
+  // Welkomstscherm bij eerste login
+  if (currentKlant.eerste_login !== false) {
+    showWelcome();
+    await sb.from('klanten').update({ eerste_login: false }).eq('id', currentUser.id);
   }
-  setTimeout(function(){
-    document.querySelectorAll('#portal .r').forEach(function(el){ el.classList.add('go'); });
-  }, 50);
 }
 
-document.getElementById('tours-grid').addEventListener('click', function(e) {
-  var cp = e.target.closest('[data-copy]');
-  var vw = e.target.closest('[data-id]');
-  if (cp) { copyLink(cp.getAttribute('data-copy')); return; }
-  if (vw) { var id = vw.getAttribute('data-id'); if (tourMap[id] && tourMap[id].status === 'live') openTour(id); }
-});
+// ── RENDER ────────────────────────────────────────────────────────────────
+function renderPortal() {
+  document.getElementById('app').style.display = 'flex';
 
-function openTour(id) {
-  var t = tourMap[id]; if (!t) return;
-  document.getElementById('modal-title').textContent = t.naam;
-  var chip = document.getElementById('modal-url-chip');
-  chip.textContent = t.matterport_url || '';
-  chip.style.display = t.matterport_url ? 'block' : 'none';
-  var body = document.getElementById('modal-body');
-  body.innerHTML = t.matterport_url
-    ? '<iframe src="' + t.matterport_url + '" allowfullscreen allow="xr-spatial-tracking"></iframe>'
-    : '<div class="modal-ph"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><h3>In verwerking</h3><p>U ontvangt een e-mail zodra de tour beschikbaar is.</p></div>';
-  document.getElementById('tour-modal').classList.add('open');
+  var naam = currentKlant.naam || 'Klant';
+  var ini  = naam.split(' ').map(function(w){ return w[0]||''; }).join('').substring(0,2).toUpperCase();
+
+  document.getElementById('tn-avatar').textContent = ini;
+  document.getElementById('p-welcome').innerHTML = 'Goedemorgen, <em>' + naam.split(' ')[0] + '</em>';
+
+  var live = currentTours.filter(function(t){ return t.status==='live'; });
+  var totalViews = currentTours.reduce(function(sum,t){ return sum + (t.views||0); }, 0);
+  document.getElementById('s-live').textContent  = live.length;
+  document.getElementById('s-total').textContent = currentTours.length;
+  document.getElementById('s-views').textContent = totalViews;
+
+  // Profiel
+  document.getElementById('prof-avatar').textContent  = ini;
+  document.getElementById('prof-name').textContent    = naam;
+  document.getElementById('prof-company').textContent = currentKlant.bedrijf || '';
+  document.getElementById('prof-email').textContent   = currentUser.email;
+  document.getElementById('edit-naam').value    = currentKlant.naam || '';
+  document.getElementById('edit-bedrijf').value = currentKlant.bedrijf || '';
+
+  renderTours();
+}
+
+function renderTours() {
+  var list = document.getElementById('tours-list');
+  if (currentTours.length === 0) {
+    list.innerHTML =
+      '<div class="empty-state">' +
+        '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".9"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>' +
+        '<h3>Nog geen tours</h3>' +
+        '<p>Uw eerste tour verschijnt hier zodra deze is opgeleverd.</p>' +
+      '</div>';
+    return;
+  }
+
+  list.innerHTML = '';
+  currentTours.forEach(function(t) {
+    var isLive = t.status === 'live';
+    var datum  = t.datum ? new Date(t.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '';
+    var tourUrl = t.slug ? 'https://www.explora360.nl/tour/' + t.slug : (t.matterport_url || '');
+
+    var card = document.createElement('div');
+    card.className = 'tour-card ' + (isLive ? 'live' : 'processing');
+    card.innerHTML =
+      '<div class="tc-inner">' +
+        '<div class="tc-top">' +
+          '<div>' +
+            '<div class="tc-meta">' +
+              (datum ? '<span>' + datum + '</span>' : '') +
+              (t.type ? '<span>·</span><span>' + t.type + '</span>' : '') +
+            '</div>' +
+            '<div class="tc-name">' + t.naam + '</div>' +
+            (t.adres ? '<div class="tc-address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' + t.adres + '</div>' : '') +
+          '</div>' +
+          '<span class="tc-badge ' + (isLive?'live':'proc') + '">' + (isLive?'Live':'Verwerking') + '</span>' +
+        '</div>' +
+        (isLive ? '<div class="tc-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' + (t.views||0) + ' keer bekeken</div>' : '') +
+        '<div class="tc-actions">' +
+          (isLive
+            ? '<button class="tc-btn tc-btn-view" onclick="openTour(\'' + t.id + '\')">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>Bekijken</button>' +
+              '<button class="tc-btn tc-btn-share" onclick="openShare(\'' + t.id + '\')">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Delen</button>'
+            : '<button class="tc-btn tc-btn-proc" disabled>Wordt verwerkt — u ontvangt bericht zodra de tour live is</button>') +
+        '</div>' +
+      '</div>';
+    list.appendChild(card);
+  });
+}
+
+// ── WELCOME ───────────────────────────────────────────────────────────────
+function showWelcome() {
+  document.getElementById('welcome-overlay').style.display = 'flex';
+}
+function closeWelcome() {
+  document.getElementById('welcome-overlay').style.display = 'none';
+}
+
+// ── PANELS ────────────────────────────────────────────────────────────────
+function showPanel(name) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-item').forEach(function(t){ t.classList.remove('active'); });
+  document.getElementById('panel-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── TOUR VIEWER ───────────────────────────────────────────────────────────
+async function openTour(id) {
+  var t = currentTours.find(function(t){ return t.id===id; });
+  if (!t || !t.matterport_url) return;
+
+  document.getElementById('viewer-title').textContent = t.naam;
+  document.getElementById('viewer-body').innerHTML =
+    '<iframe src="' + t.matterport_url + '" allowfullscreen allow="xr-spatial-tracking"></iframe>';
+  document.getElementById('viewer').classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  // View tellen
+  var newViews = (t.views || 0) + 1;
+  await sb.from('tours').update({ views: newViews }).eq('id', id);
+  t.views = newViews;
+  document.getElementById('s-views').textContent =
+    currentTours.reduce(function(sum,t){ return sum+(t.views||0); }, 0);
+  var viewEl = document.querySelector('[data-tourid="' + id + '"] .tc-views');
+  if (viewEl) viewEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' + newViews + ' keer bekeken';
 }
 
-function closeModal() {
-  document.getElementById('tour-modal').classList.remove('open');
-  document.getElementById('modal-url-chip').style.display = 'none';
-  document.getElementById('modal-body').innerHTML = '<div class="modal-ph"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><h3>Tour laden...</h3></div>';
+function closeViewer() {
+  document.getElementById('viewer').classList.remove('open');
+  document.getElementById('viewer-body').innerHTML = '<div class="viewer-ph"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><h3>Tour laden...</h3></div>';
   document.body.style.overflow = '';
 }
 
-function copyLink(url) {
-  if (navigator.clipboard) navigator.clipboard.writeText(url).catch(function(){});
-  var t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2800);
+// ── SHARE ─────────────────────────────────────────────────────────────────
+function openShare(id) {
+  var t = currentTours.find(function(t){ return t.id===id; });
+  if (!t) return;
+  currentShareUrl = t.slug ? 'https://www.explora360.nl/tour/' + t.slug : (t.matterport_url || '');
+  currentShareName = t.naam;
+  document.getElementById('share-tour-name').textContent = t.naam;
+  document.getElementById('share-url-text').textContent = currentShareUrl;
+  document.getElementById('share-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
+function closeShare(e) {
+  if (e && e.target !== document.getElementById('share-modal')) return;
+  document.getElementById('share-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function copyShareUrl() {
+  if (navigator.clipboard) navigator.clipboard.writeText(currentShareUrl).catch(function(){});
+  showToast('Link gekopieerd', 'success');
+  document.getElementById('share-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function shareWhatsApp() {
+  var msg = encodeURIComponent('Bekijk mijn 360° virtuele tour: ' + currentShareUrl);
+  window.open('https://wa.me/?text=' + msg, '_blank');
+}
+
+function shareEmail() {
+  var sub = encodeURIComponent('Virtuele tour: ' + currentShareName);
+  var body = encodeURIComponent('Hallo,\n\nBekijk mijn 360° virtuele tour via deze link:\n' + currentShareUrl + '\n\nGroeten');
+  window.location.href = 'mailto:?subject=' + sub + '&body=' + body;
+}
+
+function shareNative() {
+  if (navigator.share) {
+    navigator.share({ title: currentShareName, url: currentShareUrl });
+  } else {
+    copyShareUrl();
+  }
+}
+
+// ── PROFIEL ───────────────────────────────────────────────────────────────
+async function saveProfile() {
+  var naam    = document.getElementById('edit-naam').value.trim();
+  var bedrijf = document.getElementById('edit-bedrijf').value.trim();
+  var btn     = document.getElementById('save-profile-btn');
+  var msg     = document.getElementById('profile-success');
+  btn.textContent = 'Opslaan...'; btn.disabled = true;
+  await sb.from('klanten').update({ naam: naam, bedrijf: bedrijf }).eq('id', currentUser.id);
+  currentKlant.naam    = naam;
+  currentKlant.bedrijf = bedrijf;
+  var ini = naam.split(' ').map(function(w){ return w[0]||''; }).join('').substring(0,2).toUpperCase();
+  document.getElementById('tn-avatar').textContent  = ini;
+  document.getElementById('prof-avatar').textContent = ini;
+  document.getElementById('prof-name').textContent   = naam;
+  document.getElementById('prof-company').textContent = bedrijf;
+  document.getElementById('p-welcome').innerHTML = 'Goedemorgen, <em>' + naam.split(' ')[0] + '</em>';
+  btn.textContent = 'Opslaan →'; btn.disabled = false;
+  msg.style.display = 'block';
+  setTimeout(function(){ msg.style.display='none'; }, 3000);
+  showToast('Profiel opgeslagen', 'success');
+}
+
+async function savePassword() {
+  var p1  = document.getElementById('new-pass').value;
+  var p2  = document.getElementById('new-pass2').value;
+  var btn = document.getElementById('save-pass-btn');
+  var msg = document.getElementById('pass-success');
+  if (p1.length < 8) { showToast('Minimaal 8 tekens'); return; }
+  if (p1 !== p2)     { showToast('Wachtwoorden komen niet overeen'); return; }
+  btn.textContent = 'Wijzigen...'; btn.disabled = true;
+  var res = await sb.auth.updateUser({ password: p1 });
+  if (res.error) { showToast('Fout: ' + res.error.message); }
+  else {
+    document.getElementById('new-pass').value  = '';
+    document.getElementById('new-pass2').value = '';
+    msg.style.display = 'block';
+    setTimeout(function(){ msg.style.display='none'; }, 3000);
+    showToast('Wachtwoord gewijzigd', 'success');
+  }
+  btn.textContent = 'Wachtwoord wijzigen →'; btn.disabled = false;
+}
+
+// ── LOGOUT ────────────────────────────────────────────────────────────────
 async function doLogout() {
   await sb.auth.signOut();
-  tourMap = {};
-  document.getElementById('portal').style.display = 'none';
+  currentUser = null; currentKlant = null; currentTours = [];
+  document.getElementById('app').style.display = 'none';
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('l-email').value = '';
-  document.getElementById('l-pass').value = '';
+  document.getElementById('l-pass').value  = '';
 }
 
+// ── TOAST ─────────────────────────────────────────────────────────────────
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = type === 'success' ? 'show success' : 'show';
+  setTimeout(function(){ t.className = ''; }, 2800);
+}
+
+// ── EVENTS ────────────────────────────────────────────────────────────────
 document.getElementById('login-btn').addEventListener('click', doLogin);
 document.getElementById('l-pass').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
 document.getElementById('logout-btn').addEventListener('click', doLogout);
-document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') { closeViewer(); closeShare(); closeWelcome(); }
+});
 
 init();
 </script>
