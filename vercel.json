@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/tour/:slug", "destination": "/tour.html?slug=:slug" },
-    { "source": "/portaal", "destination": "/portaal.html" }
+    { "source": "/portaal", "destination": "/portaal.html" },
+    { "source": "/beheer", "destination": "/beheer.html" }
   ]
 }
