@@ -160,16 +160,26 @@ function hideLoading() {
 }
 
 function getSlug() {
-  // Haal slug op uit URL: /tour/mijn-slug of ?slug=mijn-slug
   var path = window.location.pathname;
   var parts = path.split('/').filter(Boolean);
-  // /tour/slug-hier
+
+  // /tour/mijn-slug
   if (parts.length >= 2 && parts[0] === 'tour') return parts[1];
-  // /mijn-slug (directe slug)
-  if (parts.length === 1) return parts[0];
-  // ?slug=mijn-slug fallback
+  // /mijn-slug
+  if (parts.length === 1 && parts[0] !== 'tour.html') return parts[0];
+
+  // Vercel stuurt door naar tour.html — pak origineel pad via referrer of hash
+  // Fallback: ?slug=mijn-slug
   var params = new URLSearchParams(window.location.search);
-  return params.get('slug') || '';
+  if (params.get('slug')) return params.get('slug');
+
+  // Laatste optie: lees uit document.referrer of window.location
+  // Vercel rewrite behoudt het originele pad in window.location
+  var full = window.location.href;
+  var match = full.match(/\/tour\/([^/?#]+)/);
+  if (match) return match[1];
+
+  return '';
 }
 
 async function init() {
