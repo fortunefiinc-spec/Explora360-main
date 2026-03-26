@@ -213,6 +213,11 @@ textarea.finput{resize:vertical;min-height:70px;line-height:1.6}
         Tours
         <span class="nav-badge" id="nb-t">0</span>
       </div>
+      <div class="nav-item" data-sec="facturen" onclick="showSec(this,'facturen')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Facturen
+        <span class="nav-badge" id="nb-f">0</span>
+      </div>
     </aside>
 
     <main class="main">
@@ -263,6 +268,22 @@ textarea.finput{resize:vertical;min-height:70px;line-height:1.6}
         <div class="tbl-wrap">
           <table><thead><tr><th>Tour</th><th>Klant</th><th>Matterport URL</th><th>Slug</th><th>Status</th><th>Views</th><th>Datum</th><th>Acties</th></tr></thead>
           <tbody id="tours-tbody"></tbody></table>
+        </div>
+      </div>
+
+
+      <!-- FACTUREN -->
+      <div class="sec" id="sec-facturen">
+        <div class="sec-head">
+          <div><div class="sec-title">Facturen</div><div class="sec-sub" id="f-sub">0 facturen</div></div>
+          <button class="btn btn-blue btn-sm" onclick="openModal('nieuw-factuur')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nieuwe factuur
+          </button>
+        </div>
+        <div class="tbl-wrap">
+          <table><thead><tr><th>Klant</th><th>Omschrijving</th><th>Bedrag</th><th>Status</th><th>Datum</th><th>Acties</th></tr></thead>
+          <tbody id="facturen-tbody"></tbody></table>
         </div>
       </div>
 
@@ -437,6 +458,88 @@ textarea.finput{resize:vertical;min-height:70px;line-height:1.6}
   </div>
 </div>
 
+
+<!-- MODAL: Nieuw factuur -->
+<div class="modal-ov" id="modal-nieuw-factuur">
+  <div class="modal-box">
+    <div class="modal-title">Nieuwe factuur</div>
+    <div class="modal-sub">Factuur verschijnt direct in het klantportaal</div>
+    <label class="flbl">Klant *</label>
+    <select class="finput" id="nf-klant"><option value="">Selecteer klant...</option></select>
+    <label class="flbl">Omschrijving *</label>
+    <input class="finput" type="text" id="nf-omschr" placeholder="360° Virtuele tour — Starter pakket"/>
+    <div class="form-row">
+      <div>
+        <label class="flbl">Bedrag (excl. btw) *</label>
+        <input class="finput" type="number" id="nf-bedrag" placeholder="179.00" step="0.01" min="0"/>
+      </div>
+      <div>
+        <label class="flbl">Status</label>
+        <select class="finput" id="nf-status">
+          <option value="concept">Concept</option>
+          <option value="open">Openstaand</option>
+          <option value="betaald">Betaald</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div>
+        <label class="flbl">Datum</label>
+        <input class="finput" type="date" id="nf-datum"/>
+      </div>
+      <div>
+        <label class="flbl">PDF URL (optioneel)</label>
+        <input class="finput" type="url" id="nf-pdf" placeholder="https://..."/>
+      </div>
+    </div>
+    <div class="ferr" id="nf-err"></div>
+    <div class="modal-footer">
+      <button class="btn btn-wire btn-sm" onclick="closeModal('nieuw-factuur')">Annuleren</button>
+      <button class="btn btn-blue btn-sm" id="nf-btn" onclick="maakFactuur()">Aanmaken →</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Bewerk factuur -->
+<div class="modal-ov" id="modal-bewerk-factuur">
+  <div class="modal-box">
+    <div class="modal-title">Factuur bewerken</div>
+    <div class="modal-sub" id="bf-sub"></div>
+    <input type="hidden" id="bf-id"/>
+    <label class="flbl">Omschrijving</label>
+    <input class="finput" type="text" id="bf-omschr"/>
+    <div class="form-row">
+      <div>
+        <label class="flbl">Bedrag (excl. btw)</label>
+        <input class="finput" type="number" id="bf-bedrag" step="0.01" min="0"/>
+      </div>
+      <div>
+        <label class="flbl">Status</label>
+        <select class="finput" id="bf-status">
+          <option value="concept">Concept</option>
+          <option value="open">Openstaand</option>
+          <option value="betaald">Betaald</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div>
+        <label class="flbl">Datum</label>
+        <input class="finput" type="date" id="bf-datum"/>
+      </div>
+      <div>
+        <label class="flbl">PDF URL</label>
+        <input class="finput" type="url" id="bf-pdf" placeholder="https://..."/>
+      </div>
+    </div>
+    <div class="ferr" id="bf-err"></div>
+    <div class="modal-footer">
+      <button class="btn btn-wire btn-sm" onclick="closeModal('bewerk-factuur')">Annuleren</button>
+      <button class="btn btn-blue btn-sm" id="bf-btn" onclick="bewerkFactuur()">Opslaan →</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -538,7 +641,8 @@ async function doLogout() {
 async function laadData() {
   var kr = await sb.from('klanten').select('*').neq('id', ADMIN_ID).order('created_at', { ascending: false });
   var tr = await sb.from('tours').select('*').order('created_at', { ascending: false });
-  allK = kr.data || []; allT = tr.data || [];
+  var fr = await sb.from('facturen').select('*').order('datum', { ascending: false });
+  allK = kr.data || []; allT = tr.data || []; allF = fr.data || [];
   maxV = Math.max(1, ...allT.map(function(t){ return t.views||0; }));
   renderAll();
 }
@@ -554,8 +658,8 @@ function renderAll() {
   document.getElementById('nb-t').textContent = allT.length;
   document.getElementById('k-sub').textContent = allK.length + ' klant' + (allK.length!==1?'en':'');
   document.getElementById('t-sub').textContent = allT.length + ' tour' + (allT.length!==1?'s':'');
-  renderDashboard(); renderKlanten(); renderTours();
-  vulSelect();
+  renderDashboard(); renderKlanten(); renderTours(); renderFacturen();
+  vulSelect(); vulFactuurSelect();
 }
 
 // ── DASHBOARD ─────────────────────────────────────────────────────────────
@@ -908,6 +1012,118 @@ function verstuurEmail() {
   closeModal('email');
 }
 
+
+// ── FACTUREN ──────────────────────────────────────────────────────────────
+var allF = [];
+
+async function laadFacturen() {
+  var fr = await sb.from('facturen').select('*').order('datum', { ascending: false });
+  allF = fr.data || [];
+}
+
+function renderFacturen() {
+  var tbody = document.getElementById('facturen-tbody');
+  document.getElementById('f-sub').textContent = allF.length + ' factuur' + (allF.length !== 1 ? 'en' : '');
+  document.getElementById('nb-f').textContent  = allF.length;
+
+  if (!allF.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nog geen facturen</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = allF.map(function(f) {
+    var k = allK.find(function(k){ return k.id===f.klant_id; });
+    var d = f.datum ? new Date(f.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '—';
+    var badgeClass = f.status==='betaald'?'badge-live':f.status==='open'?'badge-proc':'';
+    var badgeText  = f.status==='betaald'?'Betaald':f.status==='open'?'Openstaand':'Concept';
+    return '<tr>' +
+      '<td class="name">' + (k?k.naam||k.email:'—') + '</td>' +
+      '<td>' + (f.omschrijving||'—') + '</td>' +
+      '<td style="font-family:var(--fs);font-size:1rem">€' + parseFloat(f.bedrag||0).toFixed(2).replace('.',',') + '</td>' +
+      '<td><span class="badge ' + badgeClass + '">' + badgeText + '</span></td>' +
+      '<td>' + d + '</td>' +
+      '<td><div class="act">' +
+        (f.pdf_url?'<a href="'+f.pdf_url+'" target="_blank" class="btn btn-wire btn-xs">PDF ↗</a>':'') +
+        '<button class="btn btn-wire btn-xs" onclick="openBewerkFactuur(\'' + f.id + '\')">Edit</button>' +
+        '<button class="btn btn-'+(f.status==='betaald'?'amber':'green')+' btn-xs" onclick="toggleFactuurStatus(\'' + f.id + '\',\'' + f.status + '\')">'+  (f.status==='betaald'?'↩ Open':'✓ Betaald')+'</button>' +
+        '<button class="btn btn-red btn-xs" onclick="verwijderFactuur(\'' + f.id + '\')">✕</button>' +
+      '</div></td>' +
+    '</tr>';
+  }).join('');
+}
+
+function vulFactuurSelect() {
+  var opts = '<option value="">Selecteer klant...</option>' +
+    allK.map(function(k){ return '<option value="'+k.id+'">'+(k.naam||k.email)+(k.bedrijf?' — '+k.bedrijf:'')+'</option>'; }).join('');
+  document.getElementById('nf-klant').innerHTML = opts;
+}
+
+async function maakFactuur() {
+  var kid   = document.getElementById('nf-klant').value;
+  var omschr= document.getElementById('nf-omschr').value.trim();
+  var bedrag= document.getElementById('nf-bedrag').value;
+  var status= document.getElementById('nf-status').value;
+  var datum = document.getElementById('nf-datum').value;
+  var pdf   = document.getElementById('nf-pdf').value.trim();
+  var err   = document.getElementById('nf-err');
+  var btn   = document.getElementById('nf-btn');
+  err.style.display = 'none';
+  if (!kid || !omschr || !bedrag) { err.textContent='Selecteer klant, omschrijving en bedrag.'; err.style.display='block'; return; }
+  btn.textContent='Aanmaken...'; btn.disabled=true;
+  await sb.from('facturen').insert({ klant_id:kid, omschrijving:omschr, bedrag:parseFloat(bedrag), status:status, datum:datum||null, pdf_url:pdf||null });
+  closeModal('nieuw-factuur');
+  ['nf-omschr','nf-bedrag','nf-pdf'].forEach(function(i){ document.getElementById(i).value=''; });
+  btn.textContent='Aanmaken →'; btn.disabled=false;
+  toast('Factuur aangemaakt', 'ok');
+  await laadData();
+}
+
+function openBewerkFactuur(id) {
+  var f = allF.find(function(f){ return f.id===id; }); if(!f) return;
+  var k = allK.find(function(k){ return k.id===f.klant_id; });
+  document.getElementById('bf-id').value     = id;
+  document.getElementById('bf-sub').textContent = k ? (k.naam||k.email) : '';
+  document.getElementById('bf-omschr').value = f.omschrijving||'';
+  document.getElementById('bf-bedrag').value = f.bedrag||'';
+  document.getElementById('bf-status').value = f.status||'concept';
+  document.getElementById('bf-datum').value  = f.datum?f.datum.split('T')[0]:'';
+  document.getElementById('bf-pdf').value    = f.pdf_url||'';
+  document.getElementById('bf-err').style.display='none';
+  openModal('bewerk-factuur');
+}
+
+async function bewerkFactuur() {
+  var id    = document.getElementById('bf-id').value;
+  var omschr= document.getElementById('bf-omschr').value.trim();
+  var bedrag= document.getElementById('bf-bedrag').value;
+  var status= document.getElementById('bf-status').value;
+  var datum = document.getElementById('bf-datum').value;
+  var pdf   = document.getElementById('bf-pdf').value.trim();
+  var err   = document.getElementById('bf-err');
+  var btn   = document.getElementById('bf-btn');
+  err.style.display = 'none';
+  btn.textContent='Opslaan...'; btn.disabled=true;
+  var res = await sb.from('facturen').update({ omschrijving:omschr, bedrag:parseFloat(bedrag), status:status, datum:datum||null, pdf_url:pdf||null }).eq('id', id);
+  if (res.error) { err.textContent='Fout: '+res.error.message; err.style.display='block'; btn.textContent='Opslaan →'; btn.disabled=false; return; }
+  closeModal('bewerk-factuur'); btn.textContent='Opslaan →'; btn.disabled=false;
+  toast('Factuur bijgewerkt', 'ok');
+  await laadData();
+}
+
+async function toggleFactuurStatus(id, huidig) {
+  var nieuw = huidig==='betaald' ? 'open' : 'betaald';
+  await sb.from('facturen').update({ status:nieuw }).eq('id', id);
+  toast('Status → ' + nieuw, 'ok');
+  await laadData();
+}
+
+async function verwijderFactuur(id) {
+  if (!confirm('Factuur verwijderen?')) return;
+  await sb.from('facturen').delete().eq('id', id);
+  toast('Factuur verwijderd');
+  await laadData();
+}
+
 // ── NAV ───────────────────────────────────────────────────────────────────
 function showSec(el, name) {
   document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('active'); });
@@ -921,6 +1137,7 @@ function showSec(el, name) {
 document.getElementById('login-btn').addEventListener('click', doLogin);
 document.getElementById('l-pass').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
 document.getElementById('nt-datum').value = new Date().toISOString().split('T')[0];
+document.getElementById('nf-datum').value = new Date().toISOString().split('T')[0];
 
 init();
 </script>
