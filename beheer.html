@@ -721,12 +721,40 @@ async function bewerkKlant() {
   var bed  = document.getElementById('bk-bedrijf').value.trim();
   var pass = document.getElementById('bk-pass').value;
   var not  = document.getElementById('bk-notities').value.trim();
+  var err  = document.getElementById('bk-err');
   var btn  = document.getElementById('bk-btn');
+  err.style.display = 'none';
   btn.textContent='Opslaan...'; btn.disabled=true;
-  await sb.from('klanten').update({ naam: naam, bedrijf: bed, notities: not }).eq('id', id);
-  if (pass && pass.length>=8) await apiAdmin('update_user', { id: id, password: pass });
-  closeModal('bewerk-klant'); btn.textContent='Opslaan →'; btn.disabled=false;
-  toast('Klant bijgewerkt', 'ok'); await laadData();
+
+  // Update klant tabel
+  var dbRes = await sb.from('klanten').update({ naam: naam, bedrijf: bed, notities: not }).eq('id', id);
+  if (dbRes.error) {
+    err.textContent = 'Fout bij opslaan: ' + dbRes.error.message;
+    err.style.display = 'block';
+    btn.textContent='Opslaan →'; btn.disabled=false;
+    return;
+  }
+
+  // Wachtwoord wijzigen via API indien ingevuld
+  if (pass && pass.length >= 8) {
+    var apiRes = await apiAdmin('update_user', { id: id, password: pass });
+    if (!apiRes.ok) {
+      err.textContent = 'Wachtwoord niet gewijzigd: ' + (apiRes.data.error || 'onbekende fout');
+      err.style.display = 'block';
+      btn.textContent='Opslaan →'; btn.disabled=false;
+      return;
+    }
+  } else if (pass && pass.length < 8) {
+    err.textContent = 'Wachtwoord minimaal 8 tekens.';
+    err.style.display = 'block';
+    btn.textContent='Opslaan →'; btn.disabled=false;
+    return;
+  }
+
+  closeModal('bewerk-klant');
+  btn.textContent='Opslaan →'; btn.disabled=false;
+  toast('Klant bijgewerkt', 'ok');
+  await laadData();
 }
 
 async function verwijderKlant(id) {
@@ -791,12 +819,32 @@ async function bewerkTour() {
   var datum  = document.getElementById('bt-datum').value;
   var status = document.getElementById('bt-status').value;
   var old    = allT.find(function(t){ return t.id===id; });
+  var err    = document.getElementById('bt-err');
   var btn    = document.getElementById('bt-btn');
+  err.style.display = 'none';
   btn.textContent='Opslaan...'; btn.disabled=true;
-  await sb.from('tours').update({ naam: naam, type: type, adres: adres, matterport_url: url||null, slug: slug||null, datum: datum||null, status: status }).eq('id', id);
-  closeModal('bewerk-tour'); btn.textContent='Opslaan →'; btn.disabled=false;
+
+  var dbRes = await sb.from('tours').update({
+    naam: naam, type: type, adres: adres,
+    matterport_url: url||null, slug: slug||null,
+    datum: datum||null, status: status
+  }).eq('id', id);
+
+  if (dbRes.error) {
+    err.textContent = 'Fout: ' + dbRes.error.message;
+    err.style.display = 'block';
+    btn.textContent='Opslaan →'; btn.disabled=false;
+    return;
+  }
+
+  closeModal('bewerk-tour');
+  btn.textContent='Opslaan →'; btn.disabled=false;
   toast('Tour bijgewerkt', 'ok');
-  if (old && old.status!=='live' && status==='live') { await laadData(); openEmailModal(id); return; }
+  if (old && old.status!=='live' && status==='live') {
+    await laadData();
+    openEmailModal(id);
+    return;
+  }
   await laadData();
 }
 
