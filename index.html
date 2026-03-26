@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Explora360 — Professionele 360° Virtuele Tours voor Vastgoed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--ink4:#2e3f58;
+  --steel:#374d6a;--slate:#4e5e7e;--mist:#94aac8;--paper:#f5f7fa;--white:#fafbfd;
+  --blue:#4a90f7;--blue-lo:#2d6fd4;--blue-hi:#82b4fa;
+  --amber:#e8a030;--amber-hi:#f0bc60;
+  --fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);--pad:clamp(20px,5vw,72px);--sec:clamp(80px,11vw,140px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;line-height:1.75;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+section{position:relative;overflow:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
+.eye{font-family:var(--fb);font-size:.57rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--blue)}
+h1,h2,h3,h4{font-family:var(--fs);font-weight:300;line-height:1.08}
+h1{font-size:clamp(2.8rem,7vw,6.5rem)}h2{font-size:clamp(2rem,4.5vw,4.4rem)}h3{font-size:clamp(1.4rem,2.8vw,2.4rem)}
+p{font-size:clamp(.78rem,1vw,.9rem);line-height:1.85;letter-spacing:.02em}
+.si{font-style:italic}.ghost{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.13)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+.rule{display:block;width:26px;height:1px;background:var(--blue);margin:16px 0}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--fb);font-size:.58rem;font-weight:400;letter-spacing:.19em;text-transform:uppercase;padding:15px 32px;border:1px solid;cursor:pointer;transition:all .35s var(--ease);position:relative;overflow:hidden;white-space:nowrap}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.06);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.btn:hover::after{transform:scaleX(1)}
+.btn-blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}.btn-blue:hover{background:var(--blue-hi);border-color:var(--blue-hi)}
+.btn-wire{background:transparent;color:var(--white);border-color:rgba(255,255,255,.2)}.btn-wire:hover{border-color:var(--blue);color:var(--blue)}
+.btn-wb{background:transparent;color:var(--blue-hi);border-color:rgba(47,126,245,.45)}.btn-wb:hover{background:var(--blue);color:var(--white);border-color:var(--blue)}
+.btn-dk{background:transparent;color:var(--white);border-color:rgba(255,255,255,.22)}.btn-dk:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);color:var(--white)}
+.arr span{display:inline-block;transition:transform .28s var(--ease)}.arr:hover span{transform:translateX(5px)}
+#nav{position:fixed;top:0;width:100%;z-index:800;padding:16px 0;transition:all .45s var(--ease);border-bottom:1px solid transparent}
+#nav.solid{padding:11px 0;background:rgba(15,22,35,.93);backdrop-filter:blur(22px);border-color:rgba(255,255,255,.06)}
+.nrow{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.nlogo{font-family:var(--fs);font-size:1.4rem;font-weight:400;letter-spacing:.06em}
+.nlogo em{font-style:normal;color:var(--blue)}
+.nlinks{display:flex;gap:26px;list-style:none}
+.nlinks a{font-size:.56rem;letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.44);transition:color .22s;position:relative}
+.nlinks a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--blue);transition:width .28s var(--ease)}
+.nlinks a:hover{color:var(--white)}.nlinks a:hover::after{width:100%}
+.nright{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:3px}
+.burger span{display:block;width:20px;height:1px;background:rgba(255,255,255,.6)}
+
+/* HERO */
+#hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding-top:76px}
+.hl{display:flex;flex-direction:column;justify-content:center;padding:clamp(56px,9vw,120px) clamp(20px,4.5vw,62px) clamp(56px,9vw,120px) max(calc((100vw - 1180px)/2 + 68px),20px);position:relative;z-index:2}
+.hkick{display:flex;align-items:center;gap:13px;margin-bottom:28px}
+.hkline{width:28px;height:1px;background:var(--blue);flex-shrink:0}
+h1.hh{line-height:1.01;margin-bottom:0}
+.hsub{font-family:var(--fs);font-size:clamp(.96rem,1.85vw,1.28rem);font-style:italic;font-weight:300;color:var(--mist);margin:22px 0 12px;max-width:380px;line-height:1.55}
+.hbody{color:rgba(255,255,255,.37);max-width:340px;font-size:.8rem;margin-bottom:40px}
+.hctas{display:flex;gap:9px;flex-wrap:wrap}
+.hstats{margin-top:60px;padding-top:30px;border-top:1px solid rgba(255,255,255,.05);display:flex;gap:clamp(20px,3.5vw,44px);flex-wrap:wrap}
+.hsv{font-family:var(--fs);font-size:1.9rem;font-weight:300;display:block;color:var(--white);line-height:1}
+.hsk{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);display:block;margin-top:4px}
+.hr{position:relative;background:linear-gradient(160deg,#0c1424 0%,#162040 55%,#0e1830 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hr::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(47,126,245,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(47,126,245,.045) 1px,transparent 1px);background-size:46px 46px}
+.hr::after{content:'';position:absolute;width:460px;height:460px;background:radial-gradient(circle,rgba(47,126,245,.13) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+.scan-stage{position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:500px}
+@keyframes spin-a{from{transform:rotateX(72deg) rotateZ(0)}to{transform:rotateX(72deg) rotateZ(360deg)}}
+@keyframes spin-b{from{transform:rotateX(68deg) rotateZ(0)}to{transform:rotateX(68deg) rotateZ(-360deg)}}
+.srings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;height:320px;perspective:580px}
+.sring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(47,126,245,.22);animation:spin-a 11s linear infinite}
+.sring:nth-child(1){border-color:rgba(47,126,245,.27);animation-duration:10s}
+.sring:nth-child(2){inset:28px;border-color:rgba(47,126,245,.14);animation:spin-b 15s linear infinite}
+.sring:nth-child(3){inset:56px;border-color:rgba(47,126,245,.09);animation-duration:21s}
+.pcl{position:absolute;inset:0;pointer-events:none}
+.pt{position:absolute;border-radius:50%;background:var(--blue);animation:blink ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.08}50%{opacity:.85}}
+.hwrap{position:relative;z-index:3;animation:float-h 6s ease-in-out infinite}
+@keyframes float-h{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes sweep{0%{top:8%;opacity:.9}100%{top:90%;opacity:0}}
+.sline{position:absolute;left:8%;right:8%;height:2px;background:linear-gradient(90deg,transparent,var(--blue),rgba(47,126,245,.35),transparent);filter:blur(1px);animation:sweep 2.8s ease-in-out infinite;z-index:4}
+.fglow{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);width:260px;height:38px;background:radial-gradient(ellipse,rgba(47,126,245,.2),transparent 70%);filter:blur(15px)}
+
+/* MARQUEE — dark */
+#mband{background:var(--ink2);padding:clamp(26px,3.8vw,48px) 0;overflow:hidden;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.mrow{display:flex;gap:clamp(28px,4.5vw,62px);white-space:nowrap;animation:mq 26s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mi{font-family:var(--fs);font-size:clamp(.86rem,1.6vw,1.2rem);font-style:italic;font-weight:300;color:rgba(255,255,255,.18);flex-shrink:0}
+.md{color:var(--blue-hi);font-style:normal;margin:0 9px}
+
+/* DIENSTEN */
+#diensten{padding:var(--sec) 0;background:linear-gradient(180deg,var(--ink) 0%,var(--ink2) 100%)}
+.dg{display:grid;grid-template-columns:5fr 4fr;gap:clamp(48px,8vw,110px);align-items:start}
+.dg-l h2{margin-top:16px;max-width:500px}
+.dg-l p{color:rgba(255,255,255,.38);margin-top:18px;max-width:420px}
+.dg-l p+p{margin-top:11px}
+.sectors{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:48px;border:1px solid rgba(255,255,255,.04)}
+.sc{padding:24px 20px;background:rgba(255,255,255,.02);transition:background .28s;display:flex;flex-direction:column;gap:9px}
+.sc:hover{background:rgba(47,126,245,.055)}
+.sc-icon{line-height:1;color:var(--blue-hi)}
+.sc-icon svg{width:24px;height:24px}
+.sc-title{font-family:var(--fb);font-size:.7rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--white)}
+.sc-desc{font-size:.72rem;color:rgba(255,255,255,.3);line-height:1.62}
+.how{display:flex;flex-direction:column}
+.hs{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.hs:last-child{border-bottom:none}
+.hn{font-family:var(--fs);font-size:2.2rem;font-weight:300;color:rgba(255,255,255,.05);line-height:1;flex-shrink:0;width:40px;padding-top:2px}
+.hc h4{font-family:var(--fb);font-size:.58rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+.hc p{font-size:.74rem;color:rgba(255,255,255,.33);line-height:1.62}
+
+/* SECTOREN — dark */
+#sectoren{background:var(--ink3);color:var(--white);padding:var(--sec) 0;border-top:1px solid rgba(255,255,255,.04)}
+#sectoren .eye{color:var(--blue-hi)}
+#sectoren .rule{background:linear-gradient(90deg,var(--blue-hi),transparent)}
+.sek-intro{max-width:460px;margin-bottom:clamp(40px,5.5vw,68px)}
+.sek-intro h2{color:var(--white)}
+.sek-intro p{color:rgba(255,255,255,.42);margin-top:13px;font-size:.84rem}
+.sek-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.sek{background:rgba(255,255,255,.03);padding:34px 26px;display:flex;flex-direction:column;gap:12px;border-top:2px solid transparent;transition:all .33s var(--ease)}
+.sek:hover{border-top-color:var(--blue);background:rgba(47,126,245,.07);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3);z-index:2}
+.sek-ico{line-height:1;color:var(--blue-hi)}
+.sek-ico svg{width:28px;height:28px}
+.sek-name{font-family:var(--fs);font-size:1.45rem;font-weight:300;color:var(--white)}
+.sek-sub{font-size:.6rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--blue-hi)}
+.sek-body{font-size:.74rem;color:rgba(255,255,255,.42);line-height:1.68;flex:1}
+.sek-list{list-style:none;margin-top:5px}
+.sek-list li{font-size:.7rem;color:rgba(255,255,255,.36);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:7px}
+.sek-list li::before{content:'→';color:var(--blue-hi);flex-shrink:0;line-height:1.5}
+
+/* TECH */
+#tech{padding:var(--sec) 0;background:var(--ink2);border-top:1px solid rgba(255,255,255,.03)}
+.tech-intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,8vw,104px);align-items:center;margin-bottom:clamp(48px,6.5vw,84px)}
+.tnums{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.tn{padding:30px 22px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);position:relative;overflow:hidden}
+.tn::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
+.tn.a::before{background:linear-gradient(90deg,var(--amber),transparent)}
+.tnv{font-family:var(--fs);font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:300;color:var(--white);line-height:1;margin-bottom:8px;display:block}
+.tnv em{color:var(--blue);font-style:normal}.tn.a .tnv em{color:var(--amber-hi)}
+.tnd{font-size:.68rem;color:rgba(255,255,255,.3);line-height:1.58}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5.5vw,72px)}
+.svis{border:1px solid rgba(47,126,245,.11);background:linear-gradient(135deg,rgba(47,126,245,.055),rgba(15,40,90,.09));padding:36px 32px;position:relative;overflow:hidden}
+.svis::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(47,126,245,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(47,126,245,.045) 1px,transparent 1px);background-size:26px 26px}
+.sv-t{font-size:.56rem;letter-spacing:.17em;text-transform:uppercase;color:var(--blue);margin-bottom:24px;position:relative;z-index:1}
+.svsteps{display:flex;flex-direction:column;position:relative;z-index:1}
+.svs{display:flex;align-items:flex-start;gap:14px;padding:13px 0}
+.svs+.svs{border-top:1px solid rgba(47,126,245,.07)}
+.svsdot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px;box-shadow:0 0 7px rgba(47,126,245,.5)}
+.svs h5{font-family:var(--fb);font-size:.6rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.68);margin-bottom:2px}
+.svs p{font-size:.71rem;color:rgba(255,255,255,.27)}
+.sv-badge{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border:1px solid rgba(47,126,245,.19);font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);margin-top:20px}
+.sv-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+.tfeats{display:flex;flex-direction:column;gap:1px}
+.tf{background:var(--ink2);padding:28px 24px;border:1px solid rgba(255,255,255,.04);transition:background .28s}
+.tf:hover{background:rgba(47,126,245,.045)}
+.tf-icon{width:36px;height:36px;border:1px solid rgba(47,126,245,.2);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--blue)}
+.tf-icon svg{width:16px;height:16px}
+.tf-title{font-family:var(--fb);font-size:.66rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--white);margin-bottom:7px}
+.tf-body{font-size:.73rem;color:rgba(255,255,255,.3);line-height:1.68}
+
+
+/* PRICE TABS */
+.ptabs{display:flex;gap:1px;margin-bottom:1px;background:rgba(255,255,255,.04)}
+.ptab{display:flex;align-items:center;gap:9px;padding:16px 32px;background:rgba(255,255,255,.03);border:none;color:rgba(255,255,255,.45);font-family:var(--fb);font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .28s var(--ease);flex:1;justify-content:center}
+.ptab:hover{background:rgba(47,126,245,.06);color:rgba(255,255,255,.7)}
+.ptab.active{background:rgba(47,126,245,.12);color:var(--blue-hi);border-bottom:2px solid var(--blue-hi)}
+.ptab svg{opacity:.6;transition:opacity .28s}
+.ptab.active svg{opacity:1;stroke:var(--blue-hi)}
+.ptab-content{display:none}
+.ptab-content.active{display:block}
+.ptab-intro{margin:clamp(24px,3vw,36px) 0}
+.ptab-desc{color:rgba(255,255,255,.42);font-size:.84rem;max-width:560px}
+.pc-for{font-size:.6rem;letter-spacing:.08em;color:var(--blue-hi);opacity:.7;margin-bottom:14px;font-style:italic}
+
+/* PRIJZEN — dark */
+#prijzen{padding:var(--sec) 0;background:linear-gradient(180deg,var(--ink2) 0%,var(--ink3) 100%);color:var(--white);border-top:1px solid rgba(255,255,255,.04)}
+#prijzen .eye{color:var(--blue-hi)}
+#prijzen .rule{background:linear-gradient(90deg,var(--blue-hi),transparent)}
+.pi{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(32px,4.5vw,56px);flex-wrap:wrap;gap:20px}
+.pi-copy h2{color:var(--white)}
+.pi-copy p{color:rgba(255,255,255,.42);margin-top:11px;font-size:.82rem;max-width:400px}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.pc{background:rgba(255,255,255,.03);padding:32px 26px;display:flex;flex-direction:column;border-top:2px solid transparent;transition:all .33s var(--ease);position:relative}
+.pc:hover{border-top-color:var(--blue);background:rgba(47,126,245,.07);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3);z-index:2}
+.pc.star{border-top-color:var(--blue);background:rgba(47,126,245,.09)}
+.pc.star:hover{border-top-color:var(--blue-hi);background:rgba(47,126,245,.13)}
+.ptier{font-size:.5rem;letter-spacing:.19em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:10px}
+.pc.star .ptier{color:var(--blue-hi)}
+.pname{font-family:var(--fs);font-size:1.4rem;font-weight:300;color:var(--white);margin-bottom:2px}
+.pprice{font-family:var(--fs);font-size:2rem;font-weight:300;color:var(--blue-hi);line-height:1;margin-bottom:5px}
+.pprice small{font-family:var(--fb);font-size:.7rem;color:rgba(255,255,255,.3);font-weight:300}
+.psub{font-size:.6rem;color:rgba(255,255,255,.32);font-style:italic;margin-bottom:18px}
+.pitems{list-style:none;flex:1;margin-bottom:22px}
+.pitems li{font-size:.7rem;color:rgba(255,255,255,.5);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-start;gap:7px;line-height:1.5}
+.pitems li::before{content:'—';color:var(--blue-hi);flex-shrink:0;line-height:1.5}
+.pbadge{position:absolute;top:13px;right:13px;background:var(--blue);color:var(--white);font-size:.48rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;padding:4px 8px}
+.custom-block{margin-top:1px;background:var(--ink2);color:var(--white);padding:clamp(32px,5vw,54px);display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(28px,5vw,60px);align-items:center}
+.cb-l .eye{color:var(--blue)}.cb-l h3{color:var(--white);margin-top:12px}.cb-l p{color:rgba(255,255,255,.35);font-size:.78rem;margin-top:10px}
+.cb-items{list-style:none}
+.cb-items li{font-size:.73rem;color:rgba(255,255,255,.44);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.cb-items li::before{content:'—';color:var(--blue);flex-shrink:0}
+.cb-cta{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.cb-note{font-size:.58rem;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+
+/* PORTFOLIO */
+#portfolio{padding:var(--sec) 0;background:var(--ink)}
+.port-head{max-width:520px;margin-bottom:clamp(40px,5.5vw,68px)}
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.pitem{background:var(--ink3);border:1px solid rgba(255,255,255,.04);padding:28px 22px;transition:all .28s;position:relative;overflow:hidden;cursor:pointer}
+.pitem::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(47,126,245,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(47,126,245,.035) 1px,transparent 1px);background-size:18px 18px;opacity:0;transition:opacity .38s}
+.pitem:hover::before{opacity:1}.pitem:hover{border-color:rgba(47,126,245,.2)}
+.pitem-visual{height:168px;background:var(--ink4);margin-bottom:20px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pitem-visual svg{opacity:.45;transition:opacity .28s}.pitem:hover .pitem-visual svg{opacity:.82}
+.pitem-cat{font-size:.53rem;letter-spacing:.17em;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.pitem-title{font-family:var(--fs);font-size:1.15rem;font-weight:300;margin-bottom:5px}
+.pitem-meta{font-size:.66rem;color:rgba(255,255,255,.26);letter-spacing:.04em}
+.pitem-badge{position:absolute;top:11px;right:11px;background:rgba(47,126,245,.11);border:1px solid rgba(47,126,245,.21);color:var(--blue);font-size:.5rem;letter-spacing:.09em;text-transform:uppercase;padding:4px 9px}
+.pitem-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(47,126,245,.05);opacity:0;transition:opacity .28s}
+.pitem:hover .pitem-overlay{opacity:1}
+.pitem-overlay span{font-size:.6rem;letter-spacing:.17em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(47,126,245,.36);padding:9px 18px}
+
+
+.ao-grid-2{grid-template-columns:repeat(2,1fr)}
+.ao-grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1020px){
+  .ao-grid-2,.ao-grid-3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .ao-grid-2,.ao-grid-3{grid-template-columns:1fr}
+}
+
+/* INLINE ADD-ONS */
+.addons-inline{margin-top:clamp(36px,5vw,52px);border-top:1px solid rgba(255,255,255,.06);padding-top:clamp(28px,4vw,44px)}
+.ai-head{margin-bottom:24px}
+.ai-head .eye{display:block;margin-bottom:8px}
+.ai-head p{font-size:.75rem;color:rgba(255,255,255,.35)}
+.ai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.ai-card{background:var(--ink3);padding:22px 20px;display:flex;flex-direction:column;gap:7px;transition:background .28s var(--ease)}
+.ai-card:hover{background:rgba(47,126,245,.07)}
+.ai-card.popular-ao{border-top:2px solid var(--amber)}
+.ai-card.ai-hosting{border-top:2px solid rgba(47,126,245,.3)}
+.ai-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.ai-name{font-family:var(--fb);font-size:.72rem;font-weight:500;color:var(--white);letter-spacing:.04em;line-height:1.4}
+.ai-badge{font-size:.48rem;letter-spacing:.09em;text-transform:uppercase;background:var(--amber);color:var(--ink);padding:3px 7px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.ai-price{font-family:var(--fs);font-size:1.5rem;font-weight:300;color:var(--blue-hi);line-height:1}
+.ai-price small{font-family:var(--fb);font-size:.62rem;color:rgba(255,255,255,.3);font-weight:300}
+.ai-card.popular-ao .ai-price{color:var(--amber-hi)}
+.ai-desc{font-size:.7rem;color:rgba(255,255,255,.35);line-height:1.62;flex:1}
+@media(max-width:1020px){.ai-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.ai-grid{grid-template-columns:1fr}}
+/* CONTACT */
+#contact{padding:var(--sec) 0;background:var(--ink);border-top:1px solid rgba(255,255,255,.05)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,8vw,110px);align-items:start}
+.contact-l h2{color:var(--white);margin-top:16px;max-width:380px}
+.contact-l p{color:rgba(255,255,255,.38);margin-top:18px;font-size:.84rem;max-width:380px;line-height:1.75}
+.contact-details{margin-top:36px;display:flex;flex-direction:column;gap:0}
+.cd{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.cd-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.cd-val{font-size:.82rem;color:var(--white);font-family:var(--fs);font-weight:300}
+.contact-r{display:flex;flex-direction:column;gap:10px}
+
+/* REVIEWS */
+#reviews{padding:var(--sec) 0;background:var(--ink2);border-top:1px solid rgba(255,255,255,.03)}
+.rhead{max-width:440px;margin-bottom:clamp(44px,6vw,72px)}
+.rhead p{color:rgba(255,255,255,.35);margin-top:12px;font-size:.82rem}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:1px}
+.qt{padding:32px 26px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.035);transition:all .28s}
+.qt:hover{background:rgba(47,126,245,.04);border-top-color:var(--blue)}
+.qstars{display:flex;gap:3px;margin-bottom:12px}
+.qstar{color:var(--amber);font-size:.72rem}
+.qtext{font-family:var(--fs);font-style:italic;font-size:.94rem;color:rgba(255,255,255,.68);line-height:1.7;margin-bottom:20px}
+.qauth{display:flex;align-items:center;gap:10px}
+.qav{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--steel),var(--slate));display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:500;color:#fff;flex-shrink:0}
+.qname{font-size:.68rem;font-weight:500;color:var(--white)}
+.qrole{font-size:.57rem;color:rgba(255,255,255,.2);letter-spacing:.04em;margin-top:1px}
+.cpanel{background:linear-gradient(100deg,var(--ink3),var(--ink4));border:1px solid rgba(255,255,255,.04);padding:clamp(32px,5vw,54px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);align-items:center;margin-top:1px}
+.cp h3{color:var(--white);margin-bottom:10px}.cp p{color:rgba(255,255,255,.34);font-size:.78rem}
+.cp-note{margin-top:12px;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);opacity:.58;display:flex;align-items:center;gap:8px}
+.cp-note::before{content:'';display:block;width:16px;height:1px;background:var(--blue)}
+.cform{display:flex;flex-direction:column;gap:9px}
+.cinput{padding:13px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-bottom:none;color:var(--white);font-family:var(--fb);font-size:.78rem;outline:none;transition:border-color .22s;width:100%}
+.cinput:last-of-type{border-bottom:1px solid rgba(255,255,255,.1)}
+.cinput::placeholder{color:rgba(255,255,255,.19)}
+.cinput:focus{border-color:rgba(47,126,245,.42)}
+.cform-row{display:flex}.cinput-e{flex:1;border-right:none}
+.cbtn{padding:13px 20px;background:var(--blue);color:var(--ink);border:none;font-family:var(--fb);font-size:.57rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .22s;white-space:nowrap}
+.cbtn:hover{background:var(--blue-hi)}
+.cleg{font-size:.57rem;color:rgba(255,255,255,.15);margin-top:7px}
+.cok{display:none;color:var(--blue);font-size:.74rem;margin-top:10px}
+
+footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px solid rgba(255,255,255,.04)}
+.fgrid{display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:clamp(24px,5vw,62px);margin-bottom:clamp(40px,5.5vw,62px)}
+.fbrand .flogo{font-family:var(--fs);font-size:1.5rem;letter-spacing:.06em}
+.fbrand .flogo em{font-style:normal;color:var(--blue)}
+.fbrand p{font-size:.72rem;color:rgba(255,255,255,.19);margin-top:11px;max-width:220px;line-height:1.82}
+.fil{margin-top:18px;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);opacity:.48;display:flex;align-items:center;gap:8px}
+.fil::before{content:'';display:block;width:14px;height:1px;background:var(--blue)}
+.fcol h5{font-size:.54rem;letter-spacing:.19em;text-transform:uppercase;color:rgba(255,255,255,.15);margin-bottom:14px}
+.fcol ul{list-style:none}.fcol ul li{margin-bottom:7px}
+.fcol ul a{font-size:.72rem;color:rgba(255,255,255,.22);transition:color .2s}
+.fcol ul a:hover{color:rgba(255,255,255,.68)}
+.fbot{padding-top:20px;border-top:1px solid rgba(255,255,255,.033);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.fcopy{font-size:.6rem;color:rgba(255,255,255,.12);letter-spacing:.04em}
+.fsoc{display:flex;gap:18px}
+.fsoc a{font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.17);transition:color .2s}
+.fsoc a:hover{color:var(--blue)}
+.sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(15,22,35,.96);backdrop-filter:blur(22px);border-top:1px solid rgba(47,126,245,.17);padding:12px 0;z-index:700;transform:translateY(100%);transition:transform .48s var(--ease)}
+.sticky.on{transform:translateY(0)}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.stxt{font-size:.7rem;color:rgba(255,255,255,.44)}.stxt strong{color:var(--white)}
+.sright{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.scl{background:none;border:none;color:rgba(255,255,255,.25);font-size:1.05rem;cursor:pointer;line-height:1;padding:3px}
+.r{opacity:0;transform:translateY(22px);transition:opacity .78s var(--ease),transform .78s var(--ease)}
+.r.go{opacity:1;transform:none}
+.r.d1{transition-delay:.1s}.r.d2{transition-delay:.2s}.r.d3{transition-delay:.28s}
+
+/* ADD-ONS */
+#addons{padding:var(--sec) 0;background:var(--ink);border-top:1px solid rgba(255,255,255,.04)}
+.ao-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(40px,5.5vw,68px);flex-wrap:wrap;gap:20px}
+.ao-copy h2{color:var(--white);max-width:460px}
+.ao-copy p{color:rgba(255,255,255,.38);margin-top:12px;font-size:.84rem;max-width:440px}
+.ao-note{font-size:.62rem;color:rgba(255,255,255,.22);letter-spacing:.08em;font-style:italic;align-self:flex-end}
+.ao-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:1px}
+.ao{background:var(--ink2);padding:30px 24px;display:flex;flex-direction:column;gap:10px;border-top:2px solid transparent;transition:all .32s var(--ease);position:relative}
+.ao:hover{border-top-color:var(--blue);background:rgba(47,126,245,.04);transform:translateY(-3px);box-shadow:0 16px 36px rgba(0,0,0,.25);z-index:2}
+.ao.popular{border-top-color:var(--amber);background:rgba(232,160,48,.035)}
+.ao.popular:hover{border-top-color:var(--amber-hi);background:rgba(232,160,48,.06)}
+.ao-icon{line-height:1;color:var(--blue-hi)}
+.ao-icon svg{width:28px;height:28px}
+.ao.popular .ao-icon{color:var(--amber-hi)}
+.ao-name{font-family:var(--fs);font-size:1.25rem;font-weight:300;color:var(--white);line-height:1.15}
+.ao-price{font-family:var(--fs);font-size:1.7rem;font-weight:300;color:var(--blue-hi);line-height:1}
+.ao.popular .ao-price{color:var(--amber-hi)}
+.ao-price small{font-family:var(--fb);font-size:.65rem;color:rgba(255,255,255,.3);font-weight:300}
+.ao-desc{font-size:.73rem;color:rgba(255,255,255,.36);line-height:1.68;flex:1}
+.ao-tag{display:inline-block;padding:4px 10px;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(47,126,245,.25);color:var(--blue-hi);margin-top:4px;align-self:flex-start}
+.ao.popular .ao-tag{border-color:rgba(232,160,48,.3);color:var(--amber-hi)}
+.ao-badge{position:absolute;top:12px;right:12px;background:var(--amber);color:var(--ink);font-size:.48rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px}
+/* recurring strip */
+.ao-recurring{background:linear-gradient(100deg,var(--ink3),var(--ink4));border:1px solid rgba(255,255,255,.05);padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.ao-rec-left{display:flex;align-items:center;gap:20px}
+.ao-rec-icon{line-height:1;flex-shrink:0;color:var(--blue-hi)}
+.ao-rec-icon svg{width:32px;height:32px}
+.ao-rec-text h4{font-family:var(--fs);font-size:1.2rem;font-weight:300;color:var(--white);margin-bottom:4px}
+.ao-rec-text p{font-size:.74rem;color:rgba(255,255,255,.35);max-width:500px}
+.ao-rec-price{text-align:right;flex-shrink:0}
+.ao-rec-val{font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--blue-hi);line-height:1;display:block}
+.ao-rec-sub{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:4px}
+
+@media(max-width:1020px){
+  .contact-wrap{grid-template-columns:1fr}
+  .ao-grid{grid-template-columns:1fr 1fr}
+  .ao-head{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  .ao-grid{grid-template-columns:1fr}
+  .ao-recurring{flex-direction:column;align-items:flex-start}
+  .ao-rec-price{text-align:left}
+}
+
+@media(max-width:1020px){
+  #hero{grid-template-columns:1fr}
+  .hl{padding:106px var(--pad) 48px;align-items:center;text-align:center}
+  .hkick{justify-content:center}.hsub,.hbody{margin-left:auto;margin-right:auto;text-align:center}
+  .hctas,.hstats{justify-content:center}.hr{min-height:420px}
+  .dg,.tech-intro{grid-template-columns:1fr}.tnums{margin-top:28px}.tech-grid{grid-template-columns:1fr}
+  .pcards{grid-template-columns:1fr 1fr}.custom-block{grid-template-columns:1fr 1fr;gap:32px}.cb-cta{grid-column:1/-1}
+  .quotes,.cpanel{grid-template-columns:1fr;gap:24px}.fgrid{grid-template-columns:1fr 1fr;gap:32px}.fbrand{grid-column:1/-1}
+  .sek-grid{grid-template-columns:1fr 1fr 1fr}.port-grid{grid-template-columns:1fr 1fr}.pi{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  .sectors,.tnums,.pcards,.custom-block,.port-grid{grid-template-columns:1fr}
+  .sek-grid{grid-template-columns:1fr 1fr}
+  .nlinks{display:none}.burger{display:flex}.fgrid{grid-template-columns:1fr}
+  .nav-portal-btn{display:none}
+  .sticky-portal-btn{display:none}
+  h1{font-size:2.6rem}h2{font-size:1.9rem}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <div class="nrow">
+      <a href="#hero" class="nlogo">Explora<em>360</em></a>
+      <ul class="nlinks">
+        <li><a href="#diensten">Diensten</a></li>
+        <li><a href="#sectoren">Sectoren</a></li>
+        <li><a href="#tech">Technologie</a></li>
+        <li><a href="#prijzen">Prijzen</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="portaal.html" style="color:var(--blue-hi)">Tourportaal</a></li>
+      </ul>
+      <div class="nright">
+        <a href="portaal.html" class="btn btn-wire nav-portal-btn" style="padding:11px 22px;font-size:.54rem">Tourportaal</a>
+        <a href="#contact" class="btn btn-blue" style="padding:9px 18px;font-size:.52rem">Contact</a>
+        <div class="burger" id="burger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hl">
+    <div class="hkick r"><div class="hkline"></div><span class="eye">Professionele 360° Virtuele Tours</span></div>
+    <h1 class="hh r d1">Elk pand.<br><span class="si ghost">Virtueel.</span><br>Overal<br>zichtbaar.</h1>
+    <p class="hsub r d2">Van woning tot hotel — wij fotograferen uw ruimte in fotorealistische 360° en maken hem toegankelijk voor de hele wereld.</p>
+    <p class="hbody r d3">Professionele 360°-camera · 23 megapixel HDR · Levering binnen 24 uur · Bewezen voor makelaars, hotels, AirBnB's en campings.</p>
+    <div class="hctas r d3">
+      <a href="#prijzen" class="btn btn-blue arr">Bekijk pakketten <span>→</span></a>
+      <a href="#portfolio" class="btn btn-wire">Portfolio</a>
+    </div>
+    <div class="hstats r d3">
+      <div><span class="hsv" id="hsc">0</span><span class="hsk">Tours gemaakt</span></div>
+      <div><span class="hsv">23MP</span><span class="hsk">Resolutie</span></div>
+      <div><span class="hsv" id="hsr">0+</span><span class="hsk">Tevreden klanten</span></div>
+      <div><span class="hsv">24u</span><span class="hsk">Levertijd</span></div>
+    </div>
+  </div>
+  <div class="hr">
+    <div class="scan-stage">
+      <div class="sline"></div>
+      <div class="pcl" id="pcl"></div>
+      <div class="srings"><div class="sring"></div><div class="sring"></div><div class="sring"></div></div>
+      <div class="hwrap">
+        <svg width="290" height="252" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#101e36" stop-opacity=".92"/><stop offset="100%" stop-color="#162844" stop-opacity=".96"/></linearGradient>
+            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0c1828" stop-opacity=".96"/><stop offset="100%" stop-color="#101f34" stop-opacity=".99"/></linearGradient>
+            <linearGradient id="bhl" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(47,126,245,0)"/><stop offset="50%" stop-color="rgba(47,126,245,.13)"/><stop offset="100%" stop-color="rgba(47,126,245,0)"/></linearGradient>
+            <filter id="gf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <ellipse cx="150" cy="248" rx="108" ry="7.5" fill="rgba(47,126,245,.11)" filter="url(#gf)"/>
+          <rect x="52" y="120" width="196" height="122" fill="url(#wg)" stroke="rgba(47,126,245,.31)" stroke-width=".8"/>
+          <polygon points="40,122 150,44 260,122" fill="url(#rg)" stroke="rgba(47,126,245,.46)" stroke-width=".8"/>
+          <line x1="40" y1="122" x2="260" y2="122" stroke="rgba(47,126,245,.14)" stroke-width=".5"/>
+          <polygon points="260,122 288,135 288,242 260,242" fill="#0d1828" stroke="rgba(47,126,245,.19)" stroke-width=".8"/>
+          <polygon points="260,122 288,135 150,44" fill="#0a1422" stroke="rgba(47,126,245,.19)" stroke-width=".8"/>
+          <rect x="74" y="138" width="44" height="36" rx=".5" fill="rgba(47,126,245,.09)" stroke="rgba(47,126,245,.37)" stroke-width=".7"/>
+          <line x1="96" y1="138" x2="96" y2="174" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
+          <line x1="74" y1="156" x2="118" y2="156" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
+          <rect x="74" y="138" width="44" height="36" fill="url(#bhl)" opacity=".6"/>
+          <rect x="134" y="138" width="44" height="36" rx=".5" fill="rgba(47,126,245,.09)" stroke="rgba(47,126,245,.37)" stroke-width=".7"/>
+          <line x1="156" y1="138" x2="156" y2="174" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
+          <line x1="134" y1="156" x2="178" y2="156" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
+          <rect x="134" y="138" width="44" height="36" fill="url(#bhl)" opacity=".6"/>
+          <rect x="176" y="178" width="36" height="64" rx=".5" fill="rgba(47,126,245,.06)" stroke="rgba(47,126,245,.31)" stroke-width=".7"/>
+          <circle cx="208" cy="212" r="2.5" fill="rgba(47,126,245,.62)"/>
+          <line x1="52" y1="112" x2="248" y2="112" stroke="rgba(47,126,245,.21)" stroke-width=".5" stroke-dasharray="4 4"/>
+          <line x1="42" y1="122" x2="42" y2="242" stroke="rgba(47,126,245,.21)" stroke-width=".5" stroke-dasharray="4 4"/>
+          <text x="150" y="108" text-anchor="middle" font-family="'Jost',sans-serif" font-size="7" fill="rgba(47,126,245,.58)" letter-spacing="1">12.4 m</text>
+          <text x="30" y="185" text-anchor="middle" font-family="'Jost',sans-serif" font-size="7" fill="rgba(47,126,245,.58)" letter-spacing="1" transform="rotate(-90,30,185)">7.2 m</text>
+          <circle cx="52" cy="122" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
+          <circle cx="248" cy="122" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
+          <circle cx="52" cy="242" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
+          <circle cx="248" cy="242" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
+          <circle cx="150" cy="44" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
+          <circle cx="288" cy="135" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".8"/>
+          <circle cx="288" cy="242" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".8"/>
+          <rect x="218" y="52" width="68" height="28" rx=".5" fill="rgba(47,126,245,.1)" stroke="rgba(47,126,245,.3)" stroke-width=".6"/>
+          <circle cx="230" cy="66" r="3" fill="#2f7ef5" opacity=".82"/>
+          <text x="237" y="70" font-family="'Jost',sans-serif" font-size="8" fill="rgba(47,126,245,.82)" letter-spacing=".5">100%</text>
+          <text x="237" y="78" font-family="'Jost',sans-serif" font-size="5.5" fill="rgba(47,126,245,.43)" letter-spacing=".5">GESCAND</text>
+        </svg>
+      </div>
+      <div class="fglow"></div>
+    </div>
+  </div>
+</section>
+
+<div id="mband"><div class="mrow">
+  <span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">360° in één druk<span class="md">·</span></span><span class="mi">RAW + JPEG<span class="md">·</span></span><span class="mi">Levering binnen 24u<span class="md">·</span></span><span class="mi">Matterport platform<span class="md">·</span></span><span class="mi">Funda &amp; Booking.com ready<span class="md">·</span></span><span class="mi">AirBnB optimized<span class="md">·</span></span>
+  <span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">360° in één druk<span class="md">·</span></span><span class="mi">RAW + JPEG<span class="md">·</span></span><span class="mi">Levering binnen 24u<span class="md">·</span></span><span class="mi">Matterport platform<span class="md">·</span></span><span class="mi">Funda &amp; Booking.com ready<span class="md">·</span></span><span class="mi">AirBnB optimized<span class="md">·</span></span>
+</div></div>
+
+<section id="diensten">
+  <div class="wrap"><div class="dg">
+    <div class="r">
+      <span class="eye">Wat wij doen</span><span class="rule"></span>
+      <h2>Uw ruimte.<br><em class="si" style="color:var(--mist)">Perfect</em><br>vastgelegd.</h2>
+      <p>Explora360 maakt van elke ruimte een meeslepende, interactieve 360°-ervaring. Bezoekers lopen virtueel door uw pand — van elke hoek, op elk device, op elk moment.</p>
+      <p>Met professionele 360°-apparatuur leggen we ieder detail vast in scherpe HDR-beelden. Fotorealistische tours die vertrouwen wekken nog voor de eerste bezichtiging.</p>
+      <div class="sectors r d2">
+        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><div class="sc-title">Woningen &amp; Appartementen</div><div class="sc-desc">Meer bezichtigingen, minder no-shows. Kopers bekijken uw woning op eigen tempo.</div></div>
+        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V7a4 4 0 0 0-8 0v14"/><path d="M2 11h20"/></svg></div><div class="sc-title">Hotels &amp; B&amp;B's</div><div class="sc-desc">Hogere conversie op Booking.com en direct-boekingen door transparantie.</div></div>
+        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M12 2L2 19h20L12 2z"/><path d="M9 19v-4a3 3 0 0 1 6 0v4"/></svg></div><div class="sc-title">Campings &amp; Glamping</div><div class="sc-desc">Scan uw sanitair, receptie en verblijven voor optimale online presentatie.</div></div>
+        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="3" y="2" width="18" height="20" rx="1"/><path d="M9 22V12h6v10"/><path d="M3 7h4M3 11h4M3 15h4M17 7h4M17 11h4M17 15h4"/></svg></div><div class="sc-title">Kantoren &amp; Showrooms</div><div class="sc-desc">Virtuele rondleidingen voor huurders of klanten — 24/7 beschikbaar.</div></div>
+      </div>
+    </div>
+    <div class="r d2">
+      <span class="eye" style="display:block;margin-bottom:20px">Hoe het werkt</span>
+      <div class="how">
+        <div class="hs"><div class="hn">01</div><div class="hc"><h4>Afspraak inplannen</h4><p>U kiest een datum. Wij komen op locatie met professionele 360°-apparatuur — compact genoeg voor élke ruimte.</p></div></div>
+        <div class="hs"><div class="hn">02</div><div class="hc"><h4>360° foto per ruimte</h4><p>Één druk op de knop per kamer. De camera schiet automatisch drie HDR-belichtingen per ruimte — 30–45 min. voor een volledig pand.</p></div></div>
+        <div class="hs"><div class="hn">03</div><div class="hc"><h4>Upload &amp; automatische tour</h4><p>Via de Matterport app synchroniseert alles direct naar de cloud. Tour is online nog op locatie.</p></div></div>
+        <div class="hs"><div class="hn">04</div><div class="hc"><h4>Nabewerking &amp; levering</h4><p>Belichting en kleur professioneel verfijnd in Lightroom. Eindresultaat binnen 24 uur.</p></div></div>
+        <div class="hs"><div class="hn">05</div><div class="hc"><h4>Publiceer overal</h4><p>Één link op Funda, Booking.com, Airbnb of uw website. Werkt ook als Google Street View-bijdrage.</p></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section id="sectoren">
+  <div class="wrap">
+    <div class="sek-intro r">
+      <span class="eye">Sectoren</span><span class="rule"></span>
+      <h2>Voor elk<br><em class="si" style="color:var(--blue-hi)">vastgoed</em>type.</h2>
+      <p>Van woningen en hotels tot restaurants, zorgpraktijken en bouwprojecten — Explora360 levert het tourpakket dat past bij uw markt en doelgroep.</p>
+    </div>
+    <div class="sek-grid r">
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><div class="sek-name">Woningen</div><div class="sek-sub">Makelaar &amp; particulier</div><div class="sek-body">Meer serious buyers, minder tijdverspilling. Kopers verkennen uw woning volledig vóór de bezichtiging.</div><ul class="sek-list"><li>Volledig interactieve 360° rondleiding</li><li>23MP HDR-foto's per ruimte</li><li>Direct te integreren in Funda-link</li><li>AI-gecropte 2D-foto's inbegrepen</li></ul></div>
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V7a4 4 0 0 0-8 0v14"/><path d="M2 11h20"/></svg></div><div class="sek-name">Hotels</div><div class="sek-sub">Boutique · Keten · B&amp;B</div><div class="sek-body">Gasten die uw kamers vooraf verkennen boeken met meer vertrouwen. Verhoog uw directe boekingsratio.</div><ul class="sek-list"><li>Tour per kamer, lobby &amp; restaurant</li><li>Embed op website + Booking.com</li><li>Hogere ADR door premium presentatie</li><li>Multiroom-pakket beschikbaar</li></ul></div>
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/><circle cx="12" cy="9" r="1.5"/></svg></div><div class="sek-name">AirBnB</div><div class="sek-sub">Host · Superhost · Co-host</div><div class="sek-body">Superhosts met 360° tour ontvangen gemiddeld 40% meer aanvragen. Onze beeldkwaliteit overtuigt gasten.</div><ul class="sek-list"><li>Geoptimaliseerd voor AirBnB-listing</li><li>Verhoogt zichtbaarheid in algoritme</li><li>Verlaagt annuleringsratio aanzienlijk</li><li>Deelbaar via directe link</li></ul></div>
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M12 2L2 19h20L12 2z"/><path d="M9 19v-4a3 3 0 0 1 6 0v4"/></svg></div><div class="sek-name">Campings</div><div class="sek-sub">Camping · Glamping · Resort</div><div class="sek-body">Scan sanitairgebouwen, receptie en verblijven. Eerlijk en meeslepend beeld voor toekomstige gasten.</div><ul class="sek-list"><li>Meerdere gebouwen per dag mogelijk</li><li>Ideaal voor ACSI &amp; Zoover</li><li>Seizoensupdate mogelijk</li><li>Groepspakket beschikbaar</li></ul></div>
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="3" y="2" width="18" height="20" rx="1"/><path d="M9 22V12h6v10"/><path d="M3 7h4M3 11h4M3 15h4M17 7h4M17 11h4M17 15h4"/></svg></div><div class="sek-name">Kantoren</div><div class="sek-sub">Huur · Verkoop · Showroom</div><div class="sek-body">Zet potentiële huurders op afstand al in uw ruimte. Minder lege bezichtigingen, snellere beslissingen.</div><ul class="sek-list"><li>Volledige verdieping in één sessie</li><li>Integreerbaar in huurdersportaal</li><li>Schaalbaar voor meerdere panden</li><li>Deelbaar via WhatsApp of e-mail</li></ul></div>
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M2 20h20M6 20V10M18 20V10M12 20V4"/><path d="M2 10l10-6 10 6"/><path d="M6 14h12"/></svg></div><div class="sek-name">Nieuwbouw</div><div class="sek-sub">Projectontwikkeling · Pre-sale</div><div class="sek-body">Verkoop appartementen nog voor de eerste spade in de grond gaat. Verkoopt op gevoel en vertrouwen.</div><ul class="sek-list"><li>Scan modelwoning of showunit</li><li>Voortgangsscans bouwproces</li><li>Integreerbaar in verkoopdocumentatie</li><li>Exporteerbaar naar VR-headset</li></ul></div>
+
+      <!-- Restaurants & Horeca -->
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div><div class="sek-name">Restaurants</div><div class="sek-sub">Horeca · Café · Eventlocatie</div><div class="sek-body">Laat gasten de sfeer van uw zaak proeven vóór ze reserveren. Een 360°-tour verhoogt het aantal reserveringen en verlaagt no-shows — gasten weten precies wat ze kunnen verwachten.</div><ul class="sek-list"><li>Tour van zaal, bar, terras & keuken</li><li>Zichtbaar in Google Maps & Street View</li><li>Deelbaar via sociale media</li><li>Ideaal voor trouw- en evenementenlocaties</li></ul></div>
+
+      <!-- Zorg & Welzijn -->
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="sek-name">Zorg &amp; Welzijn</div><div class="sek-sub">Praktijk · Kliniek · Kinderdagverblijf</div><div class="sek-body">Drempelverlagend voor nieuwe patiënten en ouders. Een virtuele rondleiding door uw praktijk of opvanglocatie schept vertrouwen en verlaagt de aanloopdrempel aanzienlijk.</div><ul class="sek-list"><li>Huisarts, tandarts, fysiotherapeut</li><li>Kinderdagverblijf & basisschool</li><li>Wachtkamer, behandelkamers, entree</li><li>Geeft rust en vertrouwen vóór eerste bezoek</li></ul></div>
+
+      <!-- Retail & Showrooms -->
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><div class="sek-name">Retail &amp; Showrooms</div><div class="sek-sub">Winkel · Autoshowroom · Meubelzaak</div><div class="sek-body">Klanten oriënteren zich eerst online — met een virtuele tour laat u uw volledige showroom zien vóór het bezoek. Hogere bezoekintentie, meer gekwalificeerde bezoekers.</div><ul class="sek-list"><li>Autoshowroom, keukenzaak, meubelwinkel</li><li>Zichtbaar in Google Maps</li><li>Koppelbaar aan producthotspots</li><li>24/7 beschikbaar voor online bezoekers</li></ul></div>
+
+      <!-- Bouw & Projectdocumentatie -->
+      <div class="sek"><div class="sek-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h3v5H7zM14 8h3v3h-3z"/></svg></div><div class="sek-name">Bouw &amp; Documentatie</div><div class="sek-sub">Bouwbedrijf · Aannemer · Projectontwikkelaar</div><div class="sek-body">Leg de voortgang van elk bouwproject vast in 360°. Ideaal voor opleverdossiers, controle op afstand en communicatie met opdrachtgevers — zonder fysiek bezoek.</div><ul class="sek-list"><li>Voortgangsscans per bouwfase</li><li>Digitaal opleverdossier</li><li>Controle op afstand voor opdrachtgevers</li><li>Geschikt voor renovatie & verbouwing</li></ul></div>
+
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="wrap">
+    <div class="tech-intro">
+      <div class="r">
+        <span class="eye">Onze technologie</span><span class="rule"></span>
+        <h2>State-of-the-art.<br><em class="si" style="color:var(--mist)">HDR kwaliteit.</em></h2>
+        <p style="color:rgba(255,255,255,.37);margin-top:18px;max-width:360px">Wij werken met professionele 360°-camera's uitgerust met grote sensors voor maximale beeldkwaliteit — ook in donkere of contrastrijke ruimtes zoals woonkamers met grote ramen.</p>
+        <div style="margin-top:28px"><a href="#prijzen" class="btn btn-wb arr">Bekijk pakketten <span>→</span></a></div>
+      </div>
+      <div class="tnums r d2">
+        <div class="tn"><span class="tnv">23<em>MP</em></span><div class="tnd">6720×3360 pixels per 360°-opname — scherp tot in de verste hoek</div></div>
+        <div class="tn a"><span class="tnv">HDR<em>+</em></span><div class="tnd">automatische compositie van 3 belichtingen in ~6 sec — ideaal bij ramen en contrast</div></div>
+        <div class="tn"><span class="tnv">360<em>°</em></span><div class="tnd">volledig sferisch beeld in één druk op de knop — geen panorama-panning nodig</div></div>
+        <div class="tn a"><span class="tnv">24<em>u</em></span><div class="tnd">maximale levertijd van uw complete virtuele tour inclusief embed-link</div></div>
+      </div>
+    </div>
+    <div class="tech-grid r">
+      <div class="svis">
+        <div class="sv-t">360° workflow — live status</div>
+        <div class="svsteps">
+          <div class="svs"><div class="svsdot"></div><div><h5>HDR-opname per ruimte</h5><p>Camera schiet automatisch 3 belichtingen en combineert ze direct in camera</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:var(--blue-hi)"></div><div><h5>Auto-stitch in camera</h5><p>Twee 180°-lenzen samengesteld tot één naadloos 360°-beeld</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:var(--amber)"></div><div><h5>Cloud sync via Matterport app</h5><p>Data automatisch geüpload naar Matterport Cloud — tour staat live nog op locatie</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:rgba(47,126,245,.38)"></div><div><h5>Nabewerking in Lightroom</h5><p>RAW DNG-bestanden professioneel verfijnd in Lightroom voor maximale kwaliteit</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:rgba(47,126,245,.38)"></div><div><h5>Levering embed-link &amp; foto's</h5><p>Matterport tour link + 23MP JPEG-exports geleverd binnen 24 uur</p></div></div>
+        </div>
+        <div class="sv-badge">Live · Vandaag 3 tours verwerkt</div>
+      </div>
+      <div class="tfeats">
+        <div class="tf"><div class="tf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M3 9a9 9 0 0 1 18 0v6a9 9 0 0 1-18 0V9z"/></svg></div><div class="tf-title">Grote sensor · uitstekend in weinig licht</div><div class="tf-body">Professionele sensors voor maximale beeldkwaliteit. Scherp tot in de verste hoek, ook in donkere ruimtes en bij sterk tegenlicht.</div></div>
+        <div class="tf"><div class="tf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v1m0 16v1M4.22 4.22l.7.7m13.16 13.16.7.7M3 12h1m16 0h1M4.22 19.78l.7-.7M18.36 5.64l.7-.7"/><circle cx="12" cy="12" r="4"/></svg></div><div class="tf-title">HDR in 6 seconden</div><div class="tf-body">3 belichtingen automatisch gecombineerd — perfect voor ruimtes met ramen. RAW DNG voor maximale bewerkingsruimte.</div></div>
+        <div class="tf"><div class="tf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div><div class="tf-title">Matterport — direct online</div><div class="tf-body">Tour staat live via Matterport Cloud. Embed op Funda, Booking.com, Airbnb, eigen website of deelbaar via WhatsApp.</div></div>
+        <div class="tf"><div class="tf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 16l4.6-4.6a2 2 0 0 1 2.8 0L16 16m-2-2 1.6-1.6a2 2 0 0 1 2.8 0L20 14M14 8h.01M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg></div><div class="tf-title">23MP stilstaande foto's inbegrepen</div><div class="tf-body">AI crop-functie levert printwaardige woningfoto's uit uw 360°-beelden — geen aparte fotosessie nodig.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prijzen">
+  <div class="wrap">
+    <div class="pi r">
+      <div class="pi-copy">
+        <span class="eye">Prijzen &amp; Pakketten</span>
+        <span class="rule"></span>
+        <h2>Transparant.<br><em class="si" style="color:var(--blue-hi)">Geen verrassingen.</em></h2>
+        <p>Kies het spoor dat bij uw situatie past. Alle pakketten inclusief opnamebezoek, verwerking, Matterport tour link, foto's en 12 maanden hosting. Voeg add-ons toe voor een completer resultaat.</p>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION -->
+    <div class="ptabs r">
+      <button class="ptab active" onclick="switchTab('vastgoed', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        Vastgoed
+      </button>
+      <button class="ptab" onclick="switchTab('zakelijk', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        Zakelijk
+      </button>
+    </div>
+
+    <!-- VASTGOED TAB -->
+    <div class="ptab-content active" id="tab-vastgoed">
+      <div class="ptab-intro r">
+        <p class="ptab-desc">Voor makelaars, particulieren, hotels, AirBnB-hosts en campings. Pakketten op basis van oppervlakte en aantal ruimtes.</p>
+      </div>
+
+      <!-- Pakketten -->
+      <div class="pcards r">
+        <div class="pc">
+          <div class="ptier">Pakket 01 · Starter</div>
+          <div class="pname">Woning Tour</div>
+          <div class="pprice">€229 <small>eenmalig</small></div>
+          <div class="psub">Tot 100 m² · levering in 24u · excl. btw</div>
+          <ul class="pitems">
+            <li>360° virtuele rondleiding (alle ruimtes)</li>
+            <li>23MP HDR-beelden per ruimte</li>
+            <li>Matterport tour link — direct deelbaar</li>
+            <li>10 gecropte 2D-foto's (AI)</li>
+            <li>Embed-code voor Funda / website</li>
+            <li>12 maanden gratis hosting</li>
+          </ul>
+          <div class="pc-for">Woning · Appartement · AirBnB</div>
+          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
+        </div>
+        <div class="pc star">
+          <div class="pbadge">Populairst</div>
+          <div class="ptier">Pakket 02 · Pro</div>
+          <div class="pname">Uitgebreide Tour</div>
+          <div class="pprice">€379 <small>eenmalig</small></div>
+          <div class="psub">Tot 250 m² · levering in 24u · excl. btw</div>
+          <ul class="pitems">
+            <li>360° virtuele rondleiding (alle ruimtes)</li>
+            <li>23MP HDR in RAW + JPEG</li>
+            <li>Matterport link + Google Street View</li>
+            <li>25 gecropte 2D-foto's (AI + handmatig)</li>
+            <li>Embed voor Funda, Booking.com + Airbnb</li>
+            <li>Lightroom RAW-nabewerking inbegrepen</li>
+            <li>12 maanden gratis hosting</li>
+            <li>Levering gegarandeerd binnen 24 uur</li>
+          </ul>
+          <div class="pc-for">Grotere woning · Nieuwbouw · Vakantiewoning</div>
+          <a href="#contact" class="btn btn-blue" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
+        </div>
+        <div class="pc">
+          <div class="ptier">Pakket 03 · Hospitality</div>
+          <div class="pname">Multi-ruimte Tour</div>
+          <div class="pprice">€549 <small>vanaf</small></div>
+          <div class="psub">Lobby + 5 kamers + gemeenschappelijke ruimtes · excl. btw</div>
+          <ul class="pitems">
+            <li>Volledige 360°-tour per ruimte (aparte links)</li>
+            <li>23MP HDR alle ruimtes</li>
+            <li>Matterport dashboard toegang</li>
+            <li>40+ 2D-foto's voor marketinggebruik</li>
+            <li>Embed voor Booking.com + eigen website</li>
+            <li>AI virtuele staging optie</li>
+            <li>12 maanden hosting alle tours</li>
+            <li>Extra ruimtes: +€40,– per stuk</li>
+          </ul>
+          <div class="pc-for">Hotel · B&amp;B · Camping · Vakantiebungalow</div>
+          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
+        </div>
+      </div>
+
+      <!-- Vastgoed Add-ons -->
+      <div class="addons-inline r">
+        <div class="ai-head">
+          <span class="eye">Vastgoed Add-ons</span>
+          <p>Voeg toe bij elk vastgoedpakket · excl. btw</p>
+        </div>
+        <div class="ai-grid">
+          <div class="ai-card popular-ao">
+            <div class="ai-top">
+              <span class="ai-name">Professionele plattegrond</span>
+              <span class="ai-badge">Meest gevraagd</span>
+            </div>
+            <div class="ai-price">€69</div>
+            <div class="ai-desc">2D plattegrond met kamerlabels en afmetingen. PDF + PNG, Funda-ready.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">AI virtuele staging</span></div>
+            <div class="ai-price">€89 <small>per ruimte</small></div>
+            <div class="ai-desc">Fotorealistische meubels in lege ruimtes. Ideaal voor nieuwbouw en leegstaande panden.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Social media videoclip</span></div>
+            <div class="ai-price">€59</div>
+            <div class="ai-desc">Automatische walkthrough-video van uw tour voor Instagram, Facebook of YouTube.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Spoedlevering same-day</span></div>
+            <div class="ai-price">€69 <small>toeslag</small></div>
+            <div class="ai-desc">Tour live vóór 18:00 dezelfde dag. Voor makelaars die direct online willen.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Extra 2D-foto's (15 stuks)</span></div>
+            <div class="ai-price">€35</div>
+            <div class="ai-desc">15 extra AI-gecropte stilstaande beelden uit uw tour voor Funda of social media.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Seizoensupdate</span></div>
+            <div class="ai-price">€119</div>
+            <div class="ai-desc">Pand opnieuw fotograferen na verbouwing of bij nieuw seizoen.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Extra m² boven limiet</span></div>
+            <div class="ai-price">€0,80 <small>per m²</small></div>
+            <div class="ai-desc">Alleen het meerdere boven de pakkettlimiet wordt bijberekend.</div>
+          </div>
+          <div class="ai-card ai-hosting">
+            <div class="ai-top"><span class="ai-name">Hosting jaar 2+</span></div>
+            <div class="ai-price">€45 <small>per jaar</small></div>
+            <div class="ai-desc">Tour-link en embed-code blijven ongewijzigd. Geen herconfiguratie nodig.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZAKELIJK TAB -->
+    <div class="ptab-content" id="tab-zakelijk">
+      <div class="ptab-intro r">
+        <p class="ptab-desc">Voor bedrijven, instellingen en projecten. Pakketten op locatietype en aantal ruimtes — niet op vierkante meters.</p>
+      </div>
+
+      <!-- Pakketten -->
+      <div class="pcards r">
+        <div class="pc">
+          <div class="ptier">Pakket 01 · Basis</div>
+          <div class="pname">Locatie Tour</div>
+          <div class="pprice">€199 <small>eenmalig</small></div>
+          <div class="psub">Één locatie · tot 3 ruimtes · levering in 24u · excl. btw</div>
+          <ul class="pitems">
+            <li>360° tour van uw locatie (tot 3 ruimtes)</li>
+            <li>23MP HDR-beelden</li>
+            <li>Matterport tour link — direct deelbaar</li>
+            <li>Publicatie op Google Maps / Street View</li>
+            <li>Embed-code voor eigen website</li>
+            <li>12 maanden gratis hosting</li>
+          </ul>
+          <div class="pc-for">Café · Kleine praktijk · Winkel · Kinderdagverblijf</div>
+          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
+        </div>
+        <div class="pc star">
+          <div class="pbadge">Meest gekozen</div>
+          <div class="ptier">Pakket 02 · Plus</div>
+          <div class="pname">Uitgebreide Locatie</div>
+          <div class="pprice">€349 <small>eenmalig</small></div>
+          <div class="psub">Meerdere ruimtes · volledig pand · excl. btw</div>
+          <ul class="pitems">
+            <li>360° tour alle ruimtes (onbeperkt)</li>
+            <li>23MP HDR in RAW + JPEG</li>
+            <li>Matterport link + Google Street View</li>
+            <li>Hotspots &amp; info-tags inbegrepen</li>
+            <li>Lightroom RAW-nabewerking</li>
+            <li>25+ 2D-foto's voor marketing</li>
+            <li>Embed voor website + sociale media</li>
+            <li>12 maanden gratis hosting</li>
+          </ul>
+          <div class="pc-for">Restaurant · Showroom · School · Zorgkliniek</div>
+          <a href="#contact" class="btn btn-blue" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
+        </div>
+        <div class="pc">
+          <div class="ptier">Pakket 03 · Project</div>
+          <div class="pname">Maatwerk Project</div>
+          <div class="pprice">Op aanvraag</div>
+          <div class="psub">Meerdere locaties of bouwfasen · excl. btw</div>
+          <ul class="pitems">
+            <li>Terugkerende scans per bouwfase</li>
+            <li>Documentatie voor opdrachtgevers</li>
+            <li>Meerdere locaties onder één dashboard</li>
+            <li>Jaarabonnement mogelijk (6–12 tours)</li>
+            <li>White-label levering beschikbaar</li>
+            <li>Prioriteitsplanning &amp; vaste contactpersoon</li>
+            <li>Offerte op maat binnen 1 werkdag</li>
+          </ul>
+          <div class="pc-for">Bouwbedrijf · Aannemer · Retailketen · Projectontwikkelaar</div>
+          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Offerte aanvragen →</a>
+        </div>
+      </div>
+
+      <!-- Zakelijk Add-ons -->
+      <div class="addons-inline r">
+        <div class="ai-head">
+          <span class="eye">Zakelijk Add-ons</span>
+          <p>Voeg toe bij elk zakelijk pakket · excl. btw</p>
+        </div>
+        <div class="ai-grid">
+          <div class="ai-card popular-ao">
+            <div class="ai-top">
+              <span class="ai-name">Google Street View</span>
+              <span class="ai-badge">Aanbevolen</span>
+            </div>
+            <div class="ai-price">€49</div>
+            <div class="ai-desc">Uw locatie zichtbaar in Google Maps — cruciaal voor horeca, zorg en retail.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Hotspots &amp; info-tags</span></div>
+            <div class="ai-price">€45</div>
+            <div class="ai-desc">Klikbare punten met menukaart, tarieven of productinfo in uw tour.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Branding &amp; huisstijl overlay</span></div>
+            <div class="ai-price">€59</div>
+            <div class="ai-desc">Uw logo en merkkleur verwerkt in de tour-interface. Professioneel voor ketens.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Meertalige labels</span></div>
+            <div class="ai-price">€35 <small>per taal</small></div>
+            <div class="ai-desc">Rondleidingsteksten vertaald voor internationale gasten of klanten.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Social media videoclip</span></div>
+            <div class="ai-price">€59</div>
+            <div class="ai-desc">Automatische walkthrough-video voor Instagram, Facebook of LinkedIn.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Spoedlevering same-day</span></div>
+            <div class="ai-price">€69 <small>toeslag</small></div>
+            <div class="ai-desc">Tour live vóór 18:00 dezelfde dag als de opname.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Seizoensupdate</span></div>
+            <div class="ai-price">€119</div>
+            <div class="ai-desc">Locatie opnieuw fotograferen na verbouwing of nieuwe inrichting.</div>
+          </div>
+          <div class="ai-card ai-hosting">
+            <div class="ai-top"><span class="ai-name">Hosting jaar 2+</span></div>
+            <div class="ai-price">€45 <small>per jaar</small></div>
+            <div class="ai-desc">Tour-link en embed-code blijven ongewijzigd na het eerste gratis jaar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAATWERK BLOCK -->
+    <div class="custom-block r">
+      <div class="cb-l">
+        <span class="eye">Niet zeker welk pakket?</span>
+        <h3>Wij denken<br><em class="si" style="color:var(--blue-hi)">graag mee.</em></h3>
+        <p>Twijfelt u tussen vastgoed en zakelijk, of heeft u een specifieke situatie? Wij adviseren u kosteloos welk pakket het beste aansluit.</p>
+      </div>
+      <div>
+        <ul class="cb-items">
+          <li>Vastgoed + zakelijk combineren op één locatie</li>
+          <li>Abonnement voor meerdere panden of locaties</li>
+          <li>White-label levering voor makelaars &amp; bureaus</li>
+          <li>Terugkerende contracten (kwartaal / jaar)</li>
+          <li>Grote projecten met vaste dagprijs</li>
+          <li>AI virtuele staging op aanvraag</li>
+        </ul>
+      </div>
+      <div class="cb-cta">
+        <div class="cb-note">Reactie binnen 1 werkdag</div>
+        <div style="width:140px;height:1px;background:rgba(255,255,255,.05);margin:4px 0 12px"></div>
+        <a href="#contact" class="btn btn-blue arr" style="font-size:.58rem">Neem contact op <span>→</span></a>
+        <p style="font-size:.6rem;color:rgba(255,255,255,.2);line-height:1.62;max-width:200px;margin-top:4px">Vrijblijvend · Geen verplichtingen</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="portfolio">
+  <div class="wrap">
+    <div class="port-head r">
+      <span class="eye">Portfolio</span><span class="rule"></span>
+      <h2>Bekijk ons<br><em class="si" style="color:var(--mist)">werk.</em></h2>
+      <p style="color:rgba(255,255,255,.35);margin-top:13px;font-size:.83rem">Een selectie recente tours — van stadsappartementen tot boutique hotels en glamping-resorts.</p>
+    </div>
+    <div class="port-grid r">
+      <div class="pitem"><div class="pitem-visual"><svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="160" fill="#111c2e"/><rect x="20" y="50" width="160" height="90" fill="none" stroke="rgba(47,126,245,.27)" stroke-width=".8"/><polygon points="20,50 100,15 180,50" fill="none" stroke="rgba(47,126,245,.37)" stroke-width=".8"/><rect x="75" y="100" width="25" height="40" fill="rgba(47,126,245,.07)" stroke="rgba(47,126,245,.21)" stroke-width=".6"/><rect x="40" y="65" width="30" height="22" fill="rgba(47,126,245,.06)" stroke="rgba(47,126,245,.21)" stroke-width=".6"/><rect x="130" y="65" width="30" height="22" fill="rgba(47,126,245,.06)" stroke="rgba(47,126,245,.21)" stroke-width=".6"/><circle cx="20" cy="50" r="2.5" fill="#2f7ef5" opacity=".8"/><circle cx="180" cy="50" r="2.5" fill="#2f7ef5" opacity=".8"/><circle cx="100" cy="15" r="2.5" fill="#2f7ef5" opacity=".8"/><text x="100" y="10" text-anchor="middle" font-family="'Jost'" font-size="6" fill="rgba(47,126,245,.52)" letter-spacing="1">360° VOLTOOID</text></svg><div class="pitem-badge">360° Tour</div><div class="pitem-overlay"><span>Bekijk tour →</span></div></div><div class="pitem-cat">Woning · Amsterdam</div><div class="pitem-title">Herenhuis Jordaan</div><div class="pitem-meta">185 m² · 3 verdiepingen · Verkocht in 6 dagen</div></div>
+      <div class="pitem"><div class="pitem-visual"><svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="160" fill="#111c2e"/><rect x="10" y="30" width="180" height="115" fill="none" stroke="rgba(47,126,245,.21)" stroke-width=".8"/><rect x="10" y="30" width="180" height="22" fill="rgba(47,126,245,.05)" stroke="rgba(47,126,245,.27)" stroke-width=".6"/><line x1="10" y1="72" x2="190" y2="72" stroke="rgba(47,126,245,.11)" stroke-width=".5" stroke-dasharray="3 3"/><line x1="10" y1="112" x2="190" y2="112" stroke="rgba(47,126,245,.11)" stroke-width=".5" stroke-dasharray="3 3"/><rect x="30" y="80" width="40" height="24" fill="rgba(47,126,245,.06)" stroke="rgba(47,126,245,.19)" stroke-width=".6"/><rect x="80" y="80" width="40" height="24" fill="rgba(47,126,245,.06)" stroke="rgba(47,126,245,.19)" stroke-width=".6"/><rect x="130" y="80" width="40" height="24" fill="rgba(47,126,245,.06)" stroke="rgba(47,126,245,.19)" stroke-width=".6"/><text x="100" y="42" text-anchor="middle" font-family="'Jost'" font-size="6" fill="rgba(47,126,245,.46)" letter-spacing="1">HOTEL LOBBY</text><circle cx="10" cy="30" r="2" fill="#2f7ef5" opacity=".7"/><circle cx="190" cy="30" r="2" fill="#2f7ef5" opacity=".7"/><circle cx="10" cy="145" r="2" fill="#2f7ef5" opacity=".7"/><circle cx="190" cy="145" r="2" fill="#2f7ef5" opacity=".7"/></svg><div class="pitem-badge">Multi-ruimte</div><div class="pitem-overlay"><span>Bekijk tour →</span></div></div><div class="pitem-cat">Hotel · Utrecht</div><div class="pitem-title">Boutique Hotel De Klok</div><div class="pitem-meta">12 kamers · lobby · restaurant · +31% directe boekingen</div></div>
+      <div class="pitem"><div class="pitem-visual"><svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="160" fill="#111c2e"/><ellipse cx="100" cy="80" rx="70" ry="50" fill="none" stroke="rgba(47,126,245,.16)" stroke-width=".6"/><ellipse cx="100" cy="80" rx="50" ry="35" fill="none" stroke="rgba(47,126,245,.21)" stroke-width=".6"/><ellipse cx="100" cy="80" rx="30" ry="20" fill="rgba(47,126,245,.04)" stroke="rgba(47,126,245,.31)" stroke-width=".8"/><polygon points="50,110 65,85 80,110" fill="none" stroke="rgba(47,126,245,.31)" stroke-width=".7"/><polygon points="90,110 105,85 120,110" fill="none" stroke="rgba(47,126,245,.31)" stroke-width=".7"/><polygon points="130,110 145,85 160,110" fill="none" stroke="rgba(47,126,245,.27)" stroke-width=".7"/><circle cx="65" cy="85" r="2" fill="#2f7ef5" opacity=".8"/><circle cx="105" cy="85" r="2" fill="#2f7ef5" opacity=".8"/><circle cx="145" cy="85" r="2" fill="#2f7ef5" opacity=".6"/><text x="100" y="20" text-anchor="middle" font-family="'Jost'" font-size="6" fill="rgba(47,126,245,.46)" letter-spacing="1">CAMPING TOUR</text></svg><div class="pitem-badge">Buitenlocatie</div><div class="pitem-overlay"><span>Bekijk tour →</span></div></div><div class="pitem-cat">Camping · Zeeland</div><div class="pitem-title">Glamping Zeewind</div><div class="pitem-meta">8 locaties · sanitair · receptie · +55% zomerboekingen</div></div>
+      <div class="pitem"><div class="pitem-visual"><svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="160" fill="#111c2e"/><rect x="15" y="25" width="80" height="110" fill="none" stroke="rgba(47,126,245,.23)" stroke-width=".7"/><rect x="105" y="40" width="80" height="95" fill="none" stroke="rgba(47,126,245,.23)" stroke-width=".7"/><rect x="15" y="25" width="80" height="15" fill="rgba(47,126,245,.05)" stroke="rgba(47,126,245,.21)" stroke-width=".5"/><rect x="105" y="40" width="80" height="15" fill="rgba(47,126,245,.05)" stroke="rgba(47,126,245,.21)" stroke-width=".5"/><line x1="95" y1="80" x2="105" y2="80" stroke="rgba(47,126,245,.31)" stroke-width=".8" stroke-dasharray="2 2"/><circle cx="15" cy="25" r="2" fill="#2f7ef5" opacity=".8"/><circle cx="95" cy="25" r="2" fill="#2f7ef5" opacity=".8"/><circle cx="185" cy="40" r="2" fill="#2f7ef5" opacity=".7"/><text x="55" y="22" text-anchor="middle" font-family="'Jost'" font-size="5.5" fill="rgba(47,126,245,.46)" letter-spacing=".8">GEBOUW A</text><text x="145" y="37" text-anchor="middle" font-family="'Jost'" font-size="5.5" fill="rgba(47,126,245,.46)" letter-spacing=".8">GEBOUW B</text></svg><div class="pitem-badge">Kantoor</div><div class="pitem-overlay"><span>Bekijk tour →</span></div></div><div class="pitem-cat">Kantoor · Rotterdam</div><div class="pitem-title">Kantoorpand Wilhelminapier</div><div class="pitem-meta">2.400 m² · 4 verdiepingen · Verhuurd in 3 weken</div></div>
+      <div class="pitem"><div class="pitem-visual"><svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="160" fill="#111c2e"/><rect x="30" y="60" width="140" height="80" fill="rgba(47,126,245,.02)" stroke="rgba(47,126,245,.23)" stroke-width=".7"/><line x1="30" y1="100" x2="170" y2="100" stroke="rgba(47,126,245,.12)" stroke-width=".5"/><line x1="77" y1="60" x2="77" y2="140" stroke="rgba(47,126,245,.12)" stroke-width=".5"/><line x1="124" y1="60" x2="124" y2="140" stroke="rgba(47,126,245,.12)" stroke-width=".5"/><rect x="38" y="68" width="30" height="24" fill="rgba(47,126,245,.05)" stroke="rgba(47,126,245,.21)" stroke-width=".5"/><rect x="85" y="68" width="30" height="24" fill="rgba(47,126,245,.08)" stroke="rgba(47,126,245,.27)" stroke-width=".5"/><rect x="132" y="68" width="30" height="24" fill="rgba(47,126,245,.05)" stroke="rgba(47,126,245,.21)" stroke-width=".5"/><polygon points="30,60 100,28 170,60" fill="none" stroke="rgba(47,126,245,.31)" stroke-width=".7"/><circle cx="30" cy="60" r="2.5" fill="#2f7ef5" opacity=".8"/><circle cx="170" cy="60" r="2.5" fill="#2f7ef5" opacity=".8"/><circle cx="100" cy="28" r="2.5" fill="#2f7ef5" opacity=".9"/></svg><div class="pitem-badge">Nieuwbouw</div><div class="pitem-overlay"><span>Bekijk tour →</span></div></div><div class="pitem-cat">Appartementen · Eindhoven</div><div class="pitem-title">Project 'De Fabriek'</div><div class="pitem-meta">24 units · modelwoning gescand · 80% pre-sale</div></div>
+      <div class="pitem"><div class="pitem-visual"><svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="160" fill="#111c2e"/><rect x="20" y="45" width="160" height="95" fill="none" stroke="rgba(47,126,245,.21)" stroke-width=".7"/><rect x="30" y="55" width="50" height="35" fill="rgba(47,126,245,.05)" stroke="rgba(47,126,245,.19)" stroke-width=".5"/><rect x="90" y="55" width="80" height="35" fill="rgba(47,126,245,.04)" stroke="rgba(47,126,245,.16)" stroke-width=".5"/><rect x="30" y="100" width="140" height="30" fill="rgba(47,126,245,.025)" stroke="rgba(47,126,245,.12)" stroke-width=".5"/><circle cx="55" cy="72" r="8" fill="none" stroke="rgba(47,126,245,.21)" stroke-width=".5"/><text x="130" y="75" text-anchor="middle" font-family="'Jost'" font-size="5.5" fill="rgba(47,126,245,.4)" letter-spacing=".5">SLAAPKAMER</text><circle cx="20" cy="45" r="2" fill="#2f7ef5" opacity=".7"/><circle cx="180" cy="45" r="2" fill="#2f7ef5" opacity=".7"/><circle cx="20" cy="140" r="2" fill="#2f7ef5" opacity=".7"/><circle cx="180" cy="140" r="2" fill="#2f7ef5" opacity=".7"/></svg><div class="pitem-badge">AirBnB</div><div class="pitem-overlay"><span>Bekijk tour →</span></div></div><div class="pitem-cat">AirBnB · Giethoorn</div><div class="pitem-title">Vakantiewoning 't Riet</div><div class="pitem-meta">78 m² · Superhost · Bezettingsgraad 94%</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="rhead r">
+      <span class="eye">Klantreviews</span><span class="rule"></span>
+      <h2>Wat onze klanten<br><em class="si" style="color:var(--mist)">zeggen.</em></h2>
+      <p>Van makelaars tot AirBnB-superhosts — lees hoe Explora360 het verschil maakt.</p>
+    </div>
+    <div class="quotes r">
+      <div class="qt"><div class="qstars"><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span></div><div class="qtext">De tour was binnen 24 uur klaar. De kwaliteit overtrof onze verwachtingen — woning stond dezelfde dag op Funda en was binnen een week verkocht.</div><div class="qauth"><div class="qav">MV</div><div><div class="qname">Marloes V.</div><div class="qrole">Makelaar · ERA Amsterdam</div></div></div></div>
+      <div class="qt"><div class="qstars"><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span></div><div class="qtext">Onze directe boekingen zijn met 31% gestegen na de hotel-tour. Gasten zeggen dat ze precies wisten wat ze konden verwachten. Geen teleurstellingen meer.</div><div class="qauth"><div class="qav">TH</div><div><div class="qname">Thomas H.</div><div class="qrole">Eigenaar · Hotel De Klok Utrecht</div></div></div></div>
+      <div class="qt"><div class="qstars"><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span><span class="qstar">★</span></div><div class="qtext">Als AirBnB superhost is dit de beste investering die ik heb gedaan. Bezettingsgraad van 74% naar 94% in één seizoen. Absoluut een aanrader.</div><div class="qauth"><div class="qav">SB</div><div><div class="qname">Sofie B.</div><div class="qrole">AirBnB Superhost · Giethoorn</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-wrap r">
+      <div class="contact-l">
+        <span class="eye">Contact</span>
+        <span class="rule"></span>
+        <h2>Klaar om te<br><em class="si" style="color:var(--blue-hi)">starten?</em></h2>
+        <p>Vul uw gegevens in — wij nemen binnen 1 werkdag contact op met een persoonlijke offerte op maat.</p>
+        <div class="contact-details">
+          <div class="cd"><span class="cd-label">Telefoon</span><span class="cd-val">+31 20 123 4567</span></div>
+          <div class="cd"><span class="cd-label">E-mail</span><span class="cd-val">info@explora360.nl</span></div>
+          <div class="cd"><span class="cd-label">Reactietijd</span><span class="cd-val">Binnen 1 werkdag</span></div>
+          <div class="cd"><span class="cd-label">Levering</span><span class="cd-val">Binnen 24 uur na opname</span></div>
+        </div>
+        <div class="cp-note" style="margin-top:28px">Vrijblijvend · Geen verplichtingen</div>
+      </div>
+      <div class="contact-r r d2">
+        <form class="cform" id="cform" action="https://api.web3forms.com/submit" method="POST" onsubmit="csubmit(event)">
+          <input type="hidden" name="access_key" value="9dc3ccaa-614a-485c-af36-5b69168e90d4"/>
+          <input type="hidden" name="subject" value="Nieuwe offerte aanvraag — Explora360"/>
+          <input type="checkbox" name="botcheck" style="display:none"/>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <input class="cinput" type="text" name="naam" placeholder="Naam" id="ci-name" required/>
+            <input class="cinput" type="tel" name="telefoon" placeholder="Telefoonnummer"/>
+          </div>
+          <input class="cinput" style="border-bottom:1px solid rgba(255,255,255,.1)" type="email" name="email" placeholder="E-mailadres" id="ci-email" required/>
+          <input class="cinput" style="border-bottom:1px solid rgba(255,255,255,.1)" type="text" name="type_pand" placeholder="Type pand (woning / hotel / AirBnB / camping...)"/>
+          <textarea class="cinput" name="bericht" style="border-bottom:1px solid rgba(255,255,255,.1);resize:vertical;min-height:100px" placeholder="Aanvullende informatie of vragen..."></textarea>
+          <button class="cbtn" type="submit" id="csubmit-btn" style="align-self:flex-start;padding:15px 36px;font-size:.6rem">Verstuur aanvraag &#8594;</button>
+        </form>
+        <div class="cleg">Uw gegevens worden uitsluitend gebruikt voor het verwerken van uw aanvraag.</div>
+        <div class="cok" id="cok" style="display:none">&#10003; Aanvraag ontvangen &mdash; wij nemen binnen 1 werkdag contact op.</div>
+        <div class="cerr" id="cerr" style="display:none;margin-top:12px;font-size:.72rem;color:#e05555;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)">Er ging iets mis. Probeer het opnieuw of mail naar info@explora360.nl</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <div class="flogo">Explora<em>360</em></div>
+        <p>Professionele 360° virtuele tours voor woningen, hotels, AirBnB's en campings. Levering binnen 24 uur.</p>
+        <div class="fil">Vandaag 3 tours verwerkt</div>
+      </div>
+      <div class="fcol"><h5>Diensten</h5><ul><li><a href="#diensten">Woningen</a></li><li><a href="#sectoren">Hotels</a></li><li><a href="#sectoren">AirBnB</a></li><li><a href="#sectoren">Campings</a></li><li><a href="#sectoren">Kantoren</a></li><li><a href="#prijzen">Maatwerk</a></li></ul></div>
+      <div class="fcol"><h5>Bedrijf</h5><ul><li><a href="#">Over Explora360</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#tech">Technologie</a></li><li><a href="#prijzen">Prijzen</a></li><li><a href="#addons">Add-ons</a></li><li><a href="#reviews">Reviews</a></li></ul></div>
+      <div class="fcol"><h5>Contact</h5><ul><li><a href="#contact">info@explora360.nl</a></li><li><a href="#contact">+31 20 123 4567</a></li><li><a href="#contact">Offerte aanvragen</a></li><li><a href="portaal.html">Tourportaal</a></li><li><a href="#">Privacybeleid</a></li><li><a href="#">Algemene voorwaarden</a></li><li><a href="#">KvK: 87654321</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <div class="fcopy">© 2025 Explora360 B.V. · Alle rechten voorbehouden</div>
+      <div class="fsoc"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Google</a><a href="#">YouTube</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <div class="wrap">
+    <div class="srow">
+      <div class="stxt">360° virtuele tour laten maken? <strong>Bel ons: +31 20 123 4567</strong></div>
+      <div class="sright">
+        <a href="portaal.html" class="btn btn-wire sticky-portal-btn" style="padding:9px 18px;font-size:.54rem">Tourportaal</a>
+        <a href="#contact" class="btn btn-blue" style="padding:9px 18px;font-size:.54rem">Offerte aanvragen</a>
+        <button class="scl" onclick="cls()">×</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('solid',scrollY>55);
+  const s=document.getElementById('sticky');
+  if(scrollY>650&&!s.dataset.c)s.classList.add('on');
+},{passive:true});
+function cls(){const s=document.getElementById('sticky');s.classList.remove('on');s.dataset.c=1}
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('go');ro.unobserve(x.target)}})},{threshold:0,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+function cu(id,to,suf='',dur=1900){
+  const el=document.getElementById(id);if(!el)return;
+  const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){
+    const t=performance.now();
+    const f=n=>{const p=Math.min((n-t)/dur,1),v=1-Math.pow(1-p,3);
+    el.textContent=Math.floor(v*to).toLocaleString('nl')+suf;if(p<1)requestAnimationFrame(f)};
+    requestAnimationFrame(f);o.disconnect()}},{threshold:.4});
+  o.observe(el);
+}
+cu('hsc',847);cu('hsr',230,'+');
+(()=>{
+  const c=document.getElementById('pcl');if(!c)return;
+  for(let i=0;i<50;i++){
+    const d=document.createElement('div');d.className='pt';
+    const s=1+Math.random()*2.8;
+    Object.assign(d.style,{left:(5+Math.random()*90)+'%',top:(5+Math.random()*90)+'%',width:s+'px',height:s+'px',animationDuration:(1.5+Math.random()*3)+'s',animationDelay:(Math.random()*5)+'s',opacity:0});
+    c.appendChild(d);
+  }
+})();
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.ptab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+  // re-trigger reveal animations
+  document.querySelectorAll('#tab-' + tab + ' .r').forEach(el => {
+    el.classList.remove('go');
+    setTimeout(() => el.classList.add('go'), 50);
+  });
+}
+
+async function csubmit(e){
+  e.preventDefault();
+  var form = document.getElementById('cform');
+  var btn  = document.getElementById('csubmit-btn');
+  var ok   = document.getElementById('cok');
+  var err  = document.getElementById('cerr');
+  err.style.display = 'none';
+  btn.textContent = 'Versturen...';
+  btn.disabled = true;
+  try {
+    var res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    var json = await res.json();
+    if (json.success) {
+      form.style.display = 'none';
+      ok.style.display = 'block';
+    } else {
+      err.style.display = 'block';
+      btn.textContent = 'Verstuur aanvraag →';
+      btn.disabled = false;
+    }
+  } catch(ex) {
+    err.style.display = 'block';
+    btn.textContent = 'Verstuur aanvraag →';
+    btn.disabled = false;
+  }
+}
+function csubmit_old(){
+  const n=document.getElementById('ci-name'),e=document.getElementById('ci-email');
+  if(!n.value||!e.value||!e.value.includes('@')){
+    if(!n.value)n.style.borderColor='rgba(200,70,70,.45)';
+    if(!e.value||!e.value.includes('@'))e.style.borderColor='rgba(200,70,70,.45)';
+    return;
+  }
+  document.getElementById('cform').style.display='none';
+  document.getElementById('cok').style.display='block';
+}
+document.getElementById('burger').addEventListener('click',function(){
+  const ul=document.querySelector('.nlinks');
+  if(ul.style.display==='flex'){ul.style.display=''}
+  else{ul.style.cssText='display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(15,22,35,.97);padding:20px var(--pad);gap:15px;z-index:799;backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.04)'}
+});
+document.querySelectorAll('.nlinks a').forEach(a=>a.addEventListener('click',()=>{document.querySelector('.nlinks').style.display=''}));
+</script>
+</body>
+</html>
