@@ -311,7 +311,7 @@ h1.hh{line-height:1.01;margin-bottom:0}
 .cok{display:none;color:var(--blue);font-size:.74rem;margin-top:10px}
 
 footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px solid rgba(255,255,255,.04)}
-.fgrid{display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:clamp(24px,5vw,62px);margin-bottom:clamp(40px,5.5vw,62px)}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(24px,5vw,62px);margin-bottom:clamp(40px,5.5vw,62px)}
 .fbrand .flogo{font-family:var(--fs);font-size:1.5rem;letter-spacing:.06em}
 .fbrand .flogo em{font-style:normal;color:var(--blue)}
 .fbrand p{font-size:.72rem;color:rgba(255,255,255,.19);margin-top:11px;max-width:220px;line-height:1.82}
@@ -991,7 +991,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
         <p>Vul uw gegevens in — wij nemen binnen 1 werkdag contact op met een persoonlijke offerte op maat.</p>
         <div class="contact-details">
           <div class="cd"><span class="cd-label">Telefoon / WhatsApp</span><span class="cd-val"><a href="tel:+31616076613" style="color:inherit;text-decoration:none">+31 6 16 07 66 13</a></span></div>
-          <div class="cd"><span class="cd-label">E-mail</span><span class="cd-val"><a href="/cdn-cgi/l/email-protection#a8c1c6cec7e8cdd0d8c4c7dac99b9e9886c6c4" style="color:inherit;text-decoration:none"><span class="__cf_email__" data-cfemail="d7beb9b1b897b2afa7bbb8a5b6e4e1e7f9b9bb">[email&#160;protected]</span></a></span></div>
+          <div class="cd"><span class="cd-label">E-mail</span><span class="cd-val">info@explora360.nl</span></div>
           <div class="cd"><span class="cd-label">Reactietijd</span><span class="cd-val">Binnen 1 werkdag</span></div>
           <div class="cd"><span class="cd-label">Levering</span><span class="cd-val">Binnen 24 uur na opname</span></div>
         </div>
@@ -1010,7 +1010,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
         </form>
         <div class="cleg">Uw gegevens worden uitsluitend gebruikt voor het verwerken van uw aanvraag.</div>
         <div class="cok" id="cok" style="display:none">Aanvraag ontvangen - wij nemen binnen 1 werkdag contact op.</div>
-        <div class="cerr" id="cerr" style="display:none;margin-top:12px;font-size:.72rem;color:#e05555;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)">Er ging iets mis. Mail naar <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b52555d547b5e434b5754495a080d0b155557">[email&#160;protected]</a></div>
+        <div class="cerr" id="cerr" style="display:none;margin-top:12px;font-size:.72rem;color:#e05555;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)">Er ging iets mis. Mail naar info@explora360.nl</div>
       </div>
     </div>
   </div>
@@ -1022,15 +1022,35 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       <div class="fbrand">
         <div class="flogo">Explora<em>360</em></div>
         <p>Professionele 360° virtuele tours voor woningen, hotels, AirBnB's en campings. Levering binnen 24 uur.</p>
-        <div class="fil">Vandaag 3 tours verwerkt</div>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:6px">
+          <a href="tel:+31616076613" style="font-size:.7rem;color:rgba(255,255,255,.28);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.28)'">+31 6 16 07 66 13</a>
+          <a href="mailto:info@explora360.nl" style="font-size:.7rem;color:rgba(255,255,255,.28);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.28)'">info@explora360.nl</a>
+        </div>
       </div>
-      <div class="fcol"><h5>Diensten</h5><ul><li><a href="#diensten">Woningen</a></li><li><a href="#sectoren">Hotels</a></li><li><a href="#sectoren">AirBnB</a></li><li><a href="#sectoren">Campings</a></li><li><a href="#sectoren">Kantoren</a></li><li><a href="#prijzen">Maatwerk</a></li></ul></div>
-      <div class="fcol"><h5>Bedrijf</h5><ul><li><a href="#over">Over Explora360</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#tech">Technologie</a></li><li><a href="#prijzen">Prijzen</a></li><li><a href="#addons">Add-ons</a></li><li><a href="#reviews">Reviews</a></li></ul></div>
-      <div class="fcol"><h5>Contact</h5><ul><li><a href="#contact"><span class="__cf_email__" data-cfemail="cba2a5ada48baeb3bba7a4b9aaf8fdfbe5a5a7">[email&#160;protected]</span></a></li><li><a href="#contact">Offerte aanvragen</a></li><li><a href="portaal.html">Tourportaal</a></li><li><a href="portaal.html">Tourportaal</a></li><li><a href="faq.html">FAQ</a></li><li><a href="privacy.html">Privacyverklaring</a></li><li><a href="#">Algemene voorwaarden</a></li></ul></div>
+      <div class="fcol">
+        <h5>Website</h5>
+        <ul>
+          <li><a href="#diensten">Diensten</a></li>
+          <li><a href="#sectoren">Sectoren</a></li>
+          <li><a href="#prijzen">Prijzen</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#over">Over ons</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Klanten</h5>
+        <ul>
+          <li><a href="portaal.html">Tourportaal</a></li>
+          <li><a href="#contact">Offerte aanvragen</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="privacy.html">Privacyverklaring</a></li>
+        </ul>
+      </div>
     </div>
     <div class="fbot">
-      <div class="fcopy">© 2025 Explora360 B.V. · Alle rechten voorbehouden</div>
-      <div class="fsoc"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Google</a><a href="#">YouTube</a></div>
+      <div class="fcopy">© 2026 Explora360 · Alle rechten voorbehouden</div>
+      <div class="fsoc"><a href="#">Instagram</a><a href="#">LinkedIn</a></div>
     </div>
   </div>
 </footer>
