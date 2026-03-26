@@ -4,16 +4,23 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Explora360 — Beheerpaneel</title>
+<meta name="robots" content="noindex"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
 <style>
-:root{--ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--white:#fafbfd;--blue:#4a90f7;--blue-hi:#82b4fa;--blue-lo:#2d6fd4;--amber:#e8a030;--amber-hi:#f0bc60;--green:#2ec470;--red:#e05555;--fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;--ease:cubic-bezier(.4,0,.2,1);--pad:clamp(16px,3vw,36px)}
+:root{
+  --ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--white:#fafbfd;
+  --blue:#4a90f7;--blue-hi:#82b4fa;--blue-lo:#2d6fd4;
+  --amber:#e8a030;--amber-hi:#f0bc60;
+  --green:#2ec470;--red:#e05555;
+  --fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);--pad:clamp(14px,2.5vw,32px)
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
 body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;min-height:100vh}
 input,select,textarea,button{font-family:var(--fb)}
-a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
 
 /* LOADING */
@@ -33,121 +40,131 @@ a{color:inherit;text-decoration:none}
 .linput{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:.82rem;outline:none;transition:border-color .22s}
 .linput:focus{border-color:rgba(74,144,247,.5)}
 .lbtn{width:100%;padding:13px;background:var(--blue);color:var(--ink);border:none;font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:14px;transition:background .22s}
-.lbtn:hover{background:var(--blue-hi)}
-.lbtn:disabled{opacity:.5}
-.lerr{font-size:.7rem;color:var(--red);margin-top:10px;display:none;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)}
+.lbtn:hover{background:var(--blue-hi)}.lbtn:disabled{opacity:.5}
+.lerr{font-size:.7rem;color:var(--red);margin-top:10px;display:none;padding:9px 12px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)}
 
 /* APP */
 #app{display:none;min-height:100vh;flex-direction:column}
-.top-bar{position:sticky;top:0;z-index:100;background:rgba(26,35,51,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0}
-.top-bar-inner{max-width:1400px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.top-logo{font-family:var(--fs);font-size:1.25rem}.top-logo em{font-style:normal;color:var(--blue)}
-.top-logo sup{font-family:var(--fb);font-size:.46rem;color:rgba(255,255,255,.22);letter-spacing:.14em;vertical-align:super;margin-left:2px}
-.top-right{display:flex;align-items:center;gap:10px}
-.top-user{font-size:.62rem;color:rgba(255,255,255,.35)}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border:1px solid;font-size:.56rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .22s;background:none;white-space:nowrap}
-.btn svg{width:12px;height:12px;flex-shrink:0}
-.btn-blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}.btn-blue:hover{background:var(--blue-hi);border-color:var(--blue-hi)}
-.btn-blue:disabled{opacity:.5;cursor:default}
-.btn-wire{color:var(--white);border-color:rgba(255,255,255,.15)}.btn-wire:hover{border-color:var(--blue);color:var(--blue-hi)}
-.btn-red{color:var(--red);border-color:rgba(224,85,85,.25)}.btn-red:hover{background:rgba(224,85,85,.08)}
-.btn-green{color:var(--green);border-color:rgba(46,196,112,.25)}.btn-green:hover{background:rgba(46,196,112,.07)}
-.btn-amber{color:var(--amber-hi);border-color:rgba(232,160,48,.25)}.btn-amber:hover{background:rgba(232,160,48,.07)}
-.btn-sm{padding:6px 12px;font-size:.5rem}
-.btn-xs{padding:4px 9px;font-size:.46rem}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(26,35,51,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05);padding:13px 0}
+.topbar-inner{max-width:1400px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.topbar-logo{font-family:var(--fs);font-size:1.2rem}.topbar-logo em{font-style:normal;color:var(--blue)}
+.topbar-logo sup{font-family:var(--fb);font-size:.45rem;color:rgba(255,255,255,.2);letter-spacing:.14em;vertical-align:super;margin-left:2px}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-user{font-size:.6rem;color:rgba(255,255,255,.3)}
 
 /* LAYOUT */
-.app-body{display:flex;flex:1;max-width:1400px;margin:0 auto;width:100%}
-.sidebar{width:210px;flex-shrink:0;padding:24px 0;border-right:1px solid rgba(255,255,255,.04)}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px var(--pad);font-size:.58rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:all .22s;border-left:2px solid transparent;margin-bottom:1px}
+.layout{display:flex;max-width:1400px;margin:0 auto;width:100%;min-height:calc(100vh - 55px)}
+.sidebar{width:200px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.04);padding:20px 0}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px var(--pad);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);cursor:pointer;border-left:2px solid transparent;transition:all .2s;margin-bottom:1px}
 .nav-item:hover{color:var(--white);background:rgba(255,255,255,.02)}
 .nav-item.active{color:var(--blue-hi);border-left-color:var(--blue);background:rgba(74,144,247,.05)}
 .nav-item svg{width:13px;height:13px;flex-shrink:0}
-.nav-badge{margin-left:auto;font-size:.46rem;padding:2px 7px;background:rgba(74,144,247,.15);color:var(--blue-hi);border-radius:10px}
-.main{flex:1;padding:28px 0 28px var(--pad);min-width:0}
+.nav-badge{margin-left:auto;font-size:.44rem;padding:2px 6px;background:rgba(74,144,247,.15);color:var(--blue-hi);border-radius:8px}
+.main{flex:1;padding:24px var(--pad);min-width:0;overflow:hidden}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid;font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;background:none;white-space:nowrap}
+.btn svg{width:11px;height:11px;flex-shrink:0}
+.btn-blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}.btn-blue:hover{background:var(--blue-hi)}
+.btn-blue:disabled{opacity:.45;cursor:default}
+.btn-wire{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.14)}.btn-wire:hover{color:var(--white);border-color:rgba(74,144,247,.4)}
+.btn-green{color:var(--green);border-color:rgba(46,196,112,.22)}.btn-green:hover{background:rgba(46,196,112,.07)}
+.btn-amber{color:var(--amber-hi);border-color:rgba(232,160,48,.22)}.btn-amber:hover{background:rgba(232,160,48,.07)}
+.btn-red{color:var(--red);border-color:rgba(224,85,85,.22)}.btn-red:hover{background:rgba(224,85,85,.07)}
+.btn-sm{padding:6px 12px;font-size:.5rem}
+.btn-xs{padding:4px 9px;font-size:.46rem}
 
 /* SECTIONS */
 .sec{display:none}.sec.active{display:block}
-.sec-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
-.sec-title{font-family:var(--fs);font-size:1.6rem;font-weight:300}
-.sec-sub{font-size:.66rem;color:rgba(255,255,255,.3);margin-top:2px}
+.sec-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.sec-title{font-family:var(--fs);font-size:1.5rem;font-weight:300}
+.sec-sub{font-size:.62rem;color:rgba(255,255,255,.28);margin-top:2px}
 
 /* STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px}
-.stat-box{background:var(--ink2);padding:18px 20px;position:relative;overflow:hidden}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:22px}
+.stat-box{background:var(--ink2);padding:16px 18px;position:relative}
 .stat-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.stat-num{font-family:var(--fs);font-size:1.9rem;font-weight:300;display:block;line-height:1}
-.stat-lbl{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-top:5px;display:block}
+.stat-val{font-family:var(--fs);font-size:1.8rem;font-weight:300;display:block;line-height:1}
+.stat-lbl{font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:4px;display:block}
 
 /* TABLE */
-.table-wrap{background:var(--ink2);border:1px solid rgba(255,255,255,.05);overflow:hidden;margin-bottom:20px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:600px}
+.tbl-wrap{background:var(--ink2);border:1px solid rgba(255,255,255,.05);overflow:auto;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;min-width:500px}
 thead tr{border-bottom:1px solid rgba(255,255,255,.05)}
-th{padding:11px 14px;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);font-weight:400;text-align:left;white-space:nowrap}
-tbody tr{border-bottom:1px solid rgba(255,255,255,.03);transition:background .16s}
+th{padding:10px 12px;font-size:.48rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.22);font-weight:400;text-align:left;white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.03);transition:background .15s}
 tbody tr:last-child{border-bottom:none}
 tbody tr:hover{background:rgba(255,255,255,.02)}
-td{padding:11px 14px;font-size:.72rem;color:rgba(255,255,255,.65);vertical-align:middle}
-td.bold{color:var(--white);font-weight:400}
-td.mono{font-family:monospace;font-size:.64rem;color:rgba(255,255,255,.35)}
-.badge{display:inline-flex;align-items:center;padding:3px 8px;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
-.badge-live{background:rgba(46,196,112,.1);color:#4dda8a;border:1px solid rgba(46,196,112,.2)}
-.badge-proc{background:rgba(232,160,48,.1);color:var(--amber-hi);border:1px solid rgba(232,160,48,.2)}
-.actions{display:flex;gap:5px;flex-wrap:wrap}
-.empty-row td{text-align:center;color:rgba(255,255,255,.2);padding:28px;font-size:.72rem}
+td{padding:10px 12px;font-size:.7rem;color:rgba(255,255,255,.6);vertical-align:middle}
+td.name{color:var(--white);font-weight:400}
+td.mono{font-family:monospace;font-size:.62rem;color:rgba(255,255,255,.32)}
+.badge{display:inline-flex;align-items:center;padding:3px 8px;font-size:.46rem;letter-spacing:.08em;text-transform:uppercase}
+.badge-live{background:rgba(46,196,112,.1);color:#4dda8a;border:1px solid rgba(46,196,112,.18)}
+.badge-proc{background:rgba(232,160,48,.1);color:var(--amber-hi);border:1px solid rgba(232,160,48,.18)}
+.act{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.empty-row td{text-align:center;color:rgba(255,255,255,.18);padding:24px;font-size:.7rem}
 
 /* VIEWS BAR */
-.views-bar{display:flex;align-items:center;gap:8px}
-.views-bar-track{flex:1;height:3px;background:rgba(255,255,255,.06);max-width:80px;position:relative}
-.views-bar-fill{height:100%;background:var(--blue);transition:width .4s var(--ease)}
-.views-num{font-size:.64rem;color:rgba(255,255,255,.4);min-width:20px}
+.vbar{display:flex;align-items:center;gap:7px}
+.vbar-track{width:60px;height:2px;background:rgba(255,255,255,.06)}
+.vbar-fill{height:100%;background:var(--blue);transition:width .4s}
+.vbar-num{font-size:.62rem;color:rgba(255,255,255,.35)}
+
+/* KLANT CARD */
+.klant-card{background:var(--ink2);border:1px solid rgba(255,255,255,.05);border-top:2px solid var(--blue);padding:20px;margin-bottom:8px}
+.klant-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.klant-card-left{display:flex;align-items:center;gap:12px}
+.kc-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:.95rem;flex-shrink:0}
+.kc-name{font-family:var(--fs);font-size:1.1rem;font-weight:300}
+.kc-sub{font-size:.6rem;color:rgba(255,255,255,.28);margin-top:1px}
+.kc-email{font-size:.64rem;color:rgba(74,144,247,.7);font-family:monospace;margin-top:2px}
+.kc-notities{font-size:.66rem;color:rgba(255,255,255,.28);padding:8px 10px;background:rgba(255,255,255,.03);border-left:1px solid rgba(255,255,255,.07);margin-bottom:12px;line-height:1.6}
+.kc-tours{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04)}
+.kc-tour-row{background:var(--ink3);padding:10px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.kc-tour-name{font-size:.74rem;color:var(--white);flex:1;min-width:120px}
+.kc-tour-slug{font-family:monospace;font-size:.58rem;color:var(--blue-hi)}
+.kc-no-tours{padding:14px 12px;font-size:.68rem;color:rgba(255,255,255,.18);text-align:center;background:var(--ink3)}
 
 /* MODAL */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
 .modal-ov.open{display:flex}
-.modal-box{background:var(--ink2);border:1px solid rgba(255,255,255,.09);padding:32px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
-.modal-title{font-family:var(--fs);font-size:1.3rem;font-weight:300;margin-bottom:4px}
-.modal-sub{font-size:.6rem;color:rgba(255,255,255,.28);margin-bottom:24px}
-.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.05)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.flbl{font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);display:block;margin-bottom:6px;margin-top:12px}
+.modal-box{background:var(--ink2);border:1px solid rgba(255,255,255,.08);padding:28px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto}
+.modal-title{font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:3px}
+.modal-sub{font-size:.58rem;color:rgba(255,255,255,.26);margin-bottom:20px}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.05)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.flbl{font-size:.52rem;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:5px;margin-top:10px}
 .flbl:first-child{margin-top:0}
-.finput{width:100%;padding:11px 13px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--white);font-size:.78rem;outline:none;transition:border-color .22s}
-.finput:focus{border-color:rgba(74,144,247,.45)}
-.finput::placeholder{color:rgba(255,255,255,.18)}
+.finput{width:100%;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--white);font-size:.78rem;outline:none;transition:border-color .2s}
+.finput:focus{border-color:rgba(74,144,247,.4)}
+.finput::placeholder{color:rgba(255,255,255,.16)}
 select.finput{cursor:pointer}
-textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
-.finput-note{font-size:.6rem;color:rgba(255,255,255,.22);margin-top:5px}
-.ferr{font-size:.68rem;color:var(--red);margin-top:8px;display:none;padding:9px 12px;background:rgba(224,85,85,.07);border:1px solid rgba(224,85,85,.16)}
-.slug-preview{font-family:monospace;font-size:.64rem;color:var(--blue-hi);padding:8px 12px;background:rgba(74,144,247,.06);border:1px solid rgba(74,144,247,.15);margin-top:6px;display:none}
+textarea.finput{resize:vertical;min-height:70px;line-height:1.6}
+.finput-note{font-size:.58rem;color:rgba(255,255,255,.2);margin-top:4px;line-height:1.5}
+.ferr{font-size:.66rem;color:var(--red);margin-top:8px;display:none;padding:8px 11px;background:rgba(224,85,85,.07);border:1px solid rgba(224,85,85,.14)}
+.slug-preview{font-family:monospace;font-size:.62rem;color:var(--blue-hi);padding:7px 10px;background:rgba(74,144,247,.06);border:1px solid rgba(74,144,247,.14);margin-top:4px;display:none}
+.success-note{font-size:.68rem;color:var(--green);padding:8px 11px;background:rgba(46,196,112,.07);border:1px solid rgba(46,196,112,.16);margin-top:8px;display:none}
 
-/* TOUR PREVIEW */
-#preview-modal .modal-box{max-width:900px;padding:0;overflow:hidden}
-.preview-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:var(--ink3);border-bottom:1px solid rgba(255,255,255,.05)}
-.preview-title{font-family:var(--fs);font-size:1rem;font-weight:300}
-.preview-frame{height:500px;position:relative}
-.preview-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.preview-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:rgba(255,255,255,.2)}
-.preview-ph svg{opacity:.15}
+/* PREVIEW */
+#preview-modal .modal-box{max-width:860px;padding:0;overflow:hidden}
+.prev-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:var(--ink3);border-bottom:1px solid rgba(255,255,255,.05)}
+.prev-title{font-family:var(--fs);font-size:.95rem;font-weight:300}
+.prev-frame{height:480px;position:relative;background:var(--ink)}
+.prev-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.prev-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:rgba(255,255,255,.15)}
+.prev-ph svg{opacity:.1}
 
-/* EMAIL MODAL */
-.email-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:16px;margin-top:12px;font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.8;white-space:pre-wrap}
-
-/* KLANT DETAIL */
-.klant-detail-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding:20px;background:var(--ink2);border:1px solid rgba(255,255,255,.05);border-top:2px solid var(--blue)}
-.kd-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:1.1rem;flex-shrink:0}
-.kd-info{}
-.kd-name{font-family:var(--fs);font-size:1.3rem;font-weight:300}
-.kd-sub{font-size:.62rem;color:rgba(255,255,255,.3);margin-top:2px}
+/* EMAIL */
+.email-body-preview{background:var(--ink3);border:1px solid rgba(255,255,255,.06);padding:14px;font-size:.7rem;color:rgba(255,255,255,.42);line-height:1.85;white-space:pre-wrap;margin-top:8px;max-height:200px;overflow-y:auto}
 
 /* TOAST */
-#toast{position:fixed;bottom:24px;right:24px;background:var(--ink3);border:1px solid rgba(74,144,247,.25);color:var(--blue-hi);font-size:.64rem;letter-spacing:.08em;padding:11px 18px;z-index:9000;opacity:0;transition:all .3s var(--ease);pointer-events:none;display:flex;align-items:center;gap:7px}
+#toast{position:fixed;bottom:20px;right:20px;background:var(--ink3);border:1px solid rgba(74,144,247,.25);color:var(--blue-hi);font-size:.62rem;padding:10px 16px;z-index:9000;opacity:0;transition:all .3s;pointer-events:none;display:flex;align-items:center;gap:7px;max-width:320px}
 #toast.show{opacity:1}
 #toast.ok{border-color:rgba(46,196,112,.3);color:var(--green)}
 #toast.err{border-color:rgba(224,85,85,.3);color:var(--red)}
 #toast::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
 
-@media(max-width:900px){.sidebar{display:none}.stats-grid{grid-template-columns:1fr 1fr}.main{padding:20px var(--pad)}}
+@media(max-width:800px){.sidebar{display:none}.stats-row{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -170,31 +187,31 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
 
 <!-- APP -->
 <div id="app">
-  <div class="top-bar">
-    <div class="top-bar-inner">
-      <span class="top-logo">Explora<em>360</em><sup>Beheer</sup></span>
-      <div class="top-right">
-        <span class="top-user" id="top-user"></span>
-        <button class="btn btn-wire btn-sm" id="logout-btn">Uitloggen</button>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span class="topbar-logo">Explora<em>360</em><sup>Beheer</sup></span>
+      <div class="topbar-right">
+        <span class="topbar-user" id="top-user"></span>
+        <button class="btn btn-wire btn-sm" onclick="doLogout()">Uitloggen</button>
       </div>
     </div>
   </div>
 
-  <div class="app-body" style="padding:0 var(--pad)">
+  <div class="layout">
     <aside class="sidebar">
-      <div class="nav-item active" onclick="showSec('dashboard')">
+      <div class="nav-item active" data-sec="dashboard" onclick="showSec(this,'dashboard')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         Dashboard
       </div>
-      <div class="nav-item" onclick="showSec('klanten')">
+      <div class="nav-item" data-sec="klanten" onclick="showSec(this,'klanten')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Klanten
-        <span class="nav-badge" id="nb-klanten">0</span>
+        <span class="nav-badge" id="nb-k">0</span>
       </div>
-      <div class="nav-item" onclick="showSec('tours')">
+      <div class="nav-item" data-sec="tours" onclick="showSec(this,'tours')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
         Tours
-        <span class="nav-badge" id="nb-tours">0</span>
+        <span class="nav-badge" id="nb-t">0</span>
       </div>
     </aside>
 
@@ -203,42 +220,49 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
       <!-- DASHBOARD -->
       <div class="sec active" id="sec-dashboard">
         <div class="sec-head">
-          <div><div class="sec-title">Dashboard</div><div class="sec-sub">Overzicht</div></div>
+          <div><div class="sec-title">Dashboard</div><div class="sec-sub">Overzicht Explora360</div></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-wire btn-sm" onclick="showSec(document.querySelector('[data-sec=klanten]'),'klanten')">+ Klant</button>
+            <button class="btn btn-blue btn-sm" onclick="showSec(document.querySelector('[data-sec=tours]'),'tours');setTimeout(function(){openModal('nieuw-tour')},100)">+ Tour</button>
+          </div>
         </div>
-        <div class="stats-grid">
-          <div class="stat-box"><span class="stat-num" id="st-klanten">0</span><span class="stat-lbl">Klanten</span></div>
-          <div class="stat-box"><span class="stat-num" id="st-tours">0</span><span class="stat-lbl">Tours</span></div>
-          <div class="stat-box"><span class="stat-num" id="st-live">0</span><span class="stat-lbl">Live</span></div>
-          <div class="stat-box"><span class="stat-num" id="st-views">0</span><span class="stat-lbl">Totaal views</span></div>
+        <div class="stats-row">
+          <div class="stat-box"><span class="stat-val" id="st-k">0</span><span class="stat-lbl">Klanten</span></div>
+          <div class="stat-box"><span class="stat-val" id="st-t">0</span><span class="stat-lbl">Tours</span></div>
+          <div class="stat-box"><span class="stat-val" id="st-l">0</span><span class="stat-lbl">Live</span></div>
+          <div class="stat-box"><span class="stat-val" id="st-v">0</span><span class="stat-lbl">Views</span></div>
         </div>
-        <div class="sec-head" style="margin-top:8px"><div><div class="sec-title" style="font-size:1.1rem">Recente tours</div></div></div>
-        <div class="table-wrap">
+        <div class="sec-head" style="margin-top:4px"><div class="sec-title" style="font-size:1rem;opacity:.6">Recente tours</div></div>
+        <div class="tbl-wrap">
           <table><thead><tr><th>Tour</th><th>Klant</th><th>Status</th><th>Views</th><th>Datum</th><th>Acties</th></tr></thead>
-          <tbody id="db-tours-body"></tbody></table>
+          <tbody id="db-tbody"></tbody></table>
         </div>
       </div>
 
       <!-- KLANTEN -->
       <div class="sec" id="sec-klanten">
         <div class="sec-head">
-          <div><div class="sec-title">Klanten</div><div class="sec-sub" id="klanten-sub">0 klanten</div></div>
-          <button class="btn btn-blue btn-sm" onclick="openModal('nieuw-klant')">+ Nieuwe klant</button>
+          <div><div class="sec-title">Klanten</div><div class="sec-sub" id="k-sub">0 klanten</div></div>
+          <button class="btn btn-blue btn-sm" onclick="openModal('nieuw-klant')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nieuwe klant
+          </button>
         </div>
-        <div class="table-wrap">
-          <table><thead><tr><th>Naam</th><th>Bedrijf</th><th>E-mail</th><th>Tours</th><th>Notities</th><th>Acties</th></tr></thead>
-          <tbody id="klanten-body"></tbody></table>
-        </div>
+        <div id="klanten-cards"></div>
       </div>
 
       <!-- TOURS -->
       <div class="sec" id="sec-tours">
         <div class="sec-head">
-          <div><div class="sec-title">Tours</div><div class="sec-sub" id="tours-sub">0 tours</div></div>
-          <button class="btn btn-blue btn-sm" onclick="openModal('nieuw-tour')">+ Nieuwe tour</button>
+          <div><div class="sec-title">Tours</div><div class="sec-sub" id="t-sub">0 tours</div></div>
+          <button class="btn btn-blue btn-sm" onclick="openModal('nieuw-tour')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nieuwe tour
+          </button>
         </div>
-        <div class="table-wrap">
-          <table><thead><tr><th>Tour</th><th>Klant</th><th>Slug / Link</th><th>Status</th><th>Views</th><th>Datum</th><th>Acties</th></tr></thead>
-          <tbody id="tours-body"></tbody></table>
+        <div class="tbl-wrap">
+          <table><thead><tr><th>Tour</th><th>Klant</th><th>Matterport URL</th><th>Slug</th><th>Status</th><th>Views</th><th>Datum</th><th>Acties</th></tr></thead>
+          <tbody id="tours-tbody"></tbody></table>
         </div>
       </div>
 
@@ -249,22 +273,24 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
 <!-- MODAL: Nieuw klant -->
 <div class="modal-ov" id="modal-nieuw-klant">
   <div class="modal-box">
-    <div class="modal-title">Nieuwe klant</div>
-    <div class="modal-sub">Account wordt direct aangemaakt in Supabase Auth</div>
+    <div class="modal-title">Nieuwe klant aanmaken</div>
+    <div class="modal-sub">Klant krijgt direct toegang tot het portaal</div>
     <div class="form-row">
-      <div><label class="flbl">Naam</label><input class="finput" type="text" id="nk-naam" placeholder="Jan Jansen"/></div>
+      <div><label class="flbl">Naam *</label><input class="finput" type="text" id="nk-naam" placeholder="Jan Jansen"/></div>
       <div><label class="flbl">Bedrijf</label><input class="finput" type="text" id="nk-bedrijf" placeholder="ERA Amsterdam"/></div>
     </div>
-    <label class="flbl">E-mailadres</label>
+    <label class="flbl">E-mailadres *</label>
     <input class="finput" type="email" id="nk-email" placeholder="klant@email.nl"/>
-    <label class="flbl">Wachtwoord</label>
-    <input class="finput" type="text" id="nk-pass" placeholder="Minimaal 8 tekens"/>
-    <label class="flbl">Notities (intern)</label>
-    <textarea class="finput" id="nk-notities" placeholder="Interne aantekeningen over deze klant..."></textarea>
+    <label class="flbl">Wachtwoord *</label>
+    <input class="finput" type="text" id="nk-pass" placeholder="Minimaal 8 tekens — bijv. Tour2026!"/>
+    <p class="finput-note">Stuur dit wachtwoord door aan de klant. Ze kunnen het later wijzigen in het portaal.</p>
+    <label class="flbl">Interne notities</label>
+    <textarea class="finput" id="nk-notities" placeholder="Bijv: makelaar ERA, belt liever dan mailt..."></textarea>
     <div class="ferr" id="nk-err"></div>
+    <div class="success-note" id="nk-ok">✓ Klant aangemaakt! Direct inloggen op explora360.nl/portaal</div>
     <div class="modal-footer">
-      <button class="btn btn-wire btn-sm" onclick="closeModal('nieuw-klant')">Annuleren</button>
-      <button class="btn btn-blue btn-sm" id="nk-submit" onclick="maakKlant()">Aanmaken →</button>
+      <button class="btn btn-wire btn-sm" onclick="closeModal('nieuw-klant')">Sluiten</button>
+      <button class="btn btn-blue btn-sm" id="nk-btn" onclick="maakKlant()">Klant aanmaken →</button>
     </div>
   </div>
 </div>
@@ -273,20 +299,20 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
 <div class="modal-ov" id="modal-bewerk-klant">
   <div class="modal-box">
     <div class="modal-title">Klant bewerken</div>
-    <div class="modal-sub">Wijzig klantgegevens</div>
+    <div class="modal-sub" id="bk-sub"></div>
     <input type="hidden" id="bk-id"/>
     <div class="form-row">
       <div><label class="flbl">Naam</label><input class="finput" type="text" id="bk-naam"/></div>
       <div><label class="flbl">Bedrijf</label><input class="finput" type="text" id="bk-bedrijf"/></div>
     </div>
-    <label class="flbl">Nieuw wachtwoord <span style="color:rgba(255,255,255,.25)">(leeg = ongewijzigd)</span></label>
-    <input class="finput" type="text" id="bk-pass" placeholder="Leeg laten om niet te wijzigen"/>
-    <label class="flbl">Notities (intern)</label>
-    <textarea class="finput" id="bk-notities" placeholder="Interne aantekeningen..."></textarea>
+    <label class="flbl">Nieuw wachtwoord <span style="opacity:.4">(leeg = ongewijzigd)</span></label>
+    <input class="finput" type="text" id="bk-pass" placeholder="Nieuw wachtwoord instellen..."/>
+    <label class="flbl">Interne notities</label>
+    <textarea class="finput" id="bk-notities"></textarea>
     <div class="ferr" id="bk-err"></div>
     <div class="modal-footer">
       <button class="btn btn-wire btn-sm" onclick="closeModal('bewerk-klant')">Annuleren</button>
-      <button class="btn btn-blue btn-sm" id="bk-submit" onclick="bewerkKlant()">Opslaan →</button>
+      <button class="btn btn-blue btn-sm" id="bk-btn" onclick="bewerkKlant()">Opslaan →</button>
     </div>
   </div>
 </div>
@@ -294,36 +320,36 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
 <!-- MODAL: Nieuw tour -->
 <div class="modal-ov" id="modal-nieuw-tour">
   <div class="modal-box">
-    <div class="modal-title">Nieuwe tour</div>
+    <div class="modal-title">Nieuwe tour toevoegen</div>
     <div class="modal-sub">Tour verschijnt direct in het klantportaal</div>
-    <label class="flbl">Klant</label>
+    <label class="flbl">Klant *</label>
     <select class="finput" id="nt-klant"><option value="">Selecteer klant...</option></select>
     <div class="form-row">
       <div>
-        <label class="flbl">Naam tour</label>
-        <input class="finput" type="text" id="nt-naam" placeholder="Woning Amsterdam" oninput="autoSlug('nt')"/>
+        <label class="flbl">Naam tour *</label>
+        <input class="finput" type="text" id="nt-naam" placeholder="Woning Prinsengracht 142" oninput="autoSlug('nt')"/>
       </div>
       <div>
         <label class="flbl">Type</label>
         <select class="finput" id="nt-type">
-          <option value="Woning">Woning</option><option value="Hotel">Hotel</option>
-          <option value="AirBnB">AirBnB</option><option value="Camping">Camping</option>
-          <option value="Kantoor">Kantoor</option><option value="Restaurant">Restaurant</option>
-          <option value="Zorg">Zorg</option><option value="Retail">Retail</option><option value="Overig">Overig</option>
+          <option>Woning</option><option>Hotel</option><option>AirBnB</option>
+          <option>Camping</option><option>Kantoor</option><option>Restaurant</option>
+          <option>Zorg</option><option>Retail</option><option>Overig</option>
         </select>
       </div>
     </div>
     <label class="flbl">Adres</label>
-    <input class="finput" type="text" id="nt-adres" placeholder="Prinsengracht 142, Amsterdam"/>
+    <input class="finput" type="text" id="nt-adres" placeholder="Prinsengracht 142, Amsterdam" oninput="autoSlug('nt')"/>
     <label class="flbl">Matterport URL</label>
     <input class="finput" type="url" id="nt-url" placeholder="https://my.matterport.com/show/?m=..."/>
-    <label class="flbl">Slug (deelbare link)</label>
-    <input class="finput" type="text" id="nt-slug" placeholder="woning-amsterdam-prinsengracht"/>
-    <div class="slug-preview" id="nt-slug-preview"></div>
-    <p class="finput-note">Automatisch gegenereerd — pas aan indien gewenst. Gebruik alleen kleine letters, cijfers en koppeltekens.</p>
+    <p class="finput-note">Plak hier de volledige Matterport-link van uw scan. Dit is de link die klanten en bezoekers zien.</p>
+    <label class="flbl">Slug (publieke link)</label>
+    <input class="finput" type="text" id="nt-slug" placeholder="woning-amsterdam" oninput="updateSlugPreview('nt')"/>
+    <div class="slug-preview" id="nt-slug-prev"></div>
     <div class="form-row">
       <div><label class="flbl">Opnamedatum</label><input class="finput" type="date" id="nt-datum"/></div>
-      <div><label class="flbl">Status</label>
+      <div>
+        <label class="flbl">Status</label>
         <select class="finput" id="nt-status">
           <option value="verwerking">In verwerking</option>
           <option value="live">Live</option>
@@ -333,7 +359,7 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
     <div class="ferr" id="nt-err"></div>
     <div class="modal-footer">
       <button class="btn btn-wire btn-sm" onclick="closeModal('nieuw-tour')">Annuleren</button>
-      <button class="btn btn-blue btn-sm" id="nt-submit" onclick="maakTour()">Tour toevoegen →</button>
+      <button class="btn btn-blue btn-sm" id="nt-btn" onclick="maakTour()">Tour toevoegen →</button>
     </div>
   </div>
 </div>
@@ -342,24 +368,24 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
 <div class="modal-ov" id="modal-bewerk-tour">
   <div class="modal-box">
     <div class="modal-title">Tour bewerken</div>
-    <div class="modal-sub">Wijzig tourgegevens</div>
+    <div class="modal-sub" id="bt-sub"></div>
     <input type="hidden" id="bt-id"/>
     <div class="form-row">
       <div><label class="flbl">Naam</label><input class="finput" type="text" id="bt-naam" oninput="autoSlug('bt')"/></div>
       <div><label class="flbl">Type</label>
         <select class="finput" id="bt-type">
-          <option value="Woning">Woning</option><option value="Hotel">Hotel</option>
-          <option value="AirBnB">AirBnB</option><option value="Camping">Camping</option>
-          <option value="Kantoor">Kantoor</option><option value="Restaurant">Restaurant</option>
-          <option value="Zorg">Zorg</option><option value="Retail">Retail</option><option value="Overig">Overig</option>
+          <option>Woning</option><option>Hotel</option><option>AirBnB</option>
+          <option>Camping</option><option>Kantoor</option><option>Restaurant</option>
+          <option>Zorg</option><option>Retail</option><option>Overig</option>
         </select>
       </div>
     </div>
-    <label class="flbl">Adres</label><input class="finput" type="text" id="bt-adres"/>
-    <label class="flbl">Matterport URL</label><input class="finput" type="url" id="bt-url"/>
+    <label class="flbl">Adres</label><input class="finput" type="text" id="bt-adres" oninput="autoSlug('bt')"/>
+    <label class="flbl">Matterport URL</label>
+    <input class="finput" type="url" id="bt-url" placeholder="https://my.matterport.com/show/?m=..."/>
     <label class="flbl">Slug</label>
-    <input class="finput" type="text" id="bt-slug"/>
-    <div class="slug-preview" id="bt-slug-preview"></div>
+    <input class="finput" type="text" id="bt-slug" oninput="updateSlugPreview('bt')"/>
+    <div class="slug-preview" id="bt-slug-prev"></div>
     <div class="form-row">
       <div><label class="flbl">Datum</label><input class="finput" type="date" id="bt-datum"/></div>
       <div><label class="flbl">Status</label>
@@ -372,40 +398,38 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
     <div class="ferr" id="bt-err"></div>
     <div class="modal-footer">
       <button class="btn btn-wire btn-sm" onclick="closeModal('bewerk-tour')">Annuleren</button>
-      <button class="btn btn-blue btn-sm" id="bt-submit" onclick="bewerkTour()">Opslaan →</button>
+      <button class="btn btn-blue btn-sm" id="bt-btn" onclick="bewerkTour()">Opslaan →</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: Tour preview -->
+<!-- MODAL: Preview -->
 <div class="modal-ov" id="preview-modal">
-  <div class="modal-box">
-    <div class="preview-bar">
-      <span class="preview-title" id="preview-title">Tour preview</span>
+  <div class="modal-box" style="max-width:860px;padding:0">
+    <div class="prev-bar">
+      <span class="prev-title" id="prev-title">Preview</span>
       <button class="btn btn-wire btn-sm" onclick="closePreview()">✕ Sluiten</button>
     </div>
-    <div class="preview-frame" id="preview-frame">
-      <div class="preview-ph">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
-        <span>Tour laden...</span>
+    <div class="prev-frame" id="prev-frame">
+      <div class="prev-ph">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        <span style="font-size:.7rem">Laden...</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- MODAL: E-mail sturen -->
+<!-- MODAL: E-mail -->
 <div class="modal-ov" id="modal-email">
   <div class="modal-box">
-    <div class="modal-title">E-mail sturen aan klant</div>
-    <div class="modal-sub" id="email-modal-sub">Tour is live</div>
+    <div class="modal-title">E-mail naar klant</div>
+    <div class="modal-sub" id="email-sub">Tour is live</div>
     <input type="hidden" id="email-tour-id"/>
-    <label class="flbl">Ontvanger</label>
-    <input class="finput" type="email" id="email-to" readonly style="opacity:.6"/>
-    <label class="flbl">Onderwerp</label>
-    <input class="finput" type="text" id="email-subject"/>
+    <label class="flbl">Aan</label><input class="finput" type="email" id="email-to" readonly style="opacity:.55"/>
+    <label class="flbl">Onderwerp</label><input class="finput" type="text" id="email-subject"/>
     <label class="flbl">Bericht</label>
-    <textarea class="finput" id="email-body" style="min-height:160px"></textarea>
-    <p class="finput-note">Dit opent uw standaard e-mailapp met het bericht ingevuld. Verstuur zelf via uw inbox.</p>
+    <textarea class="finput" id="email-body" style="min-height:180px"></textarea>
+    <p class="finput-note">Klikt "Versturen" om dit te openen in uw e-mailapp. Verstuur zelf vanuit uw inbox.</p>
     <div class="modal-footer">
       <button class="btn btn-wire btn-sm" onclick="closeModal('email')">Annuleren</button>
       <button class="btn btn-blue btn-sm" onclick="verstuurEmail()">Openen in e-mailapp →</button>
@@ -419,69 +443,61 @@ textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
 var ADMIN_ID = 'b31d838e-dcee-426e-bfac-d9ae069ba7a7';
 var SB_URL   = 'https://yhzpsfpptiojkkaqrzgd.supabase.co';
 var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloenBzZnBwdGlvamtrYXFyemdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0ODM2MDAsImV4cCI6MjA5MDA1OTYwMH0.ujW0R1D_Ow4A6GLWNGCTwdOHaYItLlGdeaYXVAcIQUw';
-// Service key zit veilig op Vercel — niet hier
-
 var sb = supabase.createClient(SB_URL, ANON_KEY);
-var allKlanten = [], allTours = [];
-var maxViews = 1;
+var allK = [], allT = [], maxV = 1;
 
-// ── HELPERS ───────────────────────────────────────────────────────────────
+// ── UTILS ─────────────────────────────────────────────────────────────────
 function toast(msg, type) {
   var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = type === 'ok' ? 'show ok' : type === 'err' ? 'show err' : 'show';
-  clearTimeout(t._timer);
-  t._timer = setTimeout(function(){ t.className = ''; }, 3200);
+  t.textContent = msg; t.className = type ? 'show ' + type : 'show';
+  clearTimeout(t._t); t._t = setTimeout(function(){ t.className=''; }, 3200);
 }
-
 function hideLoading() {
   var el = document.getElementById('loading');
-  el.classList.add('hide');
-  setTimeout(function(){ el.style.display='none'; }, 400);
+  el.classList.add('hide'); setTimeout(function(){ el.style.display='none'; }, 400);
 }
-
-function openModal(name) { document.getElementById('modal-'+name).classList.add('open'); }
-function closeModal(name) { document.getElementById('modal-'+name).classList.remove('open'); }
-
+function openModal(n) { document.getElementById('modal-'+n).classList.add('open'); }
+function closeModal(n) { document.getElementById('modal-'+n).classList.remove('open'); }
 document.querySelectorAll('.modal-ov').forEach(function(m){
   m.addEventListener('click', function(e){ if(e.target===m) m.classList.remove('open'); });
 });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){m.classList.remove('open');}); });
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){ m.classList.remove('open'); });
+});
 
-// ── SLUG ──────────────────────────────────────────────────────────────────
-function toSlug(str) {
-  return str.toLowerCase()
+function toSlug(s) {
+  return s.toLowerCase()
     .replace(/[àáâäã]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
-    .replace(/[òóôöõ]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ñ]/g,'n')
+    .replace(/[òóôöõ]/g,'o').replace(/[ùúûü]/g,'u')
     .replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
 }
-
-function autoSlug(prefix) {
-  var naam  = document.getElementById(prefix+'-naam').value;
-  var adres = document.getElementById(prefix+'-adres') ? document.getElementById(prefix+'-adres').value : '';
-  var combined = naam + (adres ? '-' + adres.split(',')[0] : '');
-  var slug = toSlug(combined);
-  var slugInput   = document.getElementById(prefix+'-slug');
-  var slugPreview = document.getElementById(prefix+'-slug-preview');
-  if (slug) {
-    slugInput.value = slug;
-    slugPreview.textContent = 'explora360.nl/tour/' + slug;
-    slugPreview.style.display = 'block';
-  }
+function autoSlug(p) {
+  var n = document.getElementById(p+'-naam').value;
+  var a = document.getElementById(p+'-adres') ? document.getElementById(p+'-adres').value.split(',')[0] : '';
+  var slug = toSlug(n + (a ? '-' + a : ''));
+  document.getElementById(p+'-slug').value = slug;
+  updateSlugPreview(p);
+}
+function updateSlugPreview(p) {
+  var s = document.getElementById(p+'-slug').value;
+  var el = document.getElementById(p+'-slug-prev');
+  el.textContent = s ? 'explora360.nl/tour/' + s : '';
+  el.style.display = s ? 'block' : 'none';
 }
 
-document.getElementById('nt-slug').addEventListener('input', function(){
-  var p = document.getElementById('nt-slug-preview');
-  p.textContent = this.value ? 'explora360.nl/tour/' + this.value : '';
-  p.style.display = this.value ? 'block' : 'none';
-});
-document.getElementById('bt-slug').addEventListener('input', function(){
-  var p = document.getElementById('bt-slug-preview');
-  p.textContent = this.value ? 'explora360.nl/tour/' + this.value : '';
-  p.style.display = this.value ? 'block' : 'none';
-});
+// ── API CALL ───────────────────────────────────────────────────────────────
+async function apiAdmin(action, payload) {
+  var sess = await sb.auth.getSession();
+  var token = sess.data.session ? sess.data.session.access_token : '';
+  var res = await fetch('/api/admin', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify({ action: action, payload: payload })
+  });
+  return { ok: res.ok, data: await res.json(), status: res.status };
+}
 
-// ── INIT ──────────────────────────────────────────────────────────────────
+// ── AUTH ──────────────────────────────────────────────────────────────────
 async function init() {
   var res = await sb.auth.getSession();
   if (res.data && res.data.session && res.data.session.user.id === ADMIN_ID) {
@@ -499,13 +515,11 @@ async function doLogin() {
   var pass  = document.getElementById('l-pass').value;
   var err   = document.getElementById('l-err');
   var btn   = document.getElementById('login-btn');
-  err.style.display = 'none';
-  btn.textContent = 'Inloggen...'; btn.disabled = true;
+  err.style.display = 'none'; btn.textContent = 'Inloggen...'; btn.disabled = true;
   var res = await sb.auth.signInWithPassword({ email: email, password: pass });
   if (res.error || !res.data.user || res.data.user.id !== ADMIN_ID) {
     if (!res.error) await sb.auth.signOut();
-    err.style.display = 'block';
-    btn.textContent = 'Inloggen →'; btn.disabled = false;
+    err.style.display = 'block'; btn.textContent = 'Inloggen →'; btn.disabled = false;
     return;
   }
   document.getElementById('top-user').textContent = res.data.user.email;
@@ -524,120 +538,175 @@ async function doLogout() {
 async function laadData() {
   var kr = await sb.from('klanten').select('*').neq('id', ADMIN_ID).order('created_at', { ascending: false });
   var tr = await sb.from('tours').select('*').order('created_at', { ascending: false });
-  allKlanten = kr.data || [];
-  allTours   = tr.data || [];
-  maxViews = Math.max(1, ...allTours.map(function(t){ return t.views||0; }));
+  allK = kr.data || []; allT = tr.data || [];
+  maxV = Math.max(1, ...allT.map(function(t){ return t.views||0; }));
   renderAll();
 }
 
 function renderAll() {
-  var live  = allTours.filter(function(t){ return t.status==='live'; });
-  var views = allTours.reduce(function(s,t){ return s+(t.views||0); },0);
-  document.getElementById('st-klanten').textContent = allKlanten.length;
-  document.getElementById('st-tours').textContent   = allTours.length;
-  document.getElementById('st-live').textContent    = live.length;
-  document.getElementById('st-views').textContent   = views;
-  document.getElementById('nb-klanten').textContent = allKlanten.length;
-  document.getElementById('nb-tours').textContent   = allTours.length;
-  document.getElementById('klanten-sub').textContent = allKlanten.length + ' klant' + (allKlanten.length!==1?'en':'');
-  document.getElementById('tours-sub').textContent   = allTours.length + ' tour' + (allTours.length!==1?'s':'');
-  renderDashboard();
-  renderKlanten();
-  renderTours();
-  vulKlantenSelect();
+  var live  = allT.filter(function(t){ return t.status==='live'; }).length;
+  var views = allT.reduce(function(s,t){ return s+(t.views||0); }, 0);
+  document.getElementById('st-k').textContent = allK.length;
+  document.getElementById('st-t').textContent = allT.length;
+  document.getElementById('st-l').textContent = live;
+  document.getElementById('st-v').textContent = views;
+  document.getElementById('nb-k').textContent = allK.length;
+  document.getElementById('nb-t').textContent = allT.length;
+  document.getElementById('k-sub').textContent = allK.length + ' klant' + (allK.length!==1?'en':'');
+  document.getElementById('t-sub').textContent = allT.length + ' tour' + (allT.length!==1?'s':'');
+  renderDashboard(); renderKlanten(); renderTours();
+  vulSelect();
 }
 
 // ── DASHBOARD ─────────────────────────────────────────────────────────────
 function renderDashboard() {
-  var tbody = document.getElementById('db-tours-body');
-  var recent = allTours.slice(0,8);
-  if (!recent.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="6">Nog geen tours</td></tr>'; return; }
-  tbody.innerHTML = recent.map(function(t){
-    var k = allKlanten.find(function(k){ return k.id===t.klant_id; });
+  var tbody = document.getElementById('db-tbody');
+  var rows = allT.slice(0,10);
+  if (!rows.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="6">Nog geen tours</td></tr>'; return; }
+  tbody.innerHTML = rows.map(function(t){
+    var k = allK.find(function(k){ return k.id===t.klant_id; });
     var d = t.datum ? new Date(t.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short'}) : '—';
     return '<tr>' +
-      '<td class="bold">' + t.naam + '</td>' +
-      '<td>' + (k?(k.naam||k.email):'—') + '</td>' +
+      '<td class="name">' + t.naam + '</td>' +
+      '<td>' + (k?k.naam||k.email:'—') + '</td>' +
       '<td><span class="badge ' + (t.status==='live'?'badge-live':'badge-proc') + '">' + (t.status==='live'?'Live':'Verwerking') + '</span></td>' +
-      '<td>' + viewsBar(t.views||0) + '</td>' +
+      '<td>' + vbar(t.views||0) + '</td>' +
       '<td>' + d + '</td>' +
-      '<td><div class="actions">' +
-        (t.matterport_url ? '<button class="btn btn-wire btn-xs" onclick="openPreview(\'' + t.id + '\')">&#9654; Preview</button>' : '') +
-        '<button class="btn ' + (t.status==='live'?'btn-amber':'btn-green') + ' btn-xs" onclick="toggleStatus(\'' + t.id + '\',\'' + t.status + '\')">' + (t.status==='live'?'&#9632; Offline':'&#9654; Live') + '</button>' +
+      '<td><div class="act">' +
+        (t.matterport_url?'<button class="btn btn-wire btn-xs" onclick="openPreview(\''+t.id+'\')">▶</button>':'') +
+        '<button class="btn '+(t.status==='live'?'btn-amber':'btn-green')+' btn-xs" onclick="toggleStatus(\''+t.id+'\',\''+t.status+'\')">'+  (t.status==='live'?'▪ Offline':'▶ Live')+'</button>' +
       '</div></td>' +
     '</tr>';
   }).join('');
 }
 
-function viewsBar(v) {
-  var pct = maxViews > 0 ? Math.round((v/maxViews)*100) : 0;
-  return '<div class="views-bar"><div class="views-bar-track"><div class="views-bar-fill" style="width:' + pct + '%"></div></div><span class="views-num">' + v + '</span></div>';
+function vbar(v) {
+  var pct = Math.round((v/maxV)*100);
+  return '<div class="vbar"><div class="vbar-track"><div class="vbar-fill" style="width:'+pct+'%"></div></div><span class="vbar-num">'+v+'</span></div>';
 }
 
-// ── KLANTEN ───────────────────────────────────────────────────────────────
+// ── KLANTEN CARDS ─────────────────────────────────────────────────────────
 function renderKlanten() {
-  var tbody = document.getElementById('klanten-body');
-  if (!allKlanten.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="6">Nog geen klanten</td></tr>'; return; }
-  tbody.innerHTML = allKlanten.map(function(k){
-    var tc = allTours.filter(function(t){ return t.klant_id===k.id; }).length;
-    var note = k.notities ? ('<span style="font-size:.64rem;color:rgba(255,255,255,.35);max-width:160px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + k.notities.substring(0,60) + (k.notities.length>60?'…':'') + '</span>') : '<span style="color:rgba(255,255,255,.15);font-size:.62rem">—</span>';
+  var wrap = document.getElementById('klanten-cards');
+  if (!allK.length) {
+    wrap.innerHTML = '<div style="padding:32px;text-align:center;color:rgba(255,255,255,.2);font-size:.75rem;background:var(--ink2);border:1px dashed rgba(255,255,255,.07)">Nog geen klanten — klik op "+ Nieuwe klant" om te beginnen</div>';
+    return;
+  }
+  wrap.innerHTML = allK.map(function(k){
+    var ini = (k.naam||'?').split(' ').map(function(w){ return w[0]||''; }).join('').substring(0,2).toUpperCase();
+    var kTours = allT.filter(function(t){ return t.klant_id===k.id; });
+    var toursHtml = kTours.length ? kTours.map(function(t){
+      var slugLink = t.slug ? '<a href="https://www.explora360.nl/tour/'+t.slug+'" target="_blank" class="kc-tour-slug">'+t.slug+' ↗</a>' : '<span style="color:rgba(255,255,255,.2);font-size:.58rem">geen slug</span>';
+      return '<div class="kc-tour-row">' +
+        '<span class="kc-tour-name">' + t.naam + '</span>' +
+        '<span class="badge '+(t.status==='live'?'badge-live':'badge-proc')+'">'+(t.status==='live'?'Live':'Verwerking')+'</span>' +
+        slugLink +
+        '<span style="font-size:.6rem;color:rgba(255,255,255,.28)">' + vbar(t.views||0) + '</span>' +
+        '<div class="act">' +
+          (t.matterport_url?'<button class="btn btn-wire btn-xs" onclick="openPreview(\''+t.id+'\')">▶</button>':'') +
+          '<button class="btn btn-wire btn-xs" onclick="openBewerkTour(\''+t.id+'\')">Edit</button>' +
+          '<button class="btn '+(t.status==='live'?'btn-amber':'btn-green')+' btn-xs" onclick="toggleStatus(\''+t.id+'\',\''+t.status+'\')">'+  (t.status==='live'?'Offline':'Live')+'</button>' +
+          '<button class="btn btn-blue btn-xs" onclick="openEmailModal(\''+t.id+'\')">✉</button>' +
+          '<button class="btn btn-red btn-xs" onclick="verwijderTour(\''+t.id+'\')">✕</button>' +
+        '</div>' +
+      '</div>';
+    }).join('') : '<div class="kc-no-tours">Geen tours — <button style="background:none;border:none;color:var(--blue-hi);cursor:pointer;font-size:.68rem;font-family:var(--fb)" onclick="openNieuwTourVoorKlant(\''+k.id+'\')">+ Tour toevoegen</button></div>';
+
+    return '<div class="klant-card">' +
+      '<div class="klant-card-header">' +
+        '<div class="klant-card-left">' +
+          '<div class="kc-avatar">' + ini + '</div>' +
+          '<div>' +
+            '<div class="kc-name">' + (k.naam||'—') + '</div>' +
+            '<div class="kc-sub">' + (k.bedrijf||'') + '</div>' +
+            '<div class="kc-email">' + (k.email||'') + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="act">' +
+          '<button class="btn btn-wire btn-xs" onclick="openBewerkKlant(\''+k.id+'\')">Bewerken</button>' +
+          '<button class="btn btn-blue btn-xs" onclick="openNieuwTourVoorKlant(\''+k.id+'\')">+ Tour</button>' +
+          '<button class="btn btn-red btn-xs" onclick="verwijderKlant(\''+k.id+'\')">✕</button>' +
+        '</div>' +
+      '</div>' +
+      (k.notities ? '<div class="kc-notities">📝 ' + k.notities + '</div>' : '') +
+      '<div class="kc-tours">' + toursHtml + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function openNieuwTourVoorKlant(klantId) {
+  openModal('nieuw-tour');
+  setTimeout(function(){ document.getElementById('nt-klant').value = klantId; }, 50);
+}
+
+// ── TOURS TABLE ───────────────────────────────────────────────────────────
+function renderTours() {
+  var tbody = document.getElementById('tours-tbody');
+  if (!allT.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="8">Nog geen tours</td></tr>'; return; }
+  tbody.innerHTML = allT.map(function(t){
+    var k = allK.find(function(k){ return k.id===t.klant_id; });
+    var d = t.datum ? new Date(t.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '—';
+    var urlShort = t.matterport_url ? '<a href="'+t.matterport_url+'" target="_blank" style="color:var(--blue-hi);font-family:monospace;font-size:.58rem">Matterport ↗</a>' : '<span style="color:rgba(255,255,255,.2);font-size:.6rem">—</span>';
+    var slugHtml = t.slug ? '<a href="https://www.explora360.nl/tour/'+t.slug+'" target="_blank" style="color:var(--blue-hi);font-family:monospace;font-size:.6rem">'+t.slug+' ↗</a>' : '<span style="color:rgba(255,255,255,.2);font-size:.6rem">geen slug</span>';
     return '<tr>' +
-      '<td class="bold">' + (k.naam||'—') + '</td>' +
-      '<td>' + (k.bedrijf||'—') + '</td>' +
-      '<td class="mono">' + (k.email||'—') + '</td>' +
-      '<td style="text-align:center">' + tc + '</td>' +
-      '<td>' + note + '</td>' +
-      '<td><div class="actions">' +
-        '<button class="btn btn-wire btn-xs" onclick="openBewerkKlant(\'' + k.id + '\')">Bewerken</button>' +
-        '<button class="btn btn-red btn-xs" onclick="verwijderKlant(\'' + k.id + '\')">✕</button>' +
+      '<td class="name">' + t.naam + '<br><span style="font-size:.58rem;color:rgba(255,255,255,.25)">' + (t.type||'') + '</span></td>' +
+      '<td>' + (k?k.naam||k.email:'—') + '</td>' +
+      '<td>' + urlShort + '</td>' +
+      '<td>' + slugHtml + '</td>' +
+      '<td>' +
+        '<span class="badge '+(t.status==='live'?'badge-live':'badge-proc')+'">'+(t.status==='live'?'Live':'Verwerking')+'</span><br>' +
+        '<button class="btn '+(t.status==='live'?'btn-amber':'btn-green')+' btn-xs" style="margin-top:4px" onclick="toggleStatus(\''+t.id+'\',\''+t.status+'\')">'+  (t.status==='live'?'▪ Offline':'▶ Live')+'</button>' +
+      '</td>' +
+      '<td>' + vbar(t.views||0) + '</td>' +
+      '<td>' + d + '</td>' +
+      '<td><div class="act">' +
+        (t.matterport_url?'<button class="btn btn-wire btn-xs" onclick="openPreview(\''+t.id+'\')">▶</button>':'') +
+        '<button class="btn btn-wire btn-xs" onclick="openBewerkTour(\''+t.id+'\')">Edit</button>' +
+        '<button class="btn btn-blue btn-xs" onclick="openEmailModal(\''+t.id+'\')">✉</button>' +
+        '<button class="btn btn-red btn-xs" onclick="verwijderTour(\''+t.id+'\')">✕</button>' +
       '</div></td>' +
     '</tr>';
   }).join('');
 }
 
-function vulKlantenSelect() {
+function vulSelect() {
   var opts = '<option value="">Selecteer klant...</option>' +
-    allKlanten.map(function(k){ return '<option value="' + k.id + '">' + (k.naam||k.email) + (k.bedrijf?' — '+k.bedrijf:'') + '</option>'; }).join('');
+    allK.map(function(k){ return '<option value="'+k.id+'">'+(k.naam||k.email)+(k.bedrijf?' — '+k.bedrijf:'')+'</option>'; }).join('');
   document.getElementById('nt-klant').innerHTML = opts;
 }
 
+// ── KLANT CRUD ────────────────────────────────────────────────────────────
 async function maakKlant() {
-  var naam     = document.getElementById('nk-naam').value.trim();
-  var bedrijf  = document.getElementById('nk-bedrijf').value.trim();
-  var email    = document.getElementById('nk-email').value.trim().toLowerCase();
-  var pass     = document.getElementById('nk-pass').value;
-  var notities = document.getElementById('nk-notities').value.trim();
-  var err      = document.getElementById('nk-err');
-  var btn      = document.getElementById('nk-submit');
-  err.style.display = 'none';
-  if (!naam||!email||!pass) { err.textContent='Vul alle verplichte velden in.'; err.style.display='block'; return; }
+  var naam  = document.getElementById('nk-naam').value.trim();
+  var bed   = document.getElementById('nk-bedrijf').value.trim();
+  var email = document.getElementById('nk-email').value.trim().toLowerCase();
+  var pass  = document.getElementById('nk-pass').value;
+  var not   = document.getElementById('nk-notities').value.trim();
+  var err   = document.getElementById('nk-err');
+  var ok    = document.getElementById('nk-ok');
+  var btn   = document.getElementById('nk-btn');
+  err.style.display='none'; ok.style.display='none';
+  if (!naam||!email||!pass) { err.textContent='Vul naam, e-mail en wachtwoord in.'; err.style.display='block'; return; }
   if (pass.length<8) { err.textContent='Wachtwoord minimaal 8 tekens.'; err.style.display='block'; return; }
   btn.textContent='Aanmaken...'; btn.disabled=true;
 
-  var sess = await sb.auth.getSession();
-  var token = sess.data.session ? sess.data.session.access_token : '';
-  var signRes = await fetch('/api/admin',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-    body:JSON.stringify({action:'create_user',payload:{email:email,password:pass}})
-  });
-  var signData = await signRes.json();
-  if (!signRes.ok||!signData.id) {
-    err.textContent = signData.message || signData.msg || 'Fout bij aanmaken. Bestaat dit e-mailadres al?';
-    err.style.display='block'; btn.textContent='Aanmaken →'; btn.disabled=false; return;
+  var res = await apiAdmin('create_user', { email: email, password: pass });
+  if (!res.ok || !res.data.id) {
+    err.textContent = res.data.message || res.data.msg || 'Fout — bestaat dit e-mailadres al?';
+    err.style.display='block'; btn.textContent='Klant aanmaken →'; btn.disabled=false; return;
   }
-
-  await sb.from('klanten').insert({id:signData.id,naam:naam,bedrijf:bedrijf,email:email,notities:notities});
-  closeModal('nieuw-klant');
-  ['nk-naam','nk-bedrijf','nk-email','nk-pass','nk-notities'].forEach(function(id){ document.getElementById(id).value=''; });
-  btn.textContent='Aanmaken →'; btn.disabled=false;
+  await sb.from('klanten').insert({ id: res.data.id, naam: naam, bedrijf: bed, email: email, notities: not });
+  ok.style.display='block';
+  btn.textContent='Klant aanmaken →'; btn.disabled=false;
+  ['nk-naam','nk-bedrijf','nk-email','nk-pass','nk-notities'].forEach(function(i){ document.getElementById(i).value=''; });
   toast('Klant "'+naam+'" aangemaakt', 'ok');
   await laadData();
 }
 
 function openBewerkKlant(id) {
-  var k = allKlanten.find(function(k){ return k.id===id; }); if(!k) return;
-  document.getElementById('bk-id').value       = k.id;
+  var k = allK.find(function(k){ return k.id===id; }); if(!k) return;
+  document.getElementById('bk-id').value       = id;
+  document.getElementById('bk-sub').textContent = k.email||'';
   document.getElementById('bk-naam').value     = k.naam||'';
   document.getElementById('bk-bedrijf').value  = k.bedrijf||'';
   document.getElementById('bk-pass').value     = '';
@@ -647,98 +716,58 @@ function openBewerkKlant(id) {
 }
 
 async function bewerkKlant() {
-  var id       = document.getElementById('bk-id').value;
-  var naam     = document.getElementById('bk-naam').value.trim();
-  var bedrijf  = document.getElementById('bk-bedrijf').value.trim();
-  var pass     = document.getElementById('bk-pass').value;
-  var notities = document.getElementById('bk-notities').value.trim();
-  var btn      = document.getElementById('bk-submit');
+  var id   = document.getElementById('bk-id').value;
+  var naam = document.getElementById('bk-naam').value.trim();
+  var bed  = document.getElementById('bk-bedrijf').value.trim();
+  var pass = document.getElementById('bk-pass').value;
+  var not  = document.getElementById('bk-notities').value.trim();
+  var btn  = document.getElementById('bk-btn');
   btn.textContent='Opslaan...'; btn.disabled=true;
-  await sb.from('klanten').update({naam:naam,bedrijf:bedrijf,notities:notities}).eq('id',id);
-  if (pass&&pass.length>=8) {
-    var sess2 = await sb.auth.getSession();
-    var tok2  = sess2.data.session ? sess2.data.session.access_token : '';
-    await fetch('/api/admin',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok2},
-      body:JSON.stringify({action:'update_user',payload:{id:id,password:pass}})
-    });
-  }
+  await sb.from('klanten').update({ naam: naam, bedrijf: bed, notities: not }).eq('id', id);
+  if (pass && pass.length>=8) await apiAdmin('update_user', { id: id, password: pass });
   closeModal('bewerk-klant'); btn.textContent='Opslaan →'; btn.disabled=false;
-  toast('Klant bijgewerkt', 'ok');
-  await laadData();
+  toast('Klant bijgewerkt', 'ok'); await laadData();
 }
 
 async function verwijderKlant(id) {
-  var k = allKlanten.find(function(k){ return k.id===id; }); if(!k) return;
+  var k = allK.find(function(k){ return k.id===id; }); if(!k) return;
   if (!confirm('Klant "' + (k.naam||k.email) + '" en alle tours verwijderen?')) return;
-  await sb.from('tours').delete().eq('klant_id',id);
-  await sb.from('klanten').delete().eq('id',id);
-  var sessD = await sb.auth.getSession();
-  var tokD  = sessD.data.session ? sessD.data.session.access_token : '';
-  await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tokD},body:JSON.stringify({action:'delete_user',payload:{id:id}})});
-  toast('Klant verwijderd');
-  await laadData();
+  await sb.from('tours').delete().eq('klant_id', id);
+  await sb.from('klanten').delete().eq('id', id);
+  await apiAdmin('delete_user', { id: id });
+  toast('Klant verwijderd'); await laadData();
 }
 
-// ── TOURS ─────────────────────────────────────────────────────────────────
-function renderTours() {
-  var tbody = document.getElementById('tours-body');
-  if (!allTours.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="7">Nog geen tours</td></tr>'; return; }
-  tbody.innerHTML = allTours.map(function(t){
-    var k = allKlanten.find(function(k){ return k.id===t.klant_id; });
-    var d = t.datum ? new Date(t.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '—';
-    var slugLink = t.slug ? '<a href="https://www.explora360.nl/tour/' + t.slug + '" target="_blank" style="color:var(--blue-hi);font-family:monospace;font-size:.6rem">' + t.slug + ' ↗</a>' : '<span style="color:rgba(255,255,255,.2);font-size:.62rem">geen slug</span>';
-    return '<tr>' +
-      '<td class="bold">' + t.naam + (t.type?'<br><span style="font-size:.58rem;color:rgba(255,255,255,.3)">'+t.type+'</span>':'') + '</td>' +
-      '<td>' + (k?(k.naam||k.email):'—') + '</td>' +
-      '<td>' + slugLink + '</td>' +
-      '<td>' +
-        '<span class="badge ' + (t.status==='live'?'badge-live':'badge-proc') + '">' + (t.status==='live'?'Live':'Verwerking') + '</span>' +
-        '<br><button class="btn ' + (t.status==='live'?'btn-amber':'btn-green') + ' btn-xs" style="margin-top:5px" onclick="toggleStatus(\'' + t.id + '\',\'' + t.status + '\')">' + (t.status==='live'?'▪ Offline':'▶ Live') + '</button>' +
-      '</td>' +
-      '<td>' + viewsBar(t.views||0) + '</td>' +
-      '<td>' + d + '</td>' +
-      '<td><div class="actions">' +
-        (t.matterport_url ? '<button class="btn btn-wire btn-xs" onclick="openPreview(\'' + t.id + '\')">&#9654;</button>' : '') +
-        '<button class="btn btn-wire btn-xs" onclick="openBewerkTour(\'' + t.id + '\')">Edit</button>' +
-        '<button class="btn btn-blue btn-xs" onclick="openEmailModal(\'' + t.id + '\')">✉</button>' +
-        '<button class="btn btn-red btn-xs" onclick="verwijderTour(\'' + t.id + '\')">✕</button>' +
-      '</div></td>' +
-    '</tr>';
-  }).join('');
-}
-
+// ── TOUR CRUD ─────────────────────────────────────────────────────────────
 async function maakTour() {
-  var klant_id = document.getElementById('nt-klant').value;
-  var naam     = document.getElementById('nt-naam').value.trim();
-  var type     = document.getElementById('nt-type').value;
-  var adres    = document.getElementById('nt-adres').value.trim();
-  var url      = document.getElementById('nt-url').value.trim();
-  var slug     = document.getElementById('nt-slug').value.trim();
-  var datum    = document.getElementById('nt-datum').value;
-  var status   = document.getElementById('nt-status').value;
-  var err      = document.getElementById('nt-err');
-  var btn      = document.getElementById('nt-submit');
+  var kid    = document.getElementById('nt-klant').value;
+  var naam   = document.getElementById('nt-naam').value.trim();
+  var type   = document.getElementById('nt-type').value;
+  var adres  = document.getElementById('nt-adres').value.trim();
+  var url    = document.getElementById('nt-url').value.trim();
+  var slug   = document.getElementById('nt-slug').value.trim();
+  var datum  = document.getElementById('nt-datum').value;
+  var status = document.getElementById('nt-status').value;
+  var err    = document.getElementById('nt-err');
+  var btn    = document.getElementById('nt-btn');
   err.style.display='none';
-  if (!klant_id||!naam) { err.textContent='Selecteer klant en vul naam in.'; err.style.display='block'; return; }
+  if (!kid||!naam) { err.textContent='Selecteer klant en vul naam in.'; err.style.display='block'; return; }
   btn.textContent='Toevoegen...'; btn.disabled=true;
-  await sb.from('tours').insert({klant_id:klant_id,naam:naam,type:type,adres:adres,matterport_url:url,slug:slug||null,datum:datum||null,status:status,views:0});
+  await sb.from('tours').insert({ klant_id: kid, naam: naam, type: type, adres: adres, matterport_url: url||null, slug: slug||null, datum: datum||null, status: status, views: 0 });
   closeModal('nieuw-tour');
-  ['nt-naam','nt-adres','nt-url','nt-slug'].forEach(function(id){ document.getElementById(id).value=''; });
-  document.getElementById('nt-slug-preview').style.display='none';
+  ['nt-naam','nt-adres','nt-url','nt-slug'].forEach(function(i){ document.getElementById(i).value=''; });
+  document.getElementById('nt-slug-prev').style.display='none';
   btn.textContent='Tour toevoegen →'; btn.disabled=false;
   toast('Tour "'+naam+'" toegevoegd', 'ok');
-  if (status==='live') {
-    var k = allKlanten.find(function(k){ return k.id===klant_id; });
-    if (k) toast('Tour live — vergeet de klant niet te mailen!', 'ok');
-  }
+  if (status==='live') { await laadData(); openEmailModal(allT.find(function(t){ return t.naam===naam&&t.klant_id===kid; })||null); return; }
   await laadData();
 }
 
 function openBewerkTour(id) {
-  var t = allTours.find(function(t){ return t.id===id; }); if(!t) return;
-  document.getElementById('bt-id').value    = t.id;
+  var t = allT.find(function(t){ return t.id===id; }); if(!t) return;
+  var k = allK.find(function(k){ return k.id===t.klant_id; });
+  document.getElementById('bt-id').value    = id;
+  document.getElementById('bt-sub').textContent = k ? (k.naam||k.email) : '';
   document.getElementById('bt-naam').value  = t.naam||'';
   document.getElementById('bt-type').value  = t.type||'Overig';
   document.getElementById('bt-adres').value = t.adres||'';
@@ -746,9 +775,8 @@ function openBewerkTour(id) {
   document.getElementById('bt-slug').value  = t.slug||'';
   document.getElementById('bt-datum').value = t.datum?t.datum.split('T')[0]:'';
   document.getElementById('bt-status').value= t.status||'verwerking';
-  var p = document.getElementById('bt-slug-preview');
-  p.textContent = t.slug ? 'explora360.nl/tour/'+t.slug : '';
-  p.style.display = t.slug ? 'block' : 'none';
+  var p = document.getElementById('bt-slug-prev');
+  p.textContent = t.slug?'explora360.nl/tour/'+t.slug:''; p.style.display=t.slug?'block':'none';
   document.getElementById('bt-err').style.display='none';
   openModal('bewerk-tour');
 }
@@ -762,104 +790,88 @@ async function bewerkTour() {
   var slug   = document.getElementById('bt-slug').value.trim();
   var datum  = document.getElementById('bt-datum').value;
   var status = document.getElementById('bt-status').value;
-  var btn    = document.getElementById('bt-submit');
-  var oldTour = allTours.find(function(t){ return t.id===id; });
-  var wasLive = oldTour && oldTour.status==='live';
+  var old    = allT.find(function(t){ return t.id===id; });
+  var btn    = document.getElementById('bt-btn');
   btn.textContent='Opslaan...'; btn.disabled=true;
-  await sb.from('tours').update({naam:naam,type:type,adres:adres,matterport_url:url,slug:slug||null,datum:datum||null,status:status}).eq('id',id);
+  await sb.from('tours').update({ naam: naam, type: type, adres: adres, matterport_url: url||null, slug: slug||null, datum: datum||null, status: status }).eq('id', id);
   closeModal('bewerk-tour'); btn.textContent='Opslaan →'; btn.disabled=false;
   toast('Tour bijgewerkt', 'ok');
-  if (!wasLive && status==='live') {
-    // Stel e-mail voor
-    await laadData();
-    openEmailModal(id);
-    return;
-  }
+  if (old && old.status!=='live' && status==='live') { await laadData(); openEmailModal(id); return; }
   await laadData();
 }
 
 async function toggleStatus(id, huidig) {
   var nieuw = huidig==='live' ? 'verwerking' : 'live';
-  await sb.from('tours').update({status:nieuw}).eq('id',id);
-  toast('Status → '+nieuw, 'ok');
-  await laadData();
-  if (nieuw==='live') {
-    setTimeout(function(){ openEmailModal(id); }, 400);
-  }
+  await sb.from('tours').update({ status: nieuw }).eq('id', id);
+  toast('Status → ' + nieuw, 'ok'); await laadData();
+  if (nieuw==='live') setTimeout(function(){ openEmailModal(id); }, 300);
 }
 
 async function verwijderTour(id) {
-  var t = allTours.find(function(t){ return t.id===id; }); if(!t) return;
+  var t = allT.find(function(t){ return t.id===id; }); if(!t) return;
   if (!confirm('Tour "'+t.naam+'" verwijderen?')) return;
-  await sb.from('tours').delete().eq('id',id);
-  toast('Tour verwijderd');
-  await laadData();
+  await sb.from('tours').delete().eq('id', id);
+  toast('Tour verwijderd'); await laadData();
 }
 
 // ── PREVIEW ───────────────────────────────────────────────────────────────
 function openPreview(id) {
-  var t = allTours.find(function(t){ return t.id===id; }); if(!t||!t.matterport_url) return;
-  document.getElementById('preview-title').textContent = t.naam;
-  document.getElementById('preview-frame').innerHTML = '<iframe src="'+t.matterport_url+'" allowfullscreen allow="xr-spatial-tracking"></iframe>';
+  var t = allT.find(function(t){ return t.id===id; }); if(!t||!t.matterport_url) return;
+  document.getElementById('prev-title').textContent = t.naam;
+  document.getElementById('prev-frame').innerHTML = '<iframe src="'+t.matterport_url+'" allowfullscreen allow="xr-spatial-tracking"></iframe>';
   openModal('preview');
 }
-
 function closePreview() {
-  document.getElementById('preview-frame').innerHTML = '<div class="preview-ph"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><span>Tour laden...</span></div>';
+  document.getElementById('prev-frame').innerHTML = '<div class="prev-ph"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><span style="font-size:.7rem">Laden...</span></div>';
   closeModal('preview');
 }
 
-// ── E-MAIL ────────────────────────────────────────────────────────────────
+// ── EMAIL ─────────────────────────────────────────────────────────────────
 function openEmailModal(tourId) {
-  var t = allTours.find(function(t){ return t.id===tourId; }); if(!t) return;
-  var k = allKlanten.find(function(k){ return k.id===t.klant_id; });
-  var naam    = k ? (k.naam||'') : '';
-  var email   = k ? (k.email||'') : '';
-  var tourUrl = t.slug ? 'https://www.explora360.nl/tour/'+t.slug : (t.matterport_url||'');
-  var portaalUrl = 'https://www.explora360.nl/portaal.html';
-
+  var t = allT.find(function(t){ return t.id===tourId; }); if(!t) return;
+  var k = allK.find(function(k){ return k.id===t.klant_id; });
+  var naam = k ? (k.naam||'').split(' ')[0] || 'klant' : 'klant';
+  var email = k ? k.email||'' : '';
+  var url = t.slug ? 'https://www.explora360.nl/tour/'+t.slug : (t.matterport_url||'');
   document.getElementById('email-tour-id').value = tourId;
-  document.getElementById('email-modal-sub').textContent = 'Tour live: ' + t.naam;
+  document.getElementById('email-sub').textContent = 'Tour live: ' + t.naam;
   document.getElementById('email-to').value = email;
   document.getElementById('email-subject').value = 'Uw 360° virtuele tour is live — ' + t.naam;
   document.getElementById('email-body').value =
-'Beste ' + (naam.split(' ')[0]||'klant') + ',\n\n' +
+'Beste ' + naam + ',\n\n' +
 'Goed nieuws — uw virtuele tour is live en klaar om te delen!\n\n' +
-'🏠 Tour: ' + t.naam + '\n' +
-(t.adres ? '📍 Adres: ' + t.adres + '\n' : '') +
-'🔗 Directe link: ' + tourUrl + '\n\n' +
-'U kunt deze link delen via WhatsApp, e-mail of social media.\n\n' +
-'Al uw tours bekijken? Log in op uw persoonlijk portaal:\n' +
-portaalUrl + '\n\n' +
-'Heeft u vragen of wilt u een seizoensupdate? Neem gerust contact op.\n\n' +
+'Tour: ' + t.naam + '\n' +
+(t.adres ? 'Adres: ' + t.adres + '\n' : '') +
+'Link: ' + url + '\n\n' +
+'Deel deze link via WhatsApp, e-mail of social media.\n\n' +
+'Al uw tours bekijken? Log in op uw portaal:\n' +
+'https://www.explora360.nl/portaal\n\n' +
 'Met vriendelijke groet,\n' +
 'Explora360\n' +
-'info@explora360.nl\n' +
-'+31 6 16 07 66 13';
-
-  document.getElementById('modal-email').classList.add('open');
+'info@explora360.nl | +31 6 16 07 66 13';
+  openModal('email');
 }
 
 function verstuurEmail() {
-  var to      = document.getElementById('email-to').value;
-  var subject = encodeURIComponent(document.getElementById('email-subject').value);
-  var body    = encodeURIComponent(document.getElementById('email-body').value);
-  window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+  var to  = document.getElementById('email-to').value;
+  var sub = encodeURIComponent(document.getElementById('email-subject').value);
+  var bod = encodeURIComponent(document.getElementById('email-body').value);
+  window.location.href = 'mailto:' + to + '?subject=' + sub + '&body=' + bod;
   closeModal('email');
 }
 
-// ── SECTION NAV ───────────────────────────────────────────────────────────
-function showSec(name) {
+// ── NAV ───────────────────────────────────────────────────────────────────
+function showSec(el, name) {
   document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('active'); });
   document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
   document.getElementById('sec-'+name).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if (el) el.classList.add('active');
+  window.scrollTo(0,0);
 }
 
-// ── EVENTS ────────────────────────────────────────────────────────────────
+// ── BOOT ──────────────────────────────────────────────────────────────────
 document.getElementById('login-btn').addEventListener('click', doLogin);
 document.getElementById('l-pass').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
-document.getElementById('logout-btn').addEventListener('click', doLogout);
 document.getElementById('nt-datum').value = new Date().toISOString().split('T')[0];
 
 init();
