@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Privacyverklaring &amp; Cookiebeleid | Explora360</title>
+<meta name="description" content="Privacyverklaring en cookiebeleid van Explora360. Lees hoe wij omgaan met uw persoonsgegevens en cookies."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.explora360.nl/privacy.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--white:#fafbfd;--mist:#94aac8;--blue:#4a90f7;--blue-hi:#82b4fa;--fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;--pad:clamp(20px,5vw,72px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;line-height:1.75;min-height:100vh}
+a{color:var(--blue-hi);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
+
+nav{position:sticky;top:0;z-index:800;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(26,35,51,.97);backdrop-filter:blur(22px)}
+.nav-inner{max-width:900px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{font-family:var(--fs);font-size:1.35rem;font-weight:400;letter-spacing:.06em;color:var(--white);text-decoration:none}
+.nav-logo em{font-style:normal;color:var(--blue)}
+.nav-back{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:7px;transition:color .22s;text-decoration:none}
+.nav-back:hover{color:var(--white);text-decoration:none}
+.nav-back svg{width:14px;height:14px}
+
+.page-wrap{max-width:760px;margin:0 auto;padding:clamp(48px,7vw,80px) var(--pad)}
+.page-eye{font-size:.57rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:12px}
+.page-title{font-family:var(--fs);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:300;line-height:1.08;margin-bottom:12px}
+.page-title em{font-style:italic;color:var(--mist)}
+.page-date{font-size:.64rem;color:rgba(255,255,255,.25);letter-spacing:.1em;text-transform:uppercase;margin-bottom:clamp(36px,5vw,56px)}
+
+.prose{display:flex;flex-direction:column;gap:32px}
+.prose-section{}
+.prose h2{font-family:var(--fs);font-size:1.5rem;font-weight:300;color:var(--white);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.prose p{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:10px}
+.prose p:last-child{margin-bottom:0}
+.prose ul{list-style:none;margin:10px 0;display:flex;flex-direction:column;gap:6px}
+.prose ul li{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.75;padding-left:16px;position:relative}
+.prose ul li::before{content:'—';position:absolute;left:0;color:rgba(74,144,247,.5);font-size:.7rem}
+.prose strong{color:rgba(255,255,255,.75);font-weight:500}
+.prose a{color:var(--blue-hi)}
+
+.cookie-choices{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.cookie-choice{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;background:var(--ink2);border:1px solid rgba(255,255,255,.06)}
+.cookie-choice-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.cookie-choice-dot.always{background:#4dda8a}
+.cookie-choice-dot.optional{background:var(--blue)}
+.cookie-choice-text strong{font-size:.76rem;font-weight:500;color:var(--white);display:block;margin-bottom:3px}
+.cookie-choice-text span{font-size:.72rem;color:rgba(255,255,255,.38);line-height:1.65}
+
+.reset-btn{margin-top:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid rgba(255,255,255,.15);font-family:var(--fb);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);cursor:pointer;background:none;transition:all .22s}
+.reset-btn:hover{border-color:var(--blue);color:var(--blue-hi)}
+
+.contact-block{margin-top:8px;padding:20px 24px;background:var(--ink2);border-left:2px solid var(--blue)}
+.contact-block p{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.8;margin:0}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:28px 0;margin-top:clamp(48px,7vw,80px)}
+.page-footer{max-width:760px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.page-footer-brand{font-family:var(--fs);font-size:.9rem;color:rgba(255,255,255,.2)}
+.page-footer-brand em{font-style:normal;color:rgba(74,144,247,.5)}
+.page-footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.page-footer-links a{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2);transition:color .22s;text-decoration:none}
+.page-footer-links a:hover{color:rgba(255,255,255,.6)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Explora<em>360</em></a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Terug naar website
+    </a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <span class="page-eye">Juridisch</span>
+  <h1 class="page-title">Privacy &amp;<br/><em>Cookiebeleid</em></h1>
+  <p class="page-date">Laatste update: maart 2026 &nbsp;·&nbsp; Versie 1.0</p>
+
+  <div class="prose">
+
+    <div class="prose-section">
+      <h2>1. Wie zijn wij</h2>
+      <p>Explora360 is een Nederlands bedrijf dat professionele 360° virtuele tours verzorgt voor woningen, hotels, AirBnB's en zakelijke locaties.</p>
+      <div class="contact-block">
+        <p><strong>Explora360</strong><br/>
+        E-mail: <a href="mailto:info@explora360.nl">info@explora360.nl</a><br/>
+        Telefoon: <a href="tel:+31616076613">+31 6 16 07 66 13</a><br/>
+        Website: <a href="https://www.explora360.nl">www.explora360.nl</a></p>
+      </div>
+    </div>
+
+    <div class="prose-section">
+      <h2>2. Welke gegevens verzamelen wij</h2>
+      <p>Wij verwerken uitsluitend persoonsgegevens die u zelf aan ons verstrekt, of die automatisch worden gegenereerd bij gebruik van onze website.</p>
+      <ul>
+        <li><strong>Contactformulier:</strong> naam, e-mailadres, telefoonnummer en uw bericht</li>
+        <li><strong>Klantportaal:</strong> e-mailadres en wachtwoord (versleuteld via Supabase)</li>
+        <li><strong>Google Analytics:</strong> geanonimiseerde bezoekersstatistieken (IP-adres gemaskeerd)</li>
+        <li><strong>WhatsApp:</strong> berichten die u stuurt via onze WhatsApp-link</li>
+      </ul>
+    </div>
+
+    <div class="prose-section">
+      <h2>3. Waarvoor gebruiken wij uw gegevens</h2>
+      <ul>
+        <li>Het beantwoorden van uw offerte-aanvraag of vraag</li>
+        <li>Het aanmaken en beheren van uw klantaccount</li>
+        <li>Het leveren en beheren van uw virtuele tours</li>
+        <li>Het analyseren van websitegebruik ter verbetering van onze dienst (geanonimiseerd)</li>
+        <li>Het sturen van een factuur na oplevering</li>
+      </ul>
+      <p>Wij verkopen uw gegevens nooit aan derden en gebruiken ze uitsluitend voor bovenstaande doeleinden.</p>
+    </div>
+
+    <div class="prose-section">
+      <h2>4. Grondslagen voor verwerking</h2>
+      <ul>
+        <li><strong>Uitvoering van een overeenkomst</strong> — voor de levering van onze diensten</li>
+        <li><strong>Gerechtvaardigd belang</strong> — voor geanonimiseerde websitestatistieken</li>
+        <li><strong>Toestemming</strong> — voor analytische cookies (u kunt dit weigeren)</li>
+      </ul>
+    </div>
+
+    <div class="prose-section">
+      <h2>5. Bewaartermijnen</h2>
+      <ul>
+        <li>Contactformulierberichten: maximaal 1 jaar na laatste contact</li>
+        <li>Klantaccounts: zolang u klant bent, daarna 1 jaar na beëindiging</li>
+        <li>Factuurgegevens: 7 jaar (wettelijke bewaarplicht)</li>
+        <li>Analytics-data: maximaal 14 maanden (Google-instelling)</li>
+      </ul>
+    </div>
+
+    <div class="prose-section">
+      <h2>6. Cookies</h2>
+      <p>Onze website maakt gebruik van twee soorten cookies:</p>
+      <div class="cookie-choices">
+        <div class="cookie-choice">
+          <div class="cookie-choice-dot always"></div>
+          <div class="cookie-choice-text">
+            <strong>Noodzakelijke cookies (altijd actief)</strong>
+            <span>Uw cookievoorkeur wordt opgeslagen in <code>localStorage</code>. Geen persoonlijke gegevens, geen tracking. Kan niet worden uitgeschakeld.</span>
+          </div>
+        </div>
+        <div class="cookie-choice">
+          <div class="cookie-choice-dot optional"></div>
+          <div class="cookie-choice-text">
+            <strong>Analytische cookies (Google Analytics — op basis van toestemming)</strong>
+            <span>Wij gebruiken Google Analytics 4 om bij te houden hoeveel bezoekers onze website bezoeken, welke pagina's populair zijn en hoe lang bezoekers blijven. IP-adressen worden gemaskeerd. Google verwerkt deze data op servers in de EU (of met EU-adequate waarborgen). Meer info: <a href="https://policies.google.com/privacy" target="_blank">Google Privacybeleid</a>.</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:16px">U kunt uw cookiekeuze op elk moment wijzigen:</p>
+      <button class="reset-btn" onclick="resetCookies()">&#9665; Cookievoorkeur opnieuw instellen</button>
+    </div>
+
+    <div class="prose-section">
+      <h2>7. Uw rechten (AVG)</h2>
+      <p>Op grond van de Algemene Verordening Gegevensbescherming (AVG) heeft u de volgende rechten:</p>
+      <ul>
+        <li><strong>Inzage</strong> — opvragen welke gegevens wij van u bewaren</li>
+        <li><strong>Rectificatie</strong> — onjuiste gegevens laten corrigeren</li>
+        <li><strong>Verwijdering</strong> — uw gegevens laten wissen ("recht op vergetelheid")</li>
+        <li><strong>Bezwaar</strong> — bezwaar maken tegen verwerking op basis van gerechtvaardigd belang</li>
+        <li><strong>Overdraagbaarheid</strong> — uw gegevens in machineleesbaar formaat opvragen</li>
+        <li><strong>Intrekking toestemming</strong> — uw toestemming voor cookies altijd intrekken</li>
+      </ul>
+      <p>Stuur uw verzoek naar <a href="mailto:info@explora360.nl">info@explora360.nl</a>. Wij reageren binnen 30 dagen. U heeft ook het recht een klacht in te dienen bij de <a href="https://autoriteitpersoonsgegevens.nl" target="_blank">Autoriteit Persoonsgegevens</a>.</p>
+    </div>
+
+    <div class="prose-section">
+      <h2>8. Beveiliging</h2>
+      <p>Wij nemen passende technische en organisatorische maatregelen om uw gegevens te beschermen:</p>
+      <ul>
+        <li>Alle verbindingen verlopen via HTTPS (SSL/TLS-encryptie)</li>
+        <li>Wachtwoorden worden versleuteld opgeslagen via Supabase Auth</li>
+        <li>Toegang tot klantgegevens is beperkt via Row Level Security</li>
+        <li>Contactformulieren worden verwerkt via Web3Forms met HTTPS</li>
+      </ul>
+    </div>
+
+    <div class="prose-section">
+      <h2>9. Wijzigingen</h2>
+      <p>Wij kunnen deze privacyverklaring periodiek aanpassen. De datum van de laatste update staat bovenaan deze pagina. Bij ingrijpende wijzigingen informeren wij actieve klanten per e-mail.</p>
+    </div>
+
+    <div class="prose-section">
+      <h2>10. Contact</h2>
+      <div class="contact-block">
+        <p>Vragen over deze privacyverklaring? Neem contact op:<br/><br/>
+        <a href="mailto:info@explora360.nl">info@explora360.nl</a><br/>
+        <a href="https://wa.me/31616076613">+31 6 16 07 66 13</a> (WhatsApp)</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="page-footer">
+    <span class="page-footer-brand">Explora<em>360</em></span>
+    <div class="page-footer-links">
+      <a href="index.html">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacyverklaring</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function resetCookies() {
+  localStorage.removeItem('cookie_consent');
+  alert('Uw cookievoorkeur is verwijderd. De pagina wordt herladen.');
+  window.location.reload();
+}
+</script>
+</body>
+</html>

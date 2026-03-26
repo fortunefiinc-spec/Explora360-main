@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FAQ — Veelgestelde vragen | Explora360</title>
+<meta name="description" content="Antwoorden op de meest gestelde vragen over Explora360 virtuele tours. Over opnames, levering, Funda-integratie, hosting en introductieprijzen."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.explora360.nl/faq.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--white:#fafbfd;--mist:#94aac8;--blue:#4a90f7;--blue-hi:#82b4fa;--fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;--ease:cubic-bezier(.4,0,.2,1);--pad:clamp(20px,5vw,72px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;line-height:1.75;min-height:100vh}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:800;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(26,35,51,.97);backdrop-filter:blur(22px)}
+.nav-inner{max-width:900px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{font-family:var(--fs);font-size:1.35rem;font-weight:400;letter-spacing:.06em}
+.nav-logo em{font-style:normal;color:var(--blue)}
+.nav-back{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:7px;transition:color .22s}
+.nav-back:hover{color:var(--white)}
+.nav-back svg{width:14px;height:14px}
+
+/* PAGE */
+.page-wrap{max-width:900px;margin:0 auto;padding:clamp(48px,7vw,80px) var(--pad)}
+.page-eye{font-size:.57rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:12px}
+.page-title{font-family:var(--fs);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:300;line-height:1.08;margin-bottom:16px}
+.page-title em{font-style:italic;color:var(--mist)}
+.page-intro{font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.8;max-width:560px;margin-bottom:clamp(40px,6vw,64px)}
+
+/* CATEGORIES */
+.faq-cat{margin-bottom:48px}
+.faq-cat-title{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:1px}
+
+/* FAQ ITEMS */
+.faq-item{border-bottom:1px solid rgba(255,255,255,.05);border-left:2px solid transparent;transition:all .22s;background:var(--ink2)}
+.faq-item:hover{border-left-color:rgba(74,144,247,.4)}
+.faq-item.open{border-left-color:var(--blue);background:rgba(47,126,245,.05)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;cursor:pointer;font-size:.84rem;color:var(--white);font-weight:400;line-height:1.5;user-select:none}
+.faq-arr{width:24px;height:24px;border:1px solid rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem;color:var(--blue);transition:transform .28s,background .22s}
+.faq-item.open .faq-arr{transform:rotate(45deg);background:rgba(74,144,247,.15);border-color:rgba(74,144,247,.4)}
+.faq-a{display:none;padding:0 24px 22px 24px;font-size:.78rem;color:rgba(255,255,255,.52);line-height:1.85}
+.faq-a a{color:var(--blue-hi);text-decoration:underline;text-underline-offset:3px}
+.faq-item.open .faq-a{display:block}
+
+/* CONTACT CTA */
+.faq-cta{margin-top:clamp(40px,6vw,64px);padding:36px 40px;background:var(--ink2);border:1px solid rgba(255,255,255,.06);border-top:2px solid var(--blue);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.faq-cta-text h3{font-family:var(--fs);font-size:1.5rem;font-weight:300;margin-bottom:6px}
+.faq-cta-text p{font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.65}
+.btn-blue{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:var(--blue);color:var(--ink);border:none;font-family:var(--fb);font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .22s;text-decoration:none}
+.btn-blue:hover{background:var(--blue-hi)}
+
+/* FOOTER */
+.page-footer{border-top:1px solid rgba(255,255,255,.04);padding:28px var(--pad);max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.page-footer-brand{font-family:var(--fs);font-size:.9rem;color:rgba(255,255,255,.2)}
+.page-footer-brand em{font-style:normal;color:rgba(74,144,247,.5)}
+.page-footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.page-footer-links a{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2);transition:color .22s}
+.page-footer-links a:hover{color:rgba(255,255,255,.6)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Explora<em>360</em></a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Terug naar website
+    </a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <span class="page-eye">Veelgestelde vragen</span>
+  <h1 class="page-title">Alles wat u<br/><em>wilt weten.</em></h1>
+  <p class="page-intro">Staat uw vraag er niet bij? Neem gerust contact op via <a href="mailto:info@explora360.nl" style="color:var(--blue-hi)">info@explora360.nl</a> of stuur een WhatsApp naar <a href="https://wa.me/31616076613" style="color:var(--blue-hi)">+31 6 16 07 66 13</a>.</p>
+
+  <!-- OPNAME & LEVERING -->
+  <div class="faq-cat">
+    <div class="faq-cat-title">Opname &amp; levering</div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Wat heb ik nodig voor een opname? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Niets bijzonders. Zorg dat de ruimte schoon en opgeruimd is — net zoals bij gewone woningfotografie. Wij regelen de rest. Een opname duurt gemiddeld 1 tot 2 uur, afhankelijk van de grootte van de locatie en het gekozen pakket.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Hoe lang duurt de levering? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Standaard levering is binnen 24 uur na de opname. Zodra uw tour live staat ontvangt u een e-mail met de link. Voor spoedopdrachten (dezelfde dag voor 18:00) geldt een toeslag van &euro;55.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Werkt u door heel Nederland? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Ja, wij werken door heel Nederland. Reiskosten zijn inbegrepen voor de meeste locaties. Neem contact op voor locaties op de Waddeneilanden of ver buiten de Randstad — dan maken wij een maatwerkafspraak.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Krijg ik ook de originele bestanden? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Ja. Elk pakket bevat RAW + bewerkte bestanden. U ontvangt via uw persoonlijk klantportaal volledige toegang tot alle beelden van uw opname. U mag de bestanden gebruiken voor eigen marketing en publicaties.</div>
+    </div>
+  </div>
+
+  <!-- TECHNIEK & INTEGRATIES -->
+  <div class="faq-cat">
+    <div class="faq-cat-title">Techniek &amp; integraties</div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Werkt de tour op Funda en Booking.com? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Ja. Matterport-tours zijn direct te embedden op Funda, Booking.com, Airbnb en uw eigen website. Wij leveren ook een deelbare link die u kunt gebruiken in WhatsApp, e-mail of social media. Voor Google Street View is een add-on beschikbaar.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Wat is Matterport precies? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Matterport is het toonaangevende platform voor 3D virtuele tours wereldwijd. Het platform is compatibel met alle grote vastgoed- en hospitality-platformen en biedt 23MP HDR beeldkwaliteit. Uw tour staat in de Matterport Cloud en is altijd bereikbaar via een unieke link.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Kan ik de tour op mijn eigen website plaatsen? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Absoluut. U krijgt een embedcode die u eenvoudig op elke website kunt plaatsen — WordPress, Wix, Squarespace of maatwerk. Geen technische kennis vereist. Wij helpen u er graag bij.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Werkt de tour ook op mobiel? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Ja, volledig. De Matterport-tour werkt op alle apparaten — desktop, tablet en smartphone. Ook is VR-ondersteuning beschikbaar voor headsets zoals Meta Quest.</div>
+    </div>
+  </div>
+
+  <!-- HOSTING & BEHEER -->
+  <div class="faq-cat">
+    <div class="faq-cat-title">Hosting &amp; beheer</div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Hoe lang is de tour online? <span class="faq-arr">+</span></div>
+      <div class="faq-a">12 maanden hosting is inbegrepen bij elk pakket. Daarna kunt u eenvoudig verlengen voor &euro;39 per jaar. U ontvangt van ons een herinnering voordat uw hostingperiode afloopt.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Kan ik de tour later aanpassen of updaten? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Ja. Via een seizoensupdate (&euro;109) fotograferen wij de locatie opnieuw na een verbouwing, herinrichting of nieuw seizoen. Labels en hotspots kunnen tussentijds worden bijgewerkt. Neem contact op voor de mogelijkheden.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Heb ik een klantportaal? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Ja. Elke klant krijgt een persoonlijk portaal op <a href="portaal.html">explora360.nl/portaal</a> met inlog op e-mail en wachtwoord. Hier ziet u al uw tours, de status (live of in verwerking) en deelbare links per tour.</div>
+    </div>
+  </div>
+
+  <!-- PRIJZEN -->
+  <div class="faq-cat">
+    <div class="faq-cat-title">Prijzen &amp; introductieprijzen</div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Wat zijn de introductieprijzen precies? <span class="faq-arr">+</span></div>
+      <div class="faq-a">In 2026 werken wij met speciale lauchtarieven geldig voor het eerste jaar. In ruil voor portfolio-recht (wij mogen uw tour tonen op onze website) en een eerlijke review na afloop. U betaalt minder, wij bouwen onze referenties op. Win-win. Na het eerste jaar gelden de reguliere tarieven.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Zijn de prijzen inclusief of exclusief btw? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Alle genoemde prijzen op onze website zijn exclusief 21% btw. Op de factuur wordt btw afzonderlijk vermeld. Particulieren betalen het bedrag inclusief btw; zakelijke klanten met btw-nummer kunnen de btw verrekenen.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Hoe werkt betaling? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Na de opname ontvangt u een factuur per e-mail. Betaling via iDEAL of bankoverschrijving binnen 14 dagen. De tour gaat live zodra de betaling is ontvangen, tenzij anders afgesproken.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Kan ik een offerte aanvragen? <span class="faq-arr">+</span></div>
+      <div class="faq-a">Ja, altijd. Vul het <a href="index.html#contact">contactformulier</a> in of stuur een WhatsApp naar <a href="https://wa.me/31616076613">+31 6 16 07 66 13</a>. Wij reageren binnen 1 werkdag met een offerte op maat.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="faq-cta">
+    <div class="faq-cta-text">
+      <h3>Staat uw vraag er niet bij?</h3>
+      <p>Neem gerust contact op — wij reageren binnen 1 werkdag.</p>
+    </div>
+    <a href="index.html#contact" class="btn-blue">Stuur een bericht &rarr;</a>
+  </div>
+</div>
+
+<footer style="border-top:1px solid rgba(255,255,255,.04);padding:28px 0">
+  <div class="page-footer">
+    <span class="page-footer-brand">Explora<em>360</em></span>
+    <div class="page-footer-links">
+      <a href="index.html">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacyverklaring</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+  if (!isOpen) el.classList.add('open');
+}
+</script>
+</body>
+</html>
