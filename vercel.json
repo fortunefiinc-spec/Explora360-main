@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/tour/:slug", "destination": "/tour.html" },
+    { "source": "/portaal", "destination": "/portaal.html" },
+    { "source": "/beheer", "destination": "/beheer.html" }
+  ]
+}
