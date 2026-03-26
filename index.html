@@ -401,6 +401,38 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
   .sticky-portal-btn{display:none}
   h1{font-size:2.6rem}h2{font-size:1.9rem}
 }
+
+.intro-badge{display:inline-block;margin-top:16px;padding:8px 16px;background:rgba(232,160,48,.1);border:1px solid rgba(232,160,48,.3);color:var(--amber-hi);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:2px}
+.pkg-card{background:var(--ink2);padding:32px 28px;display:flex;flex-direction:column;position:relative;border-top:2px solid transparent;transition:all .28s var(--ease)}
+.pkg-card:hover{border-top-color:var(--blue);transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.35);z-index:2}
+.pkg-card.popular{border-top-color:var(--blue);background:rgba(47,126,245,.06)}
+.pkg-badge-pop{position:absolute;top:16px;right:16px;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;background:var(--blue);color:#fff}
+.pkg-top{margin-bottom:16px}
+.pkg-name{font-family:var(--fs);font-size:1.6rem;font-weight:300;display:block;color:var(--white)}
+.pkg-sub{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-top:4px}
+.pkg-price{font-family:var(--fs);font-size:2.2rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:20px}
+.pkg-price small{font-family:var(--fb);font-size:.6rem;font-weight:300;color:rgba(255,255,255,.35);letter-spacing:.1em}
+.pkg-list{list-style:none;margin-bottom:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pkg-list li{font-size:.75rem;color:rgba(255,255,255,.6);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.pkg-for{font-size:.6rem;color:rgba(255,255,255,.28);border-top:1px solid rgba(255,255,255,.05);padding-top:14px;margin-bottom:16px;letter-spacing:.04em}
+.pkg-btn{display:inline-flex;align-items:center;padding:11px 20px;border:1px solid rgba(255,255,255,.18);font-family:var(--fb);font-size:.56rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--white);text-decoration:none;transition:all .22s;margin-top:auto}
+.pkg-btn:hover{border-color:var(--blue);color:var(--blue-hi)}
+.pkg-card.popular .pkg-btn{background:var(--blue);border-color:var(--blue);color:var(--ink)}
+.pkg-card.popular .pkg-btn:hover{background:var(--blue-hi)}
+.bundel-wrap{margin-top:2px;margin-bottom:2px}
+.bundel-title{padding:20px 0 12px;display:flex;align-items:center;gap:16px}
+.bundel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.bundel-card{background:var(--ink2);padding:24px 28px;display:flex;flex-direction:column;gap:6px;border-top:2px solid transparent}
+.bundel-card.highlight{border-top-color:var(--amber)}
+.bundel-name{font-family:var(--fs);font-size:1.1rem;font-weight:300;color:var(--white)}
+.bundel-desc{font-size:.72rem;color:rgba(255,255,255,.38);line-height:1.6}
+.bundel-price{font-family:var(--fs);font-size:1.5rem;font-weight:300;color:var(--blue-hi);margin-top:4px}
+.bundel-price span{font-family:var(--fb);font-size:.65rem;color:rgba(255,255,255,.25);text-decoration:line-through;margin-left:8px}
+.ao-wrap{margin-top:2px}
+.ao-title{padding:20px 0 12px}
+.ao-title p{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:4px}
+@media(max-width:900px){.pkg-grid{grid-template-columns:1fr}.bundel-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -603,276 +635,275 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
     <div class="pi r">
       <div class="pi-copy">
         <span class="eye">Prijzen &amp; Pakketten</span>
-        <span class="rule"></span>
-        <h2>Transparant.<br><em class="si" style="color:var(--blue-hi)">Geen verrassingen.</em></h2>
-        <p>Kies het spoor dat bij uw situatie past. Alle pakketten inclusief opnamebezoek, verwerking, Matterport tour link, foto's en 12 maanden hosting. Voeg add-ons toe voor een completer resultaat.</p>
+        <h2>Transparant.<br/><em class="si">Zonder verrassingen.</em></h2>
+        <p>Introductietarieven 2026 &mdash; geldig voor het eerste jaar. In ruil voor portfolio-recht en een eerlijke review. Alle prijzen excl. btw. 12 maanden hosting inbegrepen. Levering binnen 24 uur waar mogelijk.</p>
+        <div class="intro-badge">&#10027; Introductieprijs 2026 &mdash; eerste jaar</div>
       </div>
     </div>
 
-    <!-- TAB NAVIGATION -->
-    <div class="ptabs r">
-      <button class="ptab active" onclick="switchTab('vastgoed', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-        Vastgoed
-      </button>
-      <button class="ptab" onclick="switchTab('zakelijk', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-        Zakelijk
-      </button>
+    <!-- TABS -->
+    <div class="pc-tabs r d1">
+      <button class="pc-tab active" onclick="switchTab(this,'vastgoed')">Vastgoed</button>
+      <button class="pc-tab" onclick="switchTab(this,'zakelijk')">Zakelijk</button>
     </div>
 
-    <!-- VASTGOED TAB -->
-    <div class="ptab-content active" id="tab-vastgoed">
-      <div class="ptab-intro r">
-        <p class="ptab-desc">Voor makelaars, particulieren, hotels, AirBnB-hosts en campings. Pakketten op basis van oppervlakte en aantal ruimtes.</p>
+    <!-- VASTGOED -->
+    <div class="pc-pakketten" id="tab-vastgoed">
+      <div class="pkg-grid">
+
+        <div class="pkg-card">
+          <div class="pkg-top">
+            <span class="pkg-name">Starter</span>
+            <span class="pkg-sub">Woningen tot 100 m²</span>
+          </div>
+          <div class="pkg-price">&euro;179 <small>excl. btw</small></div>
+          <ul class="pkg-list">
+            <li>&#10003; Volledige 360&#176; Matterport tour</li>
+            <li>&#10003; 23MP HDR foto&#8217;s inbegrepen</li>
+            <li>&#10003; 12 maanden hosting</li>
+            <li>&#10003; RAW + bewerkte bestanden</li>
+            <li>&#10003; Funda &amp; social media ready</li>
+            <li>&#10003; Levering binnen 24 uur</li>
+          </ul>
+          <div class="pkg-for">Ideaal voor: appartement, rijwoning, studio</div>
+          <a href="#contact" class="pkg-btn">Offerte aanvragen &rarr;</a>
+        </div>
+
+        <div class="pkg-card popular">
+          <div class="pkg-badge-pop">Meest gekozen</div>
+          <div class="pkg-top">
+            <span class="pkg-name">Pro</span>
+            <span class="pkg-sub">Woningen tot 250 m²</span>
+          </div>
+          <div class="pkg-price">&euro;289 <small>excl. btw</small></div>
+          <ul class="pkg-list">
+            <li>&#10003; Alles uit Starter</li>
+            <li>&#10003; Grotere woning, meer scans</li>
+            <li>&#10003; Hogere resolutie output</li>
+            <li>&#10003; Google Street View klaar</li>
+            <li>&#10003; Integratie Booking.com</li>
+            <li>&#10003; Levering binnen 24 uur</li>
+          </ul>
+          <div class="pkg-for">Ideaal voor: villa, vrijstaande woning, duplex</div>
+          <a href="#contact" class="pkg-btn">Offerte aanvragen &rarr;</a>
+        </div>
+
+        <div class="pkg-card">
+          <div class="pkg-top">
+            <span class="pkg-name">Hospitality</span>
+            <span class="pkg-sub">Hotel, B&amp;B, Vakantiewoning</span>
+          </div>
+          <div class="pkg-price">&euro;449 <small>vanaf &middot; excl. btw</small></div>
+          <ul class="pkg-list">
+            <li>&#10003; Lobby + 1 kamerscan inbegrepen</li>
+            <li>&#10003; +&euro;29 per extra kamer/ruimte</li>
+            <li>&#10003; Multi-ruimte tour in &eacute;&eacute;n link</li>
+            <li>&#10003; Booking.com &amp; Airbnb ready</li>
+            <li>&#10003; 12 maanden hosting</li>
+            <li>&#10003; RAW + bewerkte bestanden</li>
+          </ul>
+          <div class="pkg-for">Ideaal voor: hotel, B&amp;B, glamping, resort</div>
+          <a href="#contact" class="pkg-btn">Offerte aanvragen &rarr;</a>
+        </div>
+
       </div>
 
-      <!-- Pakketten -->
-      <div class="pcards r">
-        <div class="pc">
-          <div class="ptier">Pakket 01 · Starter</div>
-          <div class="pname">Woning Tour</div>
-          <div class="pprice">€229 <small>eenmalig</small></div>
-          <div class="psub">Tot 100 m² · levering in 24u · excl. btw</div>
-          <ul class="pitems">
-            <li>360° virtuele rondleiding (alle ruimtes)</li>
-            <li>23MP HDR-beelden per ruimte</li>
-            <li>Matterport tour link — direct deelbaar</li>
-            <li>10 gecropte 2D-foto's (AI)</li>
-            <li>Embed-code voor Funda / website</li>
-            <li>12 maanden gratis hosting</li>
-          </ul>
-          <div class="pc-for">Woning · Appartement · AirBnB</div>
-          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
-        </div>
-        <div class="pc star">
-          <div class="pbadge">Populairst</div>
-          <div class="ptier">Pakket 02 · Pro</div>
-          <div class="pname">Uitgebreide Tour</div>
-          <div class="pprice">€379 <small>eenmalig</small></div>
-          <div class="psub">Tot 250 m² · levering in 24u · excl. btw</div>
-          <ul class="pitems">
-            <li>360° virtuele rondleiding (alle ruimtes)</li>
-            <li>23MP HDR in RAW + JPEG</li>
-            <li>Matterport link + Google Street View</li>
-            <li>25 gecropte 2D-foto's (AI + handmatig)</li>
-            <li>Embed voor Funda, Booking.com + Airbnb</li>
-            <li>Lightroom RAW-nabewerking inbegrepen</li>
-            <li>12 maanden gratis hosting</li>
-            <li>Levering gegarandeerd binnen 24 uur</li>
-          </ul>
-          <div class="pc-for">Grotere woning · Nieuwbouw · Vakantiewoning</div>
-          <a href="#contact" class="btn btn-blue" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
-        </div>
-        <div class="pc">
-          <div class="ptier">Pakket 03 · Hospitality</div>
-          <div class="pname">Multi-ruimte Tour</div>
-          <div class="pprice">€549 <small>vanaf</small></div>
-          <div class="psub">Lobby + 5 kamers + gemeenschappelijke ruimtes · excl. btw</div>
-          <ul class="pitems">
-            <li>Volledige 360°-tour per ruimte (aparte links)</li>
-            <li>23MP HDR alle ruimtes</li>
-            <li>Matterport dashboard toegang</li>
-            <li>40+ 2D-foto's voor marketinggebruik</li>
-            <li>Embed voor Booking.com + eigen website</li>
-            <li>AI virtuele staging optie</li>
-            <li>12 maanden hosting alle tours</li>
-            <li>Extra ruimtes: +€40,– per stuk</li>
-          </ul>
-          <div class="pc-for">Hotel · B&amp;B · Camping · Vakantiebungalow</div>
-          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
+      <!-- BUNDELS VASTGOED -->
+      <div class="bundel-wrap r d2">
+        <div class="bundel-title"><span class="eye">Voordeelbundels</span></div>
+        <div class="bundel-grid">
+          <div class="bundel-card">
+            <div class="bundel-name">Starter + Staging + Video</div>
+            <div class="bundel-desc">Tour, AI staging per ruimte &amp; social media videoclip</div>
+            <div class="bundel-price">&euro;259 <span>i.p.v. &euro;279</span></div>
+          </div>
+          <div class="bundel-card highlight">
+            <div class="bundel-name">Pro + Staging + Video</div>
+            <div class="bundel-desc">Grote woning, AI staging &amp; videoclip voor social media</div>
+            <div class="bundel-price">&euro;369 <span>i.p.v. &euro;389</span></div>
+          </div>
         </div>
       </div>
 
-      <!-- Vastgoed Add-ons -->
-      <div class="addons-inline r">
-        <div class="ai-head">
-          <span class="eye">Vastgoed Add-ons</span>
-          <p>Voeg toe bij elk vastgoedpakket · excl. btw</p>
-        </div>
+      <!-- ADD-ONS VASTGOED -->
+      <div class="ao-wrap r d3">
+        <div class="ao-title"><span class="eye">Vastgoed Add-ons</span><p>Toe te voegen bij elk vastgoedpakket &middot; excl. btw</p></div>
         <div class="ai-grid">
           <div class="ai-card popular-ao">
-            <div class="ai-top">
-              <span class="ai-name">AI virtuele staging</span>
-              <span class="ai-badge">Meest gevraagd</span>
-            </div>
-            <div class="ai-price">€79 <small>per ruimte</small></div>
-            <div class="ai-desc">Fotorealistische meubels in lege ruimtes. Ideaal voor nieuwbouw en leegstaande panden.</div>
+            <div class="ai-top"><span class="ai-name">AI Virtual Staging</span><span class="ai-badge">Meest gevraagd</span></div>
+            <div class="ai-price">&euro;55 <small>per ruimte</small></div>
+            <div class="ai-desc">Lege ruimtes fotorealistisch inrichten met virtuele meubels. Per ruimte/kamer die gestaged wordt.</div>
           </div>
           <div class="ai-card">
             <div class="ai-top"><span class="ai-name">Social media videoclip</span></div>
-            <div class="ai-price">€59</div>
-            <div class="ai-desc">Automatische walkthrough-video van uw tour voor Instagram, Facebook of YouTube.</div>
+            <div class="ai-price">&euro;45 <small>per tour</small></div>
+            <div class="ai-desc">Automatische walkthrough-video van uw volledige tour. Per opgeleverde tour, klaar voor Instagram &amp; Facebook.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Spoedlevering same-day</span></div>
-            <div class="ai-price">€69 <small>toeslag</small></div>
-            <div class="ai-desc">Tour live vóór 18:00 dezelfde dag. Voor makelaars die direct online willen.</div>
+            <div class="ai-top"><span class="ai-name">Extra 2D-foto&#8217;s</span></div>
+            <div class="ai-price">&euro;29 <small>15 stuks &middot; per tour</small></div>
+            <div class="ai-desc">15 extra stilstaande beelden uit uw tour. Per set van 15 foto&#8217;s, direct bruikbaar voor Funda.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Extra 2D-foto's (15 stuks)</span></div>
-            <div class="ai-price">€35</div>
-            <div class="ai-desc">15 extra AI-gecropte stilstaande beelden uit uw tour voor Funda of social media.</div>
+            <div class="ai-top"><span class="ai-name">Hotspots + info-tags</span></div>
+            <div class="ai-price">&euro;39 <small>per tour</small></div>
+            <div class="ai-desc">Klikbare hotspots in uw tour met tekst, links of afbeeldingen. Per tour toegevoegd.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Seizoensupdate</span></div>
-            <div class="ai-price">€119</div>
-            <div class="ai-desc">Pand opnieuw fotograferen na verbouwing of bij nieuw seizoen.</div>
+            <div class="ai-top"><span class="ai-name">Google Street View</span></div>
+            <div class="ai-price">&euro;45 <small>per tour</small></div>
+            <div class="ai-desc">Tour publiceren op Google Maps Street View inclusief branding overlay. Per tour gepubliceerd.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Extra m² boven limiet</span></div>
-            <div class="ai-price">€0,80 <small>per m²</small></div>
-            <div class="ai-desc">Alleen het meerdere boven de pakkettlimiet wordt bijberekend.</div>
-          </div>
-          <div class="ai-card ai-hosting">
-            <div class="ai-top"><span class="ai-name">Hosting jaar 2+</span></div>
-            <div class="ai-price">€45 <small>per jaar</small></div>
-            <div class="ai-desc">Tour-link en embed-code blijven ongewijzigd. Geen herconfiguratie nodig.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ZAKELIJK TAB -->
-    <div class="ptab-content" id="tab-zakelijk">
-      <div class="ptab-intro r">
-        <p class="ptab-desc">Voor bedrijven, instellingen en projecten. Pakketten op locatietype en aantal ruimtes — niet op vierkante meters.</p>
-      </div>
-
-      <!-- Pakketten -->
-      <div class="pcards r">
-        <div class="pc">
-          <div class="ptier">Pakket 01 · Basis</div>
-          <div class="pname">Locatie Tour</div>
-          <div class="pprice">€199 <small>eenmalig</small></div>
-          <div class="psub">Één locatie · tot 3 ruimtes · levering in 24u · excl. btw</div>
-          <ul class="pitems">
-            <li>360° tour van uw locatie (tot 3 ruimtes)</li>
-            <li>23MP HDR-beelden</li>
-            <li>Matterport tour link — direct deelbaar</li>
-            <li>Publicatie op Google Maps / Street View</li>
-            <li>Embed-code voor eigen website</li>
-            <li>12 maanden gratis hosting</li>
-          </ul>
-          <div class="pc-for">Café · Kleine praktijk · Winkel · Kinderdagverblijf</div>
-          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
-        </div>
-        <div class="pc star">
-          <div class="pbadge">Meest gekozen</div>
-          <div class="ptier">Pakket 02 · Plus</div>
-          <div class="pname">Uitgebreide Locatie</div>
-          <div class="pprice">€349 <small>eenmalig</small></div>
-          <div class="psub">Meerdere ruimtes · volledig pand · excl. btw</div>
-          <ul class="pitems">
-            <li>360° tour alle ruimtes (onbeperkt)</li>
-            <li>23MP HDR in RAW + JPEG</li>
-            <li>Matterport link + Google Street View</li>
-            <li>Hotspots &amp; info-tags inbegrepen</li>
-            <li>Lightroom RAW-nabewerking</li>
-            <li>25+ 2D-foto's voor marketing</li>
-            <li>Embed voor website + sociale media</li>
-            <li>12 maanden gratis hosting</li>
-          </ul>
-          <div class="pc-for">Restaurant · Showroom · School · Zorgkliniek</div>
-          <a href="#contact" class="btn btn-blue" style="font-size:.54rem;padding:11px 18px">Boek nu →</a>
-        </div>
-        <div class="pc">
-          <div class="ptier">Pakket 03 · Project</div>
-          <div class="pname">Maatwerk Project</div>
-          <div class="pprice">Op aanvraag</div>
-          <div class="psub">Meerdere locaties of bouwfasen · excl. btw</div>
-          <ul class="pitems">
-            <li>Terugkerende scans per bouwfase</li>
-            <li>Documentatie voor opdrachtgevers</li>
-            <li>Meerdere locaties onder één dashboard</li>
-            <li>Jaarabonnement mogelijk (6–12 tours)</li>
-            <li>White-label levering beschikbaar</li>
-            <li>Prioriteitsplanning &amp; vaste contactpersoon</li>
-            <li>Offerte op maat binnen 1 werkdag</li>
-          </ul>
-          <div class="pc-for">Bouwbedrijf · Aannemer · Retailketen · Projectontwikkelaar</div>
-          <a href="#contact" class="btn btn-wb" style="font-size:.54rem;padding:11px 18px">Offerte aanvragen →</a>
-        </div>
-      </div>
-
-      <!-- Zakelijk Add-ons -->
-      <div class="addons-inline r">
-        <div class="ai-head">
-          <span class="eye">Zakelijk Add-ons</span>
-          <p>Voeg toe bij elk zakelijk pakket · excl. btw</p>
-        </div>
-        <div class="ai-grid">
-          <div class="ai-card popular-ao">
-            <div class="ai-top">
-              <span class="ai-name">Google Street View</span>
-              <span class="ai-badge">Aanbevolen</span>
-            </div>
-            <div class="ai-price">€49</div>
-            <div class="ai-desc">Uw locatie zichtbaar in Google Maps — cruciaal voor horeca, zorg en retail.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Hotspots &amp; info-tags</span></div>
-            <div class="ai-price">€45</div>
-            <div class="ai-desc">Klikbare punten met menukaart, tarieven of productinfo in uw tour.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Branding &amp; huisstijl overlay</span></div>
-            <div class="ai-price">€59</div>
-            <div class="ai-desc">Uw logo en merkkleur verwerkt in de tour-interface. Professioneel voor ketens.</div>
+            <div class="ai-top"><span class="ai-name">Spoedlevering</span></div>
+            <div class="ai-price">&euro;55 <small>toeslag per tour</small></div>
+            <div class="ai-desc">Tour live v&#243;&#243;r 18:00 dezelfde dag. Toeslag bovenop uw pakketprijs.</div>
           </div>
           <div class="ai-card">
             <div class="ai-top"><span class="ai-name">Meertalige labels</span></div>
-            <div class="ai-price">€35 <small>per taal</small></div>
-            <div class="ai-desc">Rondleidingsteksten vertaald voor internationale gasten of klanten.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Social media videoclip</span></div>
-            <div class="ai-price">€59</div>
-            <div class="ai-desc">Automatische walkthrough-video voor Instagram, Facebook of LinkedIn.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Spoedlevering same-day</span></div>
-            <div class="ai-price">€69 <small>toeslag</small></div>
-            <div class="ai-desc">Tour live vóór 18:00 dezelfde dag als de opname.</div>
+            <div class="ai-price">&euro;29 <small>per taal per tour</small></div>
+            <div class="ai-desc">Ruimtelabels en teksten in extra taal. Per taal die toegevoegd wordt aan uw tour.</div>
           </div>
           <div class="ai-card">
             <div class="ai-top"><span class="ai-name">Seizoensupdate</span></div>
-            <div class="ai-price">€119</div>
-            <div class="ai-desc">Locatie opnieuw fotograferen na verbouwing of nieuwe inrichting.</div>
+            <div class="ai-price">&euro;109 <small>per update</small></div>
+            <div class="ai-desc">Pand opnieuw fotograferen na verbouwing of nieuw seizoen. Per herbezoek en nieuwe opname.</div>
           </div>
           <div class="ai-card ai-hosting">
-            <div class="ai-top"><span class="ai-name">Hosting jaar 2+</span></div>
-            <div class="ai-price">€45 <small>per jaar</small></div>
-            <div class="ai-desc">Tour-link en embed-code blijven ongewijzigd na het eerste gratis jaar.</div>
+            <div class="ai-top"><span class="ai-name">Extra hosting</span></div>
+            <div class="ai-price">&euro;39 <small>per jaar</small></div>
+            <div class="ai-desc">Hosting na het eerste jaar. Eerste 12 maanden altijd inbegrepen in elk pakket.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Extra m&#178;</span></div>
+            <div class="ai-price">&euro;0,65 <small>per m&#178;</small></div>
+            <div class="ai-desc">Woning groter dan het pakket? Per extra vierkante meter boven de pakketgrens.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MAATWERK BLOCK -->
-    <div class="custom-block r">
-      <div class="cb-l">
-        <span class="eye">Niet zeker welk pakket?</span>
-        <h3>Wij denken<br><em class="si" style="color:var(--blue-hi)">graag mee.</em></h3>
-        <p>Twijfelt u tussen vastgoed en zakelijk, of heeft u een specifieke situatie? Wij adviseren u kosteloos welk pakket het beste aansluit.</p>
+    <!-- ZAKELIJK -->
+    <div class="pc-pakketten" id="tab-zakelijk" style="display:none">
+      <div class="pkg-grid">
+
+        <div class="pkg-card">
+          <div class="pkg-top">
+            <span class="pkg-name">Basis</span>
+            <span class="pkg-sub">Tot 3 ruimtes</span>
+          </div>
+          <div class="pkg-price">&euro;159 <small>excl. btw</small></div>
+          <ul class="pkg-list">
+            <li>&#10003; Tot 3 ruimtes in 1 tour</li>
+            <li>&#10003; 360&#176; Matterport tour</li>
+            <li>&#10003; 12 maanden hosting</li>
+            <li>&#10003; RAW + bewerkte bestanden</li>
+            <li>&#10003; Google Maps integratie</li>
+            <li>&#10003; Levering binnen 24 uur</li>
+          </ul>
+          <div class="pkg-for">Ideaal voor: kantoor, showroom, praktijk</div>
+          <a href="#contact" class="pkg-btn">Offerte aanvragen &rarr;</a>
+        </div>
+
+        <div class="pkg-card popular">
+          <div class="pkg-badge-pop">Meest gekozen</div>
+          <div class="pkg-top">
+            <span class="pkg-name">Plus</span>
+            <span class="pkg-sub">Onbeperkt ruimtes, 1 locatie</span>
+          </div>
+          <div class="pkg-price">&euro;259 <small>excl. btw</small></div>
+          <ul class="pkg-list">
+            <li>&#10003; Onbeperkt ruimtes op 1 locatie</li>
+            <li>&#10003; Alles uit Basis</li>
+            <li>&#10003; Hotspots inbegrepen</li>
+            <li>&#10003; Booking.com &amp; Google ready</li>
+            <li>&#10003; Meertalige ondersteuning</li>
+            <li>&#10003; Levering binnen 24 uur</li>
+          </ul>
+          <div class="pkg-for">Ideaal voor: hotel, restaurant, museum, bedrijfspand</div>
+          <a href="#contact" class="pkg-btn">Offerte aanvragen &rarr;</a>
+        </div>
+
+        <div class="pkg-card">
+          <div class="pkg-top">
+            <span class="pkg-name">Maatwerk</span>
+            <span class="pkg-sub">Meerdere locaties of extra wensen</span>
+          </div>
+          <div class="pkg-price">Op aanvraag</div>
+          <ul class="pkg-list">
+            <li>&#10003; Meerdere locaties mogelijk</li>
+            <li>&#10003; Custom branding &amp; whitelabel</li>
+            <li>&#10003; API-koppeling op aanvraag</li>
+            <li>&#10003; Dedicated support</li>
+            <li>&#10003; Seizoensupdates inbegrepen</li>
+            <li>&#10003; Tarieven op maat</li>
+          </ul>
+          <div class="pkg-for">Ideaal voor: ketens, ontwikkelaars, gemeenten</div>
+          <a href="#contact" class="pkg-btn">Contact opnemen &rarr;</a>
+        </div>
+
       </div>
-      <div>
-        <ul class="cb-items">
-          <li>Vastgoed + zakelijk combineren op één locatie</li>
-          <li>Abonnement voor meerdere panden of locaties</li>
-          <li>White-label levering voor makelaars &amp; bureaus</li>
-          <li>Terugkerende contracten (kwartaal / jaar)</li>
-          <li>Grote projecten met vaste dagprijs</li>
-          <li>AI virtuele staging op aanvraag</li>
-        </ul>
+
+      <!-- BUNDEL ZAKELIJK -->
+      <div class="bundel-wrap r d2">
+        <div class="bundel-title"><span class="eye">Voordeelbundel</span></div>
+        <div class="bundel-grid">
+          <div class="bundel-card highlight">
+            <div class="bundel-name">Plus Zakelijk + Branding + Video</div>
+            <div class="bundel-desc">Onbeperkt ruimtes, branding overlay &amp; social media videoclip</div>
+            <div class="bundel-price">&euro;329 <span>i.p.v. &euro;349</span></div>
+          </div>
+        </div>
       </div>
-      <div class="cb-cta">
-        <div class="cb-note">Reactie binnen 1 werkdag</div>
-        <div style="width:140px;height:1px;background:rgba(255,255,255,.05);margin:4px 0 12px"></div>
-        <a href="#contact" class="btn btn-blue arr" style="font-size:.58rem">Neem contact op <span>→</span></a>
-        <p style="font-size:.6rem;color:rgba(255,255,255,.2);line-height:1.62;max-width:200px;margin-top:4px">Vrijblijvend · Geen verplichtingen</p>
+
+      <!-- ADD-ONS ZAKELIJK -->
+      <div class="ao-wrap r d3">
+        <div class="ao-title"><span class="eye">Zakelijk Add-ons</span><p>Toe te voegen bij elk zakelijk pakket &middot; excl. btw</p></div>
+        <div class="ai-grid">
+          <div class="ai-card popular-ao">
+            <div class="ai-top"><span class="ai-name">AI Virtual Staging</span><span class="ai-badge">Meest gevraagd</span></div>
+            <div class="ai-price">&euro;55 <small>per ruimte</small></div>
+            <div class="ai-desc">Lege ruimtes inrichten met virtuele meubels of decoratie. Per ruimte die gestaged wordt.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Google Street View + branding</span></div>
+            <div class="ai-price">&euro;45 <small>per tour</small></div>
+            <div class="ai-desc">Publiceren op Google Maps met uw eigen branding overlay. Per tour gepubliceerd.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Social media videoclip</span></div>
+            <div class="ai-price">&euro;45 <small>per tour</small></div>
+            <div class="ai-desc">Walkthrough-video klaar voor LinkedIn, Instagram of YouTube. Per opgeleverde tour.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Hotspots + info-tags</span></div>
+            <div class="ai-price">&euro;39 <small>per tour</small></div>
+            <div class="ai-desc">Klikbare hotspots met productinfo, links of contactgegevens. Per tour toegevoegd.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Meertalige labels</span></div>
+            <div class="ai-price">&euro;29 <small>per taal per tour</small></div>
+            <div class="ai-desc">Ruimtelabels in extra taal voor internationale bezoekers. Per taal per tour.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Spoedlevering</span></div>
+            <div class="ai-price">&euro;55 <small>toeslag per tour</small></div>
+            <div class="ai-desc">Same-day levering v&#243;&#243;r 18:00. Toeslag bovenop uw pakketprijs.</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-top"><span class="ai-name">Seizoensupdate</span></div>
+            <div class="ai-price">&euro;109 <small>per update</small></div>
+            <div class="ai-desc">Locatie opnieuw fotograferen na verbouwing of herinrichting.</div>
+          </div>
+          <div class="ai-card ai-hosting">
+            <div class="ai-top"><span class="ai-name">Extra hosting</span></div>
+            <div class="ai-price">&euro;39 <small>per jaar</small></div>
+            <div class="ai-desc">Hosting na het eerste jaar. Eerste 12 maanden inbegrepen in elk pakket.</div>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 <section id="portfolio">
@@ -1026,6 +1057,12 @@ async function csubmit(e){
     if(json.success){form.style.display="none";ok.style.display="block";}
     else{err.style.display="block";btn.textContent="Verstuur aanvraag";btn.disabled=false;}
   }catch(ex){err.style.display="block";btn.textContent="Verstuur aanvraag";btn.disabled=false;}
+}
+function switchTab(btn, tab) {
+  document.querySelectorAll('.pc-tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('tab-vastgoed').style.display = tab === 'vastgoed' ? 'block' : 'none';
+  document.getElementById('tab-zakelijk').style.display = tab === 'zakelijk' ? 'block' : 'none';
 }
 function csubmit_old(){
   const n=document.getElementById('ci-name'),e=document.getElementById('ci-email');
