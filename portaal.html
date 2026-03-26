@@ -15,7 +15,7 @@
   --mist:#94aac8;--white:#fafbfd;
   --blue:#4a90f7;--blue-lo:#2d6fd4;--blue-hi:#82b4fa;
   --amber:#e8a030;--amber-hi:#f0bc60;
-  --green:#2ec470;--green-lo:#1a9e55;
+  --green:#2ec470;--red:#e05555;
   --fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;
   --ease:cubic-bezier(.4,0,.2,1);
   --r:clamp(16px,4vw,40px);
@@ -25,10 +25,10 @@ html{-webkit-font-smoothing:antialiased;height:100%}
 body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;min-height:100vh;overscroll-behavior:none}
 a{color:inherit;text-decoration:none}
 button{font-family:var(--fb);cursor:pointer}
-input{font-family:var(--fb)}
+input,textarea{font-family:var(--fb)}
 ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
 
-/* ── LOADING ── */
+/* LOADING */
 #loading{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;transition:opacity .4s}
 #loading.hide{opacity:0;pointer-events:none}
 .ld-logo{font-family:var(--fs);font-size:1.8rem}.ld-logo em{font-style:normal;color:var(--blue)}
@@ -36,7 +36,7 @@ input{font-family:var(--fb)}
 .ld-bar::after{content:'';position:absolute;left:-40%;width:40%;height:100%;background:var(--blue);animation:lb .8s ease infinite}
 @keyframes lb{from{left:-40%}to{left:100%}}
 
-/* ── LOGIN ── */
+/* LOGIN */
 #login-screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
 #login-screen::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--ink),var(--ink2) 60%,var(--ink3))}
 #login-screen::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(74,144,247,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(74,144,247,.04) 1px,transparent 1px);background-size:48px 48px}
@@ -47,172 +47,218 @@ input{font-family:var(--fb)}
 .linput{width:100%;padding:13px 15px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:.84rem;outline:none;transition:border-color .22s;-webkit-appearance:none;border-radius:0}
 .linput:focus{border-color:rgba(74,144,247,.5)}
 .linput::placeholder{color:rgba(255,255,255,.18)}
-.lbtn{width:100%;padding:14px;background:var(--blue);color:var(--ink);border:none;font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;transition:background .22s;margin-top:14px;-webkit-appearance:none;border-radius:0}
-.lbtn:hover{background:var(--blue-hi)}
-.lbtn:disabled{opacity:.5}
+.lbtn{width:100%;padding:14px;background:var(--blue);color:var(--ink);border:none;font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;transition:background .22s;margin-top:14px;border-radius:0}
+.lbtn:hover{background:var(--blue-hi)}.lbtn:disabled{opacity:.5}
 .lerr{font-size:.7rem;color:#e05555;margin-top:10px;display:none;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)}
 .lback{margin-top:18px;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.22);display:flex;align-items:center;gap:7px;background:none;border:none;padding:0;transition:color .22s}
 .lback:hover{color:rgba(255,255,255,.6)}
 
-/* ── WELCOME OVERLAY ── */
-#welcome-overlay{position:fixed;inset:0;z-index:8000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(10,15,24,.92);backdrop-filter:blur(12px)}
-.wc-box{background:var(--ink2);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--blue);padding:clamp(32px,5vw,52px);max-width:480px;width:100%;text-align:center}
-.wc-icon{width:56px;height:56px;border-radius:50%;background:rgba(74,144,247,.12);border:1px solid rgba(74,144,247,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--blue-hi)}
-.wc-icon svg{width:24px;height:24px}
-.wc-title{font-family:var(--fs);font-size:clamp(1.6rem,4vw,2.2rem);font-weight:300;margin-bottom:10px}
-.wc-sub{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.75;margin-bottom:28px}
-.wc-steps{display:flex;flex-direction:column;gap:1px;margin-bottom:28px;text-align:left}
-.wc-step{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--ink3)}
-.wc-step-num{width:24px;height:24px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:500;color:var(--blue-hi);flex-shrink:0}
-.wc-step span{font-size:.76rem;color:rgba(255,255,255,.55);line-height:1.5}
+/* WELCOME */
+#welcome-overlay{position:fixed;inset:0;z-index:8000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.7);backdrop-filter:blur(12px)}
+.wc-box{background:var(--ink2);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--blue);padding:clamp(28px,5vw,48px);max-width:460px;width:100%;text-align:center}
+.wc-icon{width:52px;height:52px;border-radius:50%;background:rgba(74,144,247,.12);border:1px solid rgba(74,144,247,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;color:var(--blue-hi)}
+.wc-title{font-family:var(--fs);font-size:clamp(1.5rem,4vw,2rem);font-weight:300;margin-bottom:10px}
+.wc-sub{font-size:.76rem;color:rgba(255,255,255,.4);line-height:1.75;margin-bottom:24px}
+.wc-steps{display:flex;flex-direction:column;gap:1px;margin-bottom:24px;text-align:left}
+.wc-step{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--ink3)}
+.wc-num{width:22px;height:22px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:500;color:var(--blue-hi);flex-shrink:0}
+.wc-step span{font-size:.74rem;color:rgba(255,255,255,.52);line-height:1.5}
 .wc-btn{width:100%;padding:14px;background:var(--blue);color:var(--ink);border:none;font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;transition:background .22s}
 .wc-btn:hover{background:var(--blue-hi)}
 
-/* ── APP SHELL ── */
+/* APP */
 #app{display:none;min-height:100vh;flex-direction:column;padding-bottom:80px}
 
-/* ── TOP NAV ── */
+/* NAV */
 .top-nav{position:sticky;top:0;z-index:700;background:rgba(26,35,51,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)}
-.top-nav-inner{max-width:700px;margin:0 auto;padding:14px var(--r);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top-nav-inner{max-width:700px;margin:0 auto;padding:13px var(--r);display:flex;align-items:center;justify-content:space-between;gap:12px}
 .tn-logo{font-family:var(--fs);font-size:1.2rem}.tn-logo em{font-style:normal;color:var(--blue)}
 .tn-logo sup{font-family:var(--fb);font-size:.46rem;color:rgba(255,255,255,.22);letter-spacing:.14em;vertical-align:super;margin-left:2px}
 .tn-right{display:flex;align-items:center;gap:10px}
-.tn-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:500;border:1px solid rgba(74,144,247,.3);cursor:pointer;flex-shrink:0}
-.tn-logout{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);padding:7px 12px;border:1px solid rgba(255,255,255,.08);background:none;color:rgba(255,255,255,.28);transition:all .22s}
+.tn-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:500;border:1px solid rgba(74,144,247,.3);cursor:pointer;flex-shrink:0;position:relative}
+.notif-dot{position:absolute;top:-2px;right:-2px;width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid var(--ink);display:none}
+.notif-dot.show{display:block}
+.tn-logout{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);padding:7px 12px;border:1px solid rgba(255,255,255,.08);background:none;transition:all .22s}
 .tn-logout:hover{color:var(--white);border-color:rgba(255,255,255,.28)}
 
-/* ── BOTTOM TAB BAR ── */
+/* TAB BAR */
 .tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:700;background:rgba(15,22,35,.97);border-top:1px solid rgba(255,255,255,.06);backdrop-filter:blur(20px);display:flex;padding-bottom:env(safe-area-inset-bottom)}
-.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;border:none;background:none;transition:color .22s}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);border:none;background:none;transition:color .22s;position:relative}
 .tab-item svg{width:20px;height:20px;stroke-width:1.5}
 .tab-item.active{color:var(--blue-hi)}
-.tab-item.active svg{stroke:var(--blue-hi)}
+.tab-notif{position:absolute;top:6px;right:calc(50% - 14px);width:8px;height:8px;border-radius:50%;background:var(--red);border:2px solid rgba(15,22,35,.97);display:none}
+.tab-notif.show{display:block}
 
-/* ── CONTENT PANELS ── */
+/* PANELS */
 .panel{display:none;max-width:700px;margin:0 auto;padding:24px var(--r)}
 .panel.active{display:block}
-
-/* ── SECTION HEADER ── */
 .sec-eye{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:6px}
 .sec-title{font-family:var(--fs);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;line-height:1.1;margin-bottom:20px}
 .sec-title em{font-style:italic;color:var(--mist)}
 
-/* ── STATS ROW ── */
+/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px}
 .stat-box{background:var(--ink2);padding:18px 16px;position:relative;overflow:hidden}
 .stat-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
 .stat-val{font-family:var(--fs);font-size:1.7rem;font-weight:300;display:block;line-height:1}
 .stat-lbl{font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-top:5px;display:block}
 
-/* ── TOUR CARDS ── */
+/* TOUR CARDS */
 .tours-list{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04)}
 .tour-card{background:var(--ink2);border-left:2px solid transparent;transition:all .22s}
 .tour-card.live{border-left-color:var(--green)}
 .tour-card.processing{border-left-color:var(--amber);opacity:.85}
-.tc-inner{padding:18px 16px}
-.tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
-.tc-meta{font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.tour-card.new-tour{border-left-color:var(--blue);animation:pulse-border 2s ease 3}
+@keyframes pulse-border{0%,100%{border-left-color:var(--blue)}50%{border-left-color:var(--blue-hi)}}
+.tc-inner{padding:16px}
+.tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.tc-meta{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.22);display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap}
 .tc-name{font-family:var(--fs);font-size:1.1rem;font-weight:300;color:var(--white);line-height:1.2}
-.tc-address{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:3px;display:flex;align-items:center;gap:5px}
-.tc-address svg{width:10px;height:10px;opacity:.4;flex-shrink:0}
-.tc-badge{font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;flex-shrink:0}
-.tc-badge.live{background:rgba(46,196,112,.12);color:#4dda8a;border:1px solid rgba(46,196,112,.22)}
-.tc-badge.proc{background:rgba(232,160,48,.12);color:var(--amber-hi);border:1px solid rgba(232,160,48,.22)}
-.tc-views{display:flex;align-items:center;gap:5px;font-size:.58rem;color:rgba(255,255,255,.3);margin-top:8px}
-.tc-views svg{width:12px;height:12px;opacity:.5}
-.tc-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.tc-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border:1px solid;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;transition:all .22s;background:none;flex:1;justify-content:center;min-height:40px}
-.tc-btn svg{width:12px;height:12px;flex-shrink:0}
-.tc-btn-view{color:var(--blue-hi);border-color:rgba(74,144,247,.3)}
-.tc-btn-view:hover{background:rgba(74,144,247,.1)}
-.tc-btn-share{color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.12)}
-.tc-btn-share:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
-.tc-btn-proc{color:rgba(255,255,255,.22);border-color:rgba(255,255,255,.06);cursor:default;flex:2}
-.empty-state{padding:48px 24px;text-align:center;background:var(--ink2);border:1px dashed rgba(255,255,255,.07)}
-.empty-state svg{opacity:.12;margin:0 auto 16px;display:block}
-.empty-state h3{font-family:var(--fs);font-size:1.3rem;font-weight:300;color:rgba(255,255,255,.35);margin-bottom:8px}
-.empty-state p{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.7}
+.tc-address{font-size:.67rem;color:rgba(255,255,255,.28);margin-top:3px;display:flex;align-items:center;gap:5px}
+.tc-badge{font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;flex-shrink:0}
+.tc-badge.live{background:rgba(46,196,112,.12);color:#4dda8a;border:1px solid rgba(46,196,112,.2)}
+.tc-badge.proc{background:rgba(232,160,48,.12);color:var(--amber-hi);border:1px solid rgba(232,160,48,.2)}
+.tc-badge.nieuw{background:rgba(74,144,247,.15);color:var(--blue-hi);border:1px solid rgba(74,144,247,.25)}
+.tc-views{display:flex;align-items:center;gap:5px;font-size:.56rem;color:rgba(255,255,255,.25);margin-top:6px}
+.tc-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.tc-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border:1px solid;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;transition:all .22s;background:none;flex:1;justify-content:center;min-height:38px}
+.tc-btn svg{width:11px;height:11px;flex-shrink:0}
+.tc-btn-view{color:var(--blue-hi);border-color:rgba(74,144,247,.28)}.tc-btn-view:hover{background:rgba(74,144,247,.1)}
+.tc-btn-share{color:rgba(255,255,255,.45);border-color:rgba(255,255,255,.1)}.tc-btn-share:hover{color:var(--white);border-color:rgba(255,255,255,.28)}
+.tc-btn-embed{color:rgba(255,255,255,.35);border-color:rgba(255,255,255,.08)}.tc-btn-embed:hover{color:var(--blue-hi);border-color:rgba(74,144,247,.25)}
+.tc-btn-proc{color:rgba(255,255,255,.2);border-color:rgba(255,255,255,.05);cursor:default;flex:2}
+.empty-state{padding:44px 20px;text-align:center;background:var(--ink2);border:1px dashed rgba(255,255,255,.07)}
+.empty-state svg{opacity:.1;margin:0 auto 14px;display:block}
+.empty-state h3{font-family:var(--fs);font-size:1.2rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:6px}
+.empty-state p{font-size:.7rem;color:rgba(255,255,255,.18);line-height:1.7}
 
-/* ── TOUR VIEWER ── */
+/* NOTIFICATIES */
+.notif-list{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04);margin-bottom:20px}
+.notif-item{background:var(--ink2);padding:16px;display:flex;align-items:flex-start;gap:12px;border-left:2px solid transparent;transition:all .22s}
+.notif-item.unread{border-left-color:var(--blue);background:rgba(74,144,247,.04)}
+.notif-item.unread .notif-title{color:var(--white)}
+.notif-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+.notif-icon.live{background:rgba(46,196,112,.12);color:#4dda8a}
+.notif-icon.info{background:rgba(74,144,247,.12);color:var(--blue-hi)}
+.notif-body{flex:1;min-width:0}
+.notif-title{font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.4;margin-bottom:3px}
+.notif-time{font-size:.58rem;color:rgba(255,255,255,.22)}
+.notif-empty{padding:32px;text-align:center;background:var(--ink2);font-size:.72rem;color:rgba(255,255,255,.18)}
+.mark-read-btn{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);background:none;border:1px solid rgba(255,255,255,.08);padding:6px 12px;transition:all .22s}
+.mark-read-btn:hover{color:var(--white);border-color:rgba(255,255,255,.25)}
+
+/* FACTUREN */
+.factuur-list{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04)}
+.factuur-item{background:var(--ink2);padding:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.factuur-info{flex:1;min-width:160px}
+.factuur-omschr{font-size:.8rem;color:var(--white);font-weight:400;margin-bottom:3px}
+.factuur-datum{font-size:.6rem;color:rgba(255,255,255,.28)}
+.factuur-bedrag{font-family:var(--fs);font-size:1.3rem;font-weight:300;color:var(--white);flex-shrink:0}
+.factuur-badge{font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;flex-shrink:0}
+.f-open{background:rgba(232,160,48,.1);color:var(--amber-hi);border:1px solid rgba(232,160,48,.2)}
+.f-betaald{background:rgba(46,196,112,.1);color:#4dda8a;border:1px solid rgba(46,196,112,.2)}
+.f-concept{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1)}
+.factuur-link{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border:1px solid rgba(74,144,247,.25);color:var(--blue-hi);background:none;transition:all .2s}
+.factuur-link:hover{background:rgba(74,144,247,.1)}
+.no-facturen{padding:32px;text-align:center;background:var(--ink2);font-size:.72rem;color:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.07)}
+
+/* CONTACT */
+.contact-card{background:var(--ink2);border:1px solid rgba(255,255,255,.06);border-top:2px solid var(--blue);padding:24px;margin-bottom:12px}
+.contact-card h3{font-family:var(--fs);font-size:1.3rem;font-weight:300;margin-bottom:6px}
+.contact-card p{font-size:.74rem;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:18px}
+.contact-options{display:flex;flex-direction:column;gap:8px}
+.contact-opt{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--ink3);border:1px solid rgba(255,255,255,.05);transition:all .22s;text-decoration:none}
+.contact-opt:hover{border-color:rgba(74,144,247,.3);background:rgba(74,144,247,.05)}
+.contact-opt svg{width:20px;height:20px;flex-shrink:0;opacity:.6}
+.contact-opt-text strong{font-size:.74rem;color:var(--white);display:block;margin-bottom:2px}
+.contact-opt-text span{font-size:.64rem;color:rgba(255,255,255,.32)}
+.contact-opt.wa svg{color:#4dda8a;opacity:.9}
+.contact-form{margin-top:12px}
+.cf-lbl{font-size:.52rem;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.28);display:block;margin-bottom:6px;margin-top:12px}
+.cf-lbl:first-child{margin-top:0}
+.cf-input{width:100%;padding:11px 13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--white);font-size:.78rem;outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0}
+.cf-input:focus{border-color:rgba(74,144,247,.4)}
+.cf-input::placeholder{color:rgba(255,255,255,.16)}
+.cf-submit{width:100%;padding:13px;background:var(--blue);color:var(--ink);border:none;font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;margin-top:14px;transition:background .22s}
+.cf-submit:hover{background:var(--blue-hi)}.cf-submit:disabled{opacity:.5}
+.cf-ok{font-size:.7rem;color:var(--green);padding:10px 14px;background:rgba(46,196,112,.07);border:1px solid rgba(46,196,112,.18);margin-top:10px;display:none}
+
+/* PROFIEL */
+.profile-card{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:20px;margin-bottom:12px}
+.profile-avatar-lg{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:400;font-family:var(--fs);border:2px solid rgba(74,144,247,.3);margin-bottom:14px}
+.profile-name{font-family:var(--fs);font-size:1.3rem;font-weight:300}
+.profile-company{font-size:.62rem;color:rgba(255,255,255,.3);margin-top:3px}
+.profile-email{font-size:.68rem;color:rgba(255,255,255,.25);margin-top:6px}
+.form-section{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:20px;margin-bottom:10px}
+.fs-title{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.24);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.field-lbl{font-size:.52rem;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.28);display:block;margin-bottom:5px;margin-top:12px}
+.field-lbl:first-child{margin-top:0}
+.field-input{width:100%;padding:11px 13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--white);font-size:.8rem;outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0}
+.field-input:focus{border-color:rgba(74,144,247,.4)}
+.field-input::placeholder{color:rgba(255,255,255,.16)}
+.save-btn{width:100%;padding:12px;background:var(--blue);color:var(--ink);border:none;font-size:.56rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;transition:background .22s;margin-top:14px}
+.save-btn:hover{background:var(--blue-hi)}.save-btn:disabled{opacity:.5}
+.save-ok{font-size:.68rem;color:var(--green);padding:8px 12px;background:rgba(46,196,112,.07);border:1px solid rgba(46,196,112,.16);margin-top:8px;display:none}
+.danger-btn{width:100%;padding:12px;background:none;color:rgba(224,85,85,.6);border:1px solid rgba(224,85,85,.18);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;transition:all .22s;margin-top:6px}
+.danger-btn:hover{color:var(--red);border-color:rgba(224,85,85,.4);background:rgba(224,85,85,.05)}
+
+/* VIEWER */
 #viewer{position:fixed;inset:0;z-index:900;background:#0a0f18;display:none;flex-direction:column}
 #viewer.open{display:flex}
 .viewer-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px var(--r);background:rgba(20,28,42,.98);border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
-.viewer-bar-left{display:flex;align-items:center;gap:12px;min-width:0}
+.viewer-bar-left{display:flex;align-items:center;gap:10px;min-width:0}
 .viewer-logo{font-family:var(--fs);font-size:1rem;flex-shrink:0}.viewer-logo em{font-style:normal;color:var(--blue)}
-.viewer-sep{width:1px;height:16px;background:rgba(255,255,255,.1);flex-shrink:0}
+.viewer-sep{width:1px;height:14px;background:rgba(255,255,255,.1);flex-shrink:0}
 .viewer-title{font-family:var(--fs);font-size:.95rem;font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .viewer-close{padding:8px 14px;background:none;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;transition:all .22s;flex-shrink:0}
 .viewer-close:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
 .viewer-body{flex:1;position:relative}
 .viewer-body iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.viewer-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:32px}
-.viewer-ph svg{opacity:.12}
-.viewer-ph h3{font-family:var(--fs);font-size:1.4rem;font-weight:300;color:rgba(255,255,255,.4)}
-.viewer-ph p{font-size:.74rem;color:rgba(255,255,255,.22);line-height:1.7;max-width:280px}
 
-/* ── SHARE CARD ── */
-#share-modal{position:fixed;inset:0;z-index:950;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+/* SHARE SHEET */
+#share-modal{position:fixed;inset:0;z-index:950;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)}
 #share-modal.open{display:flex}
-.share-sheet{background:var(--ink2);border-top:1px solid rgba(255,255,255,.08);border-top:2px solid var(--blue);width:100%;max-width:500px;padding:24px var(--r) calc(24px + env(safe-area-inset-bottom));animation:slideup .3s var(--ease)}
+.share-sheet{background:var(--ink2);border-top:2px solid var(--blue);width:100%;max-width:500px;padding:20px var(--r) calc(20px + env(safe-area-inset-bottom));animation:slideup .3s var(--ease)}
 @keyframes slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.share-handle{width:36px;height:3px;background:rgba(255,255,255,.12);border-radius:2px;margin:0 auto 20px}
-.share-title{font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:4px}
-.share-sub{font-size:.66rem;color:rgba(255,255,255,.32);margin-bottom:20px}
-.share-url{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--ink3);border:1px solid rgba(255,255,255,.07);margin-bottom:16px}
-.share-url-text{font-family:monospace;font-size:.64rem;color:rgba(255,255,255,.45);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.share-copy-btn{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-hi);padding:6px 10px;border:1px solid rgba(74,144,247,.25);background:none;flex-shrink:0;transition:all .2s}
-.share-copy-btn:hover{background:rgba(74,144,247,.1)}
-.share-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-.share-opt{display:flex;align-items:center;gap:10px;padding:14px;background:var(--ink3);border:1px solid rgba(255,255,255,.06);font-size:.62rem;color:rgba(255,255,255,.5);transition:all .22s}
+.share-handle{width:32px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin:0 auto 16px}
+.share-title{font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:3px}
+.share-sub{font-size:.64rem;color:rgba(255,255,255,.3);margin-bottom:16px}
+.share-url{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--ink3);border:1px solid rgba(255,255,255,.06);margin-bottom:12px}
+.share-url-text{font-family:monospace;font-size:.62rem;color:rgba(255,255,255,.4);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.share-copy{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-hi);padding:5px 9px;border:1px solid rgba(74,144,247,.22);background:none;flex-shrink:0;transition:all .2s}
+.share-copy:hover{background:rgba(74,144,247,.1)}
+.share-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
+.share-opt{display:flex;align-items:center;gap:9px;padding:12px;background:var(--ink3);border:1px solid rgba(255,255,255,.05);font-size:.6rem;color:rgba(255,255,255,.45);transition:all .2s}
 .share-opt:hover{background:rgba(255,255,255,.04);color:var(--white)}
-.share-opt svg{width:16px;height:16px;flex-shrink:0}
-.share-opt.wa{border-color:rgba(37,211,102,.2);color:#4dda8a}
-.share-opt.wa:hover{background:rgba(37,211,102,.06)}
-.share-close{width:100%;padding:12px;background:none;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.35);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;transition:all .22s}
-.share-close:hover{border-color:rgba(255,255,255,.28);color:var(--white)}
+.share-opt svg{width:15px;height:15px;flex-shrink:0}
+.share-opt.wa{border-color:rgba(37,211,102,.18);color:#4dda8a}
+.share-close{width:100%;padding:11px;background:none;border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.3);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;transition:all .22s}
+.share-close:hover{border-color:rgba(255,255,255,.25);color:var(--white)}
 
-/* ── PROFIEL PANEL ── */
-.profile-card{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:24px;margin-bottom:16px}
-.profile-avatar-lg{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--blue-lo),var(--blue));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:400;font-family:var(--fs);border:2px solid rgba(74,144,247,.3);margin-bottom:16px}
-.profile-name{font-family:var(--fs);font-size:1.4rem;font-weight:300}
-.profile-company{font-size:.64rem;color:rgba(255,255,255,.32);letter-spacing:.08em;margin-top:4px}
-.profile-email{font-size:.7rem;color:rgba(255,255,255,.28);margin-top:8px}
-.form-section{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:24px;margin-bottom:12px}
-.form-section-title{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05)}
-.field-lbl{font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);display:block;margin-bottom:7px;margin-top:14px}
-.field-lbl:first-child{margin-top:0}
-.field-input{width:100%;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--white);font-size:.82rem;outline:none;transition:border-color .22s;-webkit-appearance:none;border-radius:0}
-.field-input:focus{border-color:rgba(74,144,247,.45)}
-.field-input::placeholder{color:rgba(255,255,255,.18)}
-.save-btn{width:100%;padding:13px;background:var(--blue);color:var(--ink);border:none;font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;transition:background .22s;margin-top:16px}
-.save-btn:hover{background:var(--blue-hi)}
-.save-btn:disabled{opacity:.5}
-.field-note{font-size:.62rem;color:rgba(255,255,255,.22);margin-top:6px;line-height:1.6}
-.success-msg{font-size:.7rem;color:var(--green);padding:10px 14px;background:rgba(46,196,112,.08);border:1px solid rgba(46,196,112,.2);margin-top:10px;display:none}
-.danger-btn{width:100%;padding:13px;background:none;color:rgba(224,85,85,.6);border:1px solid rgba(224,85,85,.2);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;transition:all .22s;margin-top:8px}
-.danger-btn:hover{color:#e05555;border-color:rgba(224,85,85,.45);background:rgba(224,85,85,.06)}
+/* EMBED MODAL */
+#embed-modal{position:fixed;inset:0;z-index:950;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)}
+#embed-modal.open{display:flex}
+.embed-sheet{background:var(--ink2);border-top:2px solid var(--blue);width:100%;max-width:500px;padding:20px var(--r) calc(20px + env(safe-area-inset-bottom));animation:slideup .3s var(--ease)}
+.embed-title{font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:3px}
+.embed-sub{font-size:.64rem;color:rgba(255,255,255,.3);margin-bottom:14px}
+.embed-code{background:var(--ink3);border:1px solid rgba(255,255,255,.08);padding:12px;font-family:monospace;font-size:.62rem;color:rgba(255,255,255,.55);line-height:1.6;word-break:break-all;margin-bottom:10px;max-height:120px;overflow-y:auto}
+.embed-note{font-size:.62rem;color:rgba(255,255,255,.25);line-height:1.6;margin-bottom:14px}
+.embed-btns{display:flex;gap:8px}
+.embed-copy{flex:1;padding:11px;background:var(--blue);color:var(--ink);border:none;font-size:.56rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:background .22s}
+.embed-copy:hover{background:var(--blue-hi)}
+.embed-close{padding:11px 16px;background:none;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.35);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;transition:all .22s}
+.embed-close:hover{border-color:rgba(255,255,255,.28);color:var(--white)}
 
-/* ── TOAST ── */
-#toast{position:fixed;bottom:calc(80px + 12px);left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink3);border:1px solid rgba(74,144,247,.25);color:var(--blue-hi);font-size:.62rem;letter-spacing:.08em;padding:10px 18px;z-index:9000;opacity:0;transition:all .3s var(--ease);pointer-events:none;display:flex;align-items:center;gap:7px;white-space:nowrap}
+/* TOAST */
+#toast{position:fixed;bottom:calc(80px + 10px);left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink3);border:1px solid rgba(74,144,247,.25);color:var(--blue-hi);font-size:.62rem;letter-spacing:.08em;padding:10px 18px;z-index:9000;opacity:0;transition:all .3s var(--ease);pointer-events:none;display:flex;align-items:center;gap:7px;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-#toast.success{border-color:rgba(46,196,112,.3);color:#4dda8a}
+#toast.ok{border-color:rgba(46,196,112,.3);color:#4dda8a}
 #toast::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
-
-/* ── RESPONSIVE ── */
-@media(max-width:480px){
-  .stats-row{grid-template-columns:repeat(3,1fr)}
-  .tc-btn{font-size:.48rem;padding:9px 10px}
-  .share-options{grid-template-columns:1fr 1fr}
-}
 </style>
 </head>
 <body>
 
-<!-- LOADING -->
-<div id="loading">
-  <div class="ld-logo">Explora<em>360</em></div>
-  <div class="ld-bar"></div>
-</div>
+<div id="loading"><div class="ld-logo">Explora<em>360</em></div><div class="ld-bar"></div></div>
 
 <!-- LOGIN -->
 <div id="login-screen">
@@ -232,18 +278,16 @@ input{font-family:var(--fb)}
   </div>
 </div>
 
-<!-- WELCOME OVERLAY -->
+<!-- WELCOME -->
 <div id="welcome-overlay">
   <div class="wc-box">
-    <div class="wc-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2L2 19h20L12 2z"/><path d="M12 9v4M12 17h.01"/></svg>
-    </div>
-    <h2 class="wc-title">Welkom bij uw<br/>Explora360 portaal</h2>
-    <p class="wc-sub">Hier vindt u al uw virtuele tours, deelbare links en uw accountinformatie. Zo werkt het:</p>
+    <div class="wc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" width="22" height="22"><path d="M12 2L2 19h20L12 2z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+    <h2 class="wc-title">Welkom bij uw Explora360 portaal</h2>
+    <p class="wc-sub">Hier vindt u al uw virtuele tours, facturen en directe contact met Explora360.</p>
     <div class="wc-steps">
-      <div class="wc-step"><div class="wc-step-num">1</div><span>Bekijk uw tours via het <strong style="color:var(--white)">Tours tabblad</strong></span></div>
-      <div class="wc-step"><div class="wc-step-num">2</div><span>Deel een tour via de <strong style="color:var(--white)">Deel-knop</strong> — voor WhatsApp, e-mail of socials</span></div>
-      <div class="wc-step"><div class="wc-step-num">3</div><span>Beheer uw account via het <strong style="color:var(--white)">Profiel tabblad</strong></span></div>
+      <div class="wc-step"><div class="wc-num">1</div><span>Bekijk en deel uw tours via <strong style="color:var(--white)">Tours</strong></span></div>
+      <div class="wc-step"><div class="wc-num">2</div><span>Ontvang meldingen als een tour live gaat via <strong style="color:var(--white)">Meldingen</strong></span></div>
+      <div class="wc-step"><div class="wc-num">3</div><span>Bekijk facturen en neem contact op via <strong style="color:var(--white)">Contact</strong></span></div>
     </div>
     <button class="wc-btn" onclick="closeWelcome()">Aan de slag →</button>
   </div>
@@ -255,13 +299,16 @@ input{font-family:var(--fb)}
     <div class="top-nav-inner">
       <span class="tn-logo">Explora<em>360</em><sup>Portaal</sup></span>
       <div class="tn-right">
-        <div class="tn-avatar" id="tn-avatar" onclick="showPanel('profiel')">--</div>
+        <div class="tn-avatar" id="tn-avatar" onclick="showPanel('profiel')">
+          --
+          <div class="notif-dot" id="notif-dot"></div>
+        </div>
         <button class="tn-logout" id="logout-btn">Uit</button>
       </div>
     </div>
   </nav>
 
-  <!-- TOURS PANEL -->
+  <!-- TOURS -->
   <div class="panel active" id="panel-tours">
     <span class="sec-eye">Mijn tours</span>
     <h1 class="sec-title" id="p-welcome">Welkom</h1>
@@ -273,50 +320,113 @@ input{font-family:var(--fb)}
     <div class="tours-list" id="tours-list"></div>
   </div>
 
-  <!-- PROFIEL PANEL -->
+  <!-- MELDINGEN -->
+  <div class="panel" id="panel-meldingen">
+    <span class="sec-eye">Notificaties</span>
+    <h1 class="sec-title">Meldingen &amp;<br/><em>Updates</em></h1>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <span style="font-size:.62rem;color:rgba(255,255,255,.28)" id="notif-count">0 meldingen</span>
+      <button class="mark-read-btn" onclick="markAllRead()">Alles gelezen</button>
+    </div>
+    <div class="notif-list" id="notif-list"></div>
+  </div>
+
+  <!-- FACTUREN -->
+  <div class="panel" id="panel-facturen">
+    <span class="sec-eye">Financieel</span>
+    <h1 class="sec-title">Facturen &amp;<br/><em>Offertes</em></h1>
+    <div class="factuur-list" id="factuur-list"></div>
+    <div style="margin-top:16px;padding:16px;background:var(--ink2);border:1px solid rgba(255,255,255,.05)">
+      <div style="font-size:.68rem;color:rgba(255,255,255,.35);line-height:1.7">Vragen over een factuur? Neem contact op via het <button onclick="showPanel('contact')" style="background:none;border:none;color:var(--blue-hi);font-size:.68rem;cursor:pointer;font-family:var(--fb)">contact tabblad</button> of stuur een e-mail naar <a href="mailto:info@explora360.nl" style="color:var(--blue-hi)">info&#64;explora360&#46;nl</a></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="panel" id="panel-contact">
+    <span class="sec-eye">Support</span>
+    <h1 class="sec-title">Contact<br/><em>Explora360</em></h1>
+    <div class="contact-card">
+      <h3>Direct contact</h3>
+      <p>Heeft u vragen, wilt u een nieuwe opname plannen of een seizoensupdate aanvragen? Wij reageren binnen 1 werkdag.</p>
+      <div class="contact-options">
+        <a href="https://wa.me/31616076613?text=Hallo%20Explora360%2C%20ik%20heb%20een%20vraag%20via%20het%20portaal." class="contact-opt wa" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163A11.867 11.867 0 01.157 11.892C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.821 11.821 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.307 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          <div class="contact-opt-text"><strong>WhatsApp</strong><span>+31 6 16 07 66 13 — snel antwoord</span></div>
+        </a>
+        <a href="mailto:info@explora360.nl" class="contact-opt">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 7l10 7 10-7"/></svg>
+          <div class="contact-opt-text"><strong>E-mail</strong><span>info&#64;explora360&#46;nl</span></div>
+        </a>
+        <a href="tel:+31616076613" class="contact-opt">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          <div class="contact-opt-text"><strong>Bellen</strong><span>+31 6 16 07 66 13</span></div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-card">
+      <h3>Bericht sturen</h3>
+      <p>Stuur een bericht en wij nemen binnen 1 werkdag contact op.</p>
+      <div class="contact-form">
+        <label class="cf-lbl">Uw naam</label>
+        <input class="cf-input" type="text" id="cf-naam" placeholder="Jan Jansen"/>
+        <label class="cf-lbl">Onderwerp</label>
+        <input class="cf-input" type="text" id="cf-subject" placeholder="Bijv: Nieuwe opname plannen"/>
+        <label class="cf-lbl">Bericht</label>
+        <textarea class="cf-input" id="cf-bericht" rows="4" placeholder="Uw bericht..."></textarea>
+        <button class="cf-submit" id="cf-btn" onclick="stuurContactbericht()">Versturen →</button>
+        <div class="cf-ok" id="cf-ok">✓ Bericht verstuurd via WhatsApp — wij nemen snel contact op!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFIEL -->
   <div class="panel" id="panel-profiel">
     <span class="sec-eye">Mijn account</span>
     <h1 class="sec-title">Profiel &amp;<br/><em>Instellingen</em></h1>
-
     <div class="profile-card">
       <div class="profile-avatar-lg" id="prof-avatar">--</div>
       <div class="profile-name" id="prof-name">—</div>
       <div class="profile-company" id="prof-company"></div>
       <div class="profile-email" id="prof-email"></div>
     </div>
-
     <div class="form-section">
-      <div class="form-section-title">Gegevens aanpassen</div>
-      <label class="field-lbl">Naam</label>
-      <input class="field-input" type="text" id="edit-naam" placeholder="Uw naam"/>
-      <label class="field-lbl">Bedrijf</label>
-      <input class="field-input" type="text" id="edit-bedrijf" placeholder="Bedrijfsnaam (optioneel)"/>
-      <button class="save-btn" id="save-profile-btn" onclick="saveProfile()">Opslaan →</button>
-      <div class="success-msg" id="profile-success">✓ Gegevens opgeslagen</div>
+      <div class="fs-title">Gegevens aanpassen</div>
+      <label class="field-lbl">Naam</label><input class="field-input" type="text" id="edit-naam"/>
+      <label class="field-lbl">Bedrijf</label><input class="field-input" type="text" id="edit-bedrijf"/>
+      <button class="save-btn" onclick="saveProfile()">Opslaan →</button>
+      <div class="save-ok" id="profile-ok">✓ Opgeslagen</div>
     </div>
-
     <div class="form-section">
-      <div class="form-section-title">Wachtwoord wijzigen</div>
-      <label class="field-lbl">Nieuw wachtwoord</label>
-      <input class="field-input" type="password" id="new-pass" placeholder="Minimaal 8 tekens"/>
-      <label class="field-lbl">Bevestig wachtwoord</label>
-      <input class="field-input" type="password" id="new-pass2" placeholder="Herhaal wachtwoord"/>
-      <p class="field-note">Kies een sterk wachtwoord van minimaal 8 tekens.</p>
-      <button class="save-btn" id="save-pass-btn" onclick="savePassword()">Wachtwoord wijzigen →</button>
-      <div class="success-msg" id="pass-success">✓ Wachtwoord gewijzigd</div>
+      <div class="fs-title">Wachtwoord wijzigen</div>
+      <label class="field-lbl">Nieuw wachtwoord</label><input class="field-input" type="password" id="new-pass" placeholder="Minimaal 8 tekens"/>
+      <label class="field-lbl">Bevestig</label><input class="field-input" type="password" id="new-pass2" placeholder="Herhaal wachtwoord"/>
+      <button class="save-btn" onclick="savePassword()">Wijzigen →</button>
+      <div class="save-ok" id="pass-ok">✓ Wachtwoord gewijzigd</div>
     </div>
-
     <div class="form-section">
-      <div class="form-section-title">Sessie</div>
-      <button class="danger-btn" onclick="doLogout()">Uitloggen op dit apparaat</button>
+      <div class="fs-title">Sessie</div>
+      <button class="danger-btn" onclick="doLogout()">Uitloggen</button>
     </div>
   </div>
 
-  <!-- BOTTOM TAB BAR -->
+  <!-- TAB BAR -->
   <nav class="tab-bar">
     <button class="tab-item active" id="tab-tours" onclick="showPanel('tours')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
       Tours
+    </button>
+    <button class="tab-item" id="tab-meldingen" onclick="showPanel('meldingen')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      Meldingen
+      <div class="tab-notif" id="tab-notif-dot"></div>
+    </button>
+    <button class="tab-item" id="tab-facturen" onclick="showPanel('facturen')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Facturen
+    </button>
+    <button class="tab-item" id="tab-contact" onclick="showPanel('contact')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Contact
     </button>
     <button class="tab-item" id="tab-profiel" onclick="showPanel('profiel')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
@@ -325,7 +435,7 @@ input{font-family:var(--fb)}
   </nav>
 </div>
 
-<!-- TOUR VIEWER -->
+<!-- VIEWER -->
 <div id="viewer">
   <div class="viewer-bar">
     <div class="viewer-bar-left">
@@ -335,47 +445,45 @@ input{font-family:var(--fb)}
     </div>
     <button class="viewer-close" onclick="closeViewer()">✕ Sluiten</button>
   </div>
-  <div class="viewer-body" id="viewer-body">
-    <div class="viewer-ph">
-      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
-      <h3>Tour laden...</h3>
-    </div>
-  </div>
+  <div class="viewer-body" id="viewer-body"></div>
 </div>
 
 <!-- SHARE MODAL -->
-<div id="share-modal" onclick="closeShare(event)">
-  <div class="share-sheet" id="share-sheet">
+<div id="share-modal" onclick="if(event.target===this)closeShare()">
+  <div class="share-sheet">
     <div class="share-handle"></div>
-    <div class="share-title" id="share-tour-name">Tour delen</div>
-    <div class="share-sub">Kopieer de link of deel direct via een app</div>
+    <div class="share-title" id="share-name">Delen</div>
+    <div class="share-sub">Kopieer de link of deel direct</div>
     <div class="share-url">
       <span class="share-url-text" id="share-url-text"></span>
-      <button class="share-copy-btn" onclick="copyShareUrl()">Kopieer</button>
+      <button class="share-copy" onclick="copyShareUrl()">Kopieer</button>
     </div>
-    <div class="share-options">
-      <button class="share-opt wa" onclick="shareWhatsApp()">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163A11.867 11.867 0 01.157 11.892C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.821 11.821 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.307 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-        WhatsApp
-      </button>
-      <button class="share-opt" onclick="shareEmail()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 7l10 7 10-7"/></svg>
-        E-mail
-      </button>
-      <button class="share-opt" onclick="shareNative()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Meer opties
-      </button>
-      <button class="share-opt" onclick="copyShareUrl()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Link kopiëren
-      </button>
+    <div class="share-opts">
+      <button class="share-opt wa" onclick="shareWA()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163A11.867 11.867 0 01.157 11.892C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.821 11.821 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.307 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>WhatsApp</button>
+      <button class="share-opt" onclick="shareEmail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 7l10 7 10-7"/></svg>E-mail</button>
+      <button class="share-opt" onclick="shareNative()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>Meer opties</button>
+      <button class="share-opt" onclick="copyShareUrl()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Kopiëren</button>
     </div>
     <button class="share-close" onclick="closeShare()">Annuleren</button>
   </div>
 </div>
 
-<div id="toast">Gekopieerd</div>
+<!-- EMBED MODAL -->
+<div id="embed-modal" onclick="if(event.target===this)closeEmbed()">
+  <div class="embed-sheet">
+    <div class="share-handle"></div>
+    <div class="embed-title">Embedcode kopiëren</div>
+    <div class="embed-sub">Plak deze code in uw website om de tour direct te tonen</div>
+    <div class="embed-code" id="embed-code-text"></div>
+    <p class="embed-note">Werkt op elke website — WordPress, Wix, Squarespace of eigen HTML. De tour laadt volledig interactief in een iframe.</p>
+    <div class="embed-btns">
+      <button class="embed-copy" onclick="copyEmbed()">Code kopiëren</button>
+      <button class="embed-close" onclick="closeEmbed()">Sluiten</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
 
 <script>
 var sb = supabase.createClient(
@@ -383,11 +491,22 @@ var sb = supabase.createClient(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloenBzZnBwdGlvamtrYXFyemdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0ODM2MDAsImV4cCI6MjA5MDA1OTYwMH0.ujW0R1D_Ow4A6GLWNGCTwdOHaYItLlGdeaYXVAcIQUw'
 );
 
-var currentUser = null;
-var currentKlant = null;
-var currentTours = [];
-var currentShareUrl = '';
-var currentShareName = '';
+var currentUser = null, currentKlant = null;
+var currentTours = [], currentFacturen = [];
+var notificaties = [], ongeLezenNotifs = 0;
+var shareUrl = '', shareName = '', embedCode = '';
+var prevTourIds = null;
+
+function toast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.className = type === 'ok' ? 'show ok' : 'show';
+  clearTimeout(t._t); t._t = setTimeout(function(){ t.className=''; }, 2800);
+}
+
+function hideLoading() {
+  var el = document.getElementById('loading');
+  el.classList.add('hide'); setTimeout(function(){ el.style.display='none'; }, 400);
+}
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 async function init() {
@@ -401,282 +520,335 @@ async function init() {
   hideLoading();
 }
 
-function hideLoading() {
-  var el = document.getElementById('loading');
-  el.classList.add('hide');
-  setTimeout(function(){ el.style.display='none'; }, 400);
-}
-
-// ── LOGIN ─────────────────────────────────────────────────────────────────
 async function doLogin() {
   var email = document.getElementById('l-email').value.trim().toLowerCase();
   var pass  = document.getElementById('l-pass').value;
   var err   = document.getElementById('l-err');
   var btn   = document.getElementById('login-btn');
-  err.style.display = 'none';
-  btn.textContent = 'Inloggen...';
-  btn.disabled = true;
+  err.style.display = 'none'; btn.textContent = 'Inloggen...'; btn.disabled = true;
   var res = await sb.auth.signInWithPassword({ email: email, password: pass });
-  if (res.error) {
-    err.style.display = 'block';
-    btn.textContent = 'Inloggen →';
-    btn.disabled = false;
-    return;
-  }
+  if (res.error) { err.style.display='block'; btn.textContent='Inloggen →'; btn.disabled=false; return; }
   currentUser = res.data.user;
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('loading').style.display = 'flex';
   document.getElementById('loading').classList.remove('hide');
-  await loadPortal();
-  hideLoading();
+  await loadPortal(); hideLoading();
 }
 
-// ── LOAD PORTAL ───────────────────────────────────────────────────────────
+// ── LOAD ──────────────────────────────────────────────────────────────────
 async function loadPortal() {
   var kr = await sb.from('klanten').select('*').eq('id', currentUser.id).single();
   currentKlant = kr.data || { naam: currentUser.email.split('@')[0], bedrijf: '', eerste_login: true };
-
   var tr = await sb.from('tours').select('*').eq('klant_id', currentUser.id).order('created_at', { ascending: false });
   currentTours = tr.data || [];
+  var fr = await sb.from('facturen').select('*').eq('klant_id', currentUser.id).order('datum', { ascending: false });
+  currentFacturen = fr.data || [];
 
+  // Genereer notificaties vanuit tours
+  bouwNotificaties();
   renderPortal();
 
-  // Welkomstscherm bij eerste login
+  // Welkomstscherm
   if (currentKlant.eerste_login !== false) {
-    showWelcome();
+    document.getElementById('welcome-overlay').style.display = 'flex';
     await sb.from('klanten').update({ eerste_login: false }).eq('id', currentUser.id);
   }
+
+  // Poll elke 30 seconden voor nieuwe tours
+  setInterval(checkNieuweNotifs, 30000);
+}
+
+// ── NOTIFICATIES ──────────────────────────────────────────────────────────
+function bouwNotificaties() {
+  notificaties = [];
+  // Tour-gebaseerde notificaties
+  currentTours.forEach(function(t) {
+    if (t.status === 'live') {
+      var opgeslagen = localStorage.getItem('notif_seen_' + t.id);
+      notificaties.push({
+        id: 'tour_live_' + t.id,
+        type: 'live',
+        title: '✓ Tour live: ' + t.naam,
+        body: 'Uw tour is beschikbaar. Deel de link met uw klanten.',
+        time: t.updated_at || t.created_at,
+        read: !!opgeslagen,
+        tourId: t.id
+      });
+    }
+  });
+  // Welkomst notificatie
+  notificaties.push({
+    id: 'welcome',
+    type: 'info',
+    title: 'Welkom bij Explora360 Portaal',
+    body: 'Hier vindt u al uw tours, facturen en kunt u direct contact opnemen.',
+    time: currentKlant.created_at,
+    read: !!localStorage.getItem('notif_seen_welcome')
+  });
+
+  ongeLezenNotifs = notificaties.filter(function(n){ return !n.read; }).length;
+  updateNotifBadges();
+}
+
+function updateNotifBadges() {
+  var show = ongeLezenNotifs > 0;
+  document.getElementById('notif-dot').classList.toggle('show', show);
+  document.getElementById('tab-notif-dot').classList.toggle('show', show);
+  document.getElementById('notif-count').textContent = notificaties.length + ' melding' + (notificaties.length !== 1 ? 'en' : '') +
+    (ongeLezenNotifs > 0 ? ' (' + ongeLezenNotifs + ' nieuw)' : '');
+}
+
+function markAllRead() {
+  notificaties.forEach(function(n){ localStorage.setItem('notif_seen_' + n.id.replace('tour_live_',''), 'true'); n.read = true; });
+  ongeLezenNotifs = 0;
+  updateNotifBadges();
+  renderNotificaties();
+  toast('Alles als gelezen gemarkeerd', 'ok');
+}
+
+async function checkNieuweNotifs() {
+  var tr = await sb.from('tours').select('id,naam,status,updated_at').eq('klant_id', currentUser.id);
+  var nieuweIds = (tr.data||[]).filter(function(t){ return t.status==='live'; }).map(function(t){ return t.id; });
+  if (prevTourIds !== null) {
+    nieuweIds.forEach(function(id) {
+      if (!prevTourIds.includes(id) && !localStorage.getItem('notif_seen_' + id)) {
+        var t = (tr.data||[]).find(function(t){ return t.id===id; });
+        if (t) toast('🎉 Tour live: ' + t.naam, 'ok');
+      }
+    });
+  }
+  prevTourIds = nieuweIds;
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────────
 function renderPortal() {
   document.getElementById('app').style.display = 'flex';
-
   var naam = currentKlant.naam || 'Klant';
   var ini  = naam.split(' ').map(function(w){ return w[0]||''; }).join('').substring(0,2).toUpperCase();
-
-  document.getElementById('tn-avatar').textContent = ini;
+  document.getElementById('tn-avatar').firstChild.textContent = ini;
   document.getElementById('p-welcome').innerHTML = 'Goedemorgen, <em>' + naam.split(' ')[0] + '</em>';
-
   var live = currentTours.filter(function(t){ return t.status==='live'; });
-  var totalViews = currentTours.reduce(function(sum,t){ return sum + (t.views||0); }, 0);
+  var views = currentTours.reduce(function(s,t){ return s+(t.views||0); }, 0);
   document.getElementById('s-live').textContent  = live.length;
   document.getElementById('s-total').textContent = currentTours.length;
-  document.getElementById('s-views').textContent = totalViews;
-
-  // Profiel
-  document.getElementById('prof-avatar').textContent  = ini;
-  document.getElementById('prof-name').textContent    = naam;
-  document.getElementById('prof-company').textContent = currentKlant.bedrijf || '';
-  document.getElementById('prof-email').textContent   = currentUser.email;
-  document.getElementById('edit-naam').value    = currentKlant.naam || '';
-  document.getElementById('edit-bedrijf').value = currentKlant.bedrijf || '';
-
-  renderTours();
+  document.getElementById('s-views').textContent = views;
+  document.getElementById('prof-avatar').textContent = ini;
+  document.getElementById('prof-name').textContent   = naam;
+  document.getElementById('prof-company').textContent = currentKlant.bedrijf||'';
+  document.getElementById('prof-email').textContent  = currentUser.email;
+  document.getElementById('edit-naam').value    = currentKlant.naam||'';
+  document.getElementById('edit-bedrijf').value = currentKlant.bedrijf||'';
+  renderTours(); renderNotificaties(); renderFacturen();
 }
 
 function renderTours() {
   var list = document.getElementById('tours-list');
-  if (currentTours.length === 0) {
-    list.innerHTML =
-      '<div class="empty-state">' +
-        '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".9"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>' +
-        '<h3>Nog geen tours</h3>' +
-        '<p>Uw eerste tour verschijnt hier zodra deze is opgeleverd.</p>' +
-      '</div>';
+  if (!currentTours.length) {
+    list.innerHTML = '<div class="empty-state"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".9"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg><h3>Nog geen tours</h3><p>Uw eerste tour verschijnt hier zodra deze is opgeleverd.</p></div>';
     return;
   }
-
   list.innerHTML = '';
   currentTours.forEach(function(t) {
     var isLive = t.status === 'live';
-    var datum  = t.datum ? new Date(t.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '';
-    var tourUrl = t.slug ? 'https://www.explora360.nl/tour/' + t.slug : (t.matterport_url || '');
-
+    var isNieuw = isLive && !localStorage.getItem('notif_seen_' + t.id);
+    var datum = t.datum ? new Date(t.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '';
+    var url = t.slug ? 'https://www.explora360.nl/tour/' + t.slug : (t.matterport_url || '');
     var card = document.createElement('div');
-    card.className = 'tour-card ' + (isLive ? 'live' : 'processing');
+    card.className = 'tour-card ' + (isLive ? (isNieuw ? 'new-tour' : 'live') : 'processing');
     card.innerHTML =
       '<div class="tc-inner">' +
         '<div class="tc-top">' +
           '<div>' +
-            '<div class="tc-meta">' +
-              (datum ? '<span>' + datum + '</span>' : '') +
-              (t.type ? '<span>·</span><span>' + t.type + '</span>' : '') +
-            '</div>' +
+            '<div class="tc-meta">' + (datum?'<span>'+datum+'</span>':'') + (t.type?'<span>·</span><span>'+t.type+'</span>':'') + '</div>' +
             '<div class="tc-name">' + t.naam + '</div>' +
-            (t.adres ? '<div class="tc-address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>' + t.adres + '</div>' : '') +
+            (t.adres?'<div class="tc-address"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/></svg>'+t.adres+'</div>':'') +
           '</div>' +
-          '<span class="tc-badge ' + (isLive?'live':'proc') + '">' + (isLive?'Live':'Verwerking') + '</span>' +
+          '<span class="tc-badge '+(isLive?(isNieuw?'nieuw':'live'):'proc')+'">'+(isLive?(isNieuw?'Nieuw!':'Live'):'Verwerking')+'</span>' +
         '</div>' +
-        (isLive ? '<div class="tc-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' + (t.views||0) + ' keer bekeken</div>' : '') +
+        (isLive?'<div class="tc-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'+(t.views||0)+' keer bekeken</div>':'') +
         '<div class="tc-actions">' +
           (isLive
-            ? '<button class="tc-btn tc-btn-view" onclick="openTour(\'' + t.id + '\')">' +
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>Bekijken</button>' +
-              '<button class="tc-btn tc-btn-share" onclick="openShare(\'' + t.id + '\')">' +
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Delen</button>'
-            : '<button class="tc-btn tc-btn-proc" disabled>Wordt verwerkt — u ontvangt bericht zodra de tour live is</button>') +
+            ? '<button class="tc-btn tc-btn-view" onclick="openTour(\''+t.id+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>Bekijken</button>' +
+              '<button class="tc-btn tc-btn-share" onclick="openShare(\''+t.id+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Delen</button>' +
+              (url?'<button class="tc-btn tc-btn-embed" onclick="openEmbed(\''+t.id+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Embedcode</button>':'')
+            : '<button class="tc-btn tc-btn-proc" disabled>Wordt verwerkt — u ontvangt een melding zodra de tour live is</button>') +
         '</div>' +
       '</div>';
     list.appendChild(card);
   });
+  prevTourIds = currentTours.filter(function(t){ return t.status==='live'; }).map(function(t){ return t.id; });
 }
 
-// ── WELCOME ───────────────────────────────────────────────────────────────
-function showWelcome() {
-  document.getElementById('welcome-overlay').style.display = 'flex';
+function renderNotificaties() {
+  var list = document.getElementById('notif-list');
+  if (!notificaties.length) {
+    list.innerHTML = '<div class="notif-empty">Geen meldingen</div>';
+    return;
+  }
+  list.innerHTML = notificaties.map(function(n) {
+    var time = n.time ? new Date(n.time).toLocaleDateString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
+    return '<div class="notif-item '+(n.read?'':'unread')+'" onclick="markNotifRead(\''+n.id+'\')">' +
+      '<div class="notif-icon '+(n.type==='live'?'live':'info')+'">'+(n.type==='live'?'✓':'ℹ')+'</div>' +
+      '<div class="notif-body"><div class="notif-title">'+n.title+'</div><div class="notif-time">'+time+'</div></div>' +
+    '</div>';
+  }).join('');
 }
-function closeWelcome() {
-  document.getElementById('welcome-overlay').style.display = 'none';
+
+function markNotifRead(id) {
+  var n = notificaties.find(function(n){ return n.id===id; });
+  if (!n || n.read) return;
+  n.read = true;
+  localStorage.setItem('notif_seen_' + id.replace('tour_live_',''), 'true');
+  ongeLezenNotifs = Math.max(0, ongeLezenNotifs - 1);
+  updateNotifBadges(); renderNotificaties();
+}
+
+function renderFacturen() {
+  var list = document.getElementById('factuur-list');
+  if (!currentFacturen.length) {
+    list.innerHTML = '<div class="no-facturen">Nog geen facturen — facturen verschijnen hier zodra ze worden aangemaakt door Explora360</div>';
+    return;
+  }
+  list.innerHTML = currentFacturen.map(function(f) {
+    var d = f.datum ? new Date(f.datum).toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'}) : '';
+    var badgeClass = f.status==='betaald'?'f-betaald':f.status==='concept'?'f-concept':'f-open';
+    var badgeText  = f.status==='betaald'?'Betaald':f.status==='concept'?'Concept':'Openstaand';
+    return '<div class="factuur-item">' +
+      '<div class="factuur-info"><div class="factuur-omschr">' + (f.omschrijving||'Factuur') + '</div><div class="factuur-datum">' + d + '</div></div>' +
+      '<span class="factuur-badge '+badgeClass+'">'+badgeText+'</span>' +
+      '<div class="factuur-bedrag">€' + (parseFloat(f.bedrag||0).toFixed(2).replace('.',',')) + '</div>' +
+      (f.pdf_url?'<a href="'+f.pdf_url+'" target="_blank" class="factuur-link">PDF ↗</a>':'') +
+    '</div>';
+  }).join('');
 }
 
 // ── PANELS ────────────────────────────────────────────────────────────────
 function showPanel(name) {
   document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
   document.querySelectorAll('.tab-item').forEach(function(t){ t.classList.remove('active'); });
-  document.getElementById('panel-' + name).classList.add('active');
-  document.getElementById('tab-' + name).classList.add('active');
-  window.scrollTo(0, 0);
+  document.getElementById('panel-'+name).classList.add('active');
+  var tab = document.getElementById('tab-'+name);
+  if (tab) tab.classList.add('active');
+  window.scrollTo(0,0);
+  if (name === 'meldingen') {
+    // Mark all as read na 3 seconden
+    setTimeout(function(){
+      notificaties.forEach(function(n){ if(!n.read){ n.read=true; localStorage.setItem('notif_seen_'+n.id.replace('tour_live_',''),'true'); }});
+      ongeLezenNotifs = 0; updateNotifBadges();
+    }, 3000);
+  }
 }
 
-// ── TOUR VIEWER ───────────────────────────────────────────────────────────
+// ── VIEWER ────────────────────────────────────────────────────────────────
 async function openTour(id) {
-  var t = currentTours.find(function(t){ return t.id===id; });
-  if (!t || !t.matterport_url) return;
-
+  var t = currentTours.find(function(t){ return t.id===id; }); if(!t||!t.matterport_url) return;
   document.getElementById('viewer-title').textContent = t.naam;
-  document.getElementById('viewer-body').innerHTML =
-    '<iframe src="' + t.matterport_url + '" allowfullscreen allow="xr-spatial-tracking"></iframe>';
+  document.getElementById('viewer-body').innerHTML = '<iframe src="'+t.matterport_url+'" allowfullscreen allow="xr-spatial-tracking"></iframe>';
   document.getElementById('viewer').classList.add('open');
   document.body.style.overflow = 'hidden';
-
-  // View tellen
-  var newViews = (t.views || 0) + 1;
-  await sb.from('tours').update({ views: newViews }).eq('id', id);
-  t.views = newViews;
-  document.getElementById('s-views').textContent =
-    currentTours.reduce(function(sum,t){ return sum+(t.views||0); }, 0);
-  var viewEl = document.querySelector('[data-tourid="' + id + '"] .tc-views');
-  if (viewEl) viewEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' + newViews + ' keer bekeken';
+  // Mark notif as read
+  localStorage.setItem('notif_seen_' + id, 'true');
+  var nIdx = notificaties.findIndex(function(n){ return n.id==='tour_live_'+id; });
+  if (nIdx !== -1 && !notificaties[nIdx].read) { notificaties[nIdx].read=true; ongeLezenNotifs=Math.max(0,ongeLezenNotifs-1); updateNotifBadges(); }
+  // Views
+  var nv = (t.views||0)+1;
+  await sb.from('tours').update({views:nv}).eq('id',id);
+  t.views = nv;
 }
 
 function closeViewer() {
   document.getElementById('viewer').classList.remove('open');
-  document.getElementById('viewer-body').innerHTML = '<div class="viewer-ph"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><h3>Tour laden...</h3></div>';
+  document.getElementById('viewer-body').innerHTML = '';
   document.body.style.overflow = '';
 }
 
 // ── SHARE ─────────────────────────────────────────────────────────────────
 function openShare(id) {
-  var t = currentTours.find(function(t){ return t.id===id; });
-  if (!t) return;
-  currentShareUrl = t.slug ? 'https://www.explora360.nl/tour/' + t.slug : (t.matterport_url || '');
-  currentShareName = t.naam;
-  document.getElementById('share-tour-name').textContent = t.naam;
-  document.getElementById('share-url-text').textContent = currentShareUrl;
+  var t = currentTours.find(function(t){ return t.id===id; }); if(!t) return;
+  shareUrl  = t.slug ? 'https://www.explora360.nl/tour/'+t.slug : (t.matterport_url||'');
+  shareName = t.naam;
+  document.getElementById('share-name').textContent = t.naam;
+  document.getElementById('share-url-text').textContent = shareUrl;
   document.getElementById('share-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+function closeShare() { document.getElementById('share-modal').classList.remove('open'); document.body.style.overflow=''; }
+function copyShareUrl() { if(navigator.clipboard) navigator.clipboard.writeText(shareUrl).catch(function(){}); toast('Link gekopieerd','ok'); closeShare(); }
+function shareWA() { window.open('https://wa.me/?text='+encodeURIComponent('Bekijk mijn 360° virtuele tour: '+shareUrl),'_blank'); }
+function shareEmail() { window.location.href='mailto:?subject='+encodeURIComponent('Virtuele tour: '+shareName)+'&body='+encodeURIComponent('Bekijk mijn 360° virtuele tour:\n'+shareUrl); }
+function shareNative() { if(navigator.share) navigator.share({title:shareName,url:shareUrl}); else copyShareUrl(); }
 
-function closeShare(e) {
-  if (e && e.target !== document.getElementById('share-modal')) return;
-  document.getElementById('share-modal').classList.remove('open');
-  document.body.style.overflow = '';
+// ── EMBED ─────────────────────────────────────────────────────────────────
+function openEmbed(id) {
+  var t = currentTours.find(function(t){ return t.id===id; }); if(!t||!t.matterport_url) return;
+  embedCode = '<iframe src="' + t.matterport_url + '" width="100%" height="500" frameborder="0" allowfullscreen allow="xr-spatial-tracking" title="' + t.naam + '"></iframe>';
+  document.getElementById('embed-code-text').textContent = embedCode;
+  document.getElementById('embed-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+function closeEmbed() { document.getElementById('embed-modal').classList.remove('open'); document.body.style.overflow=''; }
+function copyEmbed() { if(navigator.clipboard) navigator.clipboard.writeText(embedCode).catch(function(){}); toast('Embedcode gekopieerd','ok'); closeEmbed(); }
 
-function copyShareUrl() {
-  if (navigator.clipboard) navigator.clipboard.writeText(currentShareUrl).catch(function(){});
-  showToast('Link gekopieerd', 'success');
-  document.getElementById('share-modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function shareWhatsApp() {
-  var msg = encodeURIComponent('Bekijk mijn 360° virtuele tour: ' + currentShareUrl);
-  window.open('https://wa.me/?text=' + msg, '_blank');
-}
-
-function shareEmail() {
-  var sub = encodeURIComponent('Virtuele tour: ' + currentShareName);
-  var body = encodeURIComponent('Hallo,\n\nBekijk mijn 360° virtuele tour via deze link:\n' + currentShareUrl + '\n\nGroeten');
-  window.location.href = 'mailto:?subject=' + sub + '&body=' + body;
-}
-
-function shareNative() {
-  if (navigator.share) {
-    navigator.share({ title: currentShareName, url: currentShareUrl });
-  } else {
-    copyShareUrl();
-  }
+// ── CONTACT FORMULIER ─────────────────────────────────────────────────────
+function stuurContactbericht() {
+  var naam    = document.getElementById('cf-naam').value.trim() || (currentKlant.naam||'Klant');
+  var subject = document.getElementById('cf-subject').value.trim();
+  var bericht = document.getElementById('cf-bericht').value.trim();
+  if (!subject || !bericht) { toast('Vul onderwerp en bericht in'); return; }
+  // Stuur via WhatsApp
+  var msg = 'Hallo Explora360,\n\n' + 'Naam: ' + naam + '\nOnderwerp: ' + subject + '\n\n' + bericht;
+  window.open('https://wa.me/31616076613?text='+encodeURIComponent(msg), '_blank');
+  document.getElementById('cf-bericht').value = '';
+  document.getElementById('cf-subject').value = '';
+  document.getElementById('cf-ok').style.display = 'block';
+  setTimeout(function(){ document.getElementById('cf-ok').style.display='none'; }, 4000);
 }
 
 // ── PROFIEL ───────────────────────────────────────────────────────────────
 async function saveProfile() {
-  var naam    = document.getElementById('edit-naam').value.trim();
-  var bedrijf = document.getElementById('edit-bedrijf').value.trim();
-  var btn     = document.getElementById('save-profile-btn');
-  var msg     = document.getElementById('profile-success');
-  btn.textContent = 'Opslaan...'; btn.disabled = true;
-  await sb.from('klanten').update({ naam: naam, bedrijf: bedrijf }).eq('id', currentUser.id);
-  currentKlant.naam    = naam;
-  currentKlant.bedrijf = bedrijf;
+  var naam = document.getElementById('edit-naam').value.trim();
+  var bed  = document.getElementById('edit-bedrijf').value.trim();
+  await sb.from('klanten').update({naam:naam,bedrijf:bed}).eq('id',currentUser.id);
+  currentKlant.naam=naam; currentKlant.bedrijf=bed;
   var ini = naam.split(' ').map(function(w){ return w[0]||''; }).join('').substring(0,2).toUpperCase();
-  document.getElementById('tn-avatar').textContent  = ini;
+  document.getElementById('tn-avatar').firstChild.textContent = ini;
   document.getElementById('prof-avatar').textContent = ini;
   document.getElementById('prof-name').textContent   = naam;
-  document.getElementById('prof-company').textContent = bedrijf;
-  document.getElementById('p-welcome').innerHTML = 'Goedemorgen, <em>' + naam.split(' ')[0] + '</em>';
-  btn.textContent = 'Opslaan →'; btn.disabled = false;
-  msg.style.display = 'block';
-  setTimeout(function(){ msg.style.display='none'; }, 3000);
-  showToast('Profiel opgeslagen', 'success');
+  document.getElementById('prof-company').textContent= bed;
+  document.getElementById('p-welcome').innerHTML = 'Goedemorgen, <em>'+naam.split(' ')[0]+'</em>';
+  document.getElementById('profile-ok').style.display='block';
+  setTimeout(function(){ document.getElementById('profile-ok').style.display='none'; },3000);
+  toast('Profiel opgeslagen','ok');
 }
 
 async function savePassword() {
-  var p1  = document.getElementById('new-pass').value;
-  var p2  = document.getElementById('new-pass2').value;
-  var btn = document.getElementById('save-pass-btn');
-  var msg = document.getElementById('pass-success');
-  if (p1.length < 8) { showToast('Minimaal 8 tekens'); return; }
-  if (p1 !== p2)     { showToast('Wachtwoorden komen niet overeen'); return; }
-  btn.textContent = 'Wijzigen...'; btn.disabled = true;
-  var res = await sb.auth.updateUser({ password: p1 });
-  if (res.error) { showToast('Fout: ' + res.error.message); }
-  else {
-    document.getElementById('new-pass').value  = '';
-    document.getElementById('new-pass2').value = '';
-    msg.style.display = 'block';
-    setTimeout(function(){ msg.style.display='none'; }, 3000);
-    showToast('Wachtwoord gewijzigd', 'success');
-  }
-  btn.textContent = 'Wachtwoord wijzigen →'; btn.disabled = false;
+  var p1 = document.getElementById('new-pass').value;
+  var p2 = document.getElementById('new-pass2').value;
+  if (p1.length<8) { toast('Minimaal 8 tekens'); return; }
+  if (p1!==p2) { toast('Wachtwoorden komen niet overeen'); return; }
+  var res = await sb.auth.updateUser({password:p1});
+  if (res.error) { toast('Fout: '+res.error.message); return; }
+  document.getElementById('new-pass').value=''; document.getElementById('new-pass2').value='';
+  document.getElementById('pass-ok').style.display='block';
+  setTimeout(function(){ document.getElementById('pass-ok').style.display='none'; },3000);
+  toast('Wachtwoord gewijzigd','ok');
 }
 
-// ── LOGOUT ────────────────────────────────────────────────────────────────
 async function doLogout() {
   await sb.auth.signOut();
-  currentUser = null; currentKlant = null; currentTours = [];
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('l-email').value = '';
-  document.getElementById('l-pass').value  = '';
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('l-email').value=''; document.getElementById('l-pass').value='';
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────────────
-function showToast(msg, type) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = type === 'success' ? 'show success' : 'show';
-  setTimeout(function(){ t.className = ''; }, 2800);
-}
+// ── WELCOME ───────────────────────────────────────────────────────────────
+function closeWelcome() { document.getElementById('welcome-overlay').style.display='none'; }
 
 // ── EVENTS ────────────────────────────────────────────────────────────────
 document.getElementById('login-btn').addEventListener('click', doLogin);
 document.getElementById('l-pass').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
 document.getElementById('logout-btn').addEventListener('click', doLogout);
-document.addEventListener('keydown', function(e){
-  if (e.key === 'Escape') { closeViewer(); closeShare(); closeWelcome(); }
-});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeViewer(); closeShare(); closeEmbed(); closeWelcome(); }});
 
 init();
 </script>
