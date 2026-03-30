@@ -113,7 +113,7 @@ h1.hh{line-height:1.01;margin-bottom:0}
 
 /* DIENSTEN */
 #diensten{padding:var(--sec) 0;background:linear-gradient(180deg,var(--ink) 0%,var(--ink2) 100%)}
-.dg{display:grid;grid-template-columns:5fr 4fr;gap:clamp(48px,8vw,110px);align-items:start}
+.dg{display:flex;flex-direction:column;gap:clamp(36px,5vw,60px)}
 .dg-l h2{margin-top:16px;max-width:500px}
 .dg-l p{color:rgba(255,255,255,.38);margin-top:18px;max-width:420px}
 .dg-l p+p{margin-top:11px}
@@ -277,13 +277,12 @@ h1.hh{line-height:1.01;margin-bottom:0}
 .contact-l h2{color:var(--white);margin-top:16px;max-width:380px}
 .contact-l p{color:rgba(255,255,255,.38);margin-top:18px;font-size:.84rem;max-width:380px;line-height:1.75}
 .contact-details{margin-top:36px;display:flex;flex-direction:column;gap:0}
-.cd{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.cd{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .cd-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3)}
 .cd-val{font-size:.82rem;color:var(--white);font-family:var(--fs);font-weight:300}
 .contact-r{display:flex;flex-direction:column;gap:10px}
 
 /* REVIEWS */
-#reviews{padding:var(--sec) 0;background:var(--ink2);border-top:1px solid rgba(255,255,255,.03)}
 .rhead{max-width:440px;margin-bottom:clamp(44px,6vw,72px)}
 .rhead p{color:rgba(255,255,255,.35);margin-top:12px;font-size:.82rem}
 .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:1px}
@@ -300,32 +299,22 @@ h1.hh{line-height:1.01;margin-bottom:0}
 .cp h3{color:var(--white);margin-bottom:10px}.cp p{color:rgba(255,255,255,.34);font-size:.78rem}
 .cp-note{margin-top:12px;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);opacity:.58;display:flex;align-items:center;gap:8px}
 .cp-note::before{content:'';display:block;width:16px;height:1px;background:var(--blue)}
-.cform{display:flex;flex-direction:column;gap:9px}
-.cinput{padding:13px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-bottom:none;color:var(--white);font-family:var(--fb);font-size:.78rem;outline:none;transition:border-color .22s;width:100%}
-.cinput:last-of-type{border-bottom:1px solid rgba(255,255,255,.1)}
-.cinput::placeholder{color:rgba(255,255,255,.19)}
-.cinput:focus{border-color:rgba(47,126,245,.42)}
-.cform-row{display:flex}.cinput-e{flex:1;border-right:none}
-.cbtn{padding:13px 20px;background:var(--blue);color:var(--ink);border:none;font-family:var(--fb);font-size:.57rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .22s;white-space:nowrap}
-.cbtn:hover{background:var(--blue-hi)}
-.cleg{font-size:.57rem;color:rgba(255,255,255,.15);margin-top:7px}
-.cok{display:none;color:var(--blue);font-size:.74rem;margin-top:10px}
 
 footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px solid rgba(255,255,255,.04)}
 .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(24px,5vw,62px);margin-bottom:clamp(40px,5.5vw,62px)}
 .fbrand .flogo{font-family:var(--fs);font-size:1.5rem;letter-spacing:.06em}
 .fbrand .flogo em{font-style:normal;color:var(--blue)}
-.fbrand p{font-size:.72rem;color:rgba(255,255,255,.19);margin-top:11px;max-width:220px;line-height:1.82}
+.fbrand p{font-size:.74rem;color:rgba(255,255,255,.42);margin-top:11px;max-width:260px;line-height:1.9}
 .fil{margin-top:18px;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);opacity:.48;display:flex;align-items:center;gap:8px}
 .fil::before{content:'';display:block;width:14px;height:1px;background:var(--blue)}
-.fcol h5{font-size:.54rem;letter-spacing:.19em;text-transform:uppercase;color:rgba(255,255,255,.15);margin-bottom:14px}
+.fcol h5{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:14px}
 .fcol ul{list-style:none}.fcol ul li{margin-bottom:7px}
-.fcol ul a{font-size:.72rem;color:rgba(255,255,255,.22);transition:color .2s}
+.fcol ul a{font-size:.74rem;color:rgba(255,255,255,.48);transition:color .2s}
 .fcol ul a:hover{color:rgba(255,255,255,.68)}
 .fbot{padding-top:20px;border-top:1px solid rgba(255,255,255,.033);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.fcopy{font-size:.6rem;color:rgba(255,255,255,.12);letter-spacing:.04em}
+.fcopy{font-size:.62rem;color:rgba(255,255,255,.32);letter-spacing:.04em}
 .fsoc{display:flex;gap:18px}
-.fsoc a{font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.17);transition:color .2s}
+.fsoc a{font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.38);transition:color .2s}
 .fsoc a:hover{color:var(--blue)}
 .sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(15,22,35,.96);backdrop-filter:blur(22px);border-top:1px solid rgba(47,126,245,.17);padding:12px 0;z-index:700;transform:translateY(100%);transition:transform .48s var(--ease)}
 .sticky.on{transform:translateY(0)}
@@ -335,7 +324,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
 .scl{background:none;border:none;color:rgba(255,255,255,.25);font-size:1.05rem;cursor:pointer;line-height:1;padding:3px}
 .r{opacity:0;transform:translateY(22px);transition:opacity .78s var(--ease),transform .78s var(--ease)}
 .r.go{opacity:1;transform:none}
-.r.d1{transition-delay:.1s}.r.d2{transition-delay:.2s}.r.d3{transition-delay:.28s}
+.r.d1{transition-delay:.1s}.r.d2{}.r.d3{transition-delay:.28s}
 
 /* ADD-ONS */
 #addons{padding:var(--sec) 0;background:var(--ink);border-top:1px solid rgba(255,255,255,.04)}
@@ -393,6 +382,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
 }
 @media(max-width:640px){
   .sectors,.tnums,.pcards,.custom-block,.port-grid{grid-template-columns:1fr}
+  #workflow .wrap > div{grid-template-columns:1fr !important}
   .sek-grid{grid-template-columns:1fr 1fr}
   .nlinks{display:none}.burger{display:flex}.fgrid{grid-template-columns:1fr}
   .nav-portal-btn{display:flex}
@@ -406,8 +396,8 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
 .over-values{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04)}
 .oval{display:flex;align-items:flex-start;gap:16px;background:var(--ink2);padding:22px 24px;transition:background .22s}
 .oval:hover{background:rgba(47,126,245,.06)}
-.oval-icon{font-size:.7rem;color:var(--blue);flex-shrink:0;margin-top:3px;opacity:.7}
-.oval-text{display:flex;flex-direction:column;gap:4px}
+.oval-icon{font-size:.7rem;color:var(--blue);flex-shrink:0;margin-top:3px;opacity:.9}
+.oval-text strong{font-size:.76rem;color:rgba(255,255,255,.85);font-weight:500}.oval-text span{font-size:.72rem;color:rgba(255,255,255,.48);line-height:1.6}.oval-text{display:flex;flex-direction:column;gap:5px}
 .oval-text strong{font-size:.78rem;font-weight:500;color:var(--white);letter-spacing:.03em}
 .oval-text span{font-size:.72rem;color:rgba(255,255,255,.38);line-height:1.65}
 .faq-head{padding:clamp(48px,7vw,80px) 0 32px}
@@ -476,7 +466,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       </ul>
       <div class="nright">
         <a href="portaal.html" class="btn btn-wire nav-portal-btn" style="padding:9px 14px;font-size:.5rem">Portaal</a>
-        <a href="#contact" class="btn btn-blue" style="padding:9px 14px;font-size:.5rem">Contact</a>
+        <a href="offerte.html" class="btn btn-blue" style="padding:9px 14px;font-size:.5rem">Offerte</a>
         <div class="burger" id="burger"><span></span><span></span><span></span></div>
       </div>
     </div>
@@ -562,14 +552,8 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       <h2>Uw ruimte.<br><em class="si" style="color:var(--mist)">Perfect</em><br>vastgelegd.</h2>
       <p>Explora360 maakt van elke ruimte een meeslepende, interactieve 360°-ervaring. Bezoekers lopen virtueel door uw pand — van elke hoek, op elk device, op elk moment.</p>
       <p>Met professionele 360°-apparatuur leggen we ieder detail vast in scherpe HDR-beelden. Fotorealistische tours die vertrouwen wekken nog voor de eerste bezichtiging.</p>
-      <div class="sectors r d2">
-        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div><div class="sc-title">Woningen &amp; Appartementen</div><div class="sc-desc">Meer bezichtigingen, minder no-shows. Kopers bekijken uw woning op eigen tempo.</div></div>
-        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V7a4 4 0 0 0-8 0v14"/><path d="M2 11h20"/></svg></div><div class="sc-title">Hotels &amp; B&amp;B's</div><div class="sc-desc">Hogere conversie op Booking.com en direct-boekingen door transparantie.</div></div>
-        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M12 2L2 19h20L12 2z"/><path d="M9 19v-4a3 3 0 0 1 6 0v4"/></svg></div><div class="sc-title">Campings &amp; Glamping</div><div class="sc-desc">Scan uw sanitair, receptie en verblijven voor optimale online presentatie.</div></div>
-        <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="3" y="2" width="18" height="20" rx="1"/><path d="M9 22V12h6v10"/><path d="M3 7h4M3 11h4M3 15h4M17 7h4M17 11h4M17 15h4"/></svg></div><div class="sc-title">Kantoren &amp; Showrooms</div><div class="sc-desc">Virtuele rondleidingen voor huurders of klanten — 24/7 beschikbaar.</div></div>
-      </div>
     </div>
-    <div class="r d2">
+    <div class="r">
       <span class="eye" style="display:block;margin-bottom:20px">Hoe het werkt</span>
       <div class="how">
         <div class="hs"><div class="hn">01</div><div class="hc"><h4>Afspraak inplannen</h4><p>U kiest een datum. Wij komen op locatie met professionele 360°-apparatuur — compact genoeg voor élke ruimte.</p></div></div>
@@ -580,6 +564,33 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       </div>
     </div>
   </div></div>
+</section>
+
+<section id="workflow" style="padding:var(--sec) 0;background:var(--ink2);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:start">
+      <div class="r">
+        <span class="eye">Van opname tot portaal</span><span class="rule"></span>
+        <h2>Hoe het<br><em class="si" style="color:var(--mist)">werkt.</em></h2>
+        <p style="color:rgba(255,255,255,.42);margin-top:18px;font-size:.84rem;line-height:1.8;max-width:360px">Van de eerste HDR-opname tot uw persoonlijk klantportaal — alles binnen 24 uur geregeld.</p>
+        <div style="margin-top:28px"><a href="offerte.html" class="btn btn-blue arr" style="padding:13px 28px;font-size:.58rem">Offerte aanvragen <span>→</span></a></div>
+      </div>
+      <div>
+<div class="svis">
+        <div class="sv-t">360° workflow &amp; klantportaal</div>
+        <div class="svsteps">
+          <div class="svs"><div class="svsdot"></div><div><h5>HDR-opname per ruimte</h5><p>Camera schiet automatisch 3 belichtingen en combineert ze direct in camera</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:var(--blue-hi)"></div><div><h5>Auto-stitch &amp; cloud sync</h5><p>Twee 180°-lenzen samengesteld tot één naadloos beeld — automatisch geüpload naar Matterport Cloud</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:var(--amber)"></div><div><h5>Nabewerking &amp; levering</h5><p>RAW bestanden professioneel verfijnd in Lightroom. Tour live binnen 24 uur na opname</p></div></div>
+          <div class="svs" style="border-top:1px solid rgba(74,144,247,.12);margin-top:8px;padding-top:14px"><div class="svsdot" style="background:var(--green)"></div><div><h5>Persoonlijk klantportaal</h5><p>Elke klant krijgt direct toegang via <a href="portaal.html" style="color:var(--blue-hi)">explora360.nl/portaal</a> — tours bekijken, delen en embedden</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:var(--green);opacity:.6"></div><div><h5>Deelbaar &amp; embedbaar</h5><p>Directe link voor WhatsApp, e-mail of social media. Embedcode voor eigen website inbegrepen</p></div></div>
+          <div class="svs"><div class="svsdot" style="background:rgba(46,196,112,.4)"></div><div><h5>Facturen &amp; updates</h5><p>Facturen en seizoensupdates direct zichtbaar in het portaal. Altijd actueel</p></div></div>
+        </div>
+        <div class="sv-badge">Live · explora360.nl</div>
+      </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="sectoren">
@@ -629,18 +640,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
         <div class="tn a"><span class="tnv">24<em>u</em></span><div class="tnd">maximale levertijd van uw complete virtuele tour inclusief embed-link</div></div>
       </div>
     </div>
-    <div class="tech-grid r">
-      <div class="svis">
-        <div class="sv-t">360° workflow — live status</div>
-        <div class="svsteps">
-          <div class="svs"><div class="svsdot"></div><div><h5>HDR-opname per ruimte</h5><p>Camera schiet automatisch 3 belichtingen en combineert ze direct in camera</p></div></div>
-          <div class="svs"><div class="svsdot" style="background:var(--blue-hi)"></div><div><h5>Auto-stitch in camera</h5><p>Twee 180°-lenzen samengesteld tot één naadloos 360°-beeld</p></div></div>
-          <div class="svs"><div class="svsdot" style="background:var(--amber)"></div><div><h5>Cloud sync via Matterport app</h5><p>Data automatisch geüpload naar Matterport Cloud — tour staat live nog op locatie</p></div></div>
-          <div class="svs"><div class="svsdot" style="background:rgba(47,126,245,.38)"></div><div><h5>Nabewerking in Lightroom</h5><p>RAW DNG-bestanden professioneel verfijnd in Lightroom voor maximale kwaliteit</p></div></div>
-          <div class="svs"><div class="svsdot" style="background:rgba(47,126,245,.38)"></div><div><h5>Levering embed-link &amp; foto's</h5><p>Matterport tour link + 23MP JPEG-exports geleverd binnen 24 uur</p></div></div>
-        </div>
-        <div class="sv-badge">Live · explora360.nl</div>
-      </div>
+    <div class="tech-grid r" style="grid-template-columns:1fr">
       <div class="tfeats">
         <div class="tf"><div class="tf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M3 9a9 9 0 0 1 18 0v6a9 9 0 0 1-18 0V9z"/></svg></div><div class="tf-title">Grote sensor · uitstekend in weinig licht</div><div class="tf-body">Professionele sensors voor maximale beeldkwaliteit. Scherp tot in de verste hoek, ook in donkere ruimtes en bij sterk tegenlicht.</div></div>
         <div class="tf"><div class="tf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v1m0 16v1M4.22 4.22l.7.7m13.16 13.16.7.7M3 12h1m16 0h1M4.22 19.78l.7-.7M18.36 5.64l.7-.7"/><circle cx="12" cy="12" r="4"/></svg></div><div class="tf-title">HDR in 6 seconden</div><div class="tf-body">3 belichtingen automatisch gecombineerd — perfect voor ruimtes met ramen. RAW DNG voor maximale bewerkingsruimte.</div></div>
@@ -945,17 +945,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
   </div>
 </section>
 
-<section id="reviews">
-  <div class="wrap">
-    <div class="rhead r">
-      <span class="eye">Klantreviews</span><span class="rule"></span>
-      <h2>Wat onze klanten<br><em class="si" style="color:var(--mist)">zeggen.</em></h2>
-      <p>Van makelaars tot AirBnB-superhosts — lees hoe Explora360 het verschil maakt.</p>
-    </div>
-    <div class="quotes r">
-      <div class="qt" style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;min-height:160px;border:1px dashed rgba(255,255,255,.08)"><div style="text-align:center;padding:32px"><div style="font-family:var(--fs);font-size:1.6rem;font-weight:300;color:rgba(255,255,255,.2);margin-bottom:10px">Klantreviews</div><div style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.15)">Volgt binnenkort</div></div></div>    </div>
-  </div>
-</section>
+
 
 
 <section id="over">
@@ -964,15 +954,15 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       <div class="over-copy">
         <span class="eye">Over Explora360</span>
         <h2>Persoonlijk.<br/><em class="si">Professioneel.</em></h2>
-        <p style="margin-top:18px;font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.85;max-width:480px">Explora360 is een gespecialiseerd bedrijf dat professionele 360&#176; virtuele tours maakt voor woningen, hotels, AirBnB&#8217;s en zakelijke locaties in Nederland.</p>
-        <p style="margin-top:14px;font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.85;max-width:480px">Wij werken met de nieuwste Matterport-technologie en leveren standaard binnen 24 uur. Elke klant krijgt een persoonlijk portaal met directe toegang tot zijn tours en deelbare links.</p>
-        <p style="margin-top:14px;font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.85;max-width:480px">In 2026 werken wij met introductieprijzen in ruil voor portfolio-recht en een eerlijke review. Zo bouwen wij samen aan een sterk fundament.</p>
+        <p style="margin-top:18px;font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.9;max-width:520px">Explora360 is een gespecialiseerd bedrijf dat professionele 360&#176; virtuele tours maakt voor woningen, hotels, AirBnB&#8217;s en zakelijke locaties in Nederland.</p>
+        <p style="margin-top:14px;font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.9;max-width:520px">Wij werken met de nieuwste Matterport-technologie en leveren standaard binnen 24 uur — van opname tot live tour.</p>
+        <p style="margin-top:14px;font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.9;max-width:520px">In 2026 werken wij met introductieprijzen in ruil voor portfolio-recht en een eerlijke review. Zo bouwen wij samen aan een sterk fundament.</p>
         <a href="#contact" class="btn btn-blue" style="margin-top:28px;padding:13px 28px;font-size:.58rem">Neem contact op &rarr;</a>
       </div>
       <div class="over-values">
         <div class="oval"><div class="oval-icon">&#9651;</div><div class="oval-text"><strong>Eerlijk &amp; transparant</strong><span>Vaste prijzen, geen verborgen kosten. U weet vooraf precies wat u krijgt.</span></div></div>
         <div class="oval"><div class="oval-icon">&#9711;</div><div class="oval-text"><strong>Levering binnen 24 uur</strong><span>Opname vandaag, tour morgen live. Standaard voor elk pakket.</span></div></div>
-        <div class="oval"><div class="oval-icon">&#9670;</div><div class="oval-text"><strong>Persoonlijk portaal</strong><span>Elke klant krijgt eigen inlog met live toegang tot zijn tours en deellinks.</span></div></div>
+
         <div class="oval"><div class="oval-icon">&#9651;</div><div class="oval-text"><strong>Matterport platform</strong><span>Toonaangevende technologie. Compatibel met Funda, Booking.com en Google.</span></div></div>
       </div>
     </div>
@@ -986,29 +976,40 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
         <span class="eye">Contact</span>
         <span class="rule"></span>
         <h2>Klaar om te<br><em class="si" style="color:var(--blue-hi)">starten?</em></h2>
-        <p>Vul uw gegevens in — wij nemen binnen 1 werkdag contact op met een persoonlijke offerte op maat.</p>
-        <div class="contact-details">
-          <div class="cd"><span class="cd-label">Telefoon / WhatsApp</span><span class="cd-val"><a href="tel:+31616076613" style="color:inherit;text-decoration:none">+31 6 16 07 66 13</a></span></div>
-          <div class="cd"><span class="cd-label">E-mail</span><span class="cd-val">info&#64;explora360&#46;nl</span></div>
-          <div class="cd"><span class="cd-label">Reactietijd</span><span class="cd-val">Binnen 1 werkdag</span></div>
-          <div class="cd"><span class="cd-label">Levering</span><span class="cd-val">Binnen 24 uur na opname</span></div>
+        <p style="color:rgba(255,255,255,.45);margin-top:16px;font-size:.84rem;line-height:1.8;max-width:380px">Vraag een vrijblijvende offerte aan — kies uw type locatie, pakket en add-ons. Wij reageren binnen 24 uur.</p>
+        <div class="contact-details" style="margin-top:28px">
+          <div class="cd"><span class="cd-label" style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38)">Telefoon / WhatsApp</span><span class="cd-val" style="font-size:.8rem;color:rgba(255,255,255,.75)"><a href="tel:+31616076613" style="color:inherit;text-decoration:none">+31 6 16 07 66 13</a></span></div>
+          <div class="cd"><span class="cd-label" style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38)">E-mail</span><span class="cd-val" style="font-size:.8rem;color:rgba(255,255,255,.75)">info&#64;explora360&#46;nl</span></div>
+          <div class="cd"><span class="cd-label" style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38)">Reactietijd</span><span class="cd-val" style="font-size:.8rem;color:rgba(255,255,255,.75)">Binnen 1 werkdag</span></div>
+          <div class="cd"><span class="cd-label" style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38)">Levering</span><span class="cd-val" style="font-size:.8rem;color:rgba(255,255,255,.75)">Binnen 24 uur na opname</span></div>
         </div>
-        <div class="cp-note" style="margin-top:28px">Vrijblijvend · Geen verplichtingen</div>
       </div>
       <div class="contact-r r d2">
-        <form class="cform" id="cform" action="https://api.web3forms.com/submit" method="POST" onsubmit="csubmit(event)">
-          <input type="hidden" name="access_key" value="9dc3ccaa-614a-485c-af36-5b69168e90d4"/>
-          <input type="hidden" name="subject" value="Nieuwe offerte aanvraag - Explora360"/>
-          <input type="checkbox" name="botcheck" style="display:none"/>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input class="cinput" type="text" name="naam" placeholder="Naam" id="ci-name" required/><input class="cinput" type="tel" name="telefoon" placeholder="Telefoonnummer"/></div>
-          <input class="cinput" style="border-bottom:1px solid rgba(255,255,255,.1)" type="email" name="email" placeholder="E-mailadres" id="ci-email" required/>
-          <input class="cinput" style="border-bottom:1px solid rgba(255,255,255,.1)" type="text" name="type_pand" placeholder="Type pand"/>
-          <textarea class="cinput" name="bericht" style="border-bottom:1px solid rgba(255,255,255,.1);resize:vertical;min-height:100px" placeholder="Aanvullende informatie..."></textarea>
-          <button class="cbtn" type="submit" id="csubmit-btn" style="align-self:flex-start;padding:15px 36px;font-size:.6rem">Verstuur aanvraag &#8594;</button>
-        </form>
-        <div class="cleg">Uw gegevens worden uitsluitend gebruikt voor het verwerken van uw aanvraag.</div>
-        <div class="cok" id="cok" style="display:none">Aanvraag ontvangen - wij nemen binnen 1 werkdag contact op.</div>
-        <div class="cerr" id="cerr" style="display:none;margin-top:12px;font-size:.72rem;color:#e05555;padding:10px 14px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.18)">Er ging iets mis. Mail naar info&#64;explora360&#46;nl</div>
+        <div style="background:var(--ink2);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--blue);padding:clamp(28px,4vw,44px)">
+          <div style="font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Offerte aanvragen</div>
+          <div style="font-family:var(--fs);font-size:1.5rem;font-weight:300;line-height:1.2;margin-bottom:10px">Vrijblijvend.<br><em style="color:var(--mist)">Binnen 24 uur reactie.</em></div>
+          <p style="font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.75;margin-bottom:24px">Kies uw locatietype, pakket en eventuele add-ons in onze offerte-tool. Wij sturen u een persoonlijke offerte op maat.</p>
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px">
+            <div style="background:var(--ink3);padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.74rem;color:rgba(255,255,255,.55)">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--blue-hi);flex-shrink:0">1</span>
+              Kies uw locatietype
+            </div>
+            <div style="background:var(--ink3);padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.74rem;color:rgba(255,255,255,.55)">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--blue-hi);flex-shrink:0">2</span>
+              Selecteer pakket &amp; add-ons
+            </div>
+            <div style="background:var(--ink3);padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.74rem;color:rgba(255,255,255,.55)">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--blue-hi);flex-shrink:0">3</span>
+              Vul uw gegevens in — wij reageren binnen 24 uur
+            </div>
+          </div>
+          <a href="offerte.html" class="btn btn-blue arr" style="width:100%;justify-content:center;padding:14px 28px;font-size:.6rem">Offerte aanvragen <span>→</span></a>
+          <div style="margin-top:14px;display:flex;gap:12px">
+            <a href="https://wa.me/31616076613" target="_blank" class="btn btn-wire" style="flex:1;justify-content:center;padding:11px 16px;font-size:.54rem;border-color:rgba(37,211,102,.25);color:#4dda8a">WhatsApp</a>
+            <a href="mailto:info@explora360.nl" class="btn btn-wire" style="flex:1;justify-content:center;padding:11px 16px;font-size:.54rem">E-mail</a>
+          </div>
+          <div style="margin-top:14px;font-size:.62rem;color:rgba(255,255,255,.2);text-align:center">Vrijblijvend · Geen verplichtingen · Geen spam</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1021,8 +1022,8 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
         <div class="flogo">Explora<em>360</em></div>
         <p>Professionele 360° virtuele tours voor woningen, hotels, AirBnB's en campings. Levering binnen 24 uur.</p>
         <div style="margin-top:20px;display:flex;flex-direction:column;gap:6px">
-          <a href="tel:+31616076613" style="font-size:.7rem;color:rgba(255,255,255,.28);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.28)'">+31 6 16 07 66 13</a>
-          <a href="/cdn-cgi/l/email-protection#82ebece4edc2e7faf2eeedf0e3b1b4b2acecee" style="font-size:.7rem;color:rgba(255,255,255,.28);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.28)'">info&#64;explora360&#46;nl</a>
+          <a href="tel:+31616076613" style="font-size:.74rem;color:rgba(255,255,255,.55);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.9)'" onmouseout="this.style.color='rgba(255,255,255,.55)'">+31 6 16 07 66 13</a>
+          <a href="/cdn-cgi/l/email-protection#82ebece4edc2e7faf2eeedf0e3b1b4b2acecee" style="font-size:.74rem;color:rgba(255,255,255,.55);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.9)'" onmouseout="this.style.color='rgba(255,255,255,.55)'">info&#64;explora360&#46;nl</a>
         </div>
       </div>
       <div class="fcol">
@@ -1040,7 +1041,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
         <h5>Klanten</h5>
         <ul>
           <li><a href="portaal.html">Tourportaal</a></li>
-          <li><a href="#contact">Offerte aanvragen</a></li>
+          <li><a href="offerte.html">Offerte aanvragen</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="privacy.html">Privacyverklaring</a></li>
         </ul>
@@ -1100,27 +1101,6 @@ function cu(id,to,suf='',dur=1900){
 
 function toggleFaq(el){var o=el.classList.contains("open");document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open");});if(!o)el.classList.add("open");}
 function switchTab(btn,tab){document.querySelectorAll(".pc-tab").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-vastgoed").style.display=tab==="vastgoed"?"block":"none";document.getElementById("tab-zakelijk").style.display=tab==="zakelijk"?"block":"none";}
-async function csubmit(e){
-  e.preventDefault();
-  var form=document.getElementById("cform"),btn=document.getElementById("csubmit-btn"),ok=document.getElementById("cok"),err=document.getElementById("cerr");
-  err.style.display="none";btn.textContent="Versturen...";btn.disabled=true;
-  try{
-    var res=await fetch("https://api.web3forms.com/submit",{method:"POST",body:new FormData(form),headers:{"Accept":"application/json"}});
-    var json=await res.json();
-    if(json.success){form.style.display="none";ok.style.display="block";}
-    else{err.style.display="block";btn.textContent="Verstuur aanvraag";btn.disabled=false;}
-  }catch(ex){err.style.display="block";btn.textContent="Verstuur aanvraag";btn.disabled=false;}
-}
-function csubmit_old(){
-  const n=document.getElementById('ci-name'),e=document.getElementById('ci-email');
-  if(!n.value||!e.value||!e.value.includes('@')){
-    if(!n.value)n.style.borderColor='rgba(200,70,70,.45)';
-    if(!e.value||!e.value.includes('@'))e.style.borderColor='rgba(200,70,70,.45)';
-    return;
-  }
-  document.getElementById('cform').style.display='none';
-  document.getElementById('cok').style.display='block';
-}
 document.getElementById('burger').addEventListener('click',function(){
   const ul=document.querySelector('.nlinks');
   if(ul.style.display==='flex'){ul.style.display=''}

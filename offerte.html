@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Offerte aanvragen — Explora360</title>
+<meta name="description" content="Vraag een vrijblijvende offerte aan voor een professionele 360° virtuele tour. Binnen 24 uur reactie."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.explora360.nl/offerte.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--white:#fafbfd;--mist:#94aac8;
+  --blue:#4a90f7;--blue-lo:#2d6fd4;--blue-hi:#82b4fa;
+  --amber:#e8a030;--amber-hi:#f0bc60;--green:#2ec470;
+  --fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);--pad:clamp(20px,5vw,60px)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;min-height:100vh}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:800;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(26,35,51,.97);backdrop-filter:blur(22px)}
+.nav-inner{max-width:860px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{font-family:var(--fs);font-size:1.3rem;font-weight:400}.nav-logo em{font-style:normal;color:var(--blue)}
+.nav-back{font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.32);display:flex;align-items:center;gap:7px;transition:color .22s}
+.nav-back:hover{color:var(--white)}
+.nav-back svg{width:13px;height:13px}
+
+/* PAGE */
+.page{max-width:860px;margin:0 auto;padding:clamp(36px,6vw,64px) var(--pad)}
+.page-head{margin-bottom:clamp(32px,5vw,52px)}
+.eye{font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:10px}
+.page-title{font-family:var(--fs);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;line-height:1.08}
+.page-title em{font-style:italic;color:var(--mist)}
+.page-sub{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.8;max-width:520px;margin-top:12px}
+
+/* PROGRESS */
+.progress-bar{display:flex;align-items:center;gap:0;margin-bottom:clamp(28px,4vw,44px)}
+.prog-step{display:flex;align-items:center;gap:10px;flex:1}
+.prog-step:last-child{flex:0}
+.prog-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:500;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.3);flex-shrink:0;transition:all .3s var(--ease)}
+.prog-num.active{background:var(--blue);border-color:var(--blue);color:var(--ink)}
+.prog-num.done{background:var(--green);border-color:var(--green);color:var(--ink)}
+.prog-label{font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);transition:color .3s;white-space:nowrap}
+.prog-label.active{color:var(--white)}
+.prog-line{flex:1;height:1px;background:rgba(255,255,255,.08);margin:0 12px;transition:background .3s}
+.prog-line.done{background:var(--green)}
+
+/* STEPS */
+.step{display:none;animation:fadein .35s var(--ease)}
+.step.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.step-title{font-family:var(--fs);font-size:1.6rem;font-weight:300;margin-bottom:6px}
+.step-sub{font-size:.74rem;color:rgba(255,255,255,.35);margin-bottom:28px;line-height:1.7}
+
+/* TYPE CARDS */
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px}
+.type-card{background:var(--ink2);padding:24px 20px;cursor:pointer;border-top:2px solid transparent;transition:all .25s var(--ease);position:relative}
+.type-card:hover{background:rgba(74,144,247,.05);border-top-color:rgba(74,144,247,.4)}
+.type-card.selected{border-top-color:var(--blue);background:rgba(74,144,247,.08)}
+.type-card.selected::after{content:'✓';position:absolute;top:12px;right:12px;font-size:.7rem;color:var(--blue-hi)}
+.type-icon{font-size:1.4rem;margin-bottom:10px}
+.type-name{font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:4px}
+.type-desc{font-size:.68rem;color:rgba(255,255,255,.35);line-height:1.6}
+
+/* PAKKET CARDS */
+.pakket-grid{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px}
+.pakket-card{background:var(--ink2);padding:18px 20px;cursor:pointer;border-left:2px solid transparent;transition:all .22s;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.pakket-card:hover{background:rgba(74,144,247,.04);border-left-color:rgba(74,144,247,.3)}
+.pakket-card.selected{border-left-color:var(--blue);background:rgba(74,144,247,.07)}
+.pakket-left{}
+.pakket-name{font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:3px}
+.pakket-desc{font-size:.66rem;color:rgba(255,255,255,.32);line-height:1.5}
+.pakket-price{font-family:var(--fs);font-size:1.3rem;font-weight:300;color:var(--blue-hi);flex-shrink:0}
+.pakket-popular{font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--blue);color:var(--ink);margin-left:8px;vertical-align:middle}
+
+/* ADDON GRID */
+.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px}
+.addon-card{background:var(--ink2);padding:14px 16px;cursor:pointer;border-top:1px solid transparent;transition:all .2s;display:flex;align-items:flex-start;gap:10px}
+.addon-card:hover{background:rgba(255,255,255,.02)}
+.addon-card.selected{background:rgba(74,144,247,.06)}
+.addon-check{width:18px;height:18px;border:1px solid rgba(255,255,255,.18);border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.addon-card.selected .addon-check{background:var(--blue);border-color:var(--blue);color:var(--ink)}
+.addon-name{font-size:.72rem;color:var(--white);margin-bottom:2px}
+.addon-price{font-size:.6rem;color:rgba(255,255,255,.35)}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.flbl{font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:6px;margin-top:12px}
+.flbl:first-child{margin-top:0}
+.finput{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--white);font-size:.8rem;outline:none;transition:border-color .22s;-webkit-appearance:none;border-radius:0;font-family:var(--fb)}
+.finput:focus{border-color:rgba(74,144,247,.45)}
+.finput::placeholder{color:rgba(255,255,255,.18)}
+textarea.finput{resize:vertical;min-height:90px;line-height:1.6}
+
+/* SAMENVATTING */
+.summary-box{background:var(--ink2);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--blue);padding:24px;margin-bottom:24px}
+.summary-row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.76rem}
+.summary-row:last-of-type{border-bottom:none}
+.summary-row .lbl{color:rgba(255,255,255,.45)}
+.summary-row .val{color:var(--white);font-weight:400;text-align:right}
+.summary-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;margin-top:4px;border-top:1px solid rgba(255,255,255,.1)}
+.summary-total .lbl{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.summary-total .val{font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--blue-hi)}
+.summary-btw{font-size:.6rem;color:rgba(255,255,255,.25);text-align:right;margin-top:2px}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:24px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid;font-family:var(--fb);font-size:.6rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .22s;background:none}
+.btn svg{width:13px;height:13px}
+.btn-blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}.btn-blue:hover{background:var(--blue-hi)}
+.btn-blue:disabled{opacity:.45;cursor:default}
+.btn-wire{color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.14)}.btn-wire:hover{color:var(--white);border-color:rgba(255,255,255,.35)}
+
+/* SUCCESS */
+#step-success{text-align:center;padding:40px 0}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(46,196,112,.12);border:1px solid rgba(46,196,112,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.6rem}
+.success-title{font-family:var(--fs);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;margin-bottom:10px}
+.success-sub{font-size:.8rem;color:rgba(255,255,255,.4);max-width:400px;margin:0 auto 28px;line-height:1.8}
+.success-detail{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:20px;max-width:400px;margin:0 auto 24px;text-align:left}
+.success-detail-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.72rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.success-detail-row:last-child{border-bottom:none}
+.success-detail-row .k{color:rgba(255,255,255,.38)}
+.success-detail-row .v{color:var(--white)}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.04);padding:24px 0;margin-top:clamp(40px,6vw,80px)}
+.footer-inner{max-width:860px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--fs);font-size:.9rem;color:rgba(255,255,255,.2)}.footer-brand em{font-style:normal;color:rgba(74,144,247,.5)}
+.footer-links{display:flex;gap:18px}
+.footer-links a{font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.18);transition:color .2s}.footer-links a:hover{color:rgba(255,255,255,.55)}
+
+@media(max-width:600px){
+  .type-grid{grid-template-columns:1fr}
+  .addon-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .btn-row{flex-direction:column-reverse;align-items:stretch}
+  .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Explora<em>360</em></a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Terug
+    </a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-head">
+    <span class="eye">Vrijblijvend &amp; gratis</span>
+    <h1 class="page-title">Offerte<br/><em>aanvragen</em></h1>
+    <p class="page-sub">Kies uw type locatie, pakket en eventuele add-ons. Wij sturen u binnen 24 uur een persoonlijke offerte op maat.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar" id="progress-bar">
+    <div class="prog-step">
+      <div class="prog-num active" id="pn-1">1</div>
+      <span class="prog-label active" id="pl-1">Type</span>
+    </div>
+    <div class="prog-line" id="pl-line-1"></div>
+    <div class="prog-step">
+      <div class="prog-num" id="pn-2">2</div>
+      <span class="prog-label" id="pl-2">Pakket</span>
+    </div>
+    <div class="prog-line" id="pl-line-2"></div>
+    <div class="prog-step">
+      <div class="prog-num" id="pn-3">3</div>
+      <span class="prog-label" id="pl-3">Extras</span>
+    </div>
+    <div class="prog-line" id="pl-line-3"></div>
+    <div class="prog-step">
+      <div class="prog-num" id="pn-4">4</div>
+      <span class="prog-label" id="pl-4">Gegevens</span>
+    </div>
+  </div>
+
+  <!-- STAP 1: TYPE -->
+  <div class="step active" id="step-1">
+    <div class="step-title">Wat voor locatie heeft u?</div>
+    <div class="step-sub">Kies het type dat het beste bij uw situatie past.</div>
+    <div class="type-grid">
+      <div class="type-card" onclick="selectType(this,'vastgoed')">
+        <div class="type-icon">🏠</div>
+        <div class="type-name">Vastgoed</div>
+        <div class="type-desc">Woning, appartement, villa of nieuwbouwproject te koop of te huur</div>
+      </div>
+      <div class="type-card" onclick="selectType(this,'hotel')">
+        <div class="type-icon">🏨</div>
+        <div class="type-name">Hospitality</div>
+        <div class="type-desc">Hotel, B&amp;B, vakantiewoning of resort met meerdere kamers</div>
+      </div>
+      <div class="type-card" onclick="selectType(this,'airbnb')">
+        <div class="type-icon">🛖</div>
+        <div class="type-name">AirBnB / Vakantie</div>
+        <div class="type-desc">Vakantiewoning, huisje, glamping of kortverblijf</div>
+      </div>
+      <div class="type-card" onclick="selectType(this,'zakelijk')">
+        <div class="type-icon">🏢</div>
+        <div class="type-name">Zakelijk</div>
+        <div class="type-desc">Kantoor, showroom, winkel, restaurant of andere zakelijke locatie</div>
+      </div>
+    </div>
+    <div class="btn-row" style="justify-content:flex-end">
+      <button class="btn btn-blue" id="btn-next-1" onclick="goStep(2)" disabled>
+        Verder
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STAP 2: PAKKET -->
+  <div class="step" id="step-2">
+    <div class="step-title">Kies uw pakket</div>
+    <div class="step-sub" id="pakket-sub">Introductietarieven 2026 — excl. btw. 12 maanden hosting inbegrepen.</div>
+    <div class="pakket-grid" id="pakket-grid"></div>
+    <div class="btn-row">
+      <button class="btn btn-wire" onclick="goStep(1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Terug
+      </button>
+      <button class="btn btn-blue" id="btn-next-2" onclick="goStep(3)" disabled>
+        Verder
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STAP 3: ADD-ONS -->
+  <div class="step" id="step-3">
+    <div class="step-title">Aanvullingen</div>
+    <div class="step-sub">Optioneel — voeg toe wat u nodig heeft. Alles excl. btw.</div>
+    <div class="addon-grid">
+      <div class="addon-card" onclick="toggleAddon(this,'staging',55)">
+        <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div><div class="addon-name">AI Virtual Staging</div><div class="addon-price">€55 per ruimte</div></div>
+      </div>
+      <div class="addon-card" onclick="toggleAddon(this,'video',45)">
+        <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div><div class="addon-name">Social media videoclip</div><div class="addon-price">€45 per tour</div></div>
+      </div>
+      <div class="addon-card" onclick="toggleAddon(this,'fotos',29)">
+        <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div><div class="addon-name">Extra 2D-foto's (15 stuks)</div><div class="addon-price">€29 per tour</div></div>
+      </div>
+      <div class="addon-card" onclick="toggleAddon(this,'hotspots',39)">
+        <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div><div class="addon-name">Hotspots + info-tags</div><div class="addon-price">€39 per tour</div></div>
+      </div>
+      <div class="addon-card" onclick="toggleAddon(this,'streetview',45)">
+        <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div><div class="addon-name">Google Street View</div><div class="addon-price">€45 per tour</div></div>
+      </div>
+      <div class="addon-card" onclick="toggleAddon(this,'spoed',55)">
+        <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div><div class="addon-name">Spoedlevering same-day</div><div class="addon-price">€55 toeslag</div></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-wire" onclick="goStep(2)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Terug
+      </button>
+      <button class="btn btn-blue" onclick="goStep(4)">
+        Verder
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STAP 4: GEGEVENS -->
+  <div class="step" id="step-4">
+    <div class="step-title">Uw gegevens</div>
+    <div class="step-sub">Bijna klaar — vul uw contactgegevens in zodat wij de offerte kunnen toesturen.</div>
+
+    <!-- SAMENVATTING -->
+    <div class="summary-box" id="summary-box"></div>
+
+    <div class="form-grid">
+      <div>
+        <label class="flbl">Naam *</label>
+        <input class="finput" type="text" id="f-naam" placeholder="Jan Jansen"/>
+      </div>
+      <div>
+        <label class="flbl">Bedrijf</label>
+        <input class="finput" type="text" id="f-bedrijf" placeholder="ERA Amsterdam (optioneel)"/>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div>
+        <label class="flbl">E-mailadres *</label>
+        <input class="finput" type="email" id="f-email" placeholder="jan@email.nl"/>
+      </div>
+      <div>
+        <label class="flbl">Telefoonnummer</label>
+        <input class="finput" type="tel" id="f-tel" placeholder="+31 6 12 34 56 78"/>
+      </div>
+    </div>
+    <label class="flbl">Adres locatie</label>
+    <input class="finput" type="text" id="f-adres" placeholder="Prinsengracht 142, Amsterdam"/>
+    <label class="flbl">Opmerkingen</label>
+    <textarea class="finput" id="f-opmerkingen" placeholder="Bijv: beschikbaarheid, bijzondere wensen, vragen..."></textarea>
+
+    <div style="margin-top:12px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);font-size:.66rem;color:rgba(255,255,255,.28);line-height:1.7">
+      ✓ Vrijblijvend &nbsp;·&nbsp; ✓ Binnen 24 uur reactie &nbsp;·&nbsp; ✓ Geen verplichtingen
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-wire" onclick="goStep(3)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Terug
+      </button>
+      <button class="btn btn-blue" id="btn-submit" onclick="verstuurOfferte()">
+        Offerte aanvragen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="step" id="step-success">
+    <div class="success-icon">✓</div>
+    <h2 class="success-title">Offerte aangevraagd!</h2>
+    <p class="success-sub">Wij nemen binnen 24 uur contact met u op met een persoonlijke offerte op maat.</p>
+    <div class="success-detail" id="success-detail"></div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:400px;margin:0 auto">
+      <a href="index.html" style="display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;background:var(--blue);color:var(--ink);font-family:var(--fb);font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;transition:background .22s" onmouseover="this.style.background='var(--blue-hi)'" onmouseout="this.style.background='var(--blue)'">Terug naar Explora360</a>
+      <a href="https://wa.me/31616076613?text=Hallo%2C%20ik%20heb%20zojuist%20een%20offerte%20aangevraagd%20via%20explora360.nl" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 28px;background:none;border:1px solid rgba(37,211,102,.3);color:#4dda8a;font-family:var(--fb);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;transition:all .22s" onmouseover="this.style.background='rgba(37,211,102,.07)'" onmouseout="this.style.background='none'">Snelle reactie via WhatsApp →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Explora<em>360</em></span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── STATE ─────────────────────────────────────────────────────────────────
+var state = { type: null, pakket: null, pakketPrijs: 0, addons: [], addonsPrijs: 0 };
+
+var PAKKETTEN = {
+  vastgoed: [
+    { id:'starter', name:'Starter', desc:'Woningen tot 100 m²', prijs:179, popular:false,
+      features:['360° Matterport tour','23MP HDR foto\'s','12 maanden hosting','Levering binnen 24u'] },
+    { id:'pro', name:'Pro', desc:'Woningen tot 250 m²', prijs:289, popular:true,
+      features:['Alles uit Starter','Grotere woning','Google Street View ready','Booking.com integratie'] },
+    { id:'hospitality', name:'Hospitality', desc:'Hotel · B&B · Vakantiewoning', prijs:449, popular:false,
+      features:['Lobby + 1 kamer','€29 per extra kamer','Multi-ruimte tour','Booking.com & Airbnb ready'] }
+  ],
+  hotel: [
+    { id:'hospitality', name:'Hospitality', desc:'Hotel · B&B · Resort', prijs:449, popular:true,
+      features:['Lobby + 1 kamer','€29 per extra kamer','Multi-ruimte tour','Booking.com & Airbnb ready'] }
+  ],
+  airbnb: [
+    { id:'starter', name:'Starter', desc:'Vakantiewoning tot 100 m²', prijs:179, popular:false,
+      features:['360° Matterport tour','23MP HDR foto\'s','12 maanden hosting','Airbnb ready'] },
+    { id:'pro', name:'Pro', desc:'Grotere vakantiewoning', prijs:289, popular:true,
+      features:['Alles uit Starter','Tot 250 m²','Airbnb + Booking.com','Levering binnen 24u'] }
+  ],
+  zakelijk: [
+    { id:'basis', name:'Basis', desc:'Tot 3 ruimtes', prijs:159, popular:false,
+      features:['360° Matterport tour','12 maanden hosting','Google Maps integratie','Levering binnen 24u'] },
+    { id:'plus', name:'Plus', desc:'Onbeperkt ruimtes — 1 locatie', prijs:259, popular:true,
+      features:['Alles uit Basis','Onbeperkt ruimtes','Hotspots inbegrepen','Meertalige ondersteuning'] },
+    { id:'maatwerk', name:'Maatwerk', desc:'Meerdere locaties', prijs:null, popular:false,
+      features:['Meerdere locaties','Custom branding','API-koppeling mogelijk','Tarieven op maat'] }
+  ]
+};
+
+var TYPE_LABELS = { vastgoed:'Vastgoed', hotel:'Hospitality', airbnb:'AirBnB / Vakantie', zakelijk:'Zakelijk' };
+
+// ── STAP NAVIGATIE ────────────────────────────────────────────────────────
+function goStep(n) {
+  if (n === 4) buildSummary();
+  document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('step-' + (n === 5 ? 'success' : n)).classList.add('active');
+  updateProgress(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress(cur) {
+  for (var i = 1; i <= 4; i++) {
+    var num = document.getElementById('pn-' + i);
+    var lbl = document.getElementById('pl-' + i);
+    if (!num) continue;
+    num.className = 'prog-num' + (i < cur ? ' done' : i === cur ? ' active' : '');
+    num.textContent = i < cur ? '✓' : i;
+    lbl.className = 'prog-label' + (i <= cur ? ' active' : '');
+    if (i < 4) {
+      var line = document.getElementById('pl-line-' + i);
+      if (line) line.className = 'prog-line' + (i < cur ? ' done' : '');
+    }
+  }
+}
+
+// ── TYPE ──────────────────────────────────────────────────────────────────
+function selectType(el, type) {
+  document.querySelectorAll('.type-card').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
+  state.type = type;
+  state.pakket = null; state.pakketPrijs = 0;
+  document.getElementById('btn-next-1').disabled = false;
+  buildPakketten(type);
+}
+
+// ── PAKKET ────────────────────────────────────────────────────────────────
+function buildPakketten(type) {
+  var grid = document.getElementById('pakket-grid');
+  var pakketten = PAKKETTEN[type] || [];
+  grid.innerHTML = pakketten.map(function(p) {
+    return '<div class="pakket-card" onclick="selectPakket(this,\'' + p.id + '\',' + (p.prijs||0) + ')">' +
+      '<div class="pakket-left">' +
+        '<div class="pakket-name">' + p.name + (p.popular ? '<span class="pakket-popular">Meest gekozen</span>' : '') + '</div>' +
+        '<div class="pakket-desc">' + p.desc + '</div>' +
+      '</div>' +
+      '<div class="pakket-price">' + (p.prijs ? '€' + p.prijs : 'Op aanvraag') + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function selectPakket(el, id, prijs) {
+  document.querySelectorAll('.pakket-card').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
+  state.pakket = id; state.pakketPrijs = prijs;
+  document.getElementById('btn-next-2').disabled = false;
+}
+
+// ── ADD-ONS ───────────────────────────────────────────────────────────────
+function toggleAddon(el, id, prijs) {
+  el.classList.toggle('selected');
+  var idx = state.addons.findIndex(function(a){ return a.id===id; });
+  if (idx === -1) { state.addons.push({ id:id, prijs:prijs, name:el.querySelector('.addon-name').textContent }); }
+  else { state.addons.splice(idx, 1); }
+  state.addonsPrijs = state.addons.reduce(function(s,a){ return s+a.prijs; }, 0);
+}
+
+// ── SAMENVATTING ──────────────────────────────────────────────────────────
+function buildSummary() {
+  var pakketten = PAKKETTEN[state.type] || [];
+  var p = pakketten.find(function(p){ return p.id===state.pakket; });
+  var totaal = state.pakketPrijs + state.addonsPrijs;
+  var html = '';
+  html += '<div class="summary-row"><span class="lbl">Type locatie</span><span class="val">' + (TYPE_LABELS[state.type]||'') + '</span></div>';
+  html += '<div class="summary-row"><span class="lbl">Pakket</span><span class="val">' + (p?p.name:'') + (state.pakketPrijs?(' — €'+state.pakketPrijs):'') + '</span></div>';
+  if (state.addons.length) {
+    state.addons.forEach(function(a){
+      html += '<div class="summary-row"><span class="lbl">' + a.name + '</span><span class="val">€' + a.prijs + '</span></div>';
+    });
+  }
+  html += '<div class="summary-total"><span class="lbl">Indicatief totaal</span><span class="val">' + (totaal ? '€'+totaal : 'Op aanvraag') + '</span></div>';
+  if (totaal) html += '<div class="summary-btw">Excl. 21% btw · Definitieve prijs in offerte</div>';
+  document.getElementById('summary-box').innerHTML = html;
+}
+
+// ── VERSTUUR ──────────────────────────────────────────────────────────────
+async function verstuurOfferte() {
+  var naam      = document.getElementById('f-naam').value.trim();
+  var email     = document.getElementById('f-email').value.trim();
+  var bedrijf   = document.getElementById('f-bedrijf').value.trim();
+  var tel       = document.getElementById('f-tel').value.trim();
+  var adres     = document.getElementById('f-adres').value.trim();
+  var opm       = document.getElementById('f-opmerkingen').value.trim();
+
+  if (!naam || !email) {
+    alert('Vul uw naam en e-mailadres in.');
+    return;
+  }
+
+  var btn = document.getElementById('btn-submit');
+  btn.textContent = 'Versturen...'; btn.disabled = true;
+
+  var pakketten = PAKKETTEN[state.type] || [];
+  var p = pakketten.find(function(p){ return p.id===state.pakket; });
+  var totaal = state.pakketPrijs + state.addonsPrijs;
+
+  var addonsTxt = state.addons.length
+    ? state.addons.map(function(a){ return '- ' + a.name + ' (€' + a.prijs + ')'; }).join('\n')
+    : 'Geen';
+
+  var subject = encodeURIComponent('Offerte aanvraag — ' + naam + ' — ' + (TYPE_LABELS[state.type]||''));
+  var body = encodeURIComponent(
+    'NIEUWE OFFERTE AANVRAAG\n' +
+    '========================\n\n' +
+    'Naam: ' + naam + '\n' +
+    'E-mail: ' + email + '\n' +
+    (bedrijf ? 'Bedrijf: ' + bedrijf + '\n' : '') +
+    (tel ? 'Telefoon: ' + tel + '\n' : '') +
+    (adres ? 'Adres locatie: ' + adres + '\n' : '') +
+    '\nKEUZE:\n' +
+    'Type: ' + (TYPE_LABELS[state.type]||'') + '\n' +
+    'Pakket: ' + (p?p.name:'') + (state.pakketPrijs?' (€'+state.pakketPrijs+')':'') + '\n' +
+    'Add-ons:\n' + addonsTxt + '\n' +
+    (totaal ? 'Indicatief totaal: €' + totaal + ' excl. btw\n' : '') +
+    (opm ? '\nOpmerkingen:\n' + opm + '\n' : '') +
+    '\n---\nVerstuurd via explora360.nl/offerte'
+  );
+
+  // Stuur via Web3Forms
+  var form = new FormData();
+  form.append('access_key', '9dc3ccaa-614a-485c-af36-5b69168e90d4');
+  form.append('subject', 'Offerte aanvraag — ' + naam + ' — ' + (TYPE_LABELS[state.type]||''));
+  form.append('from_name', naam);
+  form.append('email', email);
+  form.append('naam', naam);
+  form.append('bedrijf', bedrijf);
+  form.append('telefoon', tel);
+  form.append('adres_locatie', adres);
+  form.append('type_locatie', TYPE_LABELS[state.type]||'');
+  form.append('pakket', (p?p.name:'') + (state.pakketPrijs?' — €'+state.pakketPrijs:''));
+  form.append('addons', addonsTxt);
+  form.append('indicatief_totaal', totaal ? '€'+totaal+' excl. btw' : 'Op aanvraag');
+  form.append('opmerkingen', opm);
+
+  try {
+    var res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST', body: form, headers: { 'Accept': 'application/json' }
+    });
+    var json = await res.json();
+    if (json.success) {
+      // Toon success
+      document.getElementById('success-detail').innerHTML =
+        '<div class="success-detail-row"><span class="k">Naam</span><span class="v">' + naam + '</span></div>' +
+        '<div class="success-detail-row"><span class="k">Type</span><span class="v">' + (TYPE_LABELS[state.type]||'') + '</span></div>' +
+        '<div class="success-detail-row"><span class="k">Pakket</span><span class="v">' + (p?p.name:'') + '</span></div>' +
+        (totaal?'<div class="success-detail-row"><span class="k">Indicatief</span><span class="v">€'+totaal+' excl. btw</span></div>':'') +
+        '<div class="success-detail-row"><span class="k">Reactie binnen</span><span class="v">24 uur</span></div>';
+      goStep(5);
+    } else {
+      btn.textContent = 'Offerte aanvragen'; btn.disabled = false;
+      alert('Er ging iets mis. Probeer het opnieuw of stuur een WhatsApp naar +31 6 16 07 66 13');
+    }
+  } catch(e) {
+    btn.textContent = 'Offerte aanvragen'; btn.disabled = false;
+    // Fallback: open mailto
+    window.location.href = 'mailto:info@explora360.nl?subject=' + subject + '&body=' + body;
+  }
+}
+</script>
+</body>
+</html>
