@@ -466,6 +466,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       </ul>
       <div class="nright">
         <a href="portaal.html" class="btn btn-wire nav-portal-btn" style="padding:9px 14px;font-size:.5rem">Portaal</a>
+        <a href="offerte.html" class="btn btn-blue" style="padding:9px 14px;font-size:.5rem">Offerte</a>
         <div class="burger" id="burger"><span></span><span></span><span></span></div>
       </div>
     </div>
@@ -959,87 +960,30 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
         </div>
       </div>
       <div class="contact-r r d2">
-        <div id="offerte-inline" style="background:var(--ink2);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--blue);padding:clamp(24px,4vw,40px)">
-
-          <!-- STAP INDICATOR -->
-          <div style="display:flex;align-items:center;gap:0;margin-bottom:24px" id="oi-progress">
-            <div style="display:flex;align-items:center;gap:8px;flex:1">
-              <div class="oi-step-num active" id="oi-pn1">1</div>
-              <span class="oi-step-lbl active" id="oi-pl1">Type</span>
+        <div style="background:var(--ink2);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--blue);padding:clamp(28px,4vw,44px)">
+          <div style="font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Offerte aanvragen</div>
+          <div style="font-family:var(--fs);font-size:1.5rem;font-weight:300;line-height:1.2;margin-bottom:10px">Vrijblijvend.<br><em style="color:var(--mist)">Binnen 24 uur reactie.</em></div>
+          <p style="font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.75;margin-bottom:24px">Kies uw locatietype, pakket en eventuele add-ons in onze offerte-tool. Wij sturen u een persoonlijke offerte op maat.</p>
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04);margin-bottom:24px">
+            <div style="background:var(--ink3);padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.74rem;color:rgba(255,255,255,.55)">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--blue-hi);flex-shrink:0">1</span>
+              Kies uw locatietype
             </div>
-            <div style="flex:1;height:1px;background:rgba(255,255,255,.08)" id="oi-line1"></div>
-            <div style="display:flex;align-items:center;gap:8px;flex:1">
-              <div class="oi-step-num" id="oi-pn2">2</div>
-              <span class="oi-step-lbl" id="oi-pl2">Pakket</span>
+            <div style="background:var(--ink3);padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.74rem;color:rgba(255,255,255,.55)">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--blue-hi);flex-shrink:0">2</span>
+              Selecteer pakket &amp; add-ons
             </div>
-            <div style="flex:1;height:1px;background:rgba(255,255,255,.08)" id="oi-line2"></div>
-            <div style="display:flex;align-items:center;gap:8px;flex:1">
-              <div class="oi-step-num" id="oi-pn3">3</div>
-              <span class="oi-step-lbl" id="oi-pl3">Gegevens</span>
-            </div>
-          </div>
-
-          <!-- STAP 1: TYPE -->
-          <div id="oi-s1">
-            <div style="font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:16px">Wat voor locatie?</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.04);margin-bottom:20px">
-              <div class="oi-type" onclick="oiSelectType(this,'vastgoed')">Vastgoed</div>
-              <div class="oi-type" onclick="oiSelectType(this,'hotel')">Hotel &amp; B&amp;B</div>
-              <div class="oi-type" onclick="oiSelectType(this,'airbnb')">AirBnB &amp; Vakantie</div>
-              <div class="oi-type" onclick="oiSelectType(this,'camping')">Camping &amp; Glamping</div>
-              <div class="oi-type" onclick="oiSelectType(this,'zakelijk')">Kantoor &amp; Showroom</div>
-              <div class="oi-type" onclick="oiSelectType(this,'horeca')">Horeca &amp; Restaurant</div>
-              <div class="oi-type" onclick="oiSelectType(this,'nieuwbouw')">Nieuwbouw</div>
-              <div class="oi-type" onclick="oiSelectType(this,'overig')">Overig</div>
-            </div>
-            <button class="btn btn-blue" style="width:100%;justify-content:center;padding:12px" id="oi-btn1" onclick="oiGoStep(2)" disabled>Verder →</button>
-          </div>
-
-          <!-- STAP 2: PAKKET -->
-          <div id="oi-s2" style="display:none">
-            <div style="font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:16px">Kies uw pakket</div>
-            <div id="oi-pakket-grid" style="display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.04);margin-bottom:20px"></div>
-            <div style="font-size:.64rem;color:rgba(255,255,255,.25);margin-bottom:16px">Excl. btw · 12 maanden hosting inbegrepen · Introductietarief 2026</div>
-            <div style="display:flex;gap:8px">
-              <button class="btn btn-wire" style="padding:11px 16px;font-size:.54rem" onclick="oiGoStep(1)">← Terug</button>
-              <button class="btn btn-blue" style="flex:1;justify-content:center;padding:11px" id="oi-btn2" onclick="oiGoStep(3)" disabled>Verder →</button>
+            <div style="background:var(--ink3);padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:.74rem;color:rgba(255,255,255,.55)">
+              <span style="width:20px;height:20px;border-radius:50%;background:rgba(74,144,247,.15);border:1px solid rgba(74,144,247,.3);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--blue-hi);flex-shrink:0">3</span>
+              Vul uw gegevens in — wij reageren binnen 24 uur
             </div>
           </div>
-
-          <!-- STAP 3: GEGEVENS -->
-          <div id="oi-s3" style="display:none">
-            <div style="font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:6px">Uw gegevens</div>
-            <div id="oi-summary" style="background:var(--ink3);padding:12px 14px;margin-bottom:16px;font-size:.7rem;color:rgba(255,255,255,.45);border-left:2px solid var(--blue)"></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-              <div>
-                <div style="font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px">Naam *</div>
-                <input class="cinput" type="text" id="oi-naam" placeholder="Jan Jansen"/>
-              </div>
-              <div>
-                <div style="font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px">Telefoon</div>
-                <input class="cinput" type="tel" id="oi-tel" placeholder="+31 6 ..."/>
-              </div>
-            </div>
-            <div style="font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px;margin-top:8px">E-mail *</div>
-            <input class="cinput" type="email" id="oi-email" placeholder="jan@email.nl" style="margin-bottom:8px"/>
-            <div style="font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px">Adres locatie</div>
-            <input class="cinput" type="text" id="oi-adres" placeholder="Straat 1, Stad" style="margin-bottom:8px"/>
-            <div style="font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px">Opmerkingen</div>
-            <textarea class="cinput" id="oi-opm" rows="2" placeholder="Bijv. beschikbaarheid of vragen..." style="resize:none;margin-bottom:16px"></textarea>
-            <div style="display:flex;gap:8px">
-              <button class="btn btn-wire" style="padding:11px 16px;font-size:.54rem" onclick="oiGoStep(2)">← Terug</button>
-              <button class="btn btn-blue" style="flex:1;justify-content:center;padding:11px" id="oi-submit" onclick="oiVerstuur()">Aanvragen →</button>
-            </div>
-            <div id="oi-err" style="display:none;font-size:.66rem;color:#e05555;margin-top:8px;padding:8px 12px;background:rgba(224,85,85,.07);border:1px solid rgba(224,85,85,.14)"></div>
+          <a href="offerte.html" class="btn btn-blue arr" style="width:100%;justify-content:center;padding:14px 28px;font-size:.6rem">Offerte aanvragen <span>→</span></a>
+          <div style="margin-top:14px;display:flex;gap:12px">
+            <a href="https://wa.me/31616076613" target="_blank" class="btn btn-wire" style="flex:1;justify-content:center;padding:11px 16px;font-size:.54rem;border-color:rgba(37,211,102,.25);color:#4dda8a">WhatsApp</a>
+            <a href="/cdn-cgi/l/email-protection#dbb2b5bdb49bbea3abb7b4a9bae8edebf5b5b7" class="btn btn-wire" style="flex:1;justify-content:center;padding:11px 16px;font-size:.54rem">E-mail</a>
           </div>
-
-          <!-- SUCCESS -->
-          <div id="oi-success" style="display:none;text-align:center;padding:20px 0">
-            <div style="font-size:2rem;margin-bottom:12px">✓</div>
-            <div style="font-family:var(--fs);font-size:1.3rem;font-weight:300;margin-bottom:8px">Aangevraagd!</div>
-            <p style="font-size:.74rem;color:rgba(255,255,255,.4);line-height:1.7">Wij nemen binnen 24 uur contact op met een persoonlijke offerte.</p>
-          </div>
-
+          <div style="margin-top:14px;font-size:.62rem;color:rgba(255,255,255,.2);text-align:center">Vrijblijvend · Geen verplichtingen · Geen spam</div>
         </div>
       </div>
     </div>
@@ -1091,7 +1035,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       <div class="stxt">360° virtuele tour laten maken?</div>
       <div class="sright">
         <a href="portaal.html" class="btn btn-wire sticky-portal-btn" style="padding:9px 18px;font-size:.54rem">Tourportaal</a>
-
+        <a href="#contact" class="btn btn-blue" style="padding:9px 18px;font-size:.54rem">Offerte aanvragen</a>
         <button class="scl" onclick="cls()">×</button>
       </div>
     </div>
@@ -1132,82 +1076,6 @@ function cu(id,to,suf='',dur=1900){
 
 function toggleFaq(el){var o=el.classList.contains("open");document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open");});if(!o)el.classList.add("open");}
 function switchTab(btn,tab){document.querySelectorAll(".pc-tab").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-vastgoed").style.display=tab==="vastgoed"?"block":"none";document.getElementById("tab-zakelijk").style.display=tab==="zakelijk"?"block":"none";}
-
-// ── INLINE OFFERTE ────────────────────────────────────────────────────────
-var oiState = { type: null, pakket: null, pakketPrijs: 0, pakketNaam: '' };
-var OI_PAKKETTEN = {
-  vastgoed:  [{id:'starter',name:'Starter',desc:'Tot 100 m²',prijs:179},{id:'pro',name:'Pro',desc:'Tot 250 m²',prijs:289,pop:true},{id:'premium',name:'Premium',desc:'250 m²+',prijs:449}],
-  hotel:     [{id:'h-s',name:'Hospitality Starter',desc:'Lobby + 1 kamer',prijs:299},{id:'h-p',name:'Hospitality Pro',desc:'Lobby + 3 kamers',prijs:449,pop:true},{id:'h-xl',name:'Hospitality XL',desc:'Volledig hotel',prijs:null}],
-  airbnb:    [{id:'starter',name:'Starter',desc:'Tot 100 m²',prijs:179},{id:'pro',name:'Pro',desc:'Tot 250 m²',prijs:289,pop:true}],
-  camping:   [{id:'c-s',name:'Camping Basis',desc:'Receptie + 2 accommodaties',prijs:249},{id:'c-p',name:'Camping Pro',desc:'Volledig terrein',prijs:null,pop:true}],
-  zakelijk:  [{id:'basis',name:'Basis',desc:'Tot 3 ruimtes',prijs:159},{id:'plus',name:'Plus',desc:'Onbeperkt ruimtes',prijs:259,pop:true},{id:'mw',name:'Maatwerk',desc:'Meerdere locaties',prijs:null}],
-  horeca:    [{id:'h-s',name:'Horeca Starter',desc:'1 ruimte',prijs:159},{id:'h-p',name:'Horeca Pro',desc:'Volledig pand',prijs:259,pop:true}],
-  nieuwbouw: [{id:'mw',name:'Modelwoning',desc:'1 showunit',prijs:289,pop:true},{id:'proj',name:'Project',desc:'Meerdere units',prijs:null}],
-  overig:    [{id:'basis',name:'Basis',desc:'Tot 3 ruimtes',prijs:159},{id:'plus',name:'Plus',desc:'Onbeperkt',prijs:259,pop:true},{id:'mw',name:'Maatwerk',desc:'Op aanvraag',prijs:null}]
-};
-var OI_LABELS = {vastgoed:'Vastgoed',hotel:'Hotel & B&B',airbnb:'AirBnB & Vakantie',camping:'Camping & Glamping',zakelijk:'Kantoor & Showroom',horeca:'Horeca & Restaurant',nieuwbouw:'Nieuwbouw',overig:'Overig'};
-
-
-
-function oiSelectPakket(el, id, prijs, naam) {
-  document.querySelectorAll('.oi-pakket').forEach(function(p){ p.classList.remove('selected'); });
-  el.classList.add('selected');
-  oiState.pakket = id; oiState.pakketPrijs = prijs; oiState.pakketNaam = naam;
-  document.getElementById('oi-btn2').disabled = false;
-}
-
-function oiGoStep(n) {
-  [1,2,3].forEach(function(i){
-    document.getElementById('oi-s'+i).style.display = i===n?'block':'none';
-    var num = document.getElementById('oi-pn'+i);
-    var lbl = document.getElementById('oi-pl'+i);
-    num.className = 'oi-step-num'+(i<n?' done':i===n?' active':'');
-    num.textContent = i<n?'✓':i;
-    lbl.className = 'oi-step-lbl'+(i<=n?' active':'');
-    if(i<3) document.getElementById('oi-line'+i).style.background = i<n?'var(--green)':'rgba(255,255,255,.08)';
-  });
-  if(n===3){
-    document.getElementById('oi-summary').innerHTML =
-      (OI_LABELS[oiState.type]||'') + ' · ' + oiState.pakketNaam +
-      (oiState.pakketPrijs?' · <strong style="color:var(--blue-hi)">€'+oiState.pakketPrijs+' excl. btw</strong>':' · <strong style="color:var(--blue-hi)">Op aanvraag</strong>');
-  }
-}
-
-async function oiVerstuur() {
-  var naam  = document.getElementById('oi-naam').value.trim();
-  var email = document.getElementById('oi-email').value.trim();
-  var tel   = document.getElementById('oi-tel').value.trim();
-  var adres = document.getElementById('oi-adres').value.trim();
-  var opm   = document.getElementById('oi-opm').value.trim();
-  var err   = document.getElementById('oi-err');
-  var btn   = document.getElementById('oi-submit');
-  err.style.display='none';
-  if(!naam||!email){ err.textContent='Vul naam en e-mail in.'; err.style.display='block'; return; }
-  btn.textContent='Versturen...'; btn.disabled=true;
-  var fd = new FormData();
-  fd.append('access_key','9dc3ccaa-614a-485c-af36-5b69168e90d4');
-  fd.append('subject','Offerte aanvraag — '+naam+' — '+(OI_LABELS[oiState.type]||''));
-  fd.append('from_name',naam);
-  fd.append('email',email);
-  fd.append('type_locatie',OI_LABELS[oiState.type]||'');
-  fd.append('pakket',oiState.pakketNaam+(oiState.pakketPrijs?' — €'+oiState.pakketPrijs:''));
-  fd.append('telefoon',tel); fd.append('adres',adres); fd.append('opmerkingen',opm);
-  try{
-    var res = await fetch('https://api.web3forms.com/submit',{method:'POST',body:fd,headers:{'Accept':'application/json'}});
-    var json = await res.json();
-    if(json.success){
-      document.getElementById('oi-s3').style.display='none';
-      document.getElementById('oi-success').style.display='block';
-    } else {
-      err.textContent='Er ging iets mis. Probeer opnieuw.'; err.style.display='block';
-      btn.textContent='Aanvragen →'; btn.disabled=false;
-    }
-  }catch(e){
-    err.textContent='Er ging iets mis. Bel ons op +31 6 16 07 66 13'; err.style.display='block';
-    btn.textContent='Aanvragen →'; btn.disabled=false;
-  }
-}
-
 document.getElementById('burger').addEventListener('click',function(){
   const ul=document.querySelector('.nlinks');
   if(ul.style.display==='flex'){ul.style.display=''}
