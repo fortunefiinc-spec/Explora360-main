@@ -64,7 +64,6 @@ nav{position:sticky;top:0;z-index:800;padding:14px 0;border-bottom:1px solid rgb
 .type-card:hover{background:rgba(74,144,247,.05);border-top-color:rgba(74,144,247,.4)}
 .type-card.selected{border-top-color:var(--blue);background:rgba(74,144,247,.08)}
 .type-card.selected::after{content:'✓';position:absolute;top:12px;right:12px;font-size:.7rem;color:var(--blue-hi)}
-.type-icon{font-size:1.4rem;margin-bottom:10px}
 .type-name{font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:4px}
 .type-desc{font-size:.68rem;color:rgba(255,255,255,.35);line-height:1.6}
 
@@ -192,23 +191,19 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:24px 0;margin-top:clam
     <div class="step-sub">Kies het type dat het beste bij uw situatie past.</div>
     <div class="type-grid">
       <div class="type-card" onclick="selectType(this,'vastgoed')">
-        <div class="type-icon">🏠</div>
-        <div class="type-name">Vastgoed</div>
+                <div class="type-name">Vastgoed</div>
         <div class="type-desc">Woning, appartement, villa of nieuwbouwproject te koop of te huur</div>
       </div>
       <div class="type-card" onclick="selectType(this,'hotel')">
-        <div class="type-icon">🏨</div>
-        <div class="type-name">Hospitality</div>
+                <div class="type-name">Hospitality</div>
         <div class="type-desc">Hotel, B&amp;B, vakantiewoning of resort met meerdere kamers</div>
       </div>
       <div class="type-card" onclick="selectType(this,'airbnb')">
-        <div class="type-icon">🛖</div>
-        <div class="type-name">AirBnB / Vakantie</div>
+                <div class="type-name">AirBnB / Vakantie</div>
         <div class="type-desc">Vakantiewoning, huisje, glamping of kortverblijf</div>
       </div>
       <div class="type-card" onclick="selectType(this,'zakelijk')">
-        <div class="type-icon">🏢</div>
-        <div class="type-name">Zakelijk</div>
+                <div class="type-name">Zakelijk</div>
         <div class="type-desc">Kantoor, showroom, winkel, restaurant of andere zakelijke locatie</div>
       </div>
     </div>
@@ -385,7 +380,7 @@ var PAKKETTEN = {
   ]
 };
 
-var TYPE_LABELS = { vastgoed:'Vastgoed', hotel:'Hospitality', airbnb:'AirBnB / Vakantie', zakelijk:'Zakelijk' };
+var TYPE_LABELS = { vastgoed:'Vastgoed', hotel:'Hotel & B&B', airbnb:'AirBnB & Vakantie', camping:'Camping & Glamping', zakelijk:'Kantoor & Showroom', horeca:'Horeca & Restaurant', nieuwbouw:'Nieuwbouw', overig:'Overig' };
 
 // ── STAP NAVIGATIE ────────────────────────────────────────────────────────
 function goStep(n) {
