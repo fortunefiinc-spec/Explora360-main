@@ -349,36 +349,46 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:24px 0;margin-top:clam
 
 <script>
 // ── STATE ─────────────────────────────────────────────────────────────────
-var state = { type: null, pakket: null, pakketPrijs: 0, addons: [], addonsPrijs: 0 };
+var state = { type: null, pakket: null, pakketPrijs: 0, addons: [], addonsPrijs: 0, aantalPakketten: 1 };
 
 var PAKKETTEN = {
-  vastgoed: [
-    { id:'starter', name:'Starter', desc:'Woningen tot 100 m²', prijs:179, popular:false,
-      features:['360° Matterport tour','23MP HDR foto\'s','12 maanden hosting','Levering binnen 24u'] },
-    { id:'pro', name:'Pro', desc:'Woningen tot 250 m²', prijs:289, popular:true,
-      features:['Alles uit Starter','Grotere woning','Google Street View ready','Booking.com integratie'] },
-    { id:'hospitality', name:'Hospitality', desc:'Hotel · B&B · Vakantiewoning', prijs:449, popular:false,
-      features:['Lobby + 1 kamer','€29 per extra kamer','Multi-ruimte tour','Booking.com & Airbnb ready'] }
-  ],
-  hotel: [
-    { id:'hospitality', name:'Hospitality', desc:'Hotel · B&B · Resort', prijs:449, popular:true,
-      features:['Lobby + 1 kamer','€29 per extra kamer','Multi-ruimte tour','Booking.com & Airbnb ready'] }
-  ],
-  airbnb: [
-    { id:'starter', name:'Starter', desc:'Vakantiewoning tot 100 m²', prijs:179, popular:false,
-      features:['360° Matterport tour','23MP HDR foto\'s','12 maanden hosting','Airbnb ready'] },
-    { id:'pro', name:'Pro', desc:'Grotere vakantiewoning', prijs:289, popular:true,
-      features:['Alles uit Starter','Tot 250 m²','Airbnb + Booking.com','Levering binnen 24u'] }
-  ],
-  zakelijk: [
-    { id:'basis', name:'Basis', desc:'Tot 3 ruimtes', prijs:159, popular:false,
-      features:['360° Matterport tour','12 maanden hosting','Google Maps integratie','Levering binnen 24u'] },
-    { id:'plus', name:'Plus', desc:'Onbeperkt ruimtes — 1 locatie', prijs:259, popular:true,
-      features:['Alles uit Basis','Onbeperkt ruimtes','Hotspots inbegrepen','Meertalige ondersteuning'] },
-    { id:'maatwerk', name:'Maatwerk', desc:'Meerdere locaties', prijs:null, popular:false,
-      features:['Meerdere locaties','Custom branding','API-koppeling mogelijk','Tarieven op maat'] }
-  ]
-};
+    vastgoed: [
+      { id:'starter',  name:'Starter',           desc:'Woningen tot 100 m²',         prijs:189, popular:false },
+      { id:'pro',       name:'Pro',                desc:'Woningen tot 250 m²',         prijs:299, popular:true  },
+      { id:'premium',   name:'Premium',            desc:'Villa of groot pand 250 m²+', prijs:479, popular:false }
+    ],
+    hotel: [
+      { id:'h-s',  name:'Hospitality Starter', desc:'Lobby + 1 kamer',    prijs:299, popular:false },
+      { id:'h-p',  name:'Hospitality Pro',     desc:'Lobby + 3 kamers',   prijs:479, popular:true  },
+      { id:'h-xl', name:'Hospitality XL',      desc:'Volledig hotel',     prijs:null, popular:false }
+    ],
+    airbnb: [
+      { id:'starter', name:'Starter', desc:'Vakantiewoning tot 100 m²', prijs:189, popular:false },
+      { id:'pro',     name:'Pro',     desc:'Grotere vakantiewoning',     prijs:299, popular:true  }
+    ],
+    camping: [
+      { id:'c-s', name:'Camping Basis', desc:'Receptie + 2 accommodaties', prijs:249, popular:false },
+      { id:'c-p', name:'Camping Pro',   desc:'Volledig terrein',           prijs:null, popular:true  }
+    ],
+    zakelijk: [
+      { id:'basis', name:'Basis',     desc:'Tot 3 ruimtes',           prijs:169, popular:false },
+      { id:'plus',  name:'Plus',      desc:'Onbeperkt ruimtes',       prijs:279, popular:true  },
+      { id:'mw',    name:'Maatwerk',  desc:'Meerdere locaties',       prijs:null, popular:false }
+    ],
+    horeca: [
+      { id:'h-s', name:'Horeca Starter', desc:'1 ruimte',        prijs:169, popular:false },
+      { id:'h-p', name:'Horeca Pro',     desc:'Volledig pand',   prijs:279, popular:true  }
+    ],
+    nieuwbouw: [
+      { id:'mw',   name:'Modelwoning', desc:'1 showunit',           prijs:299, popular:true  },
+      { id:'proj', name:'Project',     desc:'Meerdere units',       prijs:null, popular:false }
+    ],
+    overig: [
+      { id:'basis', name:'Basis',    desc:'Tot 3 ruimtes',  prijs:169, popular:false },
+      { id:'plus',  name:'Plus',     desc:'Onbeperkt',      prijs:279, popular:true  },
+      { id:'mw',    name:'Maatwerk', desc:'Op aanvraag',    prijs:null, popular:false }
+    ]
+  };
 
 var TYPE_LABELS = { vastgoed:'Vastgoed', hotel:'Hotel & B&B', airbnb:'AirBnB & Vakantie', camping:'Camping & Glamping', zakelijk:'Kantoor & Showroom', horeca:'Horeca & Restaurant', nieuwbouw:'Nieuwbouw', overig:'Overig' };
 
@@ -448,21 +458,51 @@ function toggleAddon(el, id, prijs) {
 }
 
 // ── SAMENVATTING ──────────────────────────────────────────────────────────
+function getKorting(n) {
+  if (n <= 1) return 0;
+  if (n === 2) return 10;
+  if (n === 3) return 15;
+  return Math.min(20 + (n - 4) * 5, 35); // 20% bij 4, 25% bij 5, max 35%
+}
+
 function buildSummary() {
   var pakketten = PAKKETTEN[state.type] || [];
   var p = pakketten.find(function(p){ return p.id===state.pakket; });
-  var totaal = state.pakketPrijs + state.addonsPrijs;
+  var subtotaal = state.pakketPrijs * state.aantalPakketten + state.addonsPrijs;
+  var kortingPct = getKorting(state.aantalPakketten);
+  var kortingBedrag = state.pakketPrijs > 0 ? Math.round(state.pakketPrijs * state.aantalPakketten * kortingPct / 100) : 0;
+  var totaal = subtotaal - kortingBedrag;
   var html = '';
   html += '<div class="summary-row"><span class="lbl">Type locatie</span><span class="val">' + (TYPE_LABELS[state.type]||'') + '</span></div>';
   html += '<div class="summary-row"><span class="lbl">Pakket</span><span class="val">' + (p?p.name:'') + (state.pakketPrijs?(' — €'+state.pakketPrijs):'') + '</span></div>';
+  // Aantal pakketten selector
+  html += '<div class="summary-row" style="align-items:center">' +
+    '<span class="lbl">Aantal locaties/panden</span>' +
+    '<span class="val" style="display:flex;align-items:center;gap:10px">' +
+      '<button onclick="oiAantalChange(-1)" style="width:28px;height:28px;border:1px solid rgba(255,255,255,.15);background:none;color:var(--white);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">−</button>' +
+      '<span id="aantal-display" style="font-size:1rem;font-weight:500;min-width:20px;text-align:center">' + state.aantalPakketten + '</span>' +
+      '<button onclick="oiAantalChange(1)" style="width:28px;height:28px;border:1px solid rgba(255,255,255,.15);background:none;color:var(--white);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">+</button>' +
+    '</span>' +
+  '</div>';
   if (state.addons.length) {
     state.addons.forEach(function(a){
       html += '<div class="summary-row"><span class="lbl">' + a.name + '</span><span class="val">€' + a.prijs + '</span></div>';
     });
   }
+  if (kortingPct > 0 && kortingBedrag > 0) {
+    html += '<div class="summary-row"><span class="lbl" style="color:var(--green)">Volumekorting ' + kortingPct + '%</span><span class="val" style="color:var(--green)">− €' + kortingBedrag + '</span></div>';
+  }
   html += '<div class="summary-total"><span class="lbl">Indicatief totaal</span><span class="val">' + (totaal ? '€'+totaal : 'Op aanvraag') + '</span></div>';
   if (totaal) html += '<div class="summary-btw">Excl. 21% btw · Definitieve prijs in offerte</div>';
+  if (state.aantalPakketten === 1 && state.pakketPrijs > 0) {
+    html += '<div style="margin-top:8px;font-size:.64rem;color:rgba(255,255,255,.3);padding:8px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)">💡 Meer panden? Pas het aantal aan voor volumekorting — 2 panden = 10%, 3 panden = 15%...</div>';
+  }
   document.getElementById('summary-box').innerHTML = html;
+}
+
+function oiAantalChange(delta) {
+  state.aantalPakketten = Math.max(1, Math.min(20, state.aantalPakketten + delta));
+  buildSummary();
 }
 
 // ── VERSTUUR ──────────────────────────────────────────────────────────────
@@ -484,7 +524,9 @@ async function verstuurOfferte() {
 
   var pakketten = PAKKETTEN[state.type] || [];
   var p = pakketten.find(function(p){ return p.id===state.pakket; });
-  var totaal = state.pakketPrijs + state.addonsPrijs;
+  var kortingPct = getKorting(state.aantalPakketten);
+  var kortingBedrag = state.pakketPrijs > 0 ? Math.round(state.pakketPrijs * state.aantalPakketten * kortingPct / 100) : 0;
+  var totaal = state.pakketPrijs * state.aantalPakketten + state.addonsPrijs - kortingBedrag;
 
   var addonsTxt = state.addons.length
     ? state.addons.map(function(a){ return '- ' + a.name + ' (€' + a.prijs + ')'; }).join('\n')
@@ -520,6 +562,8 @@ async function verstuurOfferte() {
   form.append('adres_locatie', adres);
   form.append('type_locatie', TYPE_LABELS[state.type]||'');
   form.append('pakket', (p?p.name:'') + (state.pakketPrijs?' — €'+state.pakketPrijs:''));
+  form.append('aantal_pakketten', state.aantalPakketten);
+  if (kortingPct > 0) form.append('volumekorting', kortingPct + '% — €' + kortingBedrag);
   form.append('addons', addonsTxt);
   form.append('indicatief_totaal', totaal ? '€'+totaal+' excl. btw' : 'Op aanvraag');
   form.append('opmerkingen', opm);
@@ -535,7 +579,7 @@ async function verstuurOfferte() {
         '<div class="success-detail-row"><span class="k">Naam</span><span class="v">' + naam + '</span></div>' +
         '<div class="success-detail-row"><span class="k">Type</span><span class="v">' + (TYPE_LABELS[state.type]||'') + '</span></div>' +
         '<div class="success-detail-row"><span class="k">Pakket</span><span class="v">' + (p?p.name:'') + '</span></div>' +
-        (totaal?'<div class="success-detail-row"><span class="k">Indicatief</span><span class="v">€'+totaal+' excl. btw</span></div>':'') +
+        (totaal?'<div class="success-detail-row"><span class="k">Aantal</span><span class="v">'+state.aantalPakketten+' pand'+(state.aantalPakketten>1?'en':'')+'</span></div><div class="success-detail-row"><span class="k">Indicatief</span><span class="v">€'+totaal+' excl. btw'+(kortingPct>0?' (incl. '+kortingPct+'% korting)':'')+'</span></div>':'') +
         '<div class="success-detail-row"><span class="k">Reactie binnen</span><span class="v">24 uur</span></div>';
       goStep(5);
     } else {
