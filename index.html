@@ -74,35 +74,18 @@ p{font-size:clamp(.78rem,1vw,.9rem);line-height:1.85;letter-spacing:.02em}
 
 /* HERO */
 #hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding-top:76px}
-.hl{display:flex;flex-direction:column;justify-content:center;padding:clamp(56px,9vw,120px) clamp(20px,4.5vw,62px) clamp(56px,9vw,120px) max(calc((100vw - 1180px)/2 + 68px),20px);position:relative;z-index:2}
-.hkick{display:flex;align-items:center;gap:13px;margin-bottom:28px}
-.hkline{width:28px;height:1px;background:var(--blue);flex-shrink:0}
-h1.hh{line-height:1.01;margin-bottom:0}
-.hsub{font-family:var(--fs);font-size:clamp(.96rem,1.85vw,1.28rem);font-style:italic;font-weight:300;color:var(--mist);margin:22px 0 12px;max-width:380px;line-height:1.55}
-.hbody{color:rgba(255,255,255,.37);max-width:340px;font-size:.8rem;margin-bottom:40px}
-.hctas{display:flex;gap:9px;flex-wrap:wrap}
+h1.hbody{color:rgba(255,255,255,.37);max-width:340px;font-size:.8rem;margin-bottom:40px}
 .hstats{margin-top:60px;padding-top:30px;border-top:1px solid rgba(255,255,255,.05);display:flex;gap:clamp(20px,3.5vw,44px);flex-wrap:wrap}
 .hsv{font-family:var(--fs);font-size:1.9rem;font-weight:300;display:block;color:var(--white);line-height:1}
 .hsk{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);display:block;margin-top:4px}
-.hr{position:relative;background:linear-gradient(160deg,#0c1424 0%,#162040 55%,#0e1830 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hr::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(47,126,245,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(47,126,245,.045) 1px,transparent 1px);background-size:46px 46px}
 .hr::after{content:'';position:absolute;width:460px;height:460px;background:radial-gradient(circle,rgba(47,126,245,.13) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
-.scan-stage{position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:500px}
 @keyframes spin-a{from{transform:rotateX(72deg) rotateZ(0)}to{transform:rotateX(72deg) rotateZ(360deg)}}
 @keyframes spin-b{from{transform:rotateX(68deg) rotateZ(0)}to{transform:rotateX(68deg) rotateZ(-360deg)}}
-.srings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;height:320px;perspective:580px}
-.sring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(47,126,245,.22);animation:spin-a 11s linear infinite}
-.sring:nth-child(1){border-color:rgba(47,126,245,.27);animation-duration:10s}
-.sring:nth-child(2){inset:28px;border-color:rgba(47,126,245,.14);animation:spin-b 15s linear infinite}
-.sring:nth-child(3){inset:56px;border-color:rgba(47,126,245,.09);animation-duration:21s}
-.pcl{position:absolute;inset:0;pointer-events:none}
 .pt{position:absolute;border-radius:50%;background:var(--blue);animation:blink ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:.08}50%{opacity:.85}}
-.hwrap{position:relative;z-index:3;animation:float-h 6s ease-in-out infinite}
 @keyframes float-h{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
 @keyframes sweep{0%{top:8%;opacity:.9}100%{top:90%;opacity:0}}
-.sline{position:absolute;left:8%;right:8%;height:2px;background:linear-gradient(90deg,transparent,var(--blue),rgba(47,126,245,.35),transparent);filter:blur(1px);animation:sweep 2.8s ease-in-out infinite;z-index:4}
-.fglow{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);width:260px;height:38px;background:radial-gradient(ellipse,rgba(47,126,245,.2),transparent 70%);filter:blur(15px)}
 
 /* MARQUEE — dark */
 #mband{background:var(--ink2);padding:clamp(26px,3.8vw,48px) 0;overflow:hidden;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
@@ -269,8 +252,10 @@ h1.hh{line-height:1.01;margin-bottom:0}
 .ai-price small{font-family:var(--fb);font-size:.62rem;color:rgba(255,255,255,.3);font-weight:300}
 .ai-card.popular-ao .ai-price{color:var(--amber-hi)}
 .ai-desc{font-size:.7rem;color:rgba(255,255,255,.35);line-height:1.62;flex:1}
-@media(max-width:1020px){.ai-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.ai-grid{grid-template-columns:1fr}}
+@media(max-width:1020px){.ai-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.pkg-grid{grid-template-columns:repeat(2,1fr) !important}}
+@media(max-width:640px){.ai-grid{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:1fr !important}}
 /* CONTACT */
 #contact{padding:var(--sec) 0;background:var(--ink);border-top:1px solid rgba(255,255,255,.05)}
 .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,8vw,110px);align-items:start}
@@ -372,10 +357,8 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
 
 @media(max-width:1020px){
   #hero{grid-template-columns:1fr}
-  .hl{padding:106px var(--pad) 48px;align-items:center;text-align:center}
-  .hkick{justify-content:center}.hsub,.hbody{margin-left:auto;margin-right:auto;text-align:center}
-  .hctas,.hstats{justify-content:center}.hr{min-height:420px}
-  .dg,.tech-intro{grid-template-columns:1fr}.tnums{margin-top:28px}.tech-grid{grid-template-columns:1fr}
+    .hkick{justify-content:center}.hsub,.hbody{margin-left:auto;margin-right:auto;text-align:center}
+  .hctas,.hstats{justify-content:center}  .dg,.tech-intro{grid-template-columns:1fr}.tnums{margin-top:28px}.tech-grid{grid-template-columns:1fr}
   .pcards{grid-template-columns:1fr 1fr}.custom-block{grid-template-columns:1fr 1fr;gap:32px}.cb-cta{grid-column:1/-1}
   .quotes,.cpanel{grid-template-columns:1fr;gap:24px}.fgrid{grid-template-columns:1fr 1fr;gap:32px}.fbrand{grid-column:1/-1}
   .sek-grid{grid-template-columns:1fr 1fr 1fr}.port-grid{grid-template-columns:1fr 1fr}.pi{flex-direction:column;align-items:flex-start}
@@ -383,6 +366,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
 @media(max-width:640px){
   .sectors,.tnums,.pcards,.custom-block,.port-grid{grid-template-columns:1fr}
   #workflow .wrap > div{grid-template-columns:1fr !important}
+  #hero .dg{grid-template-columns:1fr !important}
   .sek-grid{grid-template-columns:1fr 1fr}
   .nlinks{display:none}.burger{display:flex}.fgrid{grid-template-columns:1fr}
   .nav-portal-btn{display:flex}
@@ -445,8 +429,10 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
 .ao-title{padding:20px 0 12px}
 .ao-title p{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:4px}
 @media(max-width:900px){.pkg-grid{grid-template-columns:1fr}.bundel-grid{grid-template-columns:1fr}.over-grid{grid-template-columns:1fr}.faq-grid{grid-template-columns:1fr}}
-@media(max-width:1020px){.ai-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.ai-grid{grid-template-columns:1fr}}
+@media(max-width:1020px){.ai-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.pkg-grid{grid-template-columns:repeat(2,1fr) !important}}
+@media(max-width:640px){.ai-grid{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:1fr !important}}
 </style>
 </head>
 <body>
@@ -456,7 +442,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
     <div class="nrow">
       <a href="#hero" class="nlogo">Explora<em>360</em></a>
       <ul class="nlinks">
-        <li><a href="#diensten">Diensten</a></li>
+        <li><a href="#hero">Diensten</a></li>
         <li><a href="#sectoren">Sectoren</a></li>
         <li><a href="#prijzen">Prijzen</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
@@ -472,98 +458,42 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
   </div>
 </nav>
 
-<section id="hero">
-  <div class="hl">
-    <div class="hkick r"><div class="hkline"></div><span class="eye">Professionele 360° Virtuele Tours</span></div>
-    <p class="hsub r d2">Van woning tot hotel — wij fotograferen uw ruimte in fotorealistische 360° en maken hem toegankelijk voor de hele wereld.</p>
-    <div class="hctas r d3">
-      <a href="#prijzen" class="btn btn-blue arr">Bekijk pakketten <span>→</span></a>
-      <a href="#portfolio" class="btn btn-wire">Portfolio</a>
-    </div>
-    <div class="hstats r d3">
-      <div><span class="hsv">23MP</span><span class="hsk">HDR resolutie</span></div>
-      <div><span class="hsv">360°</span><span class="hsk">Volledig beeld</span></div>
-      <div><span class="hsv">24u</span><span class="hsk">Levertijd</span></div>
-    </div>
-  </div>
-  <div class="hr">
-    <div class="scan-stage">
-      <div class="sline"></div>
-      <div class="pcl" id="pcl"></div>
-      <div class="srings"><div class="sring"></div><div class="sring"></div><div class="sring"></div></div>
-      <div class="hwrap">
-        <svg width="290" height="252" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#101e36" stop-opacity=".92"/><stop offset="100%" stop-color="#162844" stop-opacity=".96"/></linearGradient>
-            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0c1828" stop-opacity=".96"/><stop offset="100%" stop-color="#101f34" stop-opacity=".99"/></linearGradient>
-            <linearGradient id="bhl" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(47,126,245,0)"/><stop offset="50%" stop-color="rgba(47,126,245,.13)"/><stop offset="100%" stop-color="rgba(47,126,245,0)"/></linearGradient>
-            <filter id="gf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-          <ellipse cx="150" cy="248" rx="108" ry="7.5" fill="rgba(47,126,245,.11)" filter="url(#gf)"/>
-          <rect x="52" y="120" width="196" height="122" fill="url(#wg)" stroke="rgba(47,126,245,.31)" stroke-width=".8"/>
-          <polygon points="40,122 150,44 260,122" fill="url(#rg)" stroke="rgba(47,126,245,.46)" stroke-width=".8"/>
-          <line x1="40" y1="122" x2="260" y2="122" stroke="rgba(47,126,245,.14)" stroke-width=".5"/>
-          <polygon points="260,122 288,135 288,242 260,242" fill="#0d1828" stroke="rgba(47,126,245,.19)" stroke-width=".8"/>
-          <polygon points="260,122 288,135 150,44" fill="#0a1422" stroke="rgba(47,126,245,.19)" stroke-width=".8"/>
-          <rect x="74" y="138" width="44" height="36" rx=".5" fill="rgba(47,126,245,.09)" stroke="rgba(47,126,245,.37)" stroke-width=".7"/>
-          <line x1="96" y1="138" x2="96" y2="174" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
-          <line x1="74" y1="156" x2="118" y2="156" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
-          <rect x="74" y="138" width="44" height="36" fill="url(#bhl)" opacity=".6"/>
-          <rect x="134" y="138" width="44" height="36" rx=".5" fill="rgba(47,126,245,.09)" stroke="rgba(47,126,245,.37)" stroke-width=".7"/>
-          <line x1="156" y1="138" x2="156" y2="174" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
-          <line x1="134" y1="156" x2="178" y2="156" stroke="rgba(47,126,245,.21)" stroke-width=".5"/>
-          <rect x="134" y="138" width="44" height="36" fill="url(#bhl)" opacity=".6"/>
-          <rect x="176" y="178" width="36" height="64" rx=".5" fill="rgba(47,126,245,.06)" stroke="rgba(47,126,245,.31)" stroke-width=".7"/>
-          <circle cx="208" cy="212" r="2.5" fill="rgba(47,126,245,.62)"/>
-          <line x1="52" y1="112" x2="248" y2="112" stroke="rgba(47,126,245,.21)" stroke-width=".5" stroke-dasharray="4 4"/>
-          <line x1="42" y1="122" x2="42" y2="242" stroke="rgba(47,126,245,.21)" stroke-width=".5" stroke-dasharray="4 4"/>
-          <text x="150" y="108" text-anchor="middle" font-family="'Jost',sans-serif" font-size="7" fill="rgba(47,126,245,.58)" letter-spacing="1">12.4 m</text>
-          <text x="30" y="185" text-anchor="middle" font-family="'Jost',sans-serif" font-size="7" fill="rgba(47,126,245,.58)" letter-spacing="1" transform="rotate(-90,30,185)">7.2 m</text>
-          <circle cx="52" cy="122" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
-          <circle cx="248" cy="122" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
-          <circle cx="52" cy="242" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
-          <circle cx="248" cy="242" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
-          <circle cx="150" cy="44" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".9"/>
-          <circle cx="288" cy="135" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".8"/>
-          <circle cx="288" cy="242" r="3" fill="#2f7ef5" filter="url(#gf)" opacity=".8"/>
-          <rect x="218" y="52" width="68" height="28" rx=".5" fill="rgba(47,126,245,.1)" stroke="rgba(47,126,245,.3)" stroke-width=".6"/>
-          <circle cx="230" cy="66" r="3" fill="#2f7ef5" opacity=".82"/>
-          <text x="237" y="70" font-family="'Jost',sans-serif" font-size="8" fill="rgba(47,126,245,.82)" letter-spacing=".5">100%</text>
-          <text x="237" y="78" font-family="'Jost',sans-serif" font-size="5.5" fill="rgba(47,126,245,.43)" letter-spacing=".5">GESCAND</text>
-        </svg>
+<section id="hero" style="padding:clamp(80px,12vw,140px) 0 clamp(60px,8vw,100px)">
+  <div class="wrap">
+    <div class="dg">
+      <div class="r">
+        <div class="hkick r" style="margin-bottom:clamp(20px,3vw,36px)"><div class="hkline"></div><span class="eye">Professionele 360° Virtuele Tours</span></div>
+        <h2 style="font-family:var(--fs);font-size:clamp(2.6rem,7vw,5rem);font-weight:300;line-height:1.05;letter-spacing:-.01em">Uw ruimte.<br><em class="si" style="color:var(--mist)">Perfect</em><br>vastgelegd.</h2>
+        <p class="r d2" style="margin-top:clamp(16px,2.5vw,28px);font-size:clamp(.82rem,1.5vw,1rem);color:rgba(255,255,255,.5);line-height:1.8;max-width:480px">Van woning tot hotel — wij fotograferen uw ruimte in fotorealistische 360° en maken hem toegankelijk voor de hele wereld.</p>
+        <div class="hctas r d3" style="margin-top:clamp(24px,3.5vw,40px)">
+          <a href="#prijzen" class="btn btn-blue arr">Bekijk pakketten <span>→</span></a>
+          <a href="#portfolio" class="btn btn-wire">Portfolio</a>
+        </div>
+        <div class="hstats r d3" style="margin-top:clamp(28px,4vw,48px)">
+          <div><span class="hsv">23MP</span><span class="hsk">HDR resolutie</span></div>
+          <div><span class="hsv">360°</span><span class="hsk">Volledig beeld</span></div>
+          <div><span class="hsv">24u</span><span class="hsk">Levertijd</span></div>
+        </div>
       </div>
-      <div class="fglow"></div>
+      <div class="r d2">
+        <span class="eye" style="display:block;margin-bottom:20px">Hoe het werkt</span>
+        <div class="how">
+          <div class="hs"><div class="hn">01</div><div class="hc"><h4>Afspraak inplannen</h4><p>U kiest een datum en locatie. Wij komen met professionele 360°-apparatuur — compact genoeg voor élke ruimte.</p></div></div>
+          <div class="hs"><div class="hn">02</div><div class="hc"><h4>Persoonlijk klantportaal</h4><p>U ontvangt direct toegang via <a href="portaal.html" style="color:var(--blue-hi)">explora360.nl/portaal</a> — tours bekijken, deelbare links, embedcode en facturen op één plek.</p></div></div>
+          <div class="hs"><div class="hn">03</div><div class="hc"><h4>HDR-opname per ruimte</h4><p>Één druk op de knop per kamer. De camera schiet automatisch drie HDR-belichtingen en combineert ze direct — 30–45 min. voor een volledig pand.</p></div></div>
+          <div class="hs"><div class="hn">04</div><div class="hc"><h4>Auto-stitch &amp; cloud sync</h4><p>Twee 180°-lenzen samengesteld tot één naadloos 360°-beeld. Automatisch geüpload naar Matterport Cloud.</p></div></div>
+          <div class="hs"><div class="hn">05</div><div class="hc"><h4>Nabewerking &amp; levering</h4><p>RAW bestanden professioneel verfijnd in Lightroom. Eindresultaat inclusief embed-link en foto's binnen 24 uur geleverd.</p></div></div>
+          <div class="hs"><div class="hn">06</div><div class="hc"><h4>Publiceer overal</h4><p>Één link op Funda, Booking.com, Airbnb of uw eigen website. Werkt ook als Google Street View-bijdrage.</p></div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <div id="mband"><div class="mrow">
-  <span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">360° in één druk<span class="md">·</span></span><span class="mi">RAW + JPEG<span class="md">·</span></span><span class="mi">Levering binnen 24u<span class="md">·</span></span><span class="mi">Matterport platform<span class="md">·</span></span><span class="mi">Funda &amp; Booking.com ready<span class="md">·</span></span><span class="mi">AirBnB optimized<span class="md">·</span></span>
-  <span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">360° in één druk<span class="md">·</span></span><span class="mi">RAW + JPEG<span class="md">·</span></span><span class="mi">Levering binnen 24u<span class="md">·</span></span><span class="mi">Matterport platform<span class="md">·</span></span><span class="mi">Funda &amp; Booking.com ready<span class="md">·</span></span><span class="mi">AirBnB optimized<span class="md">·</span></span>
+  <span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">360° in één druk<span class="md">·</span></span><span class="mi">RAW + JPEG<span class="md">·</span></span><span class="mi">Levering binnen 24u<span class="md">·</span></span><span class="mi">Matterport platform<span class="md">·</span></span><span class="mi">Funda &amp; Booking.com ready<span class="md">·</span></span><span class="mi">AirBnB optimized<span class="md">·</span></span>
+  <span class="mi">23 Megapixel HDR<span class="md">·</span></span><span class="mi">360° in één druk<span class="md">·</span></span><span class="mi">RAW + JPEG<span class="md">·</span></span><span class="mi">Levering binnen 24u<span class="md">·</span></span><span class="mi">Matterport platform<span class="md">·</span></span><span class="mi">Funda &amp; Booking.com ready<span class="md">·</span></span><span class="mi">AirBnB optimized<span class="md">·</span></span>
 </div></div>
-
-<section id="diensten">
-  <div class="wrap"><div class="dg">
-    <div class="r">
-      <span class="eye">Wat wij doen</span><span class="rule"></span>
-      <h2>Uw ruimte.<br><em class="si" style="color:var(--mist)">Perfect</em><br>vastgelegd.</h2>
-      <p>Explora360 maakt van elke ruimte een meeslepende, interactieve 360°-ervaring. Bezoekers lopen virtueel door uw pand — van elke hoek, op elk device, op elk moment.</p>
-      <p style="margin-top:12px">Met professionele 360°-apparatuur leggen we ieder detail vast in scherpe HDR-beelden. Fotorealistische tours die vertrouwen wekken nog voor de eerste bezichtiging.</p>
-      <div style="margin-top:28px"><a href="offerte.html" class="btn btn-blue arr" style="padding:13px 28px;font-size:.58rem">Offerte aanvragen <span>→</span></a></div>
-    </div>
-    <div class="r">
-      <span class="eye" style="display:block;margin-bottom:20px">Hoe het werkt</span>
-      <div class="how">
-        <div class="hs"><div class="hn">01</div><div class="hc"><h4>Afspraak inplannen</h4><p>U kiest een datum en locatie. Wij komen met professionele 360°-apparatuur — compact genoeg voor élke ruimte.</p></div></div>
-        <div class="hs"><div class="hn">02</div><div class="hc"><h4>Persoonlijk klantportaal</h4><p>U ontvangt direct toegang via <a href="portaal.html" style="color:var(--blue-hi)">explora360.nl/portaal</a> — tours bekijken, deelbare links, embedcode en facturen op één plek.</p></div></div>
-        <div class="hs"><div class="hn">03</div><div class="hc"><h4>HDR-opname per ruimte</h4><p>Één druk op de knop per kamer. De camera schiet automatisch drie HDR-belichtingen en combineert ze direct — 30–45 min. voor een volledig pand.</p></div></div>
-        <div class="hs"><div class="hn">04</div><div class="hc"><h4>Auto-stitch &amp; cloud sync</h4><p>Twee 180°-lenzen samengesteld tot één naadloos 360°-beeld. Automatisch geüpload naar Matterport Cloud.</p></div></div>
-        <div class="hs"><div class="hn">05</div><div class="hc"><h4>Nabewerking &amp; levering</h4><p>RAW bestanden professioneel verfijnd in Lightroom. Eindresultaat inclusief embed-link en foto's binnen 24 uur geleverd.</p></div></div>
-        <div class="hs"><div class="hn">06</div><div class="hc"><h4>Publiceer overal</h4><p>Één link op Funda, Booking.com, Airbnb of uw eigen website. Werkt ook als Google Street View-bijdrage.</p></div></div>
-      </div>
-    </div>
-  </div></div>
-</section>
 
 
 <section id="sectoren">
@@ -630,276 +560,212 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       <div class="pi-copy">
         <span class="eye">Prijzen &amp; Pakketten</span>
         <h2>Transparant.<br/><em class="si">Zonder verrassingen.</em></h2>
-        <p>Introductietarieven 2026 &mdash; geldig voor het eerste jaar. In ruil voor portfolio-recht en een eerlijke review. Alle prijzen excl. btw. 12 maanden hosting inbegrepen. Levering binnen 24 uur waar mogelijk.</p>
+        <p>Introductietarieven 2026. Alle prijzen excl. btw. 12 maanden hosting inbegrepen. Levering binnen 24 uur.</p>
         <div class="intro-badge">&#10027; Introductieprijs 2026 &mdash; eerste jaar</div>
       </div>
     </div>
 
-    <!-- TABS -->
-    <div class="pc-tabs r d1">
-      <button class="pc-tab active" onclick="switchTab(this,'vastgoed')">Vastgoed</button>
-      <button class="pc-tab" onclick="switchTab(this,'zakelijk')">Zakelijk</button>
+    <!-- HOOFDPAKKETTEN -->
+    <div class="pkg-grid r" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:2px">
+
+      <!-- BASIS -->
+      <div class="pc" style="background:var(--ink2);padding:clamp(22px,3vw,36px);border-top:2px solid rgba(255,255,255,.1);position:relative">
+        <span class="pkg-name">Basis</span>
+        <span class="pkg-sub">Tot 75 m²</span>
+        <div class="pkg-price">&euro;249 <small>excl. btw</small></div>
+        <ul class="pkg-list">
+          <li>&#10003; 360° Matterport tour</li>
+          <li>&#10003; 10 bewerkte 2D-foto's</li>
+          <li>&#10003; 12 maanden hosting</li>
+          <li>&#10003; Funda &amp; Google ready</li>
+          <li>&#10003; Levering binnen 24u</li>
+          <li>&#10003; Deelbare link + embedcode</li>
+        </ul>
+        <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
+      </div>
+
+      <!-- STANDAARD -->
+      <div class="pc star" style="background:var(--ink2);padding:clamp(22px,3vw,36px);border-top:2px solid var(--blue);position:relative">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--blue);color:var(--ink);font-size:.48rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:4px 14px;white-space:nowrap">Meest gekozen</div>
+        <span class="pkg-name" style="margin-top:16px;display:block">Standaard</span>
+        <span class="pkg-sub">75 – 150 m²</span>
+        <div class="pkg-price" style="color:var(--blue-hi)">&euro;389 <small>excl. btw</small></div>
+        <ul class="pkg-list">
+          <li>&#10003; 360° Matterport tour</li>
+          <li>&#10003; 25 bewerkte 2D-foto's</li>
+          <li>&#10003; RAW + Lightroom bewerking</li>
+          <li>&#10003; Google Street View ready</li>
+          <li>&#10003; 12 maanden hosting</li>
+          <li>&#10003; Alle platformen</li>
+          <li>&#10003; Branded portaallink</li>
+        </ul>
+        <a href="offerte.html" class="pkg-btn" style="background:var(--blue);color:var(--ink);border-color:var(--blue)">Offerte aanvragen &rarr;</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="pc" style="background:var(--ink2);padding:clamp(22px,3vw,36px);border-top:2px solid rgba(255,255,255,.1);position:relative">
+        <span class="pkg-name">Pro</span>
+        <span class="pkg-sub">150 – 250 m²</span>
+        <div class="pkg-price">&euro;489 <small>excl. btw</small></div>
+        <ul class="pkg-list">
+          <li>&#10003; Alles van Standaard</li>
+          <li>&#10003; Grotere panden</li>
+          <li>&#10003; Prioriteit levering</li>
+          <li>&#10003; Extra optimalisatie</li>
+          <li>&#10003; 12 maanden hosting</li>
+        </ul>
+        <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="pc" style="background:var(--ink2);padding:clamp(22px,3vw,36px);border-top:2px solid var(--amber);position:relative">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--amber);color:var(--ink);font-size:.48rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:4px 14px;white-space:nowrap">Grootste panden</div>
+        <span class="pkg-name" style="margin-top:16px;display:block">Premium</span>
+        <span class="pkg-sub">250 m²+ &middot; Commercieel</span>
+        <div class="pkg-price" style="color:var(--amber-hi)">&euro;689 <small>excl. btw</small></div>
+        <ul class="pkg-list">
+          <li>&#10003; Alles van Pro</li>
+          <li>&#10003; Horeca &amp; retail</li>
+          <li>&#10003; Prioriteit levering</li>
+          <li>&#10003; Extra afwerking</li>
+          <li>&#10003; 12 maanden hosting</li>
+        </ul>
+        <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
+      </div>
+
     </div>
 
-    <!-- VASTGOED -->
-    <div class="pc-pakketten" id="tab-vastgoed">
-      <div class="pkg-grid">
+    <!-- EXTRA REGEL -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:var(--ink2);border:1px solid rgba(255,255,255,.05);padding:14px 20px;margin-bottom:2px">
+      <span style="font-size:.72rem;color:rgba(255,255,255,.45)">Extra m² boven limiet</span>
+      <span style="font-family:var(--fs);font-size:1.2rem;color:rgba(255,255,255,.6)">€0,70 <small style="font-family:var(--fb);font-size:.62rem;color:rgba(255,255,255,.3)">per m²</small></span>
+    </div>
 
-        <div class="pkg-card">
-          <div class="pkg-top">
-            <span class="pkg-name">Starter</span>
-            <span class="pkg-sub">Woningen tot 100 m²</span>
-          </div>
-          <div class="pkg-price">&euro;189 <small>excl. btw</small></div>
-          <ul class="pkg-list">
-            <li>&#10003; Volledige 360&#176; Matterport tour</li>
-            <li>&#10003; 23MP HDR foto&#8217;s inbegrepen</li>
-            <li>&#10003; 12 maanden hosting</li>
-            <li>&#10003; RAW + bewerkte bestanden</li>
-            <li>&#10003; Funda &amp; social media ready</li>
-            <li>&#10003; Levering binnen 24 uur</li>
-          </ul>
-          <div class="pkg-for">Ideaal voor: appartement, rijwoning, studio</div>
-          <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
-        </div>
-
-        <div class="pkg-card popular">
-          <div class="pkg-badge-pop">Meest gekozen</div>
-          <div class="pkg-top">
-            <span class="pkg-name">Pro</span>
-            <span class="pkg-sub">Woningen tot 250 m²</span>
-          </div>
-          <div class="pkg-price">&euro;299 <small>excl. btw</small></div>
-          <ul class="pkg-list">
-            <li>&#10003; Alles uit Starter</li>
-            <li>&#10003; Grotere woning, meer scans</li>
-            <li>&#10003; Hogere resolutie output</li>
-            <li>&#10003; Google Street View klaar</li>
-            <li>&#10003; Integratie Booking.com</li>
-            <li>&#10003; Levering binnen 24 uur</li>
-          </ul>
-          <div class="pkg-for">Ideaal voor: villa, vrijstaande woning, duplex</div>
-          <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
-        </div>
-
-        <div class="pkg-card">
-          <div class="pkg-top">
-            <span class="pkg-name">Hospitality</span>
-            <span class="pkg-sub">Hotel, B&amp;B, Vakantiewoning</span>
-          </div>
-          <div class="pkg-price">&euro;479 <small>vanaf &middot; excl. btw</small></div>
-          <ul class="pkg-list">
-            <li>&#10003; Lobby + 1 kamerscan inbegrepen</li>
-            <li>&#10003; +&euro;29 per extra kamer/ruimte</li>
-            <li>&#10003; Multi-ruimte tour in &eacute;&eacute;n link</li>
-            <li>&#10003; Booking.com &amp; Airbnb ready</li>
-            <li>&#10003; 12 maanden hosting</li>
-            <li>&#10003; RAW + bewerkte bestanden</li>
-          </ul>
-          <div class="pkg-for">Ideaal voor: hotel, B&amp;B, glamping, resort</div>
-          <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
-        </div>
-
+    <!-- MULTIROOM -->
+    <div class="r" style="background:var(--ink2);border:1px solid rgba(255,255,255,.05);border-left:3px solid var(--blue);padding:clamp(20px,3vw,32px);margin-bottom:clamp(36px,5vw,60px);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center">
+      <div>
+        <div style="font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Hotel &middot; B&amp;B &middot; Camping &middot; Resort</div>
+        <div style="font-family:var(--fs);font-size:1.4rem;font-weight:300;margin-bottom:6px">Multiroom pakket</div>
+        <p style="font-size:.74rem;color:rgba(255,255,255,.42);line-height:1.7;max-width:500px">Lobby of receptie + 5 ruimtes. Ideaal voor hotels, B&amp;B's en campings met meerdere accommodaties. Extra ruimte +€39 per stuk. 12 maanden hosting inbegrepen.</p>
+        <ul style="margin-top:10px;list-style:none;display:flex;flex-wrap:wrap;gap:8px">
+          <li style="font-size:.64rem;color:rgba(255,255,255,.5);padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">&#10003; Lobby + 5 ruimtes</li>
+          <li style="font-size:.64rem;color:rgba(255,255,255,.5);padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">&#10003; Booking.com ready</li>
+          <li style="font-size:.64rem;color:rgba(255,255,255,.5);padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">&#10003; +€39 per extra ruimte</li>
+          <li style="font-size:.64rem;color:rgba(255,255,255,.5);padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">&#10003; 12 maanden hosting</li>
+        </ul>
       </div>
-
-      <!-- BUNDELS VASTGOED -->
-      <div class="bundel-wrap r d2">
-        <div class="bundel-title"><span class="eye">Voordeelbundels</span></div>
-        <div class="bundel-grid">
-          <div class="bundel-card">
-            <div class="bundel-name">Starter + Staging + Video</div>
-            <div class="bundel-desc">Tour, AI staging per ruimte &amp; social media videoclip</div>
-            <div class="bundel-price">&euro;279 <span>i.p.v. &euro;309</span></div>
-          </div>
-          <div class="bundel-card highlight">
-            <div class="bundel-name">Pro + Staging + Video</div>
-            <div class="bundel-desc">Grote woning, AI staging &amp; videoclip voor social media</div>
-            <div class="bundel-price">&euro;399 <span>i.p.v. &euro;429</span></div>
-          </div>
-        </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--fs);font-size:2rem;font-weight:300;color:var(--blue-hi)">€499</div>
+        <div style="font-size:.58rem;color:rgba(255,255,255,.28);margin-bottom:14px">excl. btw</div>
+        <a href="offerte.html" class="pkg-btn" style="display:inline-block">Offerte &rarr;</a>
       </div>
+    </div>
 
-      <!-- ADD-ONS VASTGOED -->
-      <div class="ao-wrap r d3">
-        <div class="ao-title"><span class="eye">Vastgoed Add-ons</span><p>Toe te voegen bij elk vastgoedpakket &middot; excl. btw</p></div>
-        <div class="ai-grid">
-          <div class="ai-card popular-ao">
-            <div class="ai-top"><span class="ai-name">AI Virtual Staging</span><span class="ai-badge">Meest gevraagd</span></div>
-            <div class="ai-price">&euro;55 <small>per ruimte</small></div>
-            <div class="ai-desc">Lege ruimtes fotorealistisch inrichten met virtuele meubels. Per ruimte/kamer die gestaged wordt.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Social media videoclip</span></div>
-            <div class="ai-price">&euro;45 <small>per tour</small></div>
-            <div class="ai-desc">Automatische walkthrough-video van uw volledige tour. Per opgeleverde tour, klaar voor Instagram &amp; Facebook.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Extra 2D-foto&#8217;s</span></div>
-            <div class="ai-price">&euro;29 <small>15 stuks &middot; per tour</small></div>
-            <div class="ai-desc">15 extra stilstaande beelden uit uw tour. Per set van 15 foto&#8217;s, direct bruikbaar voor Funda.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Hotspots + info-tags</span></div>
-            <div class="ai-price">&euro;39 <small>per tour</small></div>
-            <div class="ai-desc">Klikbare hotspots in uw tour met tekst, links of afbeeldingen. Per tour toegevoegd.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Google Street View</span></div>
-            <div class="ai-price">&euro;45 <small>per tour</small></div>
-            <div class="ai-desc">Tour publiceren op Google Maps Street View inclusief branding overlay. Per tour gepubliceerd.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Spoedlevering</span></div>
-            <div class="ai-price">&euro;55 <small>toeslag per tour</small></div>
-            <div class="ai-desc">Tour live v&#243;&#243;r 18:00 dezelfde dag. Toeslag bovenop uw pakketprijs.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Meertalige labels</span></div>
-            <div class="ai-price">&euro;29 <small>per taal per tour</small></div>
-            <div class="ai-desc">Ruimtelabels en teksten in extra taal. Per taal die toegevoegd wordt aan uw tour.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Seizoensupdate</span></div>
-            <div class="ai-price">&euro;109 <small>per update</small></div>
-            <div class="ai-desc">Pand opnieuw fotograferen na verbouwing of nieuw seizoen. Per herbezoek en nieuwe opname.</div>
-          </div>
-          <div class="ai-card ai-hosting">
-            <div class="ai-top"><span class="ai-name">Extra hosting</span></div>
-            <div class="ai-price">&euro;39 <small>per jaar</small></div>
-            <div class="ai-desc">Hosting na het eerste jaar. Eerste 12 maanden altijd inbegrepen in elk pakket.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Extra m&#178;</span></div>
-            <div class="ai-price">&euro;0,65 <small>per m&#178;</small></div>
-            <div class="ai-desc">Woning groter dan het pakket? Per extra vierkante meter boven de pakketgrens.</div>
-          </div>
+    <!-- ADD-ONS -->
+    <div class="r">
+      <div style="margin-bottom:20px">
+        <span class="eye">Add-ons</span>
+        <h3 style="font-family:var(--fs);font-size:1.4rem;font-weight:300;margin-top:6px">Uitbreiden naar wens</h3>
+      </div>
+      <div class="ai-grid" style="grid-template-columns:repeat(5,1fr)">
+        <div class="ai-card popular-ao">
+          <div class="ai-name">AI Virtual Staging</div>
+          <div class="ai-price">&euro;59 <small>per ruimte</small></div>
+          <div class="ai-desc">Virtueel gestoffeerde ruimte — ideaal voor leegstaand vastgoed</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">Social media video</div>
+          <div class="ai-price">&euro;49 <small>per tour</small></div>
+          <div class="ai-desc">Videoclip van uw tour voor Instagram, Facebook of TikTok</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">Google Street View</div>
+          <div class="ai-price">&euro;55 <small>per tour</small></div>
+          <div class="ai-desc">Tour zichtbaar in Google Maps &amp; Street View</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">Hotspots &amp; info-tags</div>
+          <div class="ai-price">&euro;39 <small>per tour</small></div>
+          <div class="ai-desc">Klikbare info-punten in de tour — perfect voor retail &amp; horeca</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">Spoedlevering</div>
+          <div class="ai-price">&euro;55 <small>toeslag</small></div>
+          <div class="ai-desc">Levering dezelfde dag vóór 18:00</div>
         </div>
       </div>
     </div>
 
-    <!-- ZAKELIJK -->
-    <div class="pc-pakketten" id="tab-zakelijk" style="display:none">
-      <div class="pkg-grid">
-
-        <div class="pkg-card">
-          <div class="pkg-top">
-            <span class="pkg-name">Basis</span>
-            <span class="pkg-sub">Tot 3 ruimtes</span>
-          </div>
-          <div class="pkg-price">&euro;169 <small>excl. btw</small></div>
-          <ul class="pkg-list">
-            <li>&#10003; Tot 3 ruimtes in 1 tour</li>
-            <li>&#10003; 360&#176; Matterport tour</li>
-            <li>&#10003; 12 maanden hosting</li>
-            <li>&#10003; RAW + bewerkte bestanden</li>
-            <li>&#10003; Google Maps integratie</li>
-            <li>&#10003; Levering binnen 24 uur</li>
-          </ul>
-          <div class="pkg-for">Ideaal voor: kantoor, showroom, praktijk</div>
-          <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
-        </div>
-
-        <div class="pkg-card popular">
-          <div class="pkg-badge-pop">Meest gekozen</div>
-          <div class="pkg-top">
-            <span class="pkg-name">Plus</span>
-            <span class="pkg-sub">Onbeperkt ruimtes, 1 locatie</span>
-          </div>
-          <div class="pkg-price">&euro;279 <small>excl. btw</small></div>
-          <ul class="pkg-list">
-            <li>&#10003; Onbeperkt ruimtes op 1 locatie</li>
-            <li>&#10003; Alles uit Basis</li>
-            <li>&#10003; Hotspots inbegrepen</li>
-            <li>&#10003; Booking.com &amp; Google ready</li>
-            <li>&#10003; Meertalige ondersteuning</li>
-            <li>&#10003; Levering binnen 24 uur</li>
-          </ul>
-          <div class="pkg-for">Ideaal voor: hotel, restaurant, museum, bedrijfspand</div>
-          <a href="offerte.html" class="pkg-btn">Offerte aanvragen &rarr;</a>
-        </div>
-
-        <div class="pkg-card">
-          <div class="pkg-top">
-            <span class="pkg-name">Maatwerk</span>
-            <span class="pkg-sub">Meerdere locaties of extra wensen</span>
-          </div>
-          <div class="pkg-price">Op aanvraag</div>
-          <ul class="pkg-list">
-            <li>&#10003; Meerdere locaties mogelijk</li>
-            <li>&#10003; Custom branding &amp; whitelabel</li>
-            <li>&#10003; API-koppeling op aanvraag</li>
-            <li>&#10003; Dedicated support</li>
-            <li>&#10003; Seizoensupdates inbegrepen</li>
-            <li>&#10003; Tarieven op maat</li>
-          </ul>
-          <div class="pkg-for">Ideaal voor: ketens, ontwikkelaars, gemeenten</div>
-          <a href="#contact" class="pkg-btn">Contact opnemen &rarr;</a>
-        </div>
-
+    <!-- HOSTING -->
+    <div class="r" style="margin-top:clamp(32px,4vw,52px)">
+      <div style="margin-bottom:20px">
+        <span class="eye">Hosting</span>
+        <h3 style="font-family:var(--fs);font-size:1.4rem;font-weight:300;margin-top:6px">Na 12 maanden — optioneel verlengen</h3>
+        <p style="font-size:.74rem;color:rgba(255,255,255,.38);margin-top:6px">Het eerste jaar hosting zit altijd inbegrepen in uw pakket. Daarna kiest u zelf.</p>
       </div>
-
-      <!-- BUNDEL ZAKELIJK -->
-      <div class="bundel-wrap r d2">
-        <div class="bundel-title"><span class="eye">Voordeelbundel</span></div>
-        <div class="bundel-grid">
-          <div class="bundel-card highlight">
-            <div class="bundel-name">Plus Zakelijk + Branding + Video</div>
-            <div class="bundel-desc">Onbeperkt ruimtes, branding overlay &amp; social media videoclip</div>
-            <div class="bundel-price">&euro;349 <span>i.p.v. &euro;379</span></div>
-          </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)">
+        <div style="background:var(--ink2);padding:22px 20px">
+          <div style="font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:4px">1 tour</div>
+          <div style="font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--white);line-height:1">&euro;19 <small style="font-family:var(--fb);font-size:.58rem;color:rgba(255,255,255,.3)">/maand</small></div>
+          <div style="font-size:.66rem;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.6">Eén actieve tour online houden</div>
+        </div>
+        <div style="background:var(--ink2);padding:22px 20px;border-top:2px solid var(--blue)">
+          <div style="font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:4px">Tot 10 tours</div>
+          <div style="font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--blue-hi);line-height:1">&euro;29 <small style="font-family:var(--fb);font-size:.58rem;color:rgba(255,255,255,.3)">/maand</small></div>
+          <div style="font-size:.66rem;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.6">Makelaars &amp; verhuurders met meerdere panden</div>
+        </div>
+        <div style="background:var(--ink2);padding:22px 20px">
+          <div style="font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:4px">Onbeperkt</div>
+          <div style="font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--white);line-height:1">&euro;49 <small style="font-family:var(--fb);font-size:.58rem;color:rgba(255,255,255,.3)">/maand</small></div>
+          <div style="font-size:.66rem;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.6">Agencies, projectontwikkelaars &amp; ketens</div>
         </div>
       </div>
+    </div>
 
-      <!-- ADD-ONS ZAKELIJK -->
-      <div class="ao-wrap r d3">
-        <div class="ao-title"><span class="eye">Zakelijk Add-ons</span><p>Toe te voegen bij elk zakelijk pakket &middot; excl. btw</p></div>
-        <div class="ai-grid">
-          <div class="ai-card popular-ao">
-            <div class="ai-top"><span class="ai-name">AI Virtual Staging</span><span class="ai-badge">Meest gevraagd</span></div>
-            <div class="ai-price">&euro;55 <small>per ruimte</small></div>
-            <div class="ai-desc">Lege ruimtes inrichten met virtuele meubels of decoratie. Per ruimte die gestaged wordt.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Google Street View + branding</span></div>
-            <div class="ai-price">&euro;45 <small>per tour</small></div>
-            <div class="ai-desc">Publiceren op Google Maps met uw eigen branding overlay. Per tour gepubliceerd.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Social media videoclip</span></div>
-            <div class="ai-price">&euro;45 <small>per tour</small></div>
-            <div class="ai-desc">Walkthrough-video klaar voor LinkedIn, Instagram of YouTube. Per opgeleverde tour.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Hotspots + info-tags</span></div>
-            <div class="ai-price">&euro;39 <small>per tour</small></div>
-            <div class="ai-desc">Klikbare hotspots met productinfo, links of contactgegevens. Per tour toegevoegd.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Meertalige labels</span></div>
-            <div class="ai-price">&euro;29 <small>per taal per tour</small></div>
-            <div class="ai-desc">Ruimtelabels in extra taal voor internationale bezoekers. Per taal per tour.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Spoedlevering</span></div>
-            <div class="ai-price">&euro;55 <small>toeslag per tour</small></div>
-            <div class="ai-desc">Same-day levering v&#243;&#243;r 18:00. Toeslag bovenop uw pakketprijs.</div>
-          </div>
-          <div class="ai-card">
-            <div class="ai-top"><span class="ai-name">Seizoensupdate</span></div>
-            <div class="ai-price">&euro;109 <small>per update</small></div>
-            <div class="ai-desc">Locatie opnieuw fotograferen na verbouwing of herinrichting.</div>
-          </div>
-          <div class="ai-card ai-hosting">
-            <div class="ai-top"><span class="ai-name">Extra hosting</span></div>
-            <div class="ai-price">&euro;39 <small>per jaar</small></div>
-            <div class="ai-desc">Hosting na het eerste jaar. Eerste 12 maanden inbegrepen in elk pakket.</div>
-          </div>
+    <!-- BUNDELS -->
+    <div class="r" style="margin-top:clamp(32px,4vw,52px)">
+      <div style="margin-bottom:20px">
+        <span class="eye">Bundels</span>
+        <h3 style="font-family:var(--fs);font-size:1.4rem;font-weight:300;margin-top:6px">Alles in één — voordeliger</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)">
+        <div style="background:var(--ink2);padding:22px 20px;border-top:2px solid rgba(255,255,255,.1)">
+          <div style="font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px">Airbnb &amp; Short-stay</div>
+          <div style="font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:6px">Airbnb Compleet</div>
+          <div style="font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:4px">&euro;449</div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.25);margin-bottom:14px">i.p.v. &euro;497 los &middot; excl. btw</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; Tour (Standaard)</li>
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; Social media video</li>
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; AI Virtual Staging (1 ruimte)</li>
+          </ul>
+        </div>
+        <div style="background:var(--ink2);padding:22px 20px;border-top:2px solid var(--blue)">
+          <div style="font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Restaurant &amp; Winkel</div>
+          <div style="font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:6px">Restaurant Ready</div>
+          <div style="font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--blue-hi);line-height:1;margin-bottom:4px">&euro;489</div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.25);margin-bottom:14px">i.p.v. &euro;537 los &middot; excl. btw</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; Tour (Premium)</li>
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; Hotspots &amp; info-tags</li>
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; Social media video</li>
+          </ul>
+        </div>
+        <div style="background:var(--ink2);padding:22px 20px;border-top:2px solid var(--amber)">
+          <div style="font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-hi);margin-bottom:8px">Hotel &amp; Hospitality</div>
+          <div style="font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:6px">Hospitality Boost</div>
+          <div style="font-family:var(--fs);font-size:1.8rem;font-weight:300;color:var(--amber-hi);line-height:1;margin-bottom:4px">&euro;529</div>
+          <div style="font-size:.6rem;color:rgba(255,255,255,.25);margin-bottom:14px">i.p.v. &euro;548 los &middot; excl. btw</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; Multiroom pakket</li>
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; Social media video</li>
+            <li style="font-size:.68rem;color:rgba(255,255,255,.5)">&#10003; AI Virtual Staging (1 kamer)</li>
+          </ul>
         </div>
       </div>
     </div>
 
   </div>
-</section>
 </section>
 
 <section id="portfolio">
@@ -1004,7 +870,7 @@ footer{background:#090d14;padding:clamp(48px,7vw,82px) 0 26px;border-top:1px sol
       <div class="fcol">
         <h5>Website</h5>
         <ul>
-          <li><a href="#diensten">Diensten</a></li>
+          <li><a href="#hero">Diensten</a></li>
           <li><a href="#sectoren">Sectoren</a></li>
           <li><a href="#prijzen">Prijzen</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
