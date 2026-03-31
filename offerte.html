@@ -171,40 +171,40 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:24px 0;margin-top:clam
     <div class="prog-line" id="pl-line-1"></div>
     <div class="prog-step">
       <div class="prog-num" id="pn-2">2</div>
-      <span class="prog-label" id="pl-2">Pakket</span>
+      <span class="prog-label" id="pl-2">Add-ons</span>
     </div>
     <div class="prog-line" id="pl-line-2"></div>
     <div class="prog-step">
       <div class="prog-num" id="pn-3">3</div>
-      <span class="prog-label" id="pl-3">Extras</span>
+      <span class="prog-label" id="pl-3">Gegevens</span>
     </div>
-    <div class="prog-line" id="pl-line-3"></div>
-    <div class="prog-step">
-      <div class="prog-num" id="pn-4">4</div>
-      <span class="prog-label" id="pl-4">Gegevens</span>
-    </div>
+
   </div>
 
   <!-- STAP 1: TYPE -->
   <div class="step active" id="step-1">
     <div class="step-title">Wat voor locatie heeft u?</div>
     <div class="step-sub">Kies het type dat het beste bij uw situatie past.</div>
-    <div class="type-grid">
-      <div class="type-card" onclick="selectType(this,'vastgoed')">
-                <div class="type-name">Vastgoed</div>
-        <div class="type-desc">Woning, appartement, villa of nieuwbouwproject te koop of te huur</div>
+    <div class="type-grid" style="grid-template-columns:1fr">
+      <div class="type-card" onclick="selectType(this,'basis')">
+        <div class="type-name">Basis <span style="font-family:var(--fs);font-size:1.2rem;color:var(--blue-hi);float:right">€249</span></div>
+        <div class="type-desc">Tot 75 m² — kleine woning, studio, appartement of kleine zaak</div>
       </div>
-      <div class="type-card" onclick="selectType(this,'hotel')">
-                <div class="type-name">Hospitality</div>
-        <div class="type-desc">Hotel, B&amp;B, vakantiewoning of resort met meerdere kamers</div>
+      <div class="type-card" onclick="selectType(this,'standaard')">
+        <div class="type-name">Standaard <span style="font-family:var(--fs);font-size:1.2rem;color:var(--blue-hi);float:right">€389</span></div>
+        <div class="type-desc">75–150 m² — tussenwoning, groter appartement of middelgrote zaak <span style="font-size:.5rem;background:var(--blue);color:var(--ink);padding:2px 7px;margin-left:6px;vertical-align:middle">Meest gekozen</span></div>
       </div>
-      <div class="type-card" onclick="selectType(this,'airbnb')">
-                <div class="type-name">AirBnB / Vakantie</div>
-        <div class="type-desc">Vakantiewoning, huisje, glamping of kortverblijf</div>
+      <div class="type-card" onclick="selectType(this,'pro')">
+        <div class="type-name">Pro <span style="font-family:var(--fs);font-size:1.2rem;color:var(--blue-hi);float:right">€489</span></div>
+        <div class="type-desc">150–250 m² — vrijstaande woning, villa of groter bedrijfspand</div>
       </div>
-      <div class="type-card" onclick="selectType(this,'zakelijk')">
-                <div class="type-name">Zakelijk</div>
-        <div class="type-desc">Kantoor, showroom, winkel, restaurant of andere zakelijke locatie</div>
+      <div class="type-card" onclick="selectType(this,'premium')">
+        <div class="type-name">Premium <span style="font-family:var(--fs);font-size:1.2rem;color:var(--amber-hi);float:right">€689</span></div>
+        <div class="type-desc">250 m²+ — groot pand, horeca, retail of commercieel vastgoed</div>
+      </div>
+      <div class="type-card" onclick="selectType(this,'multiroom')">
+        <div class="type-name">Multiroom <span style="font-family:var(--fs);font-size:1.2rem;color:var(--blue-hi);float:right">€499</span></div>
+        <div class="type-desc">Hotel, B&amp;B, camping of resort — lobby + 5 ruimtes, +€39 per extra ruimte</div>
       </div>
     </div>
     <div class="btn-row" style="justify-content:flex-end">
@@ -215,47 +215,26 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:24px 0;margin-top:clam
     </div>
   </div>
 
-  <!-- STAP 2: PAKKET -->
+  <!-- STAP 2: ADD-ONS -->
   <div class="step" id="step-2">
-    <div class="step-title">Kies uw pakket</div>
-    <div class="step-sub" id="pakket-sub">Introductietarieven 2026 — excl. btw. 12 maanden hosting inbegrepen.</div>
-    <div class="pakket-grid" id="pakket-grid"></div>
-    <div class="btn-row">
-      <button class="btn btn-wire" onclick="goStep(1)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Terug
-      </button>
-      <button class="btn btn-blue" id="btn-next-2" onclick="goStep(3)" disabled>
-        Verder
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- STAP 3: ADD-ONS -->
-  <div class="step" id="step-3">
     <div class="step-title">Aanvullingen</div>
-    <div class="step-sub">Optioneel — voeg toe wat u nodig heeft. Alles excl. btw.</div>
+    <div class="step-sub" id="s2-sub">Optioneel — voeg toe wat u nodig heeft. Alles excl. btw.</div>
     <div class="addon-grid">
-      <div class="addon-card" onclick="toggleAddon(this,'staging',55)">
+      <div class="addon-card" onclick="toggleAddon(this,'staging',59)">
         <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-        <div><div class="addon-name">AI Virtual Staging</div><div class="addon-price">€55 per ruimte</div></div>
+        <div><div class="addon-name">AI Virtual Staging</div><div class="addon-price">€59 per ruimte</div></div>
       </div>
-      <div class="addon-card" onclick="toggleAddon(this,'video',45)">
+      <div class="addon-card" onclick="toggleAddon(this,'video',49)">
         <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-        <div><div class="addon-name">Social media videoclip</div><div class="addon-price">€45 per tour</div></div>
+        <div><div class="addon-name">Social media video</div><div class="addon-price">€49 per tour</div></div>
       </div>
-      <div class="addon-card" onclick="toggleAddon(this,'fotos',29)">
+      <div class="addon-card" onclick="toggleAddon(this,'streetview',55)">
         <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-        <div><div class="addon-name">Extra 2D-foto's (15 stuks)</div><div class="addon-price">€29 per tour</div></div>
+        <div><div class="addon-name">Google Street View</div><div class="addon-price">€55 per tour</div></div>
       </div>
       <div class="addon-card" onclick="toggleAddon(this,'hotspots',39)">
         <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-        <div><div class="addon-name">Hotspots + info-tags</div><div class="addon-price">€39 per tour</div></div>
-      </div>
-      <div class="addon-card" onclick="toggleAddon(this,'streetview',45)">
-        <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
-        <div><div class="addon-name">Google Street View</div><div class="addon-price">€45 per tour</div></div>
+        <div><div class="addon-name">Hotspots &amp; info-tags</div><div class="addon-price">€39 per tour</div></div>
       </div>
       <div class="addon-card" onclick="toggleAddon(this,'spoed',55)">
         <div class="addon-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
@@ -263,19 +242,20 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:24px 0;margin-top:clam
       </div>
     </div>
     <div class="btn-row">
-      <button class="btn btn-wire" onclick="goStep(2)">
+      <button class="btn btn-wire" onclick="goStep(1)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         Terug
       </button>
-      <button class="btn btn-blue" onclick="goStep(4)">
+      <button class="btn btn-blue" onclick="goStep(3)">
         Verder
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- STAP 4: GEGEVENS -->
-  <div class="step" id="step-4">
+  <!-- STAP 3: GEGEVENS -->
+
+  <div class="step" id="step-3">
     <div class="step-title">Uw gegevens</div>
     <div class="step-sub">Bijna klaar — vul uw contactgegevens in zodat wij de offerte kunnen toesturen.</div>
 
@@ -352,64 +332,33 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:24px 0;margin-top:clam
 var state = { type: null, pakket: null, pakketPrijs: 0, addons: [], addonsPrijs: 0, aantalPakketten: 1 };
 
 var PAKKETTEN = {
-    vastgoed: [
-      { id:'starter',  name:'Starter',           desc:'Woningen tot 100 m²',         prijs:189, popular:false },
-      { id:'pro',       name:'Pro',                desc:'Woningen tot 250 m²',         prijs:299, popular:true  },
-      { id:'premium',   name:'Premium',            desc:'Villa of groot pand 250 m²+', prijs:479, popular:false }
-    ],
-    hotel: [
-      { id:'h-s',  name:'Hospitality Starter', desc:'Lobby + 1 kamer',    prijs:299, popular:false },
-      { id:'h-p',  name:'Hospitality Pro',     desc:'Lobby + 3 kamers',   prijs:479, popular:true  },
-      { id:'h-xl', name:'Hospitality XL',      desc:'Volledig hotel',     prijs:null, popular:false }
-    ],
-    airbnb: [
-      { id:'starter', name:'Starter', desc:'Vakantiewoning tot 100 m²', prijs:189, popular:false },
-      { id:'pro',     name:'Pro',     desc:'Grotere vakantiewoning',     prijs:299, popular:true  }
-    ],
-    camping: [
-      { id:'c-s', name:'Camping Basis', desc:'Receptie + 2 accommodaties', prijs:249, popular:false },
-      { id:'c-p', name:'Camping Pro',   desc:'Volledig terrein',           prijs:null, popular:true  }
-    ],
-    zakelijk: [
-      { id:'basis', name:'Basis',     desc:'Tot 3 ruimtes',           prijs:169, popular:false },
-      { id:'plus',  name:'Plus',      desc:'Onbeperkt ruimtes',       prijs:279, popular:true  },
-      { id:'mw',    name:'Maatwerk',  desc:'Meerdere locaties',       prijs:null, popular:false }
-    ],
-    horeca: [
-      { id:'h-s', name:'Horeca Starter', desc:'1 ruimte',        prijs:169, popular:false },
-      { id:'h-p', name:'Horeca Pro',     desc:'Volledig pand',   prijs:279, popular:true  }
-    ],
-    nieuwbouw: [
-      { id:'mw',   name:'Modelwoning', desc:'1 showunit',           prijs:299, popular:true  },
-      { id:'proj', name:'Project',     desc:'Meerdere units',       prijs:null, popular:false }
-    ],
-    overig: [
-      { id:'basis', name:'Basis',    desc:'Tot 3 ruimtes',  prijs:169, popular:false },
-      { id:'plus',  name:'Plus',     desc:'Onbeperkt',      prijs:279, popular:true  },
-      { id:'mw',    name:'Maatwerk', desc:'Op aanvraag',    prijs:null, popular:false }
-    ]
+    basis:     [{ id:'basis',     name:'Basis',     desc:'Tot 75 m²',              prijs:249, popular:false }],
+    standaard: [{ id:'standaard', name:'Standaard', desc:'75–150 m²',              prijs:389, popular:true  }],
+    pro:       [{ id:'pro',       name:'Pro',        desc:'150–250 m²',            prijs:489, popular:false }],
+    premium:   [{ id:'premium',   name:'Premium',    desc:'250 m²+ / commercieel', prijs:689, popular:false }],
+    multiroom: [{ id:'multiroom', name:'Multiroom',  desc:'Lobby + 5 ruimtes',     prijs:499, popular:false }]
   };
 
-var TYPE_LABELS = { vastgoed:'Vastgoed', hotel:'Hotel & B&B', airbnb:'AirBnB & Vakantie', camping:'Camping & Glamping', zakelijk:'Kantoor & Showroom', horeca:'Horeca & Restaurant', nieuwbouw:'Nieuwbouw', overig:'Overig' };
+var TYPE_LABELS = { basis:'Basis (tot 75 m²)', standaard:'Standaard (75–150 m²)', pro:'Pro (150–250 m²)', premium:'Premium (250 m²+)', multiroom:'Multiroom (hotel/camping)' };
 
 // ── STAP NAVIGATIE ────────────────────────────────────────────────────────
 function goStep(n) {
-  if (n === 4) buildSummary();
+  if (n === 3) buildSummary();
   document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
-  document.getElementById('step-' + (n === 5 ? 'success' : n)).classList.add('active');
+  var stepId = n >= 4 ? 'success' : n; document.getElementById('step-' + stepId).classList.add('active');
   updateProgress(n);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function updateProgress(cur) {
-  for (var i = 1; i <= 4; i++) {
+  for (var i = 1; i <= 3; i++) {
     var num = document.getElementById('pn-' + i);
     var lbl = document.getElementById('pl-' + i);
     if (!num) continue;
     num.className = 'prog-num' + (i < cur ? ' done' : i === cur ? ' active' : '');
     num.textContent = i < cur ? '✓' : i;
-    lbl.className = 'prog-label' + (i <= cur ? ' active' : '');
-    if (i < 4) {
+    if (lbl) lbl.className = 'prog-label' + (i <= cur ? ' active' : '');
+    if (i < 3) {
       var line = document.getElementById('pl-line-' + i);
       if (line) line.className = 'prog-line' + (i < cur ? ' done' : '');
     }
@@ -421,9 +370,13 @@ function selectType(el, type) {
   document.querySelectorAll('.type-card').forEach(function(c){ c.classList.remove('selected'); });
   el.classList.add('selected');
   state.type = type;
-  state.pakket = null; state.pakketPrijs = 0;
+  // Pakket = zelfde als type, prijs direct ophalen
+  var paks = PAKKETTEN[type] || [];
+  var p = paks[0];
+  state.pakket = p ? p.id : type;
+  state.pakketPrijs = p ? (p.prijs || 0) : 0;
+  state.aantalPakketten = 1;
   document.getElementById('btn-next-1').disabled = false;
-  buildPakketten(type);
 }
 
 // ── PAKKET ────────────────────────────────────────────────────────────────
@@ -581,7 +534,7 @@ async function verstuurOfferte() {
         '<div class="success-detail-row"><span class="k">Pakket</span><span class="v">' + (p?p.name:'') + '</span></div>' +
         (totaal?'<div class="success-detail-row"><span class="k">Aantal</span><span class="v">'+state.aantalPakketten+' pand'+(state.aantalPakketten>1?'en':'')+'</span></div><div class="success-detail-row"><span class="k">Indicatief</span><span class="v">€'+totaal+' excl. btw'+(kortingPct>0?' (incl. '+kortingPct+'% korting)':'')+'</span></div>':'') +
         '<div class="success-detail-row"><span class="k">Reactie binnen</span><span class="v">24 uur</span></div>';
-      goStep(5);
+      goStep(4);
     } else {
       btn.textContent = 'Offerte aanvragen'; btn.disabled = false;
       alert('Er ging iets mis. Probeer het opnieuw of stuur een WhatsApp naar +31 6 16 07 66 13');
