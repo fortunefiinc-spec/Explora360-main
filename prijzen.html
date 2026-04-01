@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Prijzen &amp; Pakketten — Explora360</title>
+<meta name="description" content="Transparante prijzen voor professionele 360° virtuele tours. Vaste tarieven per m², geen verborgen kosten."/>
+<link rel="canonical" href="https://www.explora360.nl/prijzen.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#1a2333;--ink2:#212d40;--ink3:#28364d;--white:#fafbfd;--mist:#94aac8;--blue:#4a90f7;--blue-hi:#82b4fa;--blue-lo:#2d6fd4;--amber:#e8a030;--amber-hi:#f0bc60;--green:#2ec470;--fs:'Cormorant Garamond',serif;--fb:'Jost',sans-serif;--ease:cubic-bezier(.4,0,.2,1);--pad:clamp(20px,5vw,60px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--ink);color:var(--white);font-family:var(--fb);font-weight:300;min-height:100vh}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--blue)}
+nav{position:sticky;top:0;z-index:800;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(26,35,51,.97);backdrop-filter:blur(22px)}
+.nav-inner{max-width:1000px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{font-family:var(--fs);font-size:1.3rem}.nav-logo em{font-style:normal;color:var(--blue)}
+.nav-back{font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.32);display:flex;align-items:center;gap:7px;transition:color .22s}
+.nav-back:hover{color:var(--white)}.nav-back svg{width:13px;height:13px}
+.wrap{max-width:1000px;margin:0 auto;padding:clamp(40px,6vw,72px) var(--pad)}
+.eye{font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:10px}
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:2px}
+.pkg{background:var(--ink2);padding:clamp(20px,3vw,32px);position:relative}
+.pkg.star{border-top:2px solid var(--blue)}
+.pkg.amber{border-top:2px solid var(--amber)}
+.pkg.plain{border-top:2px solid rgba(255,255,255,.1)}
+.pkg-label{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-size:.46rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;white-space:nowrap}
+.pkg-name{font-family:var(--fs);font-size:1.5rem;font-weight:300;display:block;margin-top:8px}
+.pkg-sub{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.32);display:block;margin-top:4px;margin-bottom:16px}
+.pkg-price{font-family:var(--fs);font-size:2rem;font-weight:300;line-height:1;margin-bottom:18px}
+.pkg-price small{font-family:var(--fb);font-size:.58rem;color:rgba(255,255,255,.32);letter-spacing:.08em}
+.pkg-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.pkg-list li{font-size:.7rem;color:rgba(255,255,255,.55);line-height:1.5}
+.pkg-btn{display:block;text-align:center;padding:11px;border:1px solid rgba(255,255,255,.14);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:all .22s;margin-top:auto}
+.pkg-btn:hover{border-color:rgba(74,144,247,.5);color:var(--blue-hi)}
+.pkg-btn.primary{background:var(--blue);color:var(--ink);border-color:var(--blue)}.pkg-btn.primary:hover{background:var(--blue-hi)}
+.section-head{margin:clamp(40px,5vw,60px) 0 20px}
+.section-head h2{font-family:var(--fs);font-size:clamp(1.4rem,3vw,2rem);font-weight:300;margin-top:8px}
+.ai-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.ai-card{background:var(--ink2);padding:20px;display:flex;flex-direction:column;gap:6px}
+.ai-card.top{border-top:2px solid var(--amber)}
+.ai-name{font-size:.72rem;font-weight:500;color:var(--white)}
+.ai-price{font-family:var(--fs);font-size:1.4rem;font-weight:300;color:var(--blue-hi)}
+.ai-price small{font-family:var(--fb);font-size:.58rem;color:rgba(255,255,255,.28)}
+.ai-desc{font-size:.64rem;color:rgba(255,255,255,.35);line-height:1.6}
+.host-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.host-card{background:var(--ink2);padding:22px 20px}
+.host-card.mid{border-top:2px solid var(--blue)}
+.host-name{font-family:var(--fs);font-size:1.1rem;font-weight:300;margin-bottom:6px}
+.host-price{font-family:var(--fs);font-size:1.8rem;font-weight:300;line-height:1;margin-bottom:6px}
+.host-desc{font-size:.64rem;color:rgba(255,255,255,.3);line-height:1.6}
+.bundel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.bundel-card{background:var(--ink2);padding:22px 20px}
+.bundel-cat{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.bundel-name{font-family:var(--fs);font-size:1.2rem;font-weight:300;margin-bottom:4px}
+.bundel-price{font-family:var(--fs);font-size:1.8rem;font-weight:300;line-height:1;margin-bottom:4px}
+.bundel-was{font-size:.6rem;color:rgba(255,255,255,.25);margin-bottom:12px}
+.bundel-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.bundel-list li{font-size:.68rem;color:rgba(255,255,255,.5)}
+.multiroom{background:var(--ink2);border:1px solid rgba(255,255,255,.06);border-left:3px solid var(--blue);padding:clamp(18px,3vw,28px);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin-bottom:2px}
+.cta-bar{background:var(--ink2);border:1px solid rgba(255,255,255,.06);padding:clamp(20px,3vw,32px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:clamp(32px,4vw,52px)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid;font-family:var(--fb);font-size:.58rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .22s;background:none}
+.btn-blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}.btn-blue:hover{background:var(--blue-hi)}
+.btn-wire{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.14)}.btn-wire:hover{color:var(--white);border-color:rgba(255,255,255,.4)}
+footer{border-top:1px solid rgba(255,255,255,.05);padding:24px 0;margin-top:60px}
+.foot{max-width:1000px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-logo{font-family:var(--fs);font-size:.9rem;color:rgba(255,255,255,.25)}.foot-logo em{font-style:normal;color:rgba(74,144,247,.5)}
+.foot-note{font-size:.6rem;color:rgba(255,255,255,.2)}
+@media(max-width:900px){.pkg-grid{grid-template-columns:repeat(2,1fr)}.ai-grid{grid-template-columns:repeat(3,1fr)}.bundel-grid,.host-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.pkg-grid{grid-template-columns:1fr}.ai-grid{grid-template-columns:1fr 1fr}.multiroom{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Explora<em>360</em></a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Terug naar site
+    </a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <span class="eye">Prijzen &amp; Pakketten</span>
+  <h1 style="font-family:var(--fs);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;line-height:1.1;margin-bottom:10px">Transparant.<br><em style="color:var(--mist)">Zonder verrassingen.</em></h1>
+  <p style="font-size:.82rem;color:rgba(255,255,255,.38);max-width:560px;line-height:1.8;margin-bottom:clamp(32px,4vw,52px)">Introductietarieven 2026 — alle prijzen excl. btw. 12 maanden hosting inbegrepen. Levering binnen 24 uur.</p>
+
+  <!-- HOOFDPAKKETTEN -->
+  <div class="pkg-grid">
+    <div class="pkg plain">
+      <span class="pkg-name">Basis</span>
+      <span class="pkg-sub">Tot 75 m²</span>
+      <div class="pkg-price">€249 <small>excl. btw</small></div>
+      <ul class="pkg-list">
+        <li>✓ 360° Matterport tour</li>
+        <li>✓ 10 bewerkte 2D-foto's</li>
+        <li>✓ 12 maanden hosting</li>
+        <li>✓ Funda &amp; Google ready</li>
+        <li>✓ Levering binnen 24u</li>
+        <li>✓ Deelbare link + embedcode</li>
+      </ul>
+      <a href="offerte.html" class="pkg-btn">Offerte aanvragen →</a>
+    </div>
+    <div class="pkg star">
+      <div class="pkg-label" style="background:var(--blue);color:var(--ink)">Meest gekozen</div>
+      <span class="pkg-name">Standaard</span>
+      <span class="pkg-sub">75 – 150 m²</span>
+      <div class="pkg-price" style="color:var(--blue-hi)">€389 <small>excl. btw</small></div>
+      <ul class="pkg-list">
+        <li>✓ 360° Matterport tour</li>
+        <li>✓ 25 bewerkte 2D-foto's</li>
+        <li>✓ RAW + Lightroom bewerking</li>
+        <li>✓ Google Street View ready</li>
+        <li>✓ 12 maanden hosting</li>
+        <li>✓ Alle platformen</li>
+        <li>✓ Branded portaallink</li>
+      </ul>
+      <a href="offerte.html" class="pkg-btn primary">Offerte aanvragen →</a>
+    </div>
+    <div class="pkg plain">
+      <span class="pkg-name">Pro</span>
+      <span class="pkg-sub">150 – 250 m²</span>
+      <div class="pkg-price">€489 <small>excl. btw</small></div>
+      <ul class="pkg-list">
+        <li>✓ Alles van Standaard</li>
+        <li>✓ Grotere panden</li>
+        <li>✓ Prioriteit levering</li>
+        <li>✓ Extra optimalisatie</li>
+        <li>✓ 12 maanden hosting</li>
+      </ul>
+      <a href="offerte.html" class="pkg-btn">Offerte aanvragen →</a>
+    </div>
+    <div class="pkg amber">
+      <div class="pkg-label" style="background:var(--amber);color:var(--ink)">Grootste panden</div>
+      <span class="pkg-name">Premium</span>
+      <span class="pkg-sub">250 m²+ · Commercieel</span>
+      <div class="pkg-price" style="color:var(--amber-hi)">€689 <small>excl. btw</small></div>
+      <ul class="pkg-list">
+        <li>✓ Alles van Pro</li>
+        <li>✓ Horeca &amp; retail</li>
+        <li>✓ Prioriteit levering</li>
+        <li>✓ Extra afwerking</li>
+        <li>✓ 12 maanden hosting</li>
+      </ul>
+      <a href="offerte.html" class="pkg-btn">Offerte aanvragen →</a>
+    </div>
+  </div>
+
+  <!-- EXTRA M² -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:var(--ink2);border:1px solid rgba(255,255,255,.05);padding:14px 20px;margin-bottom:2px">
+    <span style="font-size:.72rem;color:rgba(255,255,255,.45)">Extra m² boven limiet</span>
+    <span style="font-family:var(--fs);font-size:1.2rem;color:rgba(255,255,255,.6)">€0,70 <small style="font-family:var(--fb);font-size:.58rem;color:rgba(255,255,255,.3)">per m²</small></span>
+  </div>
+
+  <!-- MULTIROOM -->
+  <div class="multiroom">
+    <div>
+      <div style="font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Hotel · B&amp;B · Camping · Resort</div>
+      <div style="font-family:var(--fs);font-size:1.4rem;font-weight:300;margin-bottom:6px">Multiroom pakket</div>
+      <p style="font-size:.72rem;color:rgba(255,255,255,.4);line-height:1.7;max-width:480px">Lobby of receptie + 5 ruimtes. Extra ruimte +€39. 12 maanden hosting inbegrepen.</p>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px">
+        <span style="font-size:.62rem;color:rgba(255,255,255,.45);padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">✓ Lobby + 5 ruimtes</span>
+        <span style="font-size:.62rem;color:rgba(255,255,255,.45);padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">✓ Booking.com ready</span>
+        <span style="font-size:.62rem;color:rgba(255,255,255,.45);padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)">✓ +€39 per extra ruimte</span>
+      </div>
+    </div>
+    <div style="text-align:right;flex-shrink:0">
+      <div style="font-family:var(--fs);font-size:2rem;font-weight:300;color:var(--blue-hi)">€499</div>
+      <div style="font-size:.56rem;color:rgba(255,255,255,.28);margin-bottom:12px">excl. btw</div>
+      <a href="offerte.html" class="btn btn-blue" style="padding:10px 20px;font-size:.54rem">Offerte →</a>
+    </div>
+  </div>
+
+  <!-- ADD-ONS -->
+  <div class="section-head">
+    <span class="eye">Add-ons</span>
+    <h2>Uitbreiden naar wens</h2>
+  </div>
+  <div class="ai-grid">
+    <div class="ai-card top">
+      <div class="ai-name">AI Virtual Staging</div>
+      <div class="ai-price">€59 <small>per ruimte</small></div>
+      <div class="ai-desc">Virtueel gestoffeerde ruimte — ideaal voor leegstaand vastgoed</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-name">Social media video</div>
+      <div class="ai-price">€49 <small>per tour</small></div>
+      <div class="ai-desc">Videoclip voor Instagram, Facebook of TikTok</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-name">Google Street View</div>
+      <div class="ai-price">€55 <small>per tour</small></div>
+      <div class="ai-desc">Tour zichtbaar in Google Maps &amp; Street View</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-name">Hotspots &amp; info-tags</div>
+      <div class="ai-price">€39 <small>per tour</small></div>
+      <div class="ai-desc">Klikbare info-punten — perfect voor retail &amp; horeca</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-name">Spoedlevering</div>
+      <div class="ai-price">€55 <small>toeslag</small></div>
+      <div class="ai-desc">Levering dezelfde dag vóór 18:00</div>
+    </div>
+  </div>
+
+  <!-- HOSTING -->
+  <div class="section-head">
+    <span class="eye">Hosting</span>
+    <h2>Na 12 maanden — optioneel</h2>
+    <p style="font-size:.74rem;color:rgba(255,255,255,.35);margin-top:6px">Eerste jaar altijd inbegrepen in uw pakket.</p>
+  </div>
+  <div class="host-grid">
+    <div class="host-card">
+      <div class="host-name">1 tour</div>
+      <div class="host-price" style="color:var(--white)">€19 <small style="font-family:var(--fb);font-size:.56rem;color:rgba(255,255,255,.28)">/maand</small></div>
+      <div class="host-desc">Eén actieve tour online houden</div>
+    </div>
+    <div class="host-card mid">
+      <div class="host-name">Tot 10 tours</div>
+      <div class="host-price" style="color:var(--blue-hi)">€29 <small style="font-family:var(--fb);font-size:.56rem;color:rgba(255,255,255,.28)">/maand</small></div>
+      <div class="host-desc">Makelaars &amp; verhuurders met meerdere panden</div>
+    </div>
+    <div class="host-card">
+      <div class="host-name">Onbeperkt</div>
+      <div class="host-price" style="color:var(--white)">€49 <small style="font-family:var(--fb);font-size:.56rem;color:rgba(255,255,255,.28)">/maand</small></div>
+      <div class="host-desc">Agencies, projectontwikkelaars &amp; ketens</div>
+    </div>
+  </div>
+
+  <!-- BUNDELS -->
+  <div class="section-head">
+    <span class="eye">Bundels</span>
+    <h2>Alles in één — voordeliger</h2>
+  </div>
+  <div class="bundel-grid">
+    <div class="bundel-card" style="border-top:2px solid rgba(255,255,255,.1)">
+      <div class="bundel-cat" style="color:rgba(255,255,255,.3)">Airbnb &amp; Short-stay</div>
+      <div class="bundel-name">Airbnb Compleet</div>
+      <div class="bundel-price">€449</div>
+      <div class="bundel-was">i.p.v. €497 los · excl. btw</div>
+      <ul class="bundel-list"><li>✓ Tour (Standaard)</li><li>✓ Social media video</li><li>✓ AI Virtual Staging (1 ruimte)</li></ul>
+    </div>
+    <div class="bundel-card" style="border-top:2px solid var(--blue)">
+      <div class="bundel-cat" style="color:var(--blue)">Restaurant &amp; Winkel</div>
+      <div class="bundel-name">Restaurant Ready</div>
+      <div class="bundel-price" style="color:var(--blue-hi)">€489</div>
+      <div class="bundel-was">i.p.v. €537 los · excl. btw</div>
+      <ul class="bundel-list"><li>✓ Tour (Premium)</li><li>✓ Hotspots &amp; info-tags</li><li>✓ Social media video</li></ul>
+    </div>
+    <div class="bundel-card" style="border-top:2px solid var(--amber)">
+      <div class="bundel-cat" style="color:var(--amber-hi)">Hotel &amp; Hospitality</div>
+      <div class="bundel-name">Hospitality Boost</div>
+      <div class="bundel-price" style="color:var(--amber-hi)">€529</div>
+      <div class="bundel-was">i.p.v. €548 los · excl. btw</div>
+      <ul class="bundel-list"><li>✓ Multiroom pakket</li><li>✓ Social media video</li><li>✓ AI Virtual Staging (1 kamer)</li></ul>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar">
+    <div>
+      <div style="font-family:var(--fs);font-size:1.3rem;font-weight:300;margin-bottom:6px">Klaar om te starten?</div>
+      <p style="font-size:.74rem;color:rgba(255,255,255,.38);line-height:1.7">Vraag een vrijblijvende offerte aan — binnen 24 uur reactie.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="offerte.html" class="btn btn-blue">Offerte aanvragen →</a>
+      <a href="https://wa.me/31616076613" target="_blank" class="btn btn-wire" style="border-color:rgba(37,211,102,.3);color:#4dda8a">WhatsApp</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot">
+    <span class="foot-logo">Explora<em>360</em></span>
+    <span class="foot-note">Alle prijzen excl. 21% btw · Introductietarieven 2026</span>
+    <a href="index.html" style="font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.25)'">← Terug naar site</a>
+  </div>
+</footer>
+</body>
+</html>
