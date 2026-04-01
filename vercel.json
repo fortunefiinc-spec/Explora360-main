@@ -1,7 +1,28 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    { "source": "/tour/:slug", "destination": "/tour.html?slug=:slug" },
+    { "source": "/voor-makelaars", "destination": "/voor-makelaars.html" },
+    { "source": "/voor-airbnb", "destination": "/voor-airbnb.html" },
+    { "source": "/voor-horeca", "destination": "/voor-horeca.html" },
+    { "source": "/voor-winkels", "destination": "/voor-winkels.html" },
+    { "source": "/voor-hotels", "destination": "/voor-hotels.html" },
+    { "source": "/voor-kantoren", "destination": "/voor-kantoren.html" },
+    { "source": "/prijzen", "destination": "/prijzen.html" },
+    { "source": "/offerte", "destination": "/offerte.html" },
     { "source": "/portaal", "destination": "/portaal.html" },
-    { "source": "/beheer", "destination": "/beheer.html" }
+    { "source": "/beheer", "destination": "/beheer.html" },
+    { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/privacy", "destination": "/privacy.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    }
   ]
 }
