@@ -412,23 +412,31 @@ function toggleAddon(el, id, prijs) {
 
 // ── SAMENVATTING ──────────────────────────────────────────────────────────
 function getKorting(n) {
+  // 5% per extra scan, max 20% vanaf 10 scans
   if (n <= 1) return 0;
-  if (n === 2) return 10;
-  if (n === 3) return 15;
-  return Math.min(20 + (n - 4) * 5, 35); // 20% bij 4, 25% bij 5, max 35%
+  return Math.min((n - 1) * 5, 20);
 }
 
 function buildSummary() {
   var pakketten = PAKKETTEN[state.type] || [];
   var p = pakketten.find(function(p){ return p.id===state.pakket; });
-  var subtotaal = state.pakketPrijs * state.aantalPakketten + state.addonsPrijs;
-  var kortingPct = getKorting(state.aantalPakketten);
-  var kortingBedrag = state.pakketPrijs > 0 ? Math.round(state.pakketPrijs * state.aantalPakketten * kortingPct / 100) : 0;
-  var totaal = subtotaal - kortingBedrag;
+
+  // Scan korting
+  var scanKortingPct = getKorting(state.aantalPakketten);
+  var scanBrutoPrijs = state.pakketPrijs * state.aantalPakketten;
+  var scanKorting = state.pakketPrijs > 0 ? Math.round(scanBrutoPrijs * scanKortingPct / 100) : 0;
+
+  // Add-on korting — 5% per addon, max 25%
+  var addonKortingPct = Math.min(state.addons.length * 5, 25);
+  var addonKorting = state.addonsPrijs > 0 ? Math.round(state.addonsPrijs * addonKortingPct / 100) : 0;
+
+  var totaal = scanBrutoPrijs - scanKorting + state.addonsPrijs - addonKorting;
+
   var html = '';
   html += '<div class="summary-row"><span class="lbl">Type locatie</span><span class="val">' + (TYPE_LABELS[state.type]||'') + '</span></div>';
-  html += '<div class="summary-row"><span class="lbl">Pakket</span><span class="val">' + (p?p.name:'') + (state.pakketPrijs?(' — €'+state.pakketPrijs):'') + '</span></div>';
-  // Aantal pakketten selector
+  html += '<div class="summary-row"><span class="lbl">Pakket</span><span class="val">' + (p?p.name:'') + (state.pakketPrijs?' — €'+state.pakketPrijs:'') + '</span></div>';
+
+  // Aantal scans
   html += '<div class="summary-row" style="align-items:center">' +
     '<span class="lbl">Aantal locaties/panden</span>' +
     '<span class="val" style="display:flex;align-items:center;gap:10px">' +
@@ -437,19 +445,31 @@ function buildSummary() {
       '<button onclick="oiAantalChange(1)" style="width:28px;height:28px;border:1px solid rgba(255,255,255,.15);background:none;color:var(--white);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">+</button>' +
     '</span>' +
   '</div>';
+
+  if (scanKortingPct > 0) {
+    html += '<div class="summary-row"><span class="lbl" style="color:var(--green)">Volumekorting scans (' + scanKortingPct + '%)</span><span class="val" style="color:var(--green)">− €' + scanKorting + '</span></div>';
+  }
+
+  // Add-ons
   if (state.addons.length) {
     state.addons.forEach(function(a){
       html += '<div class="summary-row"><span class="lbl">' + a.name + '</span><span class="val">€' + a.prijs + '</span></div>';
     });
+    if (addonKortingPct > 0) {
+      html += '<div class="summary-row"><span class="lbl" style="color:var(--green)">Korting add-ons (' + addonKortingPct + '%)</span><span class="val" style="color:var(--green)">− €' + addonKorting + '</span></div>';
+    }
   }
-  if (kortingPct > 0 && kortingBedrag > 0) {
-    html += '<div class="summary-row"><span class="lbl" style="color:var(--green)">Volumekorting ' + kortingPct + '%</span><span class="val" style="color:var(--green)">− €' + kortingBedrag + '</span></div>';
-  }
+
   html += '<div class="summary-total"><span class="lbl">Indicatief totaal</span><span class="val">' + (totaal ? '€'+totaal : 'Op aanvraag') + '</span></div>';
   if (totaal) html += '<div class="summary-btw">Excl. 21% btw · Definitieve prijs in offerte</div>';
+
   if (state.aantalPakketten === 1 && state.pakketPrijs > 0) {
-    html += '<div style="margin-top:8px;font-size:.64rem;color:rgba(255,255,255,.3);padding:8px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)">💡 Meer panden? Pas het aantal aan voor volumekorting — 2 panden = 10%, 3 panden = 15%...</div>';
+    html += '<div style="margin-top:8px;font-size:.64rem;color:rgba(255,255,255,.3);padding:8px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)">Meer panden? Pas het aantal aan — 2 panden = 5%, 3 = 10%, ... max 20%</div>';
   }
+  if (state.addons.length === 0 && state.pakketPrijs > 0) {
+    html += '<div style="margin-top:6px;font-size:.64rem;color:rgba(255,255,255,.3);padding:8px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)">Add-ons combineren? 1 add-on = 5% korting, 2 = 10%, ... max 25%</div>';
+  }
+
   document.getElementById('summary-box').innerHTML = html;
 }
 
@@ -477,9 +497,11 @@ async function verstuurOfferte() {
 
   var pakketten = PAKKETTEN[state.type] || [];
   var p = pakketten.find(function(p){ return p.id===state.pakket; });
-  var kortingPct = getKorting(state.aantalPakketten);
-  var kortingBedrag = state.pakketPrijs > 0 ? Math.round(state.pakketPrijs * state.aantalPakketten * kortingPct / 100) : 0;
-  var totaal = state.pakketPrijs * state.aantalPakketten + state.addonsPrijs - kortingBedrag;
+  var scanKortPct = getKorting(state.aantalPakketten);
+  var scanKort = state.pakketPrijs > 0 ? Math.round(state.pakketPrijs * state.aantalPakketten * scanKortPct / 100) : 0;
+  var addonKortPct = Math.min(state.addons.length * 5, 25);
+  var addonKort = state.addonsPrijs > 0 ? Math.round(state.addonsPrijs * addonKortPct / 100) : 0;
+  var totaal = state.pakketPrijs * state.aantalPakketten - scanKort + state.addonsPrijs - addonKort;
 
   var addonsTxt = state.addons.length
     ? state.addons.map(function(a){ return '- ' + a.name + ' (€' + a.prijs + ')'; }).join('\n')
