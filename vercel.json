@@ -2,26 +2,91 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/voor-makelaars", "destination": "/voor-makelaars.html" },
-    { "source": "/voor-airbnb", "destination": "/voor-airbnb.html" },
-    { "source": "/voor-horeca", "destination": "/voor-horeca.html" },
-    { "source": "/voor-winkels", "destination": "/voor-winkels.html" },
-    { "source": "/voor-hotels", "destination": "/voor-hotels.html" },
-    { "source": "/voor-kantoren", "destination": "/voor-kantoren.html" },
-    { "source": "/prijzen", "destination": "/prijzen.html" },
-    { "source": "/offerte", "destination": "/offerte.html" },
-    { "source": "/portaal", "destination": "/portaal.html" },
-    { "source": "/beheer", "destination": "/beheer.html" },
-    { "source": "/faq", "destination": "/faq.html" },
-    { "source": "/privacy", "destination": "/privacy.html" }
+    {
+      "source": "/voor-makelaars",
+      "destination": "/voor-makelaars.html"
+    },
+    {
+      "source": "/voor-airbnb",
+      "destination": "/voor-airbnb.html"
+    },
+    {
+      "source": "/voor-horeca",
+      "destination": "/voor-horeca.html"
+    },
+    {
+      "source": "/voor-winkels",
+      "destination": "/voor-winkels.html"
+    },
+    {
+      "source": "/voor-hotels",
+      "destination": "/voor-hotels.html"
+    },
+    {
+      "source": "/voor-kantoren",
+      "destination": "/voor-kantoren.html"
+    },
+    {
+      "source": "/prijzen",
+      "destination": "/prijzen.html"
+    },
+    {
+      "source": "/offerte",
+      "destination": "/offerte.html"
+    },
+    {
+      "source": "/portaal",
+      "destination": "/portaal.html"
+    },
+    {
+      "source": "/beheer",
+      "destination": "/beheer.html"
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/blog/360-tour-airbnb",
+      "destination": "/blog/360-tour-airbnb.html"
+    },
+    {
+      "source": "/blog/360-tour-restaurant",
+      "destination": "/blog/360-tour-restaurant.html"
+    },
+    {
+      "source": "/blog/google-business-360-tour",
+      "destination": "/blog/google-business-360-tour.html"
+    },
+    {
+      "source": "/blog/360-tour-makelaar-west-brabant",
+      "destination": "/blog/360-tour-makelaar-west-brabant.html"
+    },
+    {
+      "source": "/blog/kosten-360-tour",
+      "destination": "/blog/kosten-360-tour.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
       ]
     }
   ]
